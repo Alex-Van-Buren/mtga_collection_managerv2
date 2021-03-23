@@ -1,4 +1,4 @@
-import allArenaCards from '../data/arenaCards20210314173019.json'
+import allArenaCards from './arenaCards20210323000926.json'
 /**
  * 
  * @param {String} set Three letter mtg set code. Should be all lowercase
