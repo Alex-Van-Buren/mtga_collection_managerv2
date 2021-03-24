@@ -1,7 +1,7 @@
 // import allArenaCards from './arenaCards20210314173019.json';
 const allArenaCards = require('./arenaCards20210323000926.json');
 
-function findCardsInSet(searchOptions){
+function findCards(searchOptions){
     // TODO: Filter by Format legality
     // TODO: Filter booster still weird
     // TODO: Make filterSet work with multiple sets (eg set = ['znr', 'thb'] it should return all cards from both sets)
@@ -171,5 +171,5 @@ function filterByName(cardList, name){
     return newCardList;
 }
 
-// export default findCardsInSet;
-module.exports = findCardsInSet;
+// export default findCards;
+module.exports = findCards;
