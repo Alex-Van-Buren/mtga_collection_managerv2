@@ -3,19 +3,24 @@ const allArenaCards = require('./arenaCards20210323000926.json');
 
 function findCardsInSet(searchOptions){
     // TODO: Filter by Format legality
-    // TODO: Filter by name
+    // TODO: Filter booster still weird
     // TODO: Make filterSet work with multiple sets (eg set = ['znr', 'thb'] it should return all cards from both sets)
     // TODO: Make filterColor work with colorless, and multicolored(it should be able to return all cards with multiple colors as well as a specific color combo eg (RG))
     // TODO: Add finalList return options (eg return the img src, cmc, etc.  for each card as well as the name and arenaID )
 
-    const {set, color, rarity, booster} = searchOptions;
+    const {set, color, rarity, booster, name} = searchOptions;
     let cardList = allArenaCards;
 
     // First filter by set if needed
     if(set){
         cardList = filterSet(cardList, set);
     }
-    
+
+    // Filter by name if needed
+    if(name){
+        cardList = filterByName(cardList, name);
+    }
+
     // Filter Out Basic Lands
     cardList = filterBasicLands(cardList);
 
@@ -101,11 +106,32 @@ function filterRarity(cardList, rarity){
 // Filter by booster boolean value helper function
 function filterBooster(cardList, booster){
     let newCardList = [];
-    cardList.forEach((card) =>{
-        if(card.booster === booster){
-            newCardList.push(card);
-        }
-    });
+    // if booster true, just put cards in list if card.booster is true
+    if( booster === true){
+        cardList.forEach((card) =>{
+            if(card.booster === booster){
+                newCardList.push(card);
+            }
+        });
+    }
+    // If booster is false, card needs to have card.booster= false and card.promo_types NOT contain "boosterfun"
+    if(booster === false){
+        cardList.forEach((card) =>{
+            // Check if it has property promo_types
+            if (card.promo_types){
+                if(card.booster === booster && card.promo_types.includes("boosterfun") === false){
+                    newCardList.push(card);
+                }
+
+            // if it doesn't have card.promo_types just check if the booster property is correct
+            } else{
+                if( card.booster === booster){
+                    newCardList.push(card);
+                }
+            }
+
+        })
+    }
     return newCardList;
 }
 
@@ -124,6 +150,26 @@ function sortCards(cardList){
     return cardList;
 }
 
+// Find cards by name helper function
+function filterByName(cardList, name){
+    let newCardList = [];
+    cardList.forEach((card) =>{
+        
+        if(card.name === name){
+            newCardList.push(card);
+        }
+
+        // Need to check card faces in order to find some cards
+        if(card.card_faces){
+            card.card_faces.forEach((face) =>{
+                if (face.name === name){
+                    newCardList.push( card );
+                }
+            });
+        }
+    });
+    return newCardList;
+}
 
 // export default findCardsInSet;
 module.exports = findCardsInSet;
