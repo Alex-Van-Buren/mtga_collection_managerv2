@@ -15,11 +15,11 @@ function RarityCollectionItem({setId, cardCollection, rarity, ownedTotal, setTot
 }
 
 function mapStateToProps(state, ownProps){
-    if(state.inventory[ownProps.setId]){
+    if(state.inventory.set){
         return {
             cardCollection: state.inventory.cardCollection,
-            ownedTotal: state.inventory[ownProps.setId][ownProps.rarity].ownedTotal,
-            setTotal: state.inventory[ownProps.setId][ownProps.rarity].setTotal
+            ownedTotal: state.inventory.set[ownProps.setId][ownProps.rarity].ownedTotal,
+            setTotal: state.inventory.set[ownProps.setId][ownProps.rarity].setTotal
         }
     }
     else{

@@ -2,17 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getCollection, processSetCollection } from '../actions';
 
-const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
+// const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
 // const sets = ['znr'];
 
 class GetFile extends React.Component {
     componentDidMount() {
         this.props.getCollection(null)
 
-        
-        sets.forEach((set) =>{
-            this.props.processSetCollection(set, null)
-        })
+        this.props.processSetCollection(null);
     }
 
     handleFile = (event) =>{
@@ -37,9 +34,8 @@ class GetFile extends React.Component {
                 this.props.getCollection(inventory);
                 
                 // Put processed set information into redux                
-                sets.forEach((set) =>{
-                    this.props.processSetCollection(set, inventory)
-                })
+                
+                this.props.processSetCollection(inventory);
                            
                 
             } else

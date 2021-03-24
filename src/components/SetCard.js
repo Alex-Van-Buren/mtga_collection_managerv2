@@ -28,8 +28,8 @@ function SetCard({ setId, cardCollection, ownedTotal, setTotal}) {
 
 function mapStateToProps(state, ownProps){
     // Make sure the state exists
-    if(state.inventory[ownProps.setId]){
-        const set = state.inventory[ownProps.setId];
+    if(state.inventory.set){
+        const set = state.inventory.set[ownProps.setId];
 
         // Total up all of the rarities
         const ownedTotal = set.mythic.ownedTotal + set.rare.ownedTotal + set.uncommon.ownedTotal + set.common.ownedTotal;        
