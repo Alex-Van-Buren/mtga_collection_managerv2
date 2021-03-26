@@ -45,7 +45,9 @@ class GetFile extends React.Component {
 
     render(){
         return (
-            <input type="file" onChange={this.handleFile} accept=".log, .txt"/>
+            <div className="item ">                
+                <input type="file" onChange={this.handleFile} accept=".log, .txt" />
+            </div>
         )
     }
         
