@@ -2,11 +2,9 @@
 const allArenaCards = require('./arenaCards20210323000926.json');
 
 function findCards(searchOptions){
-    // TODO: Filter by Format legality
-    // TODO: Filter booster still weird
-    // TODO: Make filterSet work with multiple sets (eg set = ['znr', 'thb'] it should return all cards from both sets)
-    // TODO: Make filterColor work with colorless, and multicolored(it should be able to return all cards with multiple colors as well as a specific color combo eg (RG))
+    // TODO: Make filterColor work with colorless, all multicolored, and a specific multicolor combination (like Red+Green)
     // TODO: Add finalList return options (eg return the img src, cmc, etc.  for each card as well as the name and arenaID )
+    // TODO: Filter booster still weird, might add a filter alt arts
 
     const {set, color, rarity, booster, name} = searchOptions;
     let cardList = allArenaCards;
