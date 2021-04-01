@@ -73,11 +73,47 @@ function filterBasicLands(cardList){
 // Filter by Color helper function
 function filterColor(cardList, color){
     let newCardList= [];
+
     cardList.forEach((card) =>{
+
+        // check for colorless
+        if(color === 'colorless'){
+
+            // // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
+            // using front face for color
+            if(!card.colors && card.card_faces){
+                // colorless cards have nothing in their color array
+                if(card.card_faces[0].colors.length === 0){
+                    newCardList.push(card);
+                }
+            }
+            // colorless cards have nothing in their color array
+            else if(card.colors.length === 0){
+                newCardList.push(card);
+            }
+        }
+        // Check for all multicolored cards
+        else if (color === 'multi'){
+            // // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
+            // using front face for color
+            if(!card.colors && card.card_faces){
+
+                // multi-colored cards have more that 1 color in their colors array
+                if(card.card_faces[0].colors.length > 1){
+                    newCardList.push(card);
+                }
+            }
+            // multi-colored cards have more that 1 color in their colors array
+            else if(card.colors.length > 1){
+                newCardList.push(card);
+            }
+        }
+
+        // Normal color search
 
         // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
         // using front face for color
-        if (!card.colors && card.card_faces){
+        else if (!card.colors && card.card_faces){
             if(card.card_faces[0].colors.length === 1 && card.card_faces[0].colors[0] === color){
                 newCardList.push(card);
             }
