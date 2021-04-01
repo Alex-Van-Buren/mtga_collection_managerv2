@@ -14,33 +14,41 @@ class GetFile extends React.Component {
 
     handleFile = (event) =>{
 
+        // Grab file from user
         const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.readAsText(file);
 
-        // After the file loads and is read by the reader
-        reader.onloadend = () =>{
-            // Define the Regex 
-            const cardRegex = /(?<=UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+)\{.*\}(?=})/g
+        // Check that file exists
+        if (file != null && file.size > 0) {
             
-            // Use regex to extract the inventory data from the log
-            const match = cardRegex.exec(reader.result);
-
-            // Parse the data into a JSON that can be more easily manipulated
-            if( match && match[0]){
-                const inventory = JSON.parse(match[0]);
+            const reader = new FileReader();
+            reader.readAsText(file);
+            
+            // After the file loads and is read by the reader
+            reader.onloadend = () =>{
+                // Define the Regex 
+                const cardRegex = /(?<=UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+)\{.*\}(?=})/g
+                
+                // Use regex to extract the inventory data from the log
+                const match = cardRegex.exec(reader.result);
     
-                // Use getCollection action creator to put the basic inventory into Redux
-                this.props.getCollection(inventory);
-                
-                // Put processed set information into redux                
-                
-                this.props.processSetCollection(inventory);
-                           
-                
-            } else
-                alert('No inventory Data found')
-        }
+                // Parse the data into a JSON that can be more easily manipulated
+                if( match && match[0]){
+                    const inventory = JSON.parse(match[0]);
+        
+                    // Use getCollection action creator to put the basic inventory into Redux
+                    this.props.getCollection(inventory);
+                    
+                    // Put processed set information into redux                
+                    
+                    this.props.processSetCollection(inventory);
+                               
+                    
+                } else
+                    alert('No inventory Data found');
+            } 
+        } else
+            alert('No inventory Data found');
+
     }
 
     render(){
