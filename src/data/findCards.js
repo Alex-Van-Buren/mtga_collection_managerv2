@@ -70,13 +70,13 @@ function filterBasicLands(cardList){
 }
 
 // Filter by Color helper function
-function filterColor(cardList, color){
+function filterColor(cardList, searchColors){
     let newCardList= [];
 
     cardList.forEach((card) =>{
 
         // check for colorless
-        if(color[0] === 'colorless'){
+        if(searchColors[0] === 'colorless'){
 
             // // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
             // using front face for color
@@ -92,7 +92,7 @@ function filterColor(cardList, color){
             }
         }
         // Check for all multicolored cards
-        else if (color[0] === 'multi'){
+        else if (searchColors[0] === 'multi'){
             // // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
             // using front face for color
             if(!card.colors && card.card_faces){
@@ -115,19 +115,20 @@ function filterColor(cardList, color){
         else if (!card.colors && card.card_faces){
 
             // Check if the card has the same number of colors
-            if(card.card_faces[0].colors.length === color.length && card.card_faces[0].colors[0] === color[0]){
+            if(card.card_faces[0].colors.length === searchColors.length && card.card_faces[0].colors[0] === searchColors[0]){
 
                 // initialize boolean to add this card
                 let addCard = true;
 
                 // loop through each input color that is being filtered
-                color.forEach((c) => {
+                for (const searchColor of searchColors) {
 
                     // If the card doesn't contain the color make addCard false
-                    if(!card.card_faces[0].colors.includes(c)){
+                    if(!card.card_faces[0].colors.includes(searchColor)){
                         addCard = false;
+                        break; // break if it doesn't include all of the desired colors
                     }
-                });
+                }
 
                 // Use the addCard boolean to determine if the card should be added to newCardList 
                 if(addCard){
@@ -136,18 +137,19 @@ function filterColor(cardList, color){
             }
         }
         // Check if the card has the same number of colors
-        else if(card.colors.length === color.length ){
+        else if(card.colors.length === searchColors.length ){
             // initialize boolean to add this card
             let addCard = true;
 
             // loop through each input color that is being filtered
-            color.forEach((c) => {
+            for (const searchColor of searchColors) {
 
                 // If the card doesn't contain the color make addCard false
-                if(!card.colors.includes(c)){
+                if(!card.colors.includes(searchColor)){
                     addCard = false;
+                    break; // break if it doesn't include all of the desired colors
                 }
-            });
+            }
 
             // Use the addCard boolean to determine if the card should be added to newCardList 
             if(addCard){
