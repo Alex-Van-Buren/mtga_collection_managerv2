@@ -2,7 +2,6 @@
 const allArenaCards = require('./arenaCards20210323000926.json');
 
 function findCards(searchOptions){
-    // TODO: Make filterColor work with colorless, all multicolored, and a specific multicolor combination (like Red+Green)
     // TODO: Add finalList return options (eg return the img src, cmc, etc.  for each card as well as the name and arenaID )
     // TODO: Filter booster still weird, might add a filter alt arts
 
@@ -71,19 +70,91 @@ function filterBasicLands(cardList){
 }
 
 // Filter by Color helper function
-function filterColor(cardList, color){
+function filterColor(cardList, searchColors){
     let newCardList= [];
+
     cardList.forEach((card) =>{
 
-        // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
-        // using front face for color
-        if (!card.colors && card.card_faces){
-            if(card.card_faces[0].colors.length === 1 && card.card_faces[0].colors[0] === color){
+        // check for colorless
+        if(searchColors[0] === 'colorless'){
+
+            // // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
+            // using front face for color
+            if(!card.colors && card.card_faces){
+                // colorless cards have nothing in their color array
+                if(card.card_faces[0].colors.length === 0){
+                    newCardList.push(card);
+                }
+            }
+            // colorless cards have nothing in their color array
+            else if(card.colors.length === 0){
                 newCardList.push(card);
             }
         }
-        else if(card.colors.length === 1 && card.colors[0] === color){
-            newCardList.push(card);
+        // Check for all multicolored cards
+        else if (searchColors[0] === 'multi'){
+            // // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
+            // using front face for color
+            if(!card.colors && card.card_faces){
+
+                // multi-colored cards have more that 1 color in their colors array
+                if(card.card_faces[0].colors.length > 1){
+                    newCardList.push(card);
+                }
+            }
+            // multi-colored cards have more that 1 color in their colors array
+            else if(card.colors.length > 1){
+                newCardList.push(card);
+            }
+        }
+
+        // Normal color search
+
+        // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color 
+        // using front face for color
+        else if (!card.colors && card.card_faces){
+
+            // Check if the card has the same number of colors
+            if(card.card_faces[0].colors.length === searchColors.length && card.card_faces[0].colors[0] === searchColors[0]){
+
+                // initialize boolean to add this card
+                let addCard = true;
+
+                // loop through each input color that is being filtered
+                for (const searchColor of searchColors) {
+
+                    // If the card doesn't contain the color make addCard false
+                    if(!card.card_faces[0].colors.includes(searchColor)){
+                        addCard = false;
+                        break; // break if it doesn't include all of the desired colors
+                    }
+                }
+
+                // Use the addCard boolean to determine if the card should be added to newCardList 
+                if(addCard){
+                    newCardList.push(card);
+                }
+            }
+        }
+        // Check if the card has the same number of colors
+        else if(card.colors.length === searchColors.length ){
+            // initialize boolean to add this card
+            let addCard = true;
+
+            // loop through each input color that is being filtered
+            for (const searchColor of searchColors) {
+
+                // If the card doesn't contain the color make addCard false
+                if(!card.colors.includes(searchColor)){
+                    addCard = false;
+                    break; // break if it doesn't include all of the desired colors
+                }
+            }
+
+            // Use the addCard boolean to determine if the card should be added to newCardList 
+            if(addCard){
+                newCardList.push(card);
+            }
         }
     });
     return newCardList;
