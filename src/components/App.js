@@ -1,25 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './Header';
-// import GetFile from './GetFile';
 import Home from './Home';
 import SetDetails from './SetDetails';
 
-
-
-class App extends React.Component {
-    render() {
-        return (
-            <Router >
-                <Header />
-                {/* <GetFile /> */}
+/**
+ * Main Component - displays header and routes
+ */
+function App() {
+    return (
+        <Router >
+            <Header />
+            <Switch>
                 <Route exact component={Home} path='/' />
                 <Route component={SetDetails} path='/set/:setId' />
-
-            </Router>
-        );
-    }
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;

@@ -1,22 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
-class CardList extends React.Component {
+function CardList() {
     
-    render() {
-        return(
-            <div className="column">
-                <div className="ui middle aligned list"></div>
-            </div>
-        );
-    }
+    // const cardCollection = useSelector(state => state.inventory.cardCollection);
+
+    return (
+        <div className="column">
+            <div className="ui middle aligned list"></div>
+        </div>
+    );
 }
 
-function mapStateToProps(state){
-    return{
-        cardCollection: state.inventory.cardCollection
-    }
-}
-
-export default connect(mapStateToProps)(CardList);
+export default CardList;

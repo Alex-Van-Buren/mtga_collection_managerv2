@@ -1,23 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { getCollection, processSetCollection } from '../actions';
+import { NO_INVENTORY_FOUND, INVALID_FILE } from '../errors';
 
 // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
 // const sets = ['znr'];
 
-class GetFile extends React.Component {
-    componentDidMount() {
-        this.props.getCollection(null)
+function GetFile(props) {
 
-        this.props.processSetCollection(null);
-    }
+    // Get access to Redux dispatch function
+    const dispatch = useDispatch();
 
-    handleFile = (event) =>{
+    // Initial card set processing. Loads null values into Redux state
+    useEffect( () => {
 
+        // Get and process initially empty card set
+        dispatch( getCollection(null) );
+        dispatch( processSetCollection(null) );
+    },
+    [dispatch]); // Only updates if dispatch changes value. Just here to make ESLint happy
+
+    const handleFile = (event) =>{
+    
         // Grab file from user
         const file = event.target.files[0];
-
-        // Check that file exists
+    
+        // Check that a valid file exists
         if (file != null && file.size > 0) {
             
             const reader = new FileReader();
@@ -25,40 +34,40 @@ class GetFile extends React.Component {
             
             // After the file loads and is read by the reader
             reader.onloadend = () =>{
+
                 // Define the Regex 
-                const cardRegex = /(?<=UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+)\{.*\}(?=})/g
+                const cardRegex = /(?<=UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+)\{.*\}(?=})/g;
                 
                 // Use regex to extract the inventory data from the log
                 const match = cardRegex.exec(reader.result);
     
-                // Parse the data into a JSON that can be more easily manipulated
+                // Check if regex returned valid data
                 if( match && match[0]){
+
+                    // Parse the data into a JSON that can be more easily manipulated
                     const inventory = JSON.parse(match[0]);
         
                     // Use getCollection action creator to put the basic inventory into Redux
-                    this.props.getCollection(inventory);
+                    dispatch( getCollection(inventory) );
                     
-                    // Put processed set information into redux                
-                    
-                    this.props.processSetCollection(inventory);
-                               
-                    
-                } else
-                    alert('No inventory Data found');
-            } 
-        } else
-            alert('No inventory Data found');
+                    // Put processed set information into Redux                
+                    dispatch( processSetCollection(inventory) );
+                }
 
-    }
-
-    render(){
-        return (
-            <div className="item ">                
-                <input type="file" onChange={this.handleFile} accept=".log, .txt" />
-            </div>
-        )
-    }
+                // Alert user of invalid Player Log
+                else alert(NO_INVENTORY_FOUND);
+            }
+        }
         
+        // Alert user of invalid file
+        else alert(INVALID_FILE);
+    }
+
+    return (
+        <div className="item ">                
+            <input type="file" onChange={handleFile} accept=".log, .txt" />
+        </div>
+    ); 
 }
 
-export default connect(null, { getCollection, processSetCollection })(GetFile)
+export default GetFile;
