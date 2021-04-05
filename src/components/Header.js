@@ -6,6 +6,7 @@ import GetFile from './GetFile';
 /**
  * Header Component displayed on every page in App.
  * - Displays Links to different Components
+ * TODO: Hamburgerize at small screen size (that rhymes)
  */
 function Header() {
     return (
