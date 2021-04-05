@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getCollection, processSetCollection } from '../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../errors';
+import '../css/GetFile.css'
 
 // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
 // const sets = ['znr'];
@@ -63,9 +64,30 @@ function GetFile(props) {
         else alert(INVALID_FILE);
     }
 
+    // Make a ref
+    const ref = useRef();
+
+    function makeAccessible(e){
+        // If they hit enter
+        if (e.key === "Enter") {
+            // Prevent the default action, otherwise it gets clicked twice
+            e.preventDefault();
+            console.log(ref);
+            
+            ref.current.click();
+        }
+    }
+
     return (
-        <div className="item ">                
-            <input type="file" onChange={handleFile} accept=".log, .txt" />
+        <div className="item ">
+            <label className="ui positive button" ref={ref}>
+                <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeAccessible(e)}>
+                    <i className="upload icon"></i>
+                    Upload Log File
+                </span>
+                <input type="file"  onChange={handleFile} accept=".log, .txt" />
+                
+            </label>                
         </div>
     ); 
 }
