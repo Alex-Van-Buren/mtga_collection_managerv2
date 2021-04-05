@@ -8,19 +8,6 @@ import setInfo from '../data/setInfo.json'
 function SetCard({ setId }) {   
     
     /*
-     * TODO: Currently unused. Also, could simplify to:
-     *      const cardCollection = useSelector( ({ inventory }) => inventory.cardCollection );
-     * if undefined is an acceptable value.
-     * Else remove this "to do"
-     */
-    const cardCollection = useSelector( ({ inventory }) => {
-        if (inventory.set)
-            return inventory.cardCollection;
-        // else state doesn't exist yet
-        return null;
-    });
-
-    /*
      * Calculate totals from redux state 
      */
     const ownedTotal = useSelector( ({ inventory: {set} }) => {

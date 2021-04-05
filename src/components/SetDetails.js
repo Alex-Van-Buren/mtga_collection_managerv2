@@ -49,7 +49,7 @@ function mapStateToProps(state, ownProps){
         const set = state.inventory.set[ownProps.match.params.setId];
         
         const ownedTotal = set.mythic.ownedTotal + set.rare.ownedTotal + set.uncommon.ownedTotal + set.common.ownedTotal;        
-        const setTotal = set.mythic.setTotal + set.rare.setTotal + set.uncommon.setTotal + set.common.setTotal;                    
+        const setTotal = set.mythic.setTotal + set.rare.setTotal + set.uncommon.setTotal + set.common.setTotal;
         
         return {
             cardCollection: state.inventory.cardCollection,

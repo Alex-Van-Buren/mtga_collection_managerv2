@@ -187,7 +187,7 @@ function filterBooster(cardList, booster) {
     let newCardList = [];
 
     // If booster true, just put cards in list if card.booster is true
-    if ( booster === true) {
+    if (booster === true) {
         cardList.forEach( (card) => {
             if (card.booster === booster) {
                 newCardList.push(card);

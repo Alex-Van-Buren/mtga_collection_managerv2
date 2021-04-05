@@ -13,15 +13,6 @@ function RarityCollectionItem({ setId, rarity }) {
      * Extract multiple values from redux state
      * - Multiple calls to useSelector used to avoid needing to memoize redux state
      */
-    // TODO: cardCollection unused. Also could simplify if undefined is an acceptible value
-    const cardCollection = useSelector( ({ inventory }) => { // Destructure inventory from state
-        if (inventory.set)
-            return inventory.cardCollection;
-        
-        // else no collection found
-        return null;
-    });
-
     const ownedTotal = useSelector( ({ inventory: {set} }) => { // Destructure set from state.inventory
         if (set)
             return set[setId][rarity].ownedTotal;
