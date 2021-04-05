@@ -1,8 +1,13 @@
 // import allArenaCards from './arenaCards20210314173019.json';
 const allArenaCards = require('./arenaCards20210323000926.json');
-
-function findCards(searchOptions) {
-    // TODO: Add finalList return options (eg return the img src, cmc, etc.  for each card as well as the name and arenaID )
+/**
+ * 
+ * @param {*} searchOptions Object of options to filter the cards on Arena. Define as an object eg{set:'setId', name:'cardName', color: ['W', 'G'] 
+ * (color also accepts 'colorless' or 'multi'), rarity: 'rarity', booster: boolean}
+ * @param {*} returnOptions An Array of addtional properties to retrieve eg ['image_uris', 'set', 'cmc', etc]
+ * @returns An array of the cards founds with each card as an object with properties: name, arenaId, and the additional properties defined (if found)
+ */
+function findCards(searchOptions, returnOptions) {
     // TODO: Filter booster still weird, might add a filter alt arts
 
     const { set, color, rarity, booster, name } = searchOptions;
@@ -36,15 +41,13 @@ function findCards(searchOptions) {
         cardList = filterBooster(cardList, booster);
     }
 
-    let finalCardList = [];
-    cardList.forEach( (card) => {
-        finalCardList.push({name: card.name, arenaId: card.arena_id});
-    });
+    // Get the desired properties
+    cardList = getCardProperties(cardList, returnOptions);
     
     // Sort the cards alphabetically
-    finalCardList = sortCards(finalCardList);
+    cardList = sortCards(cardList);
 
-    return finalCardList;
+    return cardList;
 }
 
 // Filter Set helper function
@@ -255,6 +258,56 @@ function filterByName(cardList, name) {
         }
     });
 
+    return newCardList;
+}
+
+// Helper function that takes the input cardlist and returns the desired properties of that card to make it easier to use
+function getCardProperties(cardList, returnOptions) {
+    let newCardList = [];
+    cardList.forEach( (card) => {
+        
+        // initialize card object to add
+        let newCard = {};
+
+        // Add the name to the newCard
+        // For modal_dfc and adventure cards the desired card name is the name on the front face
+        if ( card.layout === 'adventure' || card.layout === 'modal_dfc') {
+            newCard.name = card.card_faces[0].name;
+        }
+
+        // Otherwise just grab the name from the top level name
+        else{
+            newCard.name = card.name;
+        }
+
+        // Add the arena id to newCard
+        newCard.arenaId = card.arena_id;
+
+        // Check for other optional card Properties
+        if (returnOptions) {
+            returnOptions.forEach((option) => {
+                // Check if the option is directly defined
+                if( card[option]) {
+
+                    // Then just put the option in the newCard
+                    newCard[option] = card[option];
+                } 
+                // Check if the option is defined under card_faces (using front face)
+                else if ( card.card_faces && card.card_faces[0][option]) {
+                    
+                    // Put option in the newCard
+                    newCard[option] = card.card_faces[0][option];
+                }
+
+                // Else the option is not found so do nothing                
+            });
+        }
+
+        // Add the newCard with desired Properties to newCardList
+        newCardList.push(newCard);
+    });
+
+    // Return newCardList
     return newCardList;
 }
 
