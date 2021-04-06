@@ -1,15 +1,36 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
 import CardList from './CardList';
 import RarityCollectionItem from './RarityCollectionItem';
 import setInfo from '../data/setInfo.json'
 
-function SetDetails( { cardCollection, ownedTotal, setTotal } ) {
+function SetDetails() {
     
     // Get set Id from url
     const { setId } = useParams();
+
+    /*
+     * Calculate totals from redux state 
+     */
+    const ownedTotal = useSelector( ({ inventory: {set} }) => {
+        let sum = 0;
+        if (set) {
+            // Sum the total cards owned
+            Object.keys(set[setId]).forEach( rarity => {sum += set[setId][rarity].ownedTotal} );
+        }
+        return sum;
+    });
+
+    const setTotal = useSelector( ({ inventory: {set} }) => {
+        let sum = 0;
+        if (set) {
+            // Sum the total cards in the set
+            Object.keys(set[setId]).forEach( rarity => {sum += set[setId][rarity].setTotal} );
+        }
+        return sum;
+    });
 
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
     const setName = setInfo[setId].name;
@@ -43,26 +64,5 @@ function SetDetails( { cardCollection, ownedTotal, setTotal } ) {
     )
     
 }
-function mapStateToProps( state, ownProps ) {
 
-    if ( state.inventory.set ) {
-        const set = state.inventory.set[ownProps.match.params.setId];
-        
-        const ownedTotal = set.mythic.ownedTotal + set.rare.ownedTotal + set.uncommon.ownedTotal + set.common.ownedTotal;        
-        const setTotal = set.mythic.setTotal + set.rare.setTotal + set.uncommon.setTotal + set.common.setTotal;
-        
-        return {
-            cardCollection: state.inventory.cardCollection,
-            ownedTotal: ownedTotal,
-            setTotal: setTotal
-        }
-    }else{
-        return{
-            cardCollection: null,
-            ownedTotal: 0,
-            setTotal: 0
-        }
-    }
-}
-
-export default connect(mapStateToProps)(SetDetails);
+export default SetDetails;
