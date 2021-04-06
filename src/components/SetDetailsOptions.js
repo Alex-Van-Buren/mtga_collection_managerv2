@@ -4,16 +4,16 @@ import ColorCheckboxes from './ColorCheckboxes';
 
 function SetDetailsOptions() {
 
-    const [showCards, setShowCards] = useState("all");
+    const [showCards, setShowCards] = useState("unowned");
 
     const JSXLayout = (<>
         {/* Buttons for: All Cards, Owned, Unowned */}
         <div>
             <label htmlFor="showCards">Show:</label>
             <span id="showCards" className="showCards">
-                <input type="button" value="All Cards" onClick={() => setShowCards("all")}/>
-                <input type="button" value="Owned Cards" onClick={() => setShowCards("owned")}/>
                 <input type="button" value="Unowned Cards" onClick={() => setShowCards("unowned")}/>
+                <input type="button" value="Owned Cards" onClick={() => setShowCards("owned")}/>
+                <input type="button" value="All Cards" onClick={() => setShowCards("all")}/>
             </span>
         </div>
 
