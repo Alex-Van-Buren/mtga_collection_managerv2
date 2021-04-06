@@ -38,7 +38,7 @@ function SetDetails() {
     return (
         <>
             <div className="ui grid container">
-                <div className="six wide centered column">
+                <div className="six wide column">
                     <div className="ui center aligned header">{setName}</div>
                     <div className="ui center aligned sub header">Collection Progress
                         <p>{ownedTotal} / {setTotal} ({percentOwned}%)</p>
@@ -52,13 +52,8 @@ function SetDetails() {
                 </div>
             </div>
 
-            <div className="ui six column grid">
-                <CardList setId={setId} color="W"/>
-                <CardList />
-                <CardList />
-                <CardList />
-                <CardList />
-                <CardList />
+            <div className="ui five column grid container">                
+                <CardList setId={setId}/>                
             </div>
         </>
     )
