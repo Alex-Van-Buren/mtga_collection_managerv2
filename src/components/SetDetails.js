@@ -6,13 +6,13 @@ import CardList from './CardList';
 import RarityCollectionItem from './RarityCollectionItem';
 import setInfo from '../data/setInfo.json'
 
-function SetDetails({cardCollection, ownedTotal, setTotal}) {
+function SetDetails( { cardCollection, ownedTotal, setTotal } ) {
     
-    // get set Id from url
-    const { setId }= useParams()
+    // Get set Id from url
+    const { setId } = useParams();
 
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
-    const setName = setInfo[setId].name
+    const setName = setInfo[setId].name;
 
     return (
         <>
@@ -43,9 +43,9 @@ function SetDetails({cardCollection, ownedTotal, setTotal}) {
     )
     
 }
-function mapStateToProps(state, ownProps){
+function mapStateToProps( state, ownProps ) {
 
-    if(state.inventory.set){
+    if ( state.inventory.set ) {
         const set = state.inventory.set[ownProps.match.params.setId];
         
         const ownedTotal = set.mythic.ownedTotal + set.rare.ownedTotal + set.uncommon.ownedTotal + set.common.ownedTotal;        
