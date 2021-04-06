@@ -10,7 +10,7 @@ import GetFile from './GetFile';
  */
 function Header() {
     return (
-        <div className="ui menu">
+        <div className="ui stackable menu">
             {/* Options on Left Side */}
             <Link to='/' className="item">Home</Link>
             <div className="item">Another thing</div> {/* Here for testing only */}
