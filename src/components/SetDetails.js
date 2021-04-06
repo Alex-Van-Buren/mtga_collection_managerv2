@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import CardList from './CardList';
 import RarityCollectionItem from './RarityCollectionItem';
+import SetDetailsOptions from './SetDetailsOptions';
 import setInfo from '../data/setInfo.json'
 
 function SetDetails() {
@@ -49,6 +50,10 @@ function SetDetails() {
                         <RarityCollectionItem setId={setId} rarity="uncommon" />
                         <RarityCollectionItem setId={setId} rarity="common"/>
                     </div>
+                </div>
+
+                <div className="ten wide column">
+                    <SetDetailsOptions/>
                 </div>
             </div>
 
