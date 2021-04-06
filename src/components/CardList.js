@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import findCards from '../data/findCards';
 
-
+import '../css/CardList.css'
 
 
 function CardList( {setId} ) {
@@ -31,7 +31,7 @@ function CardList( {setId} ) {
             
             return (
                 <div className="column" key={card.arenaId}>
-                    <div className="ui fluid card">
+                    <div className="ui fluid card removeBoxShadow">
                         <div className="content">
                             <div className="right floated content" >{numOwned} / 4 </div>
                         </div>                    
