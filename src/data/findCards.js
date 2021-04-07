@@ -66,7 +66,11 @@ function filterSet(cardList, set) {
 function filterBasicLands(cardList) {
     let newCardList = []
     cardList.forEach( (card) => {
-        if ( !(card.type_line.includes('Basic Land')) ){
+        if ( card.type_line.includes('Basic') && card.type_line.includes('Land') ){
+            // Skip
+        }
+        
+        else {
             newCardList.push(card);
         }
     });
