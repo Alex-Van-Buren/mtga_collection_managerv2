@@ -9,8 +9,40 @@ function CardList( {setId} ) {
     
     const cardCollection = useSelector(state => state.inventory.cardCollection);
 
+    const colors = useSelector(state => state.detailsOptions.colors);
+
+    // Build array for color searchOption
+   let colorOption = Object.keys(colors).flatMap( color => {
+        if (colors[color]) {
+
+            // Converting color text to single character used findCards
+            switch(color) {
+                case 'white':
+                    return 'W';
+                case 'blue':
+                    return 'U';
+                case 'black':
+                    return 'B';
+                case 'red':
+                    return 'R';
+                case 'green':
+                    return 'G';
+                default:
+                    return color; 
+            }            
+        }
+        // With flat map returning [] skips the element
+        return [];
+    });
+    
+    // Change colorOption to undefined if it is empty array in order for findCards to find all colors instead of only colorless
+    if ( colorOption.length === 0) {
+        colorOption = undefined;
+    }
+
+
     // TODO: These Options will need to be retrived from redux hard coded for now    
-    const searchOptions = {set: setId, color: ['B'], booster: true};
+    const searchOptions = {set: setId, color: colorOption, booster: true};
 
     // Need to get images as well as name and arenaId
     const returnOptions = ['image_uris'];
