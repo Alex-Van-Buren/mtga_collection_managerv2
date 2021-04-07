@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-
-
 export default function ColorCheckboxes() {
 
     // Initialize all colors to false

@@ -1,3 +1,11 @@
 .removeBoxShadow {
     box-shadow: none !important;
 }
+
+.ui.grid>.column:not(.row) {
+    padding: 0.5em 1em;
+}
+
+.ui.card>.content {
+    padding: 0.5em 1em;
+}

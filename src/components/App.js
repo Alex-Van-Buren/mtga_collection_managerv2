@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './Header';
 import Home from './Home';
-import SetDetails from './SetDetails';
+import SetDetails from './SetDetails/SetDetails';
 
 /**
  * Main Component - displays header and routes
