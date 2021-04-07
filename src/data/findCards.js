@@ -41,11 +41,11 @@ function findCards(searchOptions, returnOptions) {
         cardList = filterBooster(cardList, booster);
     }
 
-    // Get the desired properties
-    cardList = getCardProperties(cardList, returnOptions);
-    
-    // Sort the cards alphabetically
+    // Sort the cards 
     cardList = sortCards(cardList);
+
+    // Get the desired properties
+    cardList = getCardProperties(cardList, returnOptions);    
 
     return cardList;
 }
@@ -226,8 +226,10 @@ function filterBooster(cardList, booster) {
     return newCardList;
 }
 
-// Helper function that sorts the cards alphabetically
+// Helper function that sorts the cards 
 function sortCards(cardList) {
+
+    // First sorts alphabetically
     cardList.sort( (card1, card2) => {
         const name1 = card1.name.toUpperCase(); // ignore upper and lowercase
         const name2 = card2.name.toUpperCase();
@@ -239,6 +241,11 @@ function sortCards(cardList) {
         // Names are equal
         return 0
     });
+
+    // Then by cmc
+    cardList.sort( (card1, card2) => {
+        return card1.cmc - card2.cmc
+    })
 
     return cardList;
 }
