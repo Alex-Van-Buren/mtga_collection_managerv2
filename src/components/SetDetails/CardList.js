@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import findCards from '../data/findCards';
+import findCards from '../../data/findCards';
 
-import '../css/CardList.css'
+import '../../css/CardList.css';
 
 
 function CardList( {setId} ) {
