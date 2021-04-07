@@ -31,8 +31,11 @@ function RarityCollectionItem({ setId, rarity }) {
 
     return (
         <div className="item " id="collectionItem" >
-            <div className="right floated content"> {ownedTotal} / {setTotal} ({percentOwned}%)</div>
-            <div className="content">{rarity}</div>
+            <div className="content">
+                <span className="right floated"> {ownedTotal} / {setTotal} ({percentOwned}%)</span>
+                <i className={`ss ss-${setId} ss-${rarity} ss-grad ss-fw mtgIcon`}></i>{rarity}
+
+            </div>
         </div>
     );
 }
