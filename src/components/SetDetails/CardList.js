@@ -59,6 +59,9 @@ function CardList( {setId} ) {
     const cards = findCards(searchOptions, returnOptions);
     // console.log(cards);
 
+    // Get the showCards to know which cards to show
+    const showCards = useSelector(state => state.detailsOptions.showCards);
+
     function renderCards(cards) {
         const renderedCards = cards.map( (card) => {
             const img = card.image_uris.normal;
@@ -68,19 +71,44 @@ function CardList( {setId} ) {
             if ( cardCollection && cardCollection[card.arenaId]) {
                 numOwned = cardCollection[card.arenaId];
             } 
-            
-            return (
-                <div className="column" key={card.arenaId}>
-                    <div className="ui fluid card removeBoxShadow">
-                        <div className="content">
-                            <div className="right floated content" >{numOwned} / 4 </div>
-                        </div>                    
-                        <div className="image">
-                            <img src={img} alt={card.name}/>
+            // Initialize makeCard Boolean to false
+            let makeCard = false;
+            if ( showCards === 'all' ) {
+                makeCard = true;
+            }
+
+            else if ( showCards === '=0' && numOwned === 0 ) {
+                makeCard = true;
+            }
+
+            else if ( showCards === '>0' && numOwned >0 ) {
+                makeCard =  true;
+            }
+
+            else if ( showCards === '<4' && numOwned <4 ) {
+                makeCard = true;
+            }
+
+            else if ( showCards === '=4' && numOwned === 4) {
+                makeCard = true;
+            }        
+
+            if ( makeCard ) {
+
+                return (
+                    <div className="column" key={card.arenaId}>
+                        <div className="ui fluid card removeBoxShadow">
+                            <div className="content">
+                                <div className="right floated content" >{numOwned} / 4 </div>
+                            </div>                    
+                            <div className="image">
+                                <img src={img} alt={card.name}/>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )    
+                )    
+            }
+            return null;
         })
         return renderedCards;
     }
