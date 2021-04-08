@@ -1,0 +1,29 @@
+.colorBoxInputLabel {
+    margin: 0 1em 0 0.3em;
+    text-transform: capitalize;
+}
+
+.colorBoxInput {
+
+}
+
+.colorBoxLabel {
+    margin-right: 1em;
+}
+
+.colorBox {
+    padding: 1em 0;
+}
+
+.showButton {
+    margin: 0 0 0 1em;
+}
+
+.showLabel {
+    margin-right: 1em;
+}
+
+.setDetailsOptions {
+    padding: 3em;
+    
+}
