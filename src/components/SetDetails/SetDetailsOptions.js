@@ -13,8 +13,8 @@ function SetDetailsOptions() {
     const JSXLayout = (<div className="setDetailsOptions">
         {/* Buttons for: All Cards, Owned, Unowned */}
         <label className="showLabel">Number Owned:</label>
-        
-        <div>
+
+        <div className="showList">
             <input type="button" className="showButton" value="None"
                 onClick={() => dispatch(setShowCards("=0"))} />
 
@@ -37,7 +37,7 @@ function SetDetailsOptions() {
         {/* Checkboxes for rarity: Mythic, Rare, Uncommon, Common */}
         <label className="rarityLabel">Rarity:</label>
         
-        <div>
+        <div className="showList">
             <input type="button" className="rarityButton" value="Mythic"
                 onClick={() => dispatch( selectRarity("mythic") )} />
             <input type="button" className="rarityButton" value="Rare"
