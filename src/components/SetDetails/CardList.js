@@ -40,9 +40,17 @@ function CardList( {setId} ) {
         colorOption = undefined;
     }
 
+    // Get rarity selected from redux
+    const rarity = useSelector(state => state.detailsOptions.rarity);
 
-    // TODO: These Options will need to be retrived from redux hard coded for now    
-    const searchOptions = {set: setId, color: colorOption, booster: true};
+    let rarityOption = [rarity];
+    // if rarity is set to all, change rarityOption to undefined so findCards will not filter by rarity
+    if ( rarity === 'all' ){
+        rarityOption = undefined;
+    }    
+    
+    // Put all search options into a single object for findCards function
+    const searchOptions = {set: setId, color: colorOption, booster: true, rarity: rarityOption};
 
     // Need to get images as well as name and arenaId
     const returnOptions = ['image_uris'];
