@@ -5,6 +5,8 @@ import React from 'react';
  * @param {string} text Text for the checkbox
  * @param {boolean} checked True/false the checkbox is checked
  * @param {function} onChange Function to execute on checkbox change
+ * @param {string} labelClass Class name(s) for the label
+ * @param {string} inputClass Class name(s) for the input
  * @returns 
  */
 export default function CustomCheckbox({ text, checked, onChange, labelClass, inputClass }) {
