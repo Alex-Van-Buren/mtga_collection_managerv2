@@ -1,4 +1,4 @@
-import { GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY } from './types';
+import { GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY,SET_SHOWCARDS } from './types';
 import totalOwned from '../data/totalOwned';
 
 const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
@@ -41,5 +41,13 @@ export function selectRarity(rarity) {
         type: SELECT_RARITY,
         // Return the selected rarity in payload
         payload: rarity
+    }
+}
+
+export function setShowCards(showCards) {
+    return {
+        type: SET_SHOWCARDS,
+        // Return the selection of which cards to show
+        payload: showCards
     }
 }

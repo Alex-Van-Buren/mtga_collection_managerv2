@@ -1,4 +1,4 @@
-import { SELECT_COLOR, SELECT_RARITY } from '../actions/types';
+import { SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS } from '../actions/types';
 
 const INITIAL_STATE = {
     colors: {
@@ -11,7 +11,9 @@ const INITIAL_STATE = {
         colorless: false
     },
 
-    rarity: "all"
+    rarity: "all",
+    
+    showCards: "all"
 }
 
 export default function selectDetailsOptionsReducer(state = INITIAL_STATE, action) {
@@ -44,6 +46,11 @@ export default function selectDetailsOptionsReducer(state = INITIAL_STATE, actio
         // Rarity must be one of: { common, uncommon, rare, mythic, all }
         case SELECT_RARITY: {
             return { ...state, rarity: action.payload };
+        }
+
+        // showCards must be one of: { unowned, owned, all }
+        case SET_SHOWCARDS: {
+            return { ...state, showCards: action.payload }
         }
 
         default:

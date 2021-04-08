@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import ColorCheckboxes from './ColorCheckboxes';
-import { selectRarity /*, setShowCards*/ } from '../../actions';
+import { selectRarity, setShowCards } from '../../actions';
 import '../../css/SetDetailsOptions.css';
 
 function SetDetailsOptions() {
@@ -16,11 +16,11 @@ function SetDetailsOptions() {
             <label className="showLabel">Show:</label>
 
             <input type="button" className="showButton" value="Unowned Cards" 
-                /*onClick={() => dispatch(setShowCards("unowned"))}*/ />
+                onClick={() => dispatch(setShowCards("unowned"))} />
             <input type="button" className="showButton" value="Owned Cards"
-                /*onClick={() => dispatch(setShowCards("owned"))}*/ />
+                onClick={() => dispatch(setShowCards("owned"))} />
             <input type="button" className="showButton" value="All Cards"
-                /*onClick={() => dispatch(setShowCards("all"))}*/ />
+                onClick={() => dispatch(setShowCards("all"))} />
         </div>
 
         {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
