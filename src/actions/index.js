@@ -36,10 +36,10 @@ export function selectColor(color, newValue) {
     }
 }
 
-export function selectRarity(rarity, newValue) {
+export function selectRarity(rarity) {
     return {
         type: SELECT_RARITY,
         // Return the selected rarity in payload
-        payload: { rarity }
+        payload: rarity
     }
 }
