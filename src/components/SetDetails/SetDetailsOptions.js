@@ -12,14 +12,22 @@ function SetDetailsOptions() {
 
     const JSXLayout = (<div className="setDetailsOptions">
         {/* Buttons for: All Cards, Owned, Unowned */}
+        <label className="showLabel">Number Owned:</label>
+        
         <div>
-            <label className="showLabel">Show:</label>
+            <input type="button" className="showButton" value="None"
+                onClick={() => dispatch(setShowCards("=0"))} />
 
-            <input type="button" className="showButton" value="Unowned Cards" 
-                onClick={() => dispatch(setShowCards("unowned"))} />
-            <input type="button" className="showButton" value="Owned Cards"
-                onClick={() => dispatch(setShowCards("owned"))} />
-            <input type="button" className="showButton" value="All Cards"
+            <input type="button" className="showButton" value="Own at least 1"
+                onClick={() => dispatch(setShowCards(">0"))} />
+
+            <input type="button" className="showButton" value="Missing at least 1"
+                onClick={() => dispatch(setShowCards("<4"))} />
+
+            <input type="button" className="showButton" value="Full Playset"
+                onClick={() => dispatch(setShowCards("=4"))} />
+
+            <input type="button" className="showButton" value="Show All Cards"
                 onClick={() => dispatch(setShowCards("all"))} />
         </div>
 
@@ -27,9 +35,9 @@ function SetDetailsOptions() {
         <ColorCheckboxes/>
 
         {/* Checkboxes for rarity: Mythic, Rare, Uncommon, Common */}
+        <label className="rarityLabel">Rarity:</label>
+        
         <div>
-            <label className="rarityLabel">Rarity:</label>
-
             <input type="button" className="rarityButton" value="Mythic"
                 onClick={() => dispatch( selectRarity("mythic") )} />
             <input type="button" className="rarityButton" value="Rare"
