@@ -32,6 +32,7 @@ export function processSetCollection(collection) {
 export function selectColor(color, newValue) {
     return {
         type: SELECT_COLOR,
+        // Return the selected color and its boolean value in payload
         payload: { color, newValue }
     }
 }
