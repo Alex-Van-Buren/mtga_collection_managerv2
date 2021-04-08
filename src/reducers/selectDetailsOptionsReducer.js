@@ -1,4 +1,4 @@
-import { SELECT_COLOR } from '../actions/types';
+import { SELECT_COLOR, SELECT_RARITY } from '../actions/types';
 
 const INITIAL_STATE = {
     colors: {
@@ -9,7 +9,9 @@ const INITIAL_STATE = {
         green: false,
         multi: false,
         colorless: false
-    }
+    },
+
+    rarity: "all"
 }
 
 export default function selectDetailsOptionsReducer(state = INITIAL_STATE, action) {
@@ -37,6 +39,11 @@ export default function selectDetailsOptionsReducer(state = INITIAL_STATE, actio
             newState.colors[color] = newValue;
 
             return newState;
+        }
+
+        // Rarity must be one of: { common, uncommon, rare, mythic, all }
+        case SELECT_RARITY: {
+            return { ...state, rarity: action.payload };
         }
 
         default:
