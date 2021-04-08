@@ -6,6 +6,9 @@ function SetDetailsOptions() {
 
     const [showCards, setShowCards] = useState("unowned");
 
+    // TODO: Fix. Currently suppressing warning
+    if (false) console.log(showCards);
+
     const JSXLayout = (<>
         {/* Buttons for: All Cards, Owned, Unowned */}
         <div>
@@ -19,9 +22,6 @@ function SetDetailsOptions() {
 
         {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
         <ColorCheckboxes/>
-
-            {/* Automatically uncheck all other boxes when "All Multicolored" or "Colorless" selected */}
-
 
         {/* Checkboxes for rarity: Mythic, Rare, Uncommon, Common */}
 
