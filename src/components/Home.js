@@ -38,9 +38,9 @@ function Home() {
 
     // Choose how many cards to show based on window size
     let numCards = "four"; // Default to full width
-    if (width < 500)
+    if (width < 580)
         numCards = "one"
-    else if (width < 850)
+    else if (width < 992)
         numCards = "two";
     else if (width < 1200)
         numCards = "three";
