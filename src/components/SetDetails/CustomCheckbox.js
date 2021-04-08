@@ -13,11 +13,11 @@ export default function CustomCheckbox({ text, checked, onChange, labelClass, in
 
     return (
         <>
-            {/* Checkbox Label */}
-            <label htmlFor={text} className={labelClass}>{text}</label>
-            
             {/* Checkbox input */}
             <input type="checkbox" name={text} id={text} checked={checked} onChange={onChange} className={inputClass}/>
+            
+            {/* Checkbox Label */}
+            <label htmlFor={text} className={labelClass}>{text}</label>
         </>
     );
 }
