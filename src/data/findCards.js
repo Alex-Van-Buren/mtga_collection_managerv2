@@ -3,7 +3,7 @@ const allArenaCards = require('./arenaCards20210323000926.json');
 /**
  * 
  * @param {*} searchOptions Object of options to filter the cards on Arena. Define as an object eg{set:'setId', name:'cardName', color: ['W', 'G'] 
- * (color also accepts 'colorless' or 'multi'), rarity: 'rarity', booster: boolean}
+ * (color also accepts 'colorless' or 'multi'), rarity: ['rarity1','rarity2'], booster: boolean}
  * @param {*} returnOptions An Array of addtional properties to retrieve eg ['image_uris', 'set', 'cmc', etc]
  * @returns An array of the cards founds with each card as an object with properties: name, arenaId, and the additional properties defined (if found)
  */
@@ -182,7 +182,8 @@ function filterRarity(cardList, rarity) {
     let newCardList = [];
     cardList.forEach( (card) => {
 
-        if (card.rarity === rarity)
+        // check if the rarity array contains the rarity of the card
+        if (rarity.includes(card.rarity))
             newCardList.push(card);
     });
 
