@@ -30,7 +30,9 @@ export default function ColorCheckboxes() {
         // Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless
         <div className="colorBox">
             <label htmlFor="color" className="colorBoxLabel">Color(s):</label>
-            {renderColors}
+            <div>
+                {renderColors}
+            </div>
         </div>
     );
 }
