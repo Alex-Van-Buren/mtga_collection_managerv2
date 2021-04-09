@@ -13,6 +13,7 @@
 
 .rarityButton {
     margin: 0 0 0 1em;
+    text-transform: capitalize;
 }
 
 .rarityLabel {

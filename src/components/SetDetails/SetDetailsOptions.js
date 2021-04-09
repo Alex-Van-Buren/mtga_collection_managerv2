@@ -1,60 +1,37 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import ColorCheckboxes from './ColorCheckboxes';
+import CustomButton from './CustomButton';
 import { selectRarity, setShowCards } from '../../actions';
 import '../../css/SetDetailsOptions.css';
 
 function SetDetailsOptions() {
 
-    // Access redux dispatcher
-    const dispatch = useDispatch();
-
-    const JSXLayout = (<div className="setDetailsOptions">
-        {/* Buttons for: All Cards, Owned, Unowned */}
+    return (<div className="setDetailsOptions">
+        
+        {/* Buttons that select cards to show based on number in inventory */}
         <label className="showLabel">Number Owned:</label>
-
         <div className="showList">
-            <input type="button" className="showButton" value="None"
-                onClick={() => dispatch(setShowCards("=0"))} />
-
-            <input type="button" className="showButton" value="Own at least 1"
-                onClick={() => dispatch(setShowCards(">0"))} />
-
-            <input type="button" className="showButton" value="Missing at least 1"
-                onClick={() => dispatch(setShowCards("<4"))} />
-
-            <input type="button" className="showButton" value="Full Playset"
-                onClick={() => dispatch(setShowCards("=4"))} />
-
-            <input type="button" className="showButton" value="Show All Cards"
-                onClick={() => dispatch(setShowCards("all"))} />
+            <CustomButton action={setShowCards} className="showButton" value="=0" text="None"/>
+            <CustomButton action={setShowCards} className="showButton" value=">0" text="Own at least 1"/>
+            <CustomButton action={setShowCards} className="showButton" value="<4" text="Missing at least 1"/>
+            <CustomButton action={setShowCards} className="showButton" value="=4" text="Full Playset"/>
+            <CustomButton action={setShowCards} className="showButton" value="all" text="Show All Cards"/>
         </div>
 
         {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
         <ColorCheckboxes/>
 
-        {/* Checkboxes for rarity: Mythic, Rare, Uncommon, Common */}
+        {/* Buttons that select rarity: Mythic, Rare, Uncommon, Common */}
         <label className="rarityLabel">Rarity:</label>
-        
         <div className="showList">
-            <input type="button" className="rarityButton" value="Mythic"
-                onClick={() => dispatch( selectRarity("mythic") )} />
-            <input type="button" className="rarityButton" value="Rare"
-                onClick={() => dispatch( selectRarity("rare") )} />
-            <input type="button" className="rarityButton" value="Uncommon"
-                onClick={() => dispatch( selectRarity("uncommon") )} />
-            <input type="button" className="rarityButton" value="Common"
-                onClick={() => dispatch( selectRarity("common") )} />
-            <input type="button" className="rarityButton" value="All"
-                onClick={() => dispatch( selectRarity("all") )} />
+            <CustomButton action={selectRarity} className="rarityButton" value="mythic"/>
+            <CustomButton action={selectRarity} className="rarityButton" value="rare"/>
+            <CustomButton action={selectRarity} className="rarityButton" value="uncommon"/>
+            <CustomButton action={selectRarity} className="rarityButton" value="common"/>
+            <CustomButton action={selectRarity} className="rarityButton" value="all"/>
         </div>
-
-        {/* Pass options into Redux via Action Creator */}
-
     </div>);
-
-    return JSXLayout;
 }
 
 export default SetDetailsOptions;
