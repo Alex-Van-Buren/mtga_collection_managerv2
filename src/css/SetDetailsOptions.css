@@ -1,6 +1,5 @@
 .setDetailsOptions {
-    padding: 3em;
-    
+    padding: 3em 0;
 }
 
 .ui.button.showButton {
@@ -15,7 +14,7 @@
 .ui.button.rarityButton {
     font-size: 1em;
     padding: 0.5em;
-    text-transform: capitalize;
+    text-transform: capitalize;  
 }
 
 .ui.button.rarityButton.mythic {
@@ -60,4 +59,6 @@ background-color: #1A1718;
 
 .showList {
     padding-top: 0.5em;
+    padding-left: 1em;
+    width: 100%;
 }
