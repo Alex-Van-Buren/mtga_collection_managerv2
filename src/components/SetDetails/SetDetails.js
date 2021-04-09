@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import useResizeWidth from '../../hooks/useResizeWidth';
 
 import CardList from './CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
@@ -37,18 +36,6 @@ function SetDetails() {
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
     const setName = setInfo[setId].name;
 
-    // Find optimal number of columns for card display based on screen width
-    const width = useResizeWidth();
-
-    // initialize number of columns to five for full width screen
-    let numCols = 'five';
-    if ( width < 640 ) 
-        numCols = 'two';
-    else if ( width < 990 )
-        numCols = 'three';
-    else if ( width < 1200 )
-        numCols = 'four';
-
     return (
         <>
             <div className="ui grid container">
@@ -68,11 +55,9 @@ function SetDetails() {
                 <div className="ten wide column">
                     <SetDetailsOptions/>
                 </div>
-            </div>
-
-            <div className={`ui ${numCols} column grid container`}>                
-                <CardList setId={setId}/>                
-            </div>
+            </div>                           
+            <CardList setId={setId}/>                
+            
         </>
     )
     
