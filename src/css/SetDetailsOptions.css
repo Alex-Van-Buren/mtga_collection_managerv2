@@ -3,16 +3,16 @@
     padding: 3em 0;
 }
 div>.ui.button.showButton.basic:focus {
-    box-shadow: 0 0 0 3px black !important;
+    box-shadow: 0 0 0 2px black !important;
 }
 div>.ui.button.showButton:focus {
-    box-shadow: 0 0 0 3px black !important;
+    box-shadow: 0 0 0 2px black !important;
 }
 div>.ui.button.rarityButton:focus {
-    box-shadow: 0 0 0 3px black !important;
+    box-shadow: 0 0 0 2px black !important;
 }
 div>.ui.button.rarityButton.basic:focus {
-    box-shadow: 0 0 0 3px black !important;
+    box-shadow: 0 0 0 2px black !important;
 }
 .ui.button.showButton {
     font-size: 1em;
