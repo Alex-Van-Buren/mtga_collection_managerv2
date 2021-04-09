@@ -11,8 +11,8 @@ function SetDetailsOptions() {
     const showCards = useSelector(state => state.detailsOptions.showCards);    
     const showListButtons = [
         {value: "=0",  text: "None"}, 
-        {value: ">0",  text: "Own at least 1"}, 
-        {value: "<4",  text: "Missing at least 1"}, 
+        {value: ">0",  text: "Own at least one"}, 
+        {value: "<4",  text: "Missing at least one"}, 
         {value: "=4",  text: "Full Playset"}, 
         {value: "all", text: "Show All Cards"} 
     ];

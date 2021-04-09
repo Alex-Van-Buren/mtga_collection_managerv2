@@ -1,10 +1,15 @@
 .setDetailsOptions {
+    /* TODO: remove this padding and fix relative layout */
     padding: 3em 0;
 }
 
 .ui.button.showButton {
     font-size: 1em;
-    padding: 0.5em;
+    height: 3em;
+    margin: 0.1em;
+    padding: 0.1em;
+    vertical-align: top;
+    width: 6em;
 }
 
 .showLabel {
@@ -13,8 +18,10 @@
 
 .ui.button.rarityButton {
     font-size: 1em;
+    margin: 0.1em;
     padding: 0.5em;
-    text-transform: capitalize;  
+    text-transform: capitalize;
+    width: 6em;
 }
 
 .ui.button.rarityButton.mythic {
@@ -45,7 +52,7 @@
 }
 
 .ui.button.rarityButton.common {
-background-color: #1A1718;
+    background-color: #1A1718;
 }
 
 .ui.button.rarityButton.common.basic{
@@ -53,12 +60,7 @@ background-color: #1A1718;
     box-shadow: 0 0 0 1px #1A1718 inset !important
 }
 
-.rarityLabel {
-    margin-right: 1em;
-}
-
 .showList {
-    padding-top: 0.5em;
     padding-left: 1em;
     width: 100%;
 }
