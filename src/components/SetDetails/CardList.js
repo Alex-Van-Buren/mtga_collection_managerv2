@@ -1,10 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import findCards from '../../data/findCards';
 
+import findCards from '../../data/findCards';
+import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/CardList.css';
 
-
+/**
+ * 
+ * @param {String} setId the three letter set Id code  
+ * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays the number
+ * of cards owned by the user above each card image. 
+ */
 function CardList( {setId} ) {
     
     const cardCollection = useSelector(state => state.inventory.cardCollection);
@@ -16,19 +22,13 @@ function CardList( {setId} ) {
         if (colors[color]) {
 
             // Converting color text to single character used findCards
-            switch(color) {
-                case 'white':
-                    return 'W';
-                case 'blue':
-                    return 'U';
-                case 'black':
-                    return 'B';
-                case 'red':
-                    return 'R';
-                case 'green':
-                    return 'G';
-                default:
-                    return color; 
+            switch(color) {                
+                case 'white': return 'W';
+                case 'blue':  return 'U';
+                case 'black': return 'B';
+                case 'red':   return 'R';
+                case 'green': return 'G';
+                default:      return color; 
             }            
         }
         // With flat map returning [] skips the element
@@ -57,67 +57,81 @@ function CardList( {setId} ) {
 
     // Get the cards using the findCards Function
     const cards = findCards(searchOptions, returnOptions);
-    // console.log(cards);
 
     // Get the showCards to know which cards to show
     const showCards = useSelector(state => state.detailsOptions.showCards);
 
-    function renderCards(cards) {
-        const renderedCards = cards.map( (card) => {
-            const img = card.image_uris.normal;
-            
-            // Make sure cardCollection is defined
-            let numOwned = 0;
-            if ( cardCollection && cardCollection[card.arenaId]) {
-                numOwned = cardCollection[card.arenaId];
-            } 
-            // Initialize makeCard Boolean to false
-            let makeCard = false;
-            if ( showCards === 'all' ) {
-                makeCard = true;
-            }
+    // Initialize number of cards shown with specified options
+    let numCardsShown = 0;
 
-            else if ( showCards === '=0' && numOwned === 0 ) {
-                makeCard = true;
-            }
+    // render the cards based on how many the user owns and the showCards option
+    const renderedCards = cards.map( (card) => {
 
-            else if ( showCards === '>0' && numOwned >0 ) {
-                makeCard =  true;
-            }
+        const img = card.image_uris.normal;        
+        let numOwned = 0;
 
-            else if ( showCards === '<4' && numOwned <4 ) {
-                makeCard = true;
-            }
+        // Make sure cardCollection is defined
+        if ( cardCollection && cardCollection[card.arenaId]) {
+            numOwned = cardCollection[card.arenaId];
+        } 
+        // Initialize makeCard Boolean to false
+        let makeCard = false;
+        if ( showCards === 'all' ) {
+            makeCard = true;
+        }
 
-            else if ( showCards === '=4' && numOwned === 4) {
-                makeCard = true;
-            }        
+        else if ( showCards === '=0' && numOwned === 0 ) {
+            makeCard = true;
+        }
 
-            if ( makeCard ) {
+        else if ( showCards === '>0' && numOwned >0 ) {
+            makeCard =  true;
+        }
 
-                return (
-                    <div className="column" key={card.arenaId}>
-                        <div className="ui fluid card removeBoxShadow">
-                            <div className="content">
-                                <div className="right floated content" >{numOwned} / 4 </div>
-                            </div>                    
-                            <div className="image">
-                                <img src={img} alt={card.name}/>
-                            </div>
+        else if ( showCards === '<4' && numOwned <4 ) {
+            makeCard = true;
+        }
+
+        else if ( showCards === '=4' && numOwned === 4) {
+            makeCard = true;
+        }        
+
+        if ( makeCard ) {
+            numCardsShown++;
+            return (
+                <div className="column" key={card.arenaId}>
+                    <div className="ui fluid card removeBoxShadow">
+                        <div className="content">
+                            <div className="right floated content" >{numOwned} / 4 </div>
+                        </div>                    
+                        <div className="image">
+                            <img src={img} alt={card.name}/>
                         </div>
                     </div>
-                )    
-            }
-            return null;
-        })
-        return renderedCards;
-    }
+                </div>
+            )    
+        }
+        return null;
+    }); // end of the renderedCards map
 
+    // Find optimal number of columns for card display based on screen width
+    const width = useResizeWidth();
+
+    // initialize number of columns to five for full width screen
+    let numCols = 'five';
+    if ( width < 640 ) 
+        numCols = 'two';
+    else if ( width < 990 )
+        numCols = 'three';
+    else if ( width < 1200 )
+        numCols = 'four';
     
-
     return (
         <>
-            {renderCards(cards)}
+            <p className="ui container">Displaying {numCardsShown} cards:</p>
+            <div className={`ui ${numCols} column grid container`}> 
+                {renderedCards}
+            </div>
         </>
     );
 }
