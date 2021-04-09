@@ -18,7 +18,7 @@ function SetDetailsOptions() {
     ];
 
     const renderShowListButtons = showListButtons.map( (button) => {
-        let buttonClass = "ui button mini primary showButton";
+        let buttonClass = "ui button primary showButton";
         if ( button.value !== showCards) {
             buttonClass += " basic";
         }
@@ -35,7 +35,7 @@ function SetDetailsOptions() {
     ];
     
     const renderRarityButtons = rarityButtons.map((button) => {
-        let buttonClass = `ui button mini primary rarityButton ${button.value}`;
+        let buttonClass = `ui button primary rarityButton ${button.value}`;
         if ( button.value !== raritySelected) {
             buttonClass += ' basic';
         }
