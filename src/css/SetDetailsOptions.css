@@ -3,17 +3,55 @@
     
 }
 
-.showButton {
-    margin: 0 0 0 1em;
+.ui.button.showButton {
+    font-size: 1em;
+    padding: 0.5em;
 }
 
 .showLabel {
     margin-right: 1em;
 }
 
-.rarityButton {
-    margin: 0 0 0 1em;
+.ui.button.rarityButton {
+    font-size: 1em;
+    padding: 0.5em;
     text-transform: capitalize;
+}
+
+.ui.button.rarityButton.mythic {
+    background-color: #BF4427;
+}
+
+.ui.button.rarityButton.mythic.basic {
+    color:#BF4427 !important;
+    box-shadow: 0 0 0 1px #BF4427 inset !important;
+}
+
+.ui.button.rarityButton.rare {
+    background-color: #A58E4A;
+}
+
+.ui.button.rarityButton.rare.basic{
+    color: #A58E4A !important;
+    box-shadow: 0 0 0 1px #A58E4A inset !important; 
+}
+
+.ui.button.rarityButton.uncommon {
+    background-color: #707883;
+}
+
+.ui.button.rarityButton.uncommon.basic{
+    color:#707883 !important;
+    box-shadow: 0 0 0 1px #707883 inset !important
+}
+
+.ui.button.rarityButton.common {
+background-color: #1A1718;
+}
+
+.ui.button.rarityButton.common.basic{
+    color:#1A1718!important;
+    box-shadow: 0 0 0 1px #1A1718 inset !important
 }
 
 .rarityLabel {
