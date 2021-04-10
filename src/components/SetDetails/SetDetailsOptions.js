@@ -22,7 +22,7 @@ function SetDetailsOptions() {
         if ( button.value !== showCards) {
             buttonClass += " basic";
         }
-        return <CustomButton action={setShowCards} className={buttonClass} value={button.value} text={button.text} />
+        return <CustomButton action={setShowCards} className={buttonClass} value={button.value} text={button.text} key={button.value} />
     });
 
     const raritySelected = useSelector(state => state.detailsOptions.rarity);
@@ -39,7 +39,7 @@ function SetDetailsOptions() {
         if ( button.value !== raritySelected) {
             buttonClass += ' basic';
         }
-        return <CustomButton action={selectRarity} className={buttonClass} value={button.value} />
+        return <CustomButton action={selectRarity} className={buttonClass} value={button.value} key={button.value} />
     });
 
     return (<div className="setDetailsOptions">
