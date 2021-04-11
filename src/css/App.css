@@ -1,0 +1,15 @@
+:root {
+    --clr-txt: rgba(0,0,0,0.87);
+}
+
+.darkMode {
+    --background-clr : #212121;
+    --clr-prm: rgba(51,51,51, 0.80);
+    --clr-prm-focus: rgba(60,60,60,0.98);
+    --clr-sec: #383838;
+    --clr-txt: #DEDEDE;
+}
+
+body {
+    background-color: var(--background-clr);
+}

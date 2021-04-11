@@ -9,3 +9,11 @@
 .ui.card>.content {
     padding: 0.5em 1em;
 }
+
+.ui.fluid.card {
+    background-color: var(--background-clr);
+    color: var(--clr-txt);
+}
+p.ui.container {
+    color: var(--clr-txt);
+}

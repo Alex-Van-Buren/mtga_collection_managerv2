@@ -1,3 +1,18 @@
-#setCardHeader{
+#setCardHeader {
     margin-top: 5%;
+    color: var(--clr-txt);
+}
+
+.ui.center.aligned.sub.header {
+    color: var(--clr-txt);
+}
+
+.ui.link.card {
+    background-color: var(--clr-sec);
+    color: var(--clr-txt);
+}
+
+.ui.link.card:hover {
+    background-color: var(--clr-sec);
+    color: var(--clr-txt);
 }
