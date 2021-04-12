@@ -1,6 +1,6 @@
 #collectionItem{
     padding: 1.5em;
-    color: black;
+    color: var(--clr-txt); 
     text-transform: capitalize;
 }
 

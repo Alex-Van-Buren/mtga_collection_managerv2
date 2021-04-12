@@ -2,20 +2,30 @@
     /* TODO: remove this padding and fix relative layout */
     padding: 3em 0;
 }
+
+label {
+    color: var(--clr-txt);
+}
+
 div>.ui.button.showButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 div>.ui.button.showButton:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 div>.ui.button.rarityButton:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 div>.ui.button.rarityButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 .ui.button.showButton {
     font-size: 1em;
+    font-weight: bold;
     height: 3em;
     margin: 0.1em;
     padding: 0.1em;
@@ -29,6 +39,7 @@ div>.ui.button.rarityButton.basic:focus {
 
 .ui.button.rarityButton {
     font-size: 1em;
+    font-weight: bold;
     margin: 0.1em;
     padding: 0.5em;
     text-transform: capitalize;
@@ -48,7 +59,7 @@ div>.ui.button.rarityButton.basic:focus {
     background-color: #A58E4A;
 }
 
-.ui.button.rarityButton.rare.basic{
+.ui.button.rarityButton.rare.basic {
     color: #A58E4A !important;
     box-shadow: 0 0 0 1px #A58E4A inset !important; 
 }
@@ -57,7 +68,7 @@ div>.ui.button.rarityButton.basic:focus {
     background-color: #707883;
 }
 
-.ui.button.rarityButton.uncommon.basic{
+.ui.button.rarityButton.uncommon.basic {
     color:#707883 !important;
     box-shadow: 0 0 0 1px #707883 inset !important
 }
@@ -66,12 +77,20 @@ div>.ui.button.rarityButton.basic:focus {
     background-color: #1A1718;
 }
 
-.ui.button.rarityButton.common.basic{
-    color:#1A1718!important;
-    box-shadow: 0 0 0 1px #1A1718 inset !important
+.ui.button.rarityButton.common.basic {
+    color: var(--clr-txt) !important;
+    box-shadow: 0 0 0 1px var(--clr-txt) !important;
 }
 
 .showList {
     padding-left: 1em;
     width: 100%;
+}
+
+.colorIcon {
+    width: 2em;
+}
+
+.colorList {
+    padding-left: 1em;
 }

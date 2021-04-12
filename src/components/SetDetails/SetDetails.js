@@ -6,6 +6,7 @@ import CardList from './CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
 import SetDetailsOptions from './SetDetailsOptions';
 import setInfo from '../../data/setInfo.json';
+import '../../css/SetDetails.css';
 
 function SetDetails() {
     

@@ -1,0 +1,11 @@
+.ui.stackable.menu {
+    background-color: var(--clr-prm);    
+}
+.ui.stackable.menu .item {
+    color: var(--clr-txt);
+}
+
+.ui.stackable.menu a.item:hover {
+    background-color: var(--clr-prm-focus) ;
+    color: var(--clr-txt) ;
+}

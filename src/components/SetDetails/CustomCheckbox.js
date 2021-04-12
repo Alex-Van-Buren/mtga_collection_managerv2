@@ -9,7 +9,7 @@ import React from 'react';
  * @param {string} inputClass Class name(s) for the input
  * @returns Checkbox JSX
  */
-export default function CustomCheckbox({ text, checked, onChange, labelClass, inputClass }) {
+export default function CustomCheckbox({ text, labelText=text, checked, onChange, labelClass, inputClass }) {
 
     return (
         <>
@@ -17,7 +17,7 @@ export default function CustomCheckbox({ text, checked, onChange, labelClass, in
             <input type="checkbox" name={text} id={text} checked={checked} onChange={onChange} className={inputClass}/>
             
             {/* Checkbox Label */}
-            <label htmlFor={text} className={labelClass}>{text}</label>
+            <label htmlFor={text} className={labelClass}>{labelText}</label>
         </>
     );
 }
