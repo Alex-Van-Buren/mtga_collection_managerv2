@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import DarkModeToggle from './DarkModeToggle';
 import GetFile from './GetFile';
 import '../css/Header.css';
 
@@ -26,6 +27,11 @@ function Header() {
 
                 {/* Help Menu */}
                 <div className="item">Help</div>
+
+                {/* Dark Mode Toggle */}
+                <div className="item">
+                    <DarkModeToggle />
+                </div>
             </div>
         </div>           
     );
