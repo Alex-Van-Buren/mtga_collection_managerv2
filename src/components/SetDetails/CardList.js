@@ -67,7 +67,7 @@ function CardList( {setId} ) {
     // render the cards based on how many the user owns and the showCards option
     const renderedCards = cards.map( (card) => {
 
-        const img = card.image_uris.normal;        
+        const img = card.image_uris.border_crop;
         let numOwned = 0;
 
         // Make sure cardCollection is defined
