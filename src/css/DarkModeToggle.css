@@ -1,3 +1,7 @@
 i.icon.outline {
     color: var(--clr-txt);
 }
+
+input:checked~label#DarkModeToggle:before {
+    background-color: #21BA45 !important;
+}

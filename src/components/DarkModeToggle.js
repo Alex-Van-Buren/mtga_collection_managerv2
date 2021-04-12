@@ -35,7 +35,7 @@ function DarkModeToggle() {
             <i className="sun outline icon"></i>
             <div className="ui toggle checkbox">
                 <input type="checkbox" name="DarkModeToggle" id="DarkModeToggle" checked={darkModeEnabled} onChange={() => toggleDarkMode(darkModeEnabled)}/>
-                <label htmlFor="DarkModeToggle"><i className="moon outline icon"></i></label>
+                <label htmlFor="DarkModeToggle" id="DarkModeToggle"><i className="moon outline icon"></i></label>
             </div>
         </>
     )
