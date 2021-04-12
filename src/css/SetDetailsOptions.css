@@ -10,17 +10,22 @@ label {
 div>.ui.button.showButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 div>.ui.button.showButton:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 div>.ui.button.rarityButton:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 div>.ui.button.rarityButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
+
 .ui.button.showButton {
     font-size: 1em;
+    font-weight: bold;
     height: 3em;
     margin: 0.1em;
     padding: 0.1em;
@@ -34,6 +39,7 @@ div>.ui.button.rarityButton.basic:focus {
 
 .ui.button.rarityButton {
     font-size: 1em;
+    font-weight: bold;
     margin: 0.1em;
     padding: 0.5em;
     text-transform: capitalize;
