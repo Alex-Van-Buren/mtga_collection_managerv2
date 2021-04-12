@@ -86,3 +86,11 @@ div>.ui.button.rarityButton.basic:focus {
     padding-left: 1em;
     width: 100%;
 }
+
+.colorIcon {
+    width: 2em;
+}
+
+.colorList {
+    padding-left: 1em;
+}
