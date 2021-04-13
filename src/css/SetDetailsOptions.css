@@ -7,6 +7,8 @@ label {
     color: var(--clr-txt);
 }
 
+
+/* Focus effects */
 div>.ui.button.showButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
@@ -23,11 +25,13 @@ div>.ui.button.rarityButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
 
+
+/* Number-owned buttons */
 .ui.button.showButton {
     font-size: 1em;
     font-weight: bold;
     height: 3em;
-    margin: 0.1em;
+    margin: 0.5em 0.3em;
     padding: 0.1em;
     vertical-align: top;
     width: 6em;
@@ -37,60 +41,69 @@ div>.ui.button.rarityButton.basic:focus {
     margin-right: 1em;
 }
 
+
+/* Rarity buttons */
 .ui.button.rarityButton {
     font-size: 1em;
     font-weight: bold;
-    margin: 0.1em;
+    margin: 0.5em 0.3em;
     padding: 0.5em;
     text-transform: capitalize;
     width: 6em;
 }
+    /* Mythic */
+    .ui.button.rarityButton.mythic {
+        background-color: #BF4427;
+    }
 
-.ui.button.rarityButton.mythic {
-    background-color: #BF4427;
-}
+    .ui.button.rarityButton.mythic.basic {
+        color:#BF4427 !important;
+        box-shadow: 0 0 0 1px #BF4427 inset !important;
+    }
 
-.ui.button.rarityButton.mythic.basic {
-    color:#BF4427 !important;
-    box-shadow: 0 0 0 1px #BF4427 inset !important;
-}
+    /* Rare */
+    .ui.button.rarityButton.rare {
+        background-color: #A58E4A;
+    }
 
-.ui.button.rarityButton.rare {
-    background-color: #A58E4A;
-}
+    .ui.button.rarityButton.rare.basic {
+        color: #A58E4A !important;
+        box-shadow: 0 0 0 1px #A58E4A inset !important; 
+    }
 
-.ui.button.rarityButton.rare.basic {
-    color: #A58E4A !important;
-    box-shadow: 0 0 0 1px #A58E4A inset !important; 
-}
+    /* Uncommon */
+    .ui.button.rarityButton.uncommon {
+        background-color: #707883;
+    }
 
-.ui.button.rarityButton.uncommon {
-    background-color: #707883;
-}
+    .ui.button.rarityButton.uncommon.basic {
+        color:#707883 !important;
+        box-shadow: 0 0 0 1px #707883 inset !important
+    }
 
-.ui.button.rarityButton.uncommon.basic {
-    color:#707883 !important;
-    box-shadow: 0 0 0 1px #707883 inset !important
-}
+    /* Common */
+    .ui.button.rarityButton.common {
+        background-color: #1A1718;
+    }
 
-.ui.button.rarityButton.common {
-    background-color: #1A1718;
-}
+    .ui.button.rarityButton.common.basic {
+        color: var(--clr-txt) !important;
+        box-shadow: 0 0 0 1px var(--clr-txt) !important;
+    }
 
-.ui.button.rarityButton.common.basic {
-    color: var(--clr-txt) !important;
-    box-shadow: 0 0 0 1px var(--clr-txt) !important;
-}
 
+/* Number-owned AND Rarity button divs */
 .showList {
     padding-left: 1em;
     width: 100%;
 }
 
+
+/* Color checkboxes */
 .colorIcon {
     width: 2em;
 }
 
-.colorList {
-    padding-left: 1em;
+.colorBoxInput {
+    margin-left: 1.3em;
 }
