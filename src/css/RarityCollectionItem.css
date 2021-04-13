@@ -12,3 +12,11 @@
 .rarityText {
     padding: 0 0.5em;
 }
+
+.ui.middle.aligned.divided.list .item#collectionItem {
+    border-top: 1px solid var(--border-clr);
+}
+
+.ui.middle.aligned.divided.list .item#collectionItem:first-of-type {
+    border-top: none;
+}

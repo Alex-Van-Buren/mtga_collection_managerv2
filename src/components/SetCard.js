@@ -32,7 +32,7 @@ function SetCard({ setId }) {
     const setName = setInfo[setId].name;
     
     return (
-        <>
+        <div className="mtgaSetCard">
             {/* The specific card set */}
             <div className="ui center aligned header" id="setCardHeader">{setName}</div>
 
@@ -48,7 +48,7 @@ function SetCard({ setId }) {
                 <RarityCollectionItem setId={setId} rarity="uncommon" />
                 <RarityCollectionItem setId={setId} rarity="common"/>
             </div>
-        </>        
+        </div>        
     );
 }
 
