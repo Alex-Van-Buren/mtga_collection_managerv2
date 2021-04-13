@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import '../css/DarkModeToggle.css'
 
 function DarkModeToggle() {
-    const [darkModeEnabled, setDarkModeEnabled] = useState(false);    
+    const [darkModeEnabled, setDarkModeEnabled] = useState(false);
+    let sunIcon = "grey sun icon";
+    let moonIcon = "grey moon icon";
     
     useEffect(() => {
         const userPreference = window.localStorage.getItem('darkMode');
@@ -18,7 +20,8 @@ function DarkModeToggle() {
     }, []);
 
     function toggleDarkMode(darkModeEnabled) {
-        if(darkModeEnabled) {
+
+        if (darkModeEnabled) {
             setDarkModeEnabled(false);
             window.localStorage.setItem('darkMode', 'off');
             document.body.classList.remove('darkMode');
@@ -31,12 +34,20 @@ function DarkModeToggle() {
     }
 
     return (
-        <>        
-            <i className="sun outline icon"></i>
-            <div className="ui toggle checkbox">
-                <input type="checkbox" name="DarkModeToggle" id="DarkModeToggle" checked={darkModeEnabled} onChange={() => toggleDarkMode(darkModeEnabled)}/>
-                <label htmlFor="DarkModeToggle" id="DarkModeToggle"><i className="moon outline icon"></i></label>
+        <>
+            {/* Sun icon */}
+            <i className={`sun icon ${darkModeEnabled ? 'grey' : 'yellow'}`}/>
+
+            {/* Darkmode Toggle */}
+            <div className="ui fitted toggle checkbox">
+                <input 
+                    type="checkbox" name="DarkModeToggle" id="DarkModeToggle" 
+                    checked={darkModeEnabled} onChange={() => toggleDarkMode(darkModeEnabled)}/>
+                <label></label>
             </div>
+
+            {/* Moon icon */}
+            <i className={`moon icon ${darkModeEnabled ? 'blue' : 'grey'}`}/>
         </>
     )
 }

@@ -1,7 +1,7 @@
-i.icon.outline {
-    color: var(--clr-txt);
+.ui.fitted.toggle.checkbox input:checked ~ label:before {
+    background: #21BA45 !important;
 }
 
-input:checked~label#DarkModeToggle:before {
-    background-color: #21BA45 !important;
+.sun.icon, .moon.icon {
+    margin: 0 0.5em !important;
 }
