@@ -128,7 +128,7 @@ function CardList( {setId} ) {
     
     return (
         <>
-            <p className="ui container">Displaying {numCardsShown} cards:</p>
+            <p className="ui container">Displaying {numCardsShown} card(s):</p>
             <div className={`ui ${numCols} column grid container`}> 
                 {renderedCards}
             </div>
