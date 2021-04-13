@@ -4,8 +4,6 @@ import '../css/DarkModeToggle.css'
 
 function DarkModeToggle() {
     const [darkModeEnabled, setDarkModeEnabled] = useState(false);
-    let sunIcon = "grey sun icon";
-    let moonIcon = "grey moon icon";
     
     useEffect(() => {
         const userPreference = window.localStorage.getItem('darkMode');
