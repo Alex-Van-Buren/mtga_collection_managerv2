@@ -56,7 +56,10 @@ function SetDetails() {
                 <div className="ten wide column">
                     <SetDetailsOptions/>
                 </div>
-            </div>                           
+            </div>
+            
+            <hr className="lineBreak"/>
+
             <CardList setId={setId}/>                
             
         </>

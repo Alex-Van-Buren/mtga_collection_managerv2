@@ -1,3 +1,10 @@
 .ui.center.aligned.header {
     color: var(--clr-txt);
 }
+
+.lineBreak {
+    border: none;
+    border-top: 1px solid var(--border-clr);
+    padding: 1em 0;
+    width: 93%;
+}
