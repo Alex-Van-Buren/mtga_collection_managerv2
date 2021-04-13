@@ -5,7 +5,8 @@ import '../css/RarityCollectionItem.css';
 
 /**
  * Component that contains details about how many cards are owned from a specific set of a specific rarity
- * @param {*} props Contains setId and rarity 
+ * @param {*} setId
+ * @param {*} rarity
  */
 function RarityCollectionItem({ setId, rarity }) {
 
