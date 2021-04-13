@@ -26,6 +26,13 @@ div>.ui.button.rarityButton.basic:focus {
 }
 
 
+/* Set primary color */
+.ui.button {
+    --primary:  rgb(33, 133, 208);
+    --primary-o:  rgba(33, 133, 208, 0.8);
+}
+
+
 /* Number-owned buttons */
 .ui.button.showButton {
     font-size: 1em;
@@ -35,6 +42,11 @@ div>.ui.button.rarityButton.basic:focus {
     padding: 0.1em;
     vertical-align: top;
     width: 6em;
+}
+
+.ui.button.showButton:hover, .ui.button.showButton.basic:hover {
+    background-color: var(--primary-o) !important;
+    color: var(--clr-txt) !important;
 }
 
 .showLabel {
@@ -54,14 +66,14 @@ div>.ui.button.rarityButton.basic:focus {
     --mythic:   rgb(191, 68, 39);
     --rare:     rgb(165, 142, 74);
     --uncommon: rgb(112, 120, 131);
-    --primary:  rgb(33, 133, 208);
+    
     
     /* Opaque colors */
     --mythic-o:   rgba(191, 68, 39, 0.8);
     --rare-o:     rgba(165, 142, 74, 0.8);
     --uncommon-o: rgba(112, 120, 131, 0.8);
-    --primary-o:  rgba(33, 133, 208, 0.8);
 }
+
     /* Mythic */
     .ui.button.rarityButton.mythic {
         background-color: var(--mythic);
