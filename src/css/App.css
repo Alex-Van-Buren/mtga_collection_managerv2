@@ -1,6 +1,10 @@
 :root {
     --border-clr: rgba(34, 36, 38, 0.15);
     --clr-txt: rgba(0,0,0,0.87);
+    --clr-txt-inverse: #FFF;
+
+    --common:   rgb(26, 23, 24);
+    --common-o: rgba(26, 23, 24, 0.9);
 }
 
 .darkMode {
@@ -10,6 +14,10 @@
     --clr-prm-focus: rgba(60,60,60,0.98);
     --clr-sec: #383838;
     --clr-txt: #DEDEDE;
+    --clr-txt-inverse: #000;
+
+    --common:   rgb(229, 232, 231);
+    --common-o: rgba(229, 232, 231, 0.9);
 }
 
 body {
