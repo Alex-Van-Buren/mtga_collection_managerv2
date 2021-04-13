@@ -6,13 +6,13 @@ import CustomCheckbox from './CustomCheckbox';
 import '../../css/ColorCheckboxes.css';
 
 // Import SVG images
-import W from '../../images/W.svg';
-import U from '../../images/U.svg';
-import B from '../../images/B.svg';
-import R from '../../images/R.svg';
-import G from '../../images/G.svg';
-import M from '../../images/M.svg';
-import C from '../../images/C.svg';
+import W from '../../images/color_imgs/W.svg';
+import U from '../../images/color_imgs/U.svg';
+import B from '../../images/color_imgs/B.svg';
+import R from '../../images/color_imgs/R.svg';
+import G from '../../images/color_imgs/G.svg';
+import M from '../../images/color_imgs/M.svg';
+import C from '../../images/color_imgs/C.svg';
 
 export default function ColorCheckboxes() {
 
