@@ -37,8 +37,10 @@ function SetCard({ setId }) {
             <div className="ui center aligned header" id="setCardHeader">{setName}</div>
 
             {/* Owned cards from this set */}
-            <div className="ui center aligned sub header">Collection Progress
-                <p>{ownedTotal} / {setTotal} ({percentOwned}%)</p>
+            <div className="ui center aligned sub header">
+                Set Progress:
+                &nbsp; &nbsp; &nbsp;
+                <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
             </div>
 
             {/* Owned cards by rarity */}

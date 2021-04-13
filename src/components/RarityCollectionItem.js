@@ -34,7 +34,7 @@ function RarityCollectionItem({ setId, rarity }) {
         <div className="item " id="collectionItem" >
             <div className="content">
                 <span className="right floated"> {ownedTotal} / {setTotal} ({percentOwned}%)</span>
-                <i className={`ss ss-${setId} ss-${rarity} ss-grad ss-fw mtgIcon`}></i>
+                <i className={`ss ss-${setId} ss-${rarity} ss-fw mtgIcon`}></i>
                 <span className="rarityText">{rarity}</span>
             </div>
         </div>
