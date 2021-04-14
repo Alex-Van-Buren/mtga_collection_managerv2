@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectColor } from '../../actions';
 import CustomCheckbox from './CustomCheckbox';
+import makeAccessible from '../../hooks/makeAccessible';
 import '../../css/ColorCheckboxes.css';
 
 // Import SVG images
@@ -39,20 +40,6 @@ export default function ColorCheckboxes() {
             ));
         }, [colorLen]);
     /* End convoluted keyboard accessibility stuff */
-
-    // Helper function that allows screenreaders to click the input file type with keyboard
-    function makeAccessible(e, ref) {
-
-        // If they hit enter
-        if (e.key === "Enter") {
-
-            // Prevent the default action, otherwise it gets clicked twice
-            e.preventDefault();           
-            
-            // Click the label that is referenced using useRef hook
-            ref.current.click();
-        }
-    }
 
     // Create color checkboxes for each
     const renderColors = colors.map( (color, i) => {

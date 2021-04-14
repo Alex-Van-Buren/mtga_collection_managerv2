@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { getCollection, processSetCollection } from '../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../errors';
+import makeAccessible from '../hooks/makeAccessible';
 import '../css/GetFile.css'
 
 // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
@@ -67,24 +68,10 @@ function GetFile(props) {
     // Make a ref
     const ref = useRef();
 
-    // Helper function that allows screenreaders to click the input file type with keyboard
-    function makeAccessible(e) {
-
-        // If they hit enter
-        if (e.key === "Enter") {
-
-            // Prevent the default action, otherwise it gets clicked twice
-            e.preventDefault();           
-            
-            // Click the label that is referenced using useRef hook
-            ref.current.click();
-        }
-    }
-
     return (
         <div className="item ">
             <label className="ui positive button" ref={ref}>
-                <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeAccessible(e)}>
+                <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeAccessible(e, ref)}>
                     <i className="upload icon"></i>
                     Upload Log File
                 </span>
