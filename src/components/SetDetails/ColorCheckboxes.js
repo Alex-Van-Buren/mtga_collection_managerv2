@@ -32,7 +32,7 @@ export default function ColorCheckboxes() {
         const iconClass = colorValues[color] ? "big colorIcon" : "colorIcon";
 
         return (
-            <div className="colorCheckbox">
+            <div className="colorCheckbox" key={color}>
                 <CustomCheckbox
                     // Data
                     text={color} key={color} checked={colorValues[color]}
