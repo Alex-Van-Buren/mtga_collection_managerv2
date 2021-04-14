@@ -10,7 +10,7 @@
 
 .darkMode {
     --background-clr : #212121;
-    --border-clr: rgba(255, 255, 255, 0.70);
+    --border-clr: rgba(255, 255, 255, 0.40);
     --clr-prm: rgba(51,51,51, 0.80);
     --clr-prm-focus: rgba(60,60,60,0.98);
     --clr-sec: #383838;

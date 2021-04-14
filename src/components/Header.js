@@ -12,24 +12,28 @@ import '../css/Header.css';
  */
 function Header() {
     return (
+
+        // NOTE: ADD "bordered" CLASS TO ALL ITEMS IN THIS COMPONENT TO ENSURE THEIR BORDER
+        // APPEARS PROPERLY IN DARK MODE
+
         <div className="ui stackable menu">
             {/* Options on Left Side */}
-            <Link to='/' className="item">Home</Link>
-            <div className="item">Another thing</div> {/* Here for testing only */}
+            <Link to='/' className="bordered item">Home</Link>
+            <div className="bordered item">Another thing</div> {/* Here for testing only */}
 
             {/* Options on Right Side */}
             <div className="right menu">
 
                 {/* File Selector */}
-                <div className="ui input">
+                <div className="bordered ui input">
                     <GetFile />
                 </div>
 
                 {/* Help Menu */}
-                <div className="item">Help</div>
+                <div className="bordered item">Help</div>
 
                 {/* Dark Mode Toggle */}
-                <div className="item">
+                <div className="bordered item">
                     <DarkModeToggle />
                 </div>
             </div>
