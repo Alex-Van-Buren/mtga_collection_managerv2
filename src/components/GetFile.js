@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { getCollection, processSetCollection } from '../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../errors';
-import makeAccessible from '../hooks/makeAccessible';
+import makeKeyboardClickable from '../hooks/makeKeyboardClickable';
 import '../css/GetFile.css'
 
 // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
@@ -71,7 +71,7 @@ function GetFile(props) {
     return (
         <div className="item ">
             <label className="ui positive button" ref={ref}>
-                <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeAccessible(e, ref)}>
+                <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeKeyboardClickable(e, ref)}>
                     <i className="upload icon"></i>
                     Upload Log File
                 </span>

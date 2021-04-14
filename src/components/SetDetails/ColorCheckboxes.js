@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectColor } from '../../actions';
 import CustomCheckbox from './CustomCheckbox';
-import makeAccessible from '../../hooks/makeAccessible';
+import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/ColorCheckboxes.css';
 
 // Import SVG images
@@ -58,7 +58,7 @@ export default function ColorCheckboxes() {
 
                         // Keyboard accessibility
                         aria-controls={color} role="button" tabIndex="0"
-                        onKeyDown={(e) => makeAccessible(e, colorRefs[i])} ref={colorRefs[i]}
+                        onKeyDown={(e) => makeKeyboardClickable(e, colorRefs[i])} ref={colorRefs[i]}
                     /> }
     
                     // Classes
