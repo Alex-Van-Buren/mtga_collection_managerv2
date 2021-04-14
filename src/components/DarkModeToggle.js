@@ -36,6 +36,7 @@ function DarkModeToggle() {
             // Accessibility
             className="darkmodeToggle" tabIndex="0"
             onKeyDown={ e => {if (e.key === "Enter") toggleDarkMode(darkModeEnabled)} }
+            role="checkbox" aria-checked={darkModeEnabled} aria-label="Dark Mode Toggle"
         >
             {/* Sun icon */}
             <i className={`sun icon ${darkModeEnabled ? 'grey' : 'yellow'}`}/>

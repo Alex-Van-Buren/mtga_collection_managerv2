@@ -61,7 +61,8 @@ export default function ColorCheckboxes() {
                         className={iconClass} src={colorSVGs[i]} alt="icon"
 
                         // Keyboard accessibility
-                        aria-controls={color} role="button" tabIndex="0"
+                        aria-controls={color} role="checkbox" aria-checked={colorValues[color]} tabIndex="0"
+                        aria-label={color}
                         onKeyDown={ (e) => makeKeyboardClickable(e, colorRefs[i])} ref={colorRefs[i] }
                         onMouseLeave={ () => blur() }
                     /> }
