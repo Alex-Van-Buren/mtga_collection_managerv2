@@ -17,3 +17,7 @@
 p.ui.container {
     color: var(--clr-txt);
 }
+
+.numCardsShown {
+    font-size: 1.2em;
+}
