@@ -46,6 +46,10 @@ export default function ColorCheckboxes() {
 
         const iconClass = colorValues[color] ? "big colorIcon" : "colorIcon";
 
+        // Need to call blur so icon behavior works as expected with mouse
+        // - icon doesn't keep focus after blur is called
+        const blur = () => colorRefs[i].current.blur();
+
         return (
             <div className="colorCheckbox" key={color}>
                 <CustomCheckbox
@@ -58,7 +62,8 @@ export default function ColorCheckboxes() {
 
                         // Keyboard accessibility
                         aria-controls={color} role="button" tabIndex="0"
-                        onKeyDown={(e) => makeKeyboardClickable(e, colorRefs[i])} ref={colorRefs[i]}
+                        onKeyDown={ (e) => makeKeyboardClickable(e, colorRefs[i])} ref={colorRefs[i] }
+                        onMouseLeave={ () => blur() }
                     /> }
     
                     // Classes

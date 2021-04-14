@@ -26,8 +26,8 @@ label {
     width: 6em;
 }
 
-.ui.button.showButton:focus, .ui.button.showButton.basic:focus,
-.ui.button.showButton:hover, .ui.button.showButton.basic:hover {
+.ui.button.showButton.basic:focus,
+.ui.button.showButton.basic:hover {
     background-color: var(--primary-o) !important;
     color: var(--clr-txt) !important;
 }
@@ -67,8 +67,8 @@ label {
         box-shadow: 0 0 0 1px var(--mythic) inset !important;
     }
     
-    .ui.button.rarityButton.mythic:focus, .ui.button.rarityButton.mythic.basic:focus,
-    .ui.button.rarityButton.mythic:hover, .ui.button.rarityButton.mythic.basic:hover {
+    .ui.button.rarityButton.mythic.basic:focus,
+    .ui.button.rarityButton.mythic.basic:hover {
         background-color: var(--mythic-o) !important;
         color: var(--clr-txt) !important;
     }
@@ -83,8 +83,8 @@ label {
         box-shadow: 0 0 0 1px var(--rare) inset !important; 
     }
 
-    .ui.button.rarityButton.rare:focus, .ui.button.rarityButton.rare.basic:focus,
-    .ui.button.rarityButton.rare:hover, .ui.button.rarityButton.rare.basic:hover {
+    .ui.button.rarityButton.rare.basic:focus,
+    .ui.button.rarityButton.rare.basic:hover {
         background-color: var(--rare-o) !important;
         color: var(--clr-txt) !important;
     }
@@ -99,8 +99,8 @@ label {
         box-shadow: 0 0 0 1px var(--uncommon) inset !important
     }
 
-    .ui.button.rarityButton.uncommon:focus, .ui.button.rarityButton.uncommon.basic:focus,
-    .ui.button.rarityButton.uncommon:hover, .ui.button.rarityButton.uncommon.basic:hover {
+    .ui.button.rarityButton.uncommon.basic:focus,
+    .ui.button.rarityButton.uncommon.basic:hover {
         background-color: var(--uncommon-o) !important;
         color: var(--clr-txt) !important;
     }
@@ -116,15 +116,15 @@ label {
         box-shadow: 0 0 0 1px var(--common) inset !important;
     }
 
-    .ui.button.rarityButton.common:focus, .ui.button.rarityButton.common.basic:focus,
-    .ui.button.rarityButton.common:hover, .ui.button.rarityButton.common.basic:hover {
+    .ui.button.rarityButton.common.basic:focus,
+    .ui.button.rarityButton.common.basic:hover {
         background-color: var(--common-o) !important;
         color: var(--clr-txt-inverse) !important;
     }
 
     /* All */
-    .ui.button.rarityButton.all:focus, .ui.button.rarityButton.all.basic:focus,
-    .ui.button.rarityButton.all:hover, .ui.button.rarityButton.all.basic:hover {
+    .ui.button.rarityButton.all.basic:focus,
+    .ui.button.rarityButton.all.basic:hover {
         background-color: var(--primary-o) !important;
         color: var(--clr-txt) !important;
     }
@@ -166,7 +166,7 @@ label {
 }
 
 .colorIcon:hover, .colorIcon:focus {
-    width: 3em;
+    width: 3.5em;
     transition-duration: 150ms;
     outline: none;
 }
