@@ -31,16 +31,6 @@ function DarkModeToggle() {
         }
     }
 
-    function makeAccessible(e) {
-
-        // If they hit enter
-        if (e.key === "Enter") {          
-            
-            // Toggle Dark mode
-            toggleDarkMode(darkModeEnabled)
-        }
-    }
-
     return (
         <div
             // Accessibility
