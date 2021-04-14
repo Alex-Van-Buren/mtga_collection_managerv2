@@ -88,7 +88,7 @@ function GetFile(props) {
                     <i className="upload icon"></i>
                     Upload Log File
                 </span>
-                <input type="file" onChange={handleFile} accept=".log, .txt" tabIndex="-1" />
+                <input type="file" id="filename" onChange={handleFile} accept=".log, .txt" tabIndex="-1" />
                 
             </label>                
         </div>
