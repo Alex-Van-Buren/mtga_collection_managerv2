@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectColor } from '../../actions';
@@ -26,8 +26,36 @@ export default function ColorCheckboxes() {
     const colors = ['white', 'blue', 'black', 'red', 'green', 'multi', 'colorless'];
     const colorSVGs = [ W, U, B, R, G, M, C ];
     
+    /* REALLY CONVOLUTED WAY TO MAKE ELEMENTS FROM MAP KEYBOARD ACCESSIBLE */
+        // Need to keep track of length of colors array, because references depend on it
+        const colorLen = colors.length;
+        // Use state to rerender component upon change
+        const [colorRefs, setColorRefs] = useState([]);
+        useEffect(() => {
+            // Set state to keep track of refs to each color checkbox
+            setColorRefs(colorRefs => (
+                // Fill colorRefs array - keeping current ref if it exists, otherwise make a new one
+                Array(colorLen).fill().map((_, i) => colorRefs[i] || createRef())
+            ));
+        }, [colorLen]);
+    /* End convoluted keyboard accessibility stuff */
+
+    // Helper function that allows screenreaders to click the input file type with keyboard
+    function makeAccessible(e, ref) {
+
+        // If they hit enter
+        if (e.key === "Enter") {
+
+            // Prevent the default action, otherwise it gets clicked twice
+            e.preventDefault();           
+            
+            // Click the label that is referenced using useRef hook
+            ref.current.click();
+        }
+    }
+
     // Create color checkboxes for each
-    const renderColors = colors.map( (color, index) => {
+    const renderColors = colors.map( (color, i) => {
 
         const iconClass = colorValues[color] ? "big colorIcon" : "colorIcon";
 
@@ -38,7 +66,13 @@ export default function ColorCheckboxes() {
                     text={color} key={color} checked={colorValues[color]}
     
                     // Icon
-                    labelText={ <img className={iconClass} src={colorSVGs[index]} alt="icon" /> }
+                    labelText={ <img 
+                        className={iconClass} src={colorSVGs[i]} alt="icon"
+
+                        // Keyboard accessibility
+                        aria-controls={color} role="button" tabIndex="0"
+                        onKeyDown={(e) => makeAccessible(e, colorRefs[i])} ref={colorRefs[i]}
+                    /> }
     
                     // Classes
                     labelClass="colorBoxInputLabel" inputClass="colorBoxInput" spanClass="colorSpan"

@@ -177,7 +177,7 @@ div>.ui.button.rarityButton.basic:focus {
     display: none;
 }
 
-.colorIcon:hover {
+.colorIcon:hover, .colorIcon:focus {
     width: 3em;
     transition-duration: 150ms;
 }
