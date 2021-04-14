@@ -137,7 +137,7 @@ div>.ui.button.rarityButton.basic:focus {
 
     /* All */
     .ui.button.rarityButton.all:hover, .ui.button.rarityButton.all.basic:hover {
-        background-color: var(--primary) !important;
+        background-color: var(--primary-o) !important;
         color: var(--clr-txt) !important;
     }
 
