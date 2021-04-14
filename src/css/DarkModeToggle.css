@@ -5,3 +5,9 @@
 .sun.icon, .moon.icon {
     margin: 0 0.5em !important;
 }
+
+.darkmodeToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

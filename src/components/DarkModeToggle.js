@@ -31,22 +31,37 @@ function DarkModeToggle() {
         }
     }
 
+    function makeAccessible(e) {
+
+        // If they hit enter
+        if (e.key === "Enter") {          
+            
+            // Toggle Dark mode
+            toggleDarkMode(darkModeEnabled)
+        }
+    }
+
     return (
-        <>
+        <div
+            // Accessibility
+            className="darkmodeToggle" tabIndex="0"
+            onKeyDown={ e => {if (e.key === "Enter") toggleDarkMode(darkModeEnabled)} }
+        >
             {/* Sun icon */}
             <i className={`sun icon ${darkModeEnabled ? 'grey' : 'yellow'}`}/>
 
             {/* Darkmode Toggle */}
             <div className="ui fitted toggle checkbox">
                 <input 
-                    type="checkbox" name="DarkModeToggle" id="DarkModeToggle" 
-                    checked={darkModeEnabled} onChange={() => toggleDarkMode(darkModeEnabled)}/>
-                <label></label>
+                    type="checkbox" name="DarkModeToggle" id="DarkModeToggle" tabIndex="-1"
+                    checked={darkModeEnabled} onChange={() => toggleDarkMode(darkModeEnabled)}
+                />
+                <label tabIndex="-1"></label>
             </div>
 
             {/* Moon icon */}
             <i className={`moon icon ${darkModeEnabled ? 'blue' : 'grey'}`}/>
-        </>
+        </div>
     )
 }
 

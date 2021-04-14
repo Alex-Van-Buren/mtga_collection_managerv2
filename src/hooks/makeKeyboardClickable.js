@@ -3,7 +3,7 @@
      * @param {*} e Keydown event
      * @param {*} ref Reference to click
      */
- export default function makeAccessible(e, ref) {
+ export default function makeKeyboardClickable(e, ref) {
 
     // If they hit enter
     if (e.key === "Enter") {
