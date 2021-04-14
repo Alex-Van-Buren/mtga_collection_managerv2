@@ -12,8 +12,8 @@ import U from '../../images/color_imgs/U.svg';
 import B from '../../images/color_imgs/B.svg';
 import R from '../../images/color_imgs/R.svg';
 import G from '../../images/color_imgs/G.svg';
-import M from '../../images/color_imgs/M.svg';
 import C from '../../images/color_imgs/C.svg';
+import M from '../../images/color_imgs/M.svg';
 
 export default function ColorCheckboxes() {
 
@@ -24,8 +24,8 @@ export default function ColorCheckboxes() {
     const colorValues = useSelector( state => state.detailsOptions.colors );
 
     // List card colors and the tags needed for their icons
-    const colors = ['white', 'blue', 'black', 'red', 'green', 'multi', 'colorless'];
-    const colorSVGs = [ W, U, B, R, G, M, C ];
+    const colors = ['white', 'blue', 'black', 'red', 'green', 'colorless', 'multi'];
+    const colorSVGs = [ W, U, B, R, G, C, M ];
     
     /* REALLY CONVOLUTED WAY TO MAKE ELEMENTS FROM MAP KEYBOARD ACCESSIBLE */
         // Need to keep track of length of colors array, because references depend on it
