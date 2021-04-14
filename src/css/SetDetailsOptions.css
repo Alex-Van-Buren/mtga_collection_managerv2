@@ -156,6 +156,7 @@ div>.ui.button.rarityButton.basic:focus {
 
 .big.colorIcon {
     width: 3.5em;
+    transition-duration: 150ms;
 }
 
 .colorList {
@@ -178,4 +179,5 @@ div>.ui.button.rarityButton.basic:focus {
 
 .colorIcon:hover {
     width: 3em;
+    transition-duration: 150ms;
 }
