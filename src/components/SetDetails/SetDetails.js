@@ -42,8 +42,10 @@ function SetDetails() {
             <div className="ui grid container">
                 <div className="six wide column">
                     <div className="ui center aligned header">{setName}</div>
-                    <div className="ui center aligned sub header">Collection Progress
-                        <p>{ownedTotal} / {setTotal} ({percentOwned}%)</p>
+                    <div className="ui center aligned sub header">
+                        Set Progress:
+                        &nbsp; &nbsp; &nbsp;
+                        <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
                     </div>
                     <div className="ui middle aligned divided list">
                         <RarityCollectionItem setId={setId} rarity="mythic" />                    

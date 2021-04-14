@@ -2,6 +2,7 @@
     --border-clr: rgba(34, 36, 38, 0.15);
     --clr-txt: rgba(0,0,0,0.87);
     --clr-txt-inverse: #FFF;
+    --clr-prm-focus: #DEDEDE;
 
     --common:   rgb(26, 23, 24);
     --common-o: rgba(26, 23, 24, 0.9);
