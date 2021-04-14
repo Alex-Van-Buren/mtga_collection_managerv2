@@ -8,7 +8,7 @@ label {
 }
 
 
-/* Focus effects */
+/* Focus border effects */
 div>.ui.button.showButton.basic:focus {
     box-shadow: 0 0 0 2px black !important;
 }
@@ -154,6 +154,29 @@ div>.ui.button.rarityButton.basic:focus {
     width: 2em;
 }
 
+.big.colorIcon {
+    width: 3.5em;
+}
+
+.colorList {
+    padding-left: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.colorCheckbox {
+    vertical-align: top;
+    width: 4em;
+    height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .colorBoxInput {
-    margin-left: 1.3em;
+    display: none;
+}
+
+.colorIcon:hover {
+    width: 3em;
 }

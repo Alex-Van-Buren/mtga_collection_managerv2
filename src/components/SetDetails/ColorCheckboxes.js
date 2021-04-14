@@ -28,20 +28,25 @@ export default function ColorCheckboxes() {
     
     // Create color checkboxes for each
     const renderColors = colors.map( (color, index) => {
+
+        const iconClass = colorValues[color] ? "big colorIcon" : "colorIcon";
+
         return (
-            <CustomCheckbox
-                // Data
-                text={color} key={color} checked={colorValues[color]}
-
-                // Icon
-                labelText={ <img className="colorIcon" src={colorSVGs[index]} alt="icon" /> }
-
-                // Classes
-                labelClass="colorBoxInputLabel" inputClass="colorBoxInput"
-
-                // Dispatch redux action
-                onChange={(e) => dispatch( selectColor(e.target.name, e.target.checked) )}
-            />
+            <div className="colorCheckbox">
+                <CustomCheckbox
+                    // Data
+                    text={color} key={color} checked={colorValues[color]}
+    
+                    // Icon
+                    labelText={ <img className={iconClass} src={colorSVGs[index]} alt="icon" /> }
+    
+                    // Classes
+                    labelClass="colorBoxInputLabel" inputClass="colorBoxInput" spanClass="colorSpan"
+    
+                    // Dispatch redux action
+                    onChange={(e) => dispatch( selectColor(e.target.name, e.target.checked) )}
+                />
+            </div>
         );
     });
 

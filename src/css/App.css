@@ -23,4 +23,6 @@
 body {
     background-color: var(--background-clr);
     font-weight: bold;
+    /* Always show scroll bar */
+    overflow-y: scroll;
 }
