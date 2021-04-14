@@ -165,7 +165,6 @@ div>.ui.button.rarityButton.basic:focus {
 }
 
 .colorCheckbox {
-    vertical-align: top;
     width: 4em;
     height: 3.5em;
     display: flex;
