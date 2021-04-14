@@ -46,10 +46,6 @@ export default function ColorCheckboxes() {
 
         const iconClass = colorValues[color] ? "big colorIcon" : "colorIcon";
 
-        // Need to call blur so icon behavior works as expected with mouse
-        // - icon doesn't keep focus after blur is called
-        const blur = () => colorRefs[i].current.blur();
-
         return (
             <div className="colorCheckbox" key={color}>
                 <CustomCheckbox
@@ -57,18 +53,21 @@ export default function ColorCheckboxes() {
                     text={color} key={color} checked={colorValues[color]}
     
                     // Icon
-                    labelText={ <img 
+                    labelText={ <img
                         className={iconClass} src={colorSVGs[i]} alt="icon"
 
                         // Keyboard accessibility
                         aria-controls={color} role="checkbox" aria-checked={colorValues[color]} tabIndex="0"
-                        aria-label={color}
-                        onKeyDown={ (e) => makeKeyboardClickable(e, colorRefs[i])} ref={colorRefs[i] }
-                        onMouseLeave={ () => blur() }
+                        aria-label={color} ref={ colorRefs[i] }
+                        onKeyDown={ (e) => makeKeyboardClickable(e, colorRefs[i])}
+
+                        // Need to call blur so icon behavior works as expected with mouse
+                        // - icon doesn't keep focus after blur is called
+                        onMouseLeave={ () => colorRefs[i].current.blur() }
                     /> }
     
                     // Classes
-                    labelClass="colorBoxInputLabel" inputClass="colorBoxInput" spanClass="colorSpan"
+                    labelClass="colorBoxInputLabel" inputClass="colorBoxInput"
     
                     // Dispatch redux action
                     onChange={(e) => dispatch( selectColor(e.target.name, e.target.checked) )}

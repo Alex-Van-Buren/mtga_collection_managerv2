@@ -26,6 +26,15 @@ label {
     width: 6em;
 }
 
+.ui.button.showButton {
+    background-color: var(--primary);
+}
+
+.ui.button.showButton.basic {
+    color:var(--primary) !important;
+    box-shadow: 0 0 0 1px var(--primary) inset !important
+}
+
 .ui.button.showButton.basic:focus,
 .ui.button.showButton.basic:hover {
     background-color: var(--primary-o) !important;
@@ -57,7 +66,7 @@ label {
     --uncommon-o: rgba(112, 120, 131, 0.8);
 }
 
-    /* Mythic */
+    /* - Mythic */
     .ui.button.rarityButton.mythic {
         background-color: var(--mythic);
     }
@@ -73,7 +82,7 @@ label {
         color: var(--clr-txt) !important;
     }
 
-    /* Rare */
+    /* - Rare */
     .ui.button.rarityButton.rare {
         background-color: var(--rare);
     }
@@ -89,7 +98,7 @@ label {
         color: var(--clr-txt) !important;
     }
 
-    /* Uncommon */
+    /* - Uncommon */
     .ui.button.rarityButton.uncommon {
         background-color: var(--uncommon);
     }
@@ -105,7 +114,7 @@ label {
         color: var(--clr-txt) !important;
     }
 
-    /* Common */
+    /* - Common */
     .ui.button.rarityButton.common {
         background-color: var(--common);
         color: var(--clr-txt-inverse);
@@ -122,7 +131,16 @@ label {
         color: var(--clr-txt-inverse) !important;
     }
 
-    /* All */
+    /* - All */
+    .ui.button.rarityButton.all {
+        background-color: var(--primary);
+    }
+
+    .ui.button.rarityButton.all.basic {
+        color:var(--primary) !important;
+        box-shadow: 0 0 0 1px var(--primary) inset !important
+    }
+
     .ui.button.rarityButton.all.basic:focus,
     .ui.button.rarityButton.all.basic:hover {
         background-color: var(--primary-o) !important;
@@ -140,6 +158,7 @@ label {
 /* Color checkboxes */
 .colorIcon {
     width: 2em;
+    transition-duration: 150ms;
 }
 
 .big.colorIcon {
@@ -169,4 +188,8 @@ label {
     width: 3.5em;
     transition-duration: 150ms;
     outline: none;
+}
+
+.colorIcon:hover {
+    cursor: pointer;
 }
