@@ -52,7 +52,7 @@ function CardList( {setId} ) {
     }    
     
     // Put all search options into a single object for findCards function
-    const searchOptions = {set: setId, color: colorOption, booster: true, rarity: rarityOption, name: searchTerm};
+    const searchOptions = {set: setId, color: colorOption, booster: true, rarity: rarityOption, term: searchTerm};
 
     // Need to get images as well as name and arenaId
     const returnOptions = ['image_uris'];

@@ -10,7 +10,7 @@ const allArenaCards = require('./arenaCards20210412165933.json');
 function findCards(searchOptions, returnOptions) {
     // TODO: Filter booster still weird, might add a filter alt arts
 
-    const { set, color, rarity, booster, name, excludeBasicLands=true } = searchOptions;
+    const { set, color, rarity, booster, term, excludeBasicLands=true } = searchOptions;
     let cardList = allArenaCards;
 
     // First filter by set if needed
@@ -19,8 +19,8 @@ function findCards(searchOptions, returnOptions) {
     }
 
     // Filter by name if needed
-    if (name) {
-        cardList = filterByName(cardList, name);
+    if (term) {
+        cardList = filterByTerm(cardList, term);
     }
 
     // Filter by color if needed
@@ -255,25 +255,48 @@ function sortCards(cardList) {
 
 // Find cards by name helper function
 // - includes partial matches
-function filterByName(cardList, name) {
+function filterByTerm(cardList, term) {
     const newCardList = [];
+    
+    for (const card of cardList) {
+        let toPush = false;
 
-    cardList.forEach( (card) => {
-        if (card.name.toUpperCase().includes(name.toUpperCase())) {
-            newCardList.push(card);
+        if ( match(card.name) ) {
+            toPush = true;
+        }
+        else if ( match(card.type_line) ) {
+            toPush = true;
+        }
+
+        else if (card.oracle_text && match(card.oracle_text)) {
+            toPush = true;
         }
 
         // Need to check card faces in order to find some cards
         else if (card.card_faces) {
+
+            // Check oracle_text for each face
             for (const face of card.card_faces) {
-                if (face.name.toUpperCase().includes(name.toUpperCase())) {
-                    newCardList.push(card);
+
+                if ( face.oracle_text && match(face.oracle_text) ) {
+                    toPush = true;
+                    break;
                 }
             }
         }
-    });
+
+        if (toPush) {
+            newCardList.push(card);
+        }
+
+    }
 
     return newCardList;
+
+    // Make check less verbose
+    function match(checkText) {
+        return checkText.toUpperCase().includes(term.toUpperCase());
+    }
 }
 
 // Helper function that takes the input cardlist and returns the desired properties of that card to make it easier to use

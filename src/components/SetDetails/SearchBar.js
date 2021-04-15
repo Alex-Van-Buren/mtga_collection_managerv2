@@ -34,7 +34,7 @@ function SearchBar() {
     return (
         <input
             // Data
-            type="search" placeholder="Search card names:" className="searchBar"
+            type="search" placeholder="Search card text:" className="searchBar"
 
             // Accessibility
             autoomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Names"
