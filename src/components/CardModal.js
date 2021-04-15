@@ -32,9 +32,9 @@ function CardModal() {
     const next = (
         <button
             // Update image to display if possible
-            onClick={ () => { if (index <= imageList.length-1) dispatch(setModalContent(index + 1)) } }
+            onClick={ () => { if (index < imageList.length-1) dispatch(setModalContent(index + 1)) } }
             // Add "disabled" to class if not clickable (first image in list)
-            className={index >= imageList.length-1 ? "disabled" : ""}
+            className={index < imageList.length-1 ? "disabled" : ""}
         >
             <i class="chevron right icon"></i>
         </button>
