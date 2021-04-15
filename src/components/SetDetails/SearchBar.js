@@ -19,40 +19,30 @@ function SearchBar() {
     // Clear any search term in state on render
     useEffect(() => dispatch(setSearchTerm("")), [dispatch]);
 
-    // Send search term to redux
-    function onSubmit(event) {
-        event.preventDefault();
+    // Track change in search bar
+    useEffect(() => {
 
-        dispatch(setSearchTerm(term));
-    }
+        // Wait for user to stop typing
+        const timeoutid = setTimeout( () => {
+            dispatch(setSearchTerm(term));
+        }, 500);
 
-    // Handle change in search bar
-    function onChange(event) {
-        const currentTerm = event.target.value;
-
-        // Always update controlled input
-        setTerm(currentTerm);
-
-        // Look for the user clearing the input
-        if (currentTerm === "") {
-            dispatch(setSearchTerm(""));
-        }
-    }
+        // Cleanup function to stop search
+        return () => clearTimeout(timeoutid);
+    }, [term, dispatch])
 
     return (
-        <form onSubmit={(e) => onSubmit(e)}>
-            <input
-                // Data
-                type="search" placeholder="Search card names:" className="searchBar"
-    
-                // Accessibility
-                autoomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Names"
-                aria-controls="results" autoCapitalize="none" spellCheck="false" aria-haspopup="false"
-                
-                // Controlled input
-                value={term} onChange={ (e) => onChange(e) }
-            />
-        </form>
+        <input
+            // Data
+            type="search" placeholder="Search card names:" className="searchBar"
+
+            // Accessibility
+            autoomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Names"
+            aria-controls="results" autoCapitalize="none" spellCheck="false" aria-haspopup="false"
+            
+            // Controlled input
+            value={term} onChange={ (e) => setTerm(e.target.value) }
+        />
     );
 }
 
