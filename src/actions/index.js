@@ -1,6 +1,6 @@
 import {
     GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
-    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT
+    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT, UPDATE_IMAGE_LIST
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -60,6 +60,13 @@ export function setSearchTerm(searchTerm) {
         type: SET_SEARCH_TERM,
         payload: searchTerm
     };
+}
+
+export function updateImageList(list) {
+    return {
+        type: UPDATE_IMAGE_LIST,
+        payload: list
+    }
 }
 
 export function showModal(showBoolean) {
