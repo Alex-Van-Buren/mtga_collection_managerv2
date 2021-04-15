@@ -1,0 +1,19 @@
+#ScrollTop {
+    display: none;
+    position: fixed;
+    bottom: 5vh;
+    right: 15px;
+    background-color: var(--background-clr);
+    opacity: 0.70;
+    box-shadow: 0 0 0 1px var(--border-clr);
+    color: var(--clr-txt);
+    z-index: 99;
+}
+
+button#ScrollTop i {
+    font-size: 2rem;
+}
+
+#ScrollTop:hover {
+    opacity: 1;
+}
