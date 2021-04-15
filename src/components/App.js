@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import SetDetails from './SetDetails/SetDetails';
+import ScrollTop from './ScrollTop';
 import '../css/App.css';
 
 /**
@@ -18,6 +19,7 @@ function App() {
                 <Route exact component={Home} path='/' />
                 <Route component={SetDetails} path='/set/:setId' />
             </Switch>
+            <ScrollTop />
         </Router>
     );
 }

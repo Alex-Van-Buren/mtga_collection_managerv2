@@ -7,6 +7,8 @@
 
     --common:   rgb(26, 23, 24);
     --common-o: rgba(26, 23, 24, 0.9);
+    
+    scroll-behavior: smooth;
 }
 
 .darkMode {
