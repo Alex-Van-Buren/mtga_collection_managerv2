@@ -1,7 +1,4 @@
-.setDetailsOptions {
-    /* TODO: remove this padding and fix relative layout */
-    padding: 3em 0;
-}
+/* .setDetailsOptions {} */
 
 label {
     color: var(--clr-txt);

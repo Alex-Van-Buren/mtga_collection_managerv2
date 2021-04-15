@@ -1,4 +1,7 @@
-import { GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY,SET_SHOWCARDS } from './types';
+import {
+    GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
+    SET_SEARCH_TERM
+} from './types';
 import totalOwned from '../data/totalOwned';
 
 const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
@@ -7,7 +10,7 @@ export function getCollection(collection) {
     return {
         type: GET_CARD_COLLECTION,
         payload: collection
-    }
+    };
 }
 
 export function processSetCollection(collection) {
@@ -25,7 +28,7 @@ export function processSetCollection(collection) {
     return {
         type: PROCESS_SET_COLLECTION, 
         payload: payload
-    }
+    };
 }
 
 export function selectColor(color, newValue) {
@@ -33,7 +36,7 @@ export function selectColor(color, newValue) {
         type: SELECT_COLOR,
         // Return the selected color and its boolean value in payload
         payload: { color, newValue }
-    }
+    };
 }
 
 export function selectRarity(rarity) {
@@ -41,7 +44,7 @@ export function selectRarity(rarity) {
         type: SELECT_RARITY,
         // Return the selected rarity in payload
         payload: rarity
-    }
+    };
 }
 
 export function setShowCards(showCards) {
@@ -49,5 +52,12 @@ export function setShowCards(showCards) {
         type: SET_SHOWCARDS,
         // Return the selection of which cards to show
         payload: showCards
-    }
+    };
+}
+
+export function setSearchTerm(searchTerm) {
+    return {
+        type: SET_SEARCH_TERM,
+        payload: searchTerm
+    };
 }

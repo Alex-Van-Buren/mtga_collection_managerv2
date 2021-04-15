@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 
 import ColorCheckboxes from './ColorCheckboxes';
 import CustomButton from './CustomButton';
+import SearchBar from './SearchBar';
 import { selectRarity, setShowCards } from '../../actions';
 import '../../css/SetDetailsOptions.css';
 
@@ -43,6 +44,7 @@ function SetDetailsOptions() {
     });
 
     return (<div className="setDetailsOptions">
+        <SearchBar/>
         
         {/* Buttons that select cards to show based on number in inventory */}
         <label className="showLabel">Number Owned:</label>

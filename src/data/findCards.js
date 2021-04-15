@@ -10,7 +10,7 @@ const allArenaCards = require('./arenaCards20210412165933.json');
 function findCards(searchOptions, returnOptions) {
     // TODO: Filter booster still weird, might add a filter alt arts
 
-    const { set, color, rarity, booster, name } = searchOptions;
+    const { set, color, rarity, booster, name, excludeBasicLands=true } = searchOptions;
     let cardList = allArenaCards;
 
     // First filter by set if needed
@@ -23,9 +23,6 @@ function findCards(searchOptions, returnOptions) {
         cardList = filterByName(cardList, name);
     }
 
-    // Filter Out Basic Lands
-    cardList = filterBasicLands(cardList);
-
     // Filter by color if needed
     if (color) {
         cardList = filterColor(cardList, color);
@@ -34,6 +31,11 @@ function findCards(searchOptions, returnOptions) {
     // Filter by rarity if needed
     if (rarity) {
         cardList = filterRarity(cardList, rarity);
+    }
+
+    // Filter Out Basic Lands
+    if (excludeBasicLands) {
+        cardList = filterBasicLands(cardList);
     }
 
     // Filter booster if needed
@@ -252,21 +254,22 @@ function sortCards(cardList) {
 }
 
 // Find cards by name helper function
+// - includes partial matches
 function filterByName(cardList, name) {
-    let newCardList = [];
+    const newCardList = [];
+
     cardList.forEach( (card) => {
-        
-        if (card.name === name) {
+        if (card.name.toUpperCase().includes(name.toUpperCase())) {
             newCardList.push(card);
         }
 
         // Need to check card faces in order to find some cards
-        if (card.card_faces) {
-            card.card_faces.forEach( (face) => {
-                if (face.name === name) {
-                    newCardList.push( card );
+        else if (card.card_faces) {
+            for (const face of card.card_faces) {
+                if (face.name.toUpperCase().includes(name.toUpperCase())) {
+                    newCardList.push(card);
                 }
-            });
+            }
         }
     });
 

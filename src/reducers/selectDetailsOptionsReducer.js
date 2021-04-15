@@ -1,4 +1,4 @@
-import { SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS } from '../actions/types';
+import { SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SET_SEARCH_TERM } from '../actions/types';
 
 const INITIAL_STATE = {
     colors: {
@@ -13,7 +13,9 @@ const INITIAL_STATE = {
 
     rarity: "all",
     
-    showCards: "all"
+    showCards: "all",
+
+    searchTerm: ""
 }
 
 export default function selectDetailsOptionsReducer(state = INITIAL_STATE, action) {
@@ -50,7 +52,12 @@ export default function selectDetailsOptionsReducer(state = INITIAL_STATE, actio
 
         // showCards must be one of: { unowned, owned, all }
         case SET_SHOWCARDS: {
-            return { ...state, showCards: action.payload }
+            return { ...state, showCards: action.payload };
+        }
+
+        // Set the search term from the search bar
+        case SET_SEARCH_TERM: {
+            return { ...state, searchTerm: action.payload };
         }
 
         default:

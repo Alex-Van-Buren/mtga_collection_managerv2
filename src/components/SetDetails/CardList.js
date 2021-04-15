@@ -17,6 +17,8 @@ function CardList( {setId} ) {
 
     const colors = useSelector(state => state.detailsOptions.colors);
 
+    const searchTerm = useSelector(state => state.detailsOptions.searchTerm);
+
     // Build array for color searchOption
    let colorOption = Object.keys(colors).flatMap( color => {
         if (colors[color]) {
@@ -50,7 +52,7 @@ function CardList( {setId} ) {
     }    
     
     // Put all search options into a single object for findCards function
-    const searchOptions = {set: setId, color: colorOption, booster: true, rarity: rarityOption};
+    const searchOptions = {set: setId, color: colorOption, booster: true, rarity: rarityOption, name: searchTerm};
 
     // Need to get images as well as name and arenaId
     const returnOptions = ['image_uris'];
