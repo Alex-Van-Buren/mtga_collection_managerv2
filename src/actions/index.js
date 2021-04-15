@@ -1,6 +1,6 @@
 import {
     GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
-    SET_SEARCH_TERM
+    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -59,5 +59,19 @@ export function setSearchTerm(searchTerm) {
     return {
         type: SET_SEARCH_TERM,
         payload: searchTerm
+    };
+}
+
+export function showModal(showBoolean) {
+    return {
+        type: SHOW_MODAL,
+        payload: showBoolean
+    };
+}
+
+export function setModalContent(content) {
+    return {
+        type: SET_MODAL_CONTENT,
+        payload: content
     };
 }
