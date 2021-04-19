@@ -1,0 +1,27 @@
+.cardModal {
+    /* Keep model fixed, but allow background scroll */
+    position: fixed;
+}
+
+.basic.button.icon.massive.ui {
+    color: aliceblue !important;
+    height: 100%;
+    margin-right: 0;
+    vertical-align: bottom;
+}
+
+.modelExit {
+    height: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.modelContent {
+    display: flex;
+    height: 90%;
+}
+
+.backButton, .forwardButton {
+
+}
