@@ -10,14 +10,14 @@
     vertical-align: bottom;
 }
 
-.modelExit {
+.modalExit {
     height: 10%;
     display: flex;
     justify-content: flex-end;
     align-items: stretch;
 }
 
-.modelContent {
+.modalContent {
     display: flex;
     height: 90%;
 }
