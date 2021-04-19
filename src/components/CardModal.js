@@ -38,10 +38,9 @@ function CardModal() {
     // Close modal button
     const exit = (
         <button
-            onClick={() => dispatch(showModal(false))}
             className={`exit ${BUTTON_CLASS}`}
         >
-            <i className="big close icon"></i>
+            <i className="close icon"></i>
         </button>
     );
 
@@ -53,7 +52,7 @@ function CardModal() {
             // Add "disabled" to class if not clickable (first image in list)
             className={BUTTON_CLASS}
         >
-            <i className="big chevron left icon"></i>
+            <i className="chevron left icon"></i>
         </button>
     );
 
@@ -65,7 +64,7 @@ function CardModal() {
             // Add "disabled" to class if not clickable (first image in list)
             className={BUTTON_CLASS}
         >
-            <i className="big chevron right icon"></i>
+            <i className="chevron right icon"></i>
         </button>
     );
 
@@ -73,18 +72,24 @@ function CardModal() {
     const renderedContent =
     <>
         {/* Display exit button */}
-        <div className="modalClose">
+        <div
+            className="modalClose"
+            onClick={() => dispatch(showModal(false))}
+        >
             {exit}
         </div>
 
         <div className="modalContent">
+            
             {/* Display previous button */}
             <div className="backButton">
                 {prev}
             </div>
 
             {/* Display current card image from imageList using index */}
-            <img src={imageList[index]} alt="Card" className="cardImage"/>
+            <div className="cardImage">
+                <img src={imageList[index]} alt="Card"/>
+            </div>
 
             {/* Display next button */}
             <div className="forwardButton">
@@ -100,7 +105,10 @@ function CardModal() {
             className="ui dimmer modals visible active cardModal"
         >
             
-            <div onClick={e => e.stopPropagation()} >
+            <div
+                onClick={e => e.stopPropagation()}
+                className="modelContainer"
+            >
                 {renderedContent}
             </div>
 

@@ -26,6 +26,15 @@
     height: 90%;
 }
 
-.backButton, .forwardButton {
+.cardImage {
+    flex-basis: 80%;
+}
 
+.cardImage>img {
+    width: 100%;
+}
+
+.backButton, .forwardButton {
+    flex-basis: 10%;
+    
 }
