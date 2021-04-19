@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,6 +28,10 @@ function CardModal() {
         return () => window.removeEventListener('keydown', onEscape);
     }, [dispatch]);
 
+    // Reference DOM for previous and next buttons
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+
     // Return nothing when modal not shown
     if (!show) {
         return null;
@@ -47,8 +51,14 @@ function CardModal() {
     // "Go to previous card" button to be rendered inside modal
     const prev = (
         <button
+            ref={prevRef}
             // Update image to display if possible
-            onClick={ () => { if (index > 0) dispatch(setModalContent(index - 1)) } }
+            onClick={ () => {
+                if (index > 0) {
+                    dispatch(setModalContent(index - 1));
+                }
+                prevRef.current.blur();
+            } }
             // Add "disabled" to class if not clickable (first image in list)
             className={BUTTON_CLASS}
         >
@@ -59,8 +69,14 @@ function CardModal() {
     // "Go to next card" button to be rendered inside modal
     const next = (
         <button
+        ref={nextRef}
             // Update image to display if possible
-            onClick={ () => { if (index < imageList.length-1) dispatch(setModalContent(index + 1)) } }
+            onClick={ () => {
+                if (index < imageList.length-1) {
+                    dispatch(setModalContent(index + 1));
+                }
+                nextRef.current.blur();
+            } }
             // Add "disabled" to class if not clickable (first image in list)
             className={BUTTON_CLASS}
         >
