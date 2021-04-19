@@ -1,8 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import findCards from '../../data/findCards';
 import useResizeWidth from '../../hooks/useResizeWidth';
+import { setModalContent, updateImageList, showModal } from '../../actions';
 import '../../css/CardList.css';
 
 /**
@@ -18,6 +19,8 @@ function CardList( {setId} ) {
     const colors = useSelector(state => state.detailsOptions.colors);
 
     const searchTerm = useSelector(state => state.detailsOptions.searchTerm);
+
+    const dispatch = useDispatch();
 
     // Build array for color searchOption
    let colorOption = Object.keys(colors).flatMap( color => {
@@ -66,6 +69,9 @@ function CardList( {setId} ) {
     // Initialize number of cards shown with specified options
     let numCardsShown = 0;
 
+    // Track currently shown pictures
+    let currentPictures = [];
+
     // render the cards based on how many the user owns and the showCards option
     const renderedCards = cards.map( (card) => {
 
@@ -100,13 +106,22 @@ function CardList( {setId} ) {
 
         if ( makeCard ) {
             numCardsShown++;
+            currentPictures.push(img);
             return (
                 <div className="column" key={card.arenaId}>
                     <div className="ui fluid card removeBoxShadow">
                         <div className="content">
                             <div className="right floated content" >{numOwned} / 4 </div>
                         </div>                    
-                        <div className="image">
+                        <div
+                            className="image"
+                            onClick={() => {
+                                // Get the index of the image on click
+                                dispatch( setModalContent( currentPictures.indexOf(img) ) );
+                                // Then show the modal
+                                dispatch( showModal(true) );
+                            }}
+                        >
                             <img src={img} alt={card.name}/>
                         </div>
                     </div>
@@ -115,6 +130,10 @@ function CardList( {setId} ) {
         }
         return null;
     }); // end of the renderedCards map
+
+    // Update list of current images only once renderedCards has finished
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect( () => dispatch(updateImageList(currentPictures)), [renderedCards] );
 
     // Find optimal number of columns for card display based on screen width
     const width = useResizeWidth();

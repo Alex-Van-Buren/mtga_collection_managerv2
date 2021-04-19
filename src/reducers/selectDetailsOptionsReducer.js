@@ -1,4 +1,4 @@
-import { SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SET_SEARCH_TERM } from '../actions/types';
+import { SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SET_SEARCH_TERM, UPDATE_IMAGE_LIST } from '../actions/types';
 
 const INITIAL_STATE = {
     colors: {
@@ -15,7 +15,9 @@ const INITIAL_STATE = {
     
     showCards: "all",
 
-    searchTerm: ""
+    searchTerm: "",
+
+    imageList: []
 }
 
 export default function selectDetailsOptionsReducer(state = INITIAL_STATE, action) {
@@ -58,6 +60,10 @@ export default function selectDetailsOptionsReducer(state = INITIAL_STATE, actio
         // Set the search term from the search bar
         case SET_SEARCH_TERM: {
             return { ...state, searchTerm: action.payload };
+        }
+
+        case UPDATE_IMAGE_LIST: {
+            return { ...state, imageList: action.payload }
         }
 
         default:

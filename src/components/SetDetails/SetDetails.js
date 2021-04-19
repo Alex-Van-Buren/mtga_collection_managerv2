@@ -6,6 +6,7 @@ import CardList from './CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
 import SetDetailsOptions from './SetDetailsOptions';
 import setInfo from '../../data/setInfo.json';
+import CardModal from '../CardModal';
 import '../../css/SetDetails.css';
 
 function SetDetails() {
@@ -39,6 +40,7 @@ function SetDetails() {
 
     return (
         <>
+            <CardModal/>
             <div className="ui grid container">
                 <div className="six wide column">
                     <div className="ui center aligned header">{setName}</div>

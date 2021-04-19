@@ -1,0 +1,40 @@
+.cardModal {
+    /* Keep model fixed, but allow background scroll */
+    position: fixed !important;
+}
+
+.basic.button.icon.massive.ui {
+    color: aliceblue !important;
+    height: 100%;
+    margin-right: 0;
+    vertical-align: bottom;
+}
+
+.basic.button.icon.massive.ui:hover {
+    color: black !important;
+}
+
+.modalClose {
+    height: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.modalContent {
+    display: flex;
+    height: 90%;
+}
+
+.cardImage {
+    flex-basis: 80%;
+}
+
+.cardImage>img {
+    width: 100%;
+}
+
+.backButton, .forwardButton {
+    flex-basis: 10%;
+    
+}
