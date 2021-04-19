@@ -6,7 +6,7 @@ import CardList from './CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
 import SetDetailsOptions from './SetDetailsOptions';
 import setInfo from '../../data/setInfo.json';
-import CardModal from '../CardModal';
+import CardModal from './CardModal';
 import '../../css/SetDetails.css';
 
 function SetDetails() {
@@ -38,36 +38,40 @@ function SetDetails() {
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
     const setName = setInfo[setId].name;
 
-    return (
-        <>
-            <CardModal/>
-            <div className="ui grid container">
-                <div className="six wide column">
-                    <div className="ui center aligned header">{setName}</div>
-                    <div className="ui center aligned sub header">
-                        Set Progress:
-                        &nbsp; &nbsp; &nbsp;
-                        <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
-                    </div>
-                    <div className="ui middle aligned divided list">
-                        <RarityCollectionItem setId={setId} rarity="mythic" />                    
-                        <RarityCollectionItem setId={setId} rarity="rare" />
-                        <RarityCollectionItem setId={setId} rarity="uncommon" />
-                        <RarityCollectionItem setId={setId} rarity="common"/>
-                    </div>
+    return (<>
+        {/* Card modal is only shown when a card is clicked */}
+        <CardModal/>
+
+        <div className="ui grid container">
+
+            {/* Set Details */}
+            <div className="six wide column">
+                <div className="ui center aligned header">{setName}</div>
+                <div className="ui center aligned sub header">
+                    Set Progress:
+                    &nbsp; &nbsp; &nbsp; {/* Spacers */}
+                    <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
                 </div>
 
-                <div className="ten wide column">
-                    <SetDetailsOptions/>
+                <div className="ui middle aligned divided list">
+                    <RarityCollectionItem setId={setId} rarity="mythic" />                    
+                    <RarityCollectionItem setId={setId} rarity="rare" />
+                    <RarityCollectionItem setId={setId} rarity="uncommon" />
+                    <RarityCollectionItem setId={setId} rarity="common"/>
                 </div>
             </div>
-            
-            <hr className="lineBreak"/>
 
-            <CardList setId={setId}/>                
-            
-        </>
-    )
+            {/* Display options for SetDetails */}
+            <div className="ten wide column">
+                <SetDetailsOptions/>
+            </div>
+        </div>
+        
+        <hr className="lineBreak"/>
+
+        {/* Cards matching display options */}
+        <CardList setId={setId}/>
+    </>);
     
 }
 

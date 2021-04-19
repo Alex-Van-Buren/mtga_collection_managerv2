@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import DarkModeToggle from './DarkModeToggle';
 import GetFile from './GetFile';
-import '../css/Header.css';
+import '../../css/Header.css';
 
 /**
  * Header Component displayed on every page in App.

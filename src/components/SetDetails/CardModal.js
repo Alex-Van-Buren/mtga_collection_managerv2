@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { showModal, setModalContent } from '../actions';
-import '../css/CardModal.css';
+import { showModal, setModalContent } from '../../actions';
+import '../../css/CardModal.css';
 
 function CardModal() {
     const dispatch = useDispatch();

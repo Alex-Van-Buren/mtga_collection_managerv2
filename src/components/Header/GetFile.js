@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getCollection, processSetCollection } from '../actions';
-import { NO_INVENTORY_FOUND, INVALID_FILE } from '../errors';
-import makeKeyboardClickable from '../hooks/makeKeyboardClickable';
-import '../css/GetFile.css'
+import { getCollection, processSetCollection } from '../../actions';
+import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
+import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
+import '../../css/GetFile.css'
 
 // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
 // const sets = ['znr'];
