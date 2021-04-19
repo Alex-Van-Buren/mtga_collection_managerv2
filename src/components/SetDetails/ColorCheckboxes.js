@@ -21,7 +21,7 @@ export default function ColorCheckboxes() {
     const dispatch = useDispatch();
 
     // Get currently selected colors from redux state
-    const colorValues = useSelector( state => state.detailsOptions.colors );
+    const colorValues = useSelector( state => state.displayOptions.colors );
 
     // List card colors and the tags needed for their icons
     const colors = ['white', 'blue', 'black', 'red', 'green', 'colorless', 'multi'];

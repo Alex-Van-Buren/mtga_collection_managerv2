@@ -16,10 +16,10 @@ function CardList({ setId }) {
     
     // Get values from redux state
     const cardCollection = useSelector(state => state.inventory.cardCollection);
-    const colors         = useSelector(state => state.detailsOptions.colors);
-    const searchTerm     = useSelector(state => state.detailsOptions.searchTerm);
-    const rarity         = useSelector(state => state.detailsOptions.rarity);
-    const showCards      = useSelector(state => state.detailsOptions.showCards);
+    const colors         = useSelector(state => state.displayOptions.colors);
+    const searchTerm     = useSelector(state => state.displayOptions.searchTerm);
+    const rarity         = useSelector(state => state.displayOptions.rarity);
+    const showCards      = useSelector(state => state.displayOptions.showCards);
 
     // Access redux dispatch
     const dispatch = useDispatch();

@@ -5,9 +5,9 @@ import '../../css/DarkModeToggle.css'
 function DarkModeToggle() {
     const [darkModeEnabled, setDarkModeEnabled] = useState(false);
     
-    useEffect(() => {
+    useEffect( () => {
         const userPreference = window.localStorage.getItem('darkMode');
-        if(userPreference === 'on') {
+        if (userPreference === 'on') {
             setDarkModeEnabled(true);
             document.body.classList.add('darkMode');
         }
@@ -53,7 +53,7 @@ function DarkModeToggle() {
             {/* Moon icon */}
             <i className={`moon icon ${darkModeEnabled ? 'blue' : 'grey'}`}/>
         </div>
-    )
+    );
 }
 
 export default DarkModeToggle;

@@ -1,21 +1,23 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import ColorCheckboxes from './ColorCheckboxes';
 import CustomButton from './CustomButton';
 import SearchBar from './SearchBar';
 import { selectRarity, setShowCards } from '../../actions';
-import '../../css/SetDetailsOptions.css';
+import '../../css/DisplayOptions.css';
 
-function SetDetailsOptions() {
+function DisplayOptions() {
 
-    const showCards = useSelector(state => state.detailsOptions.showCards);    
+    const showCards = useSelector(state => state.displayOptions.showCards);
+    const raritySelected = useSelector(state => state.displayOptions.rarity);
+
     const showListButtons = [
-        {value: "=0",  text: "None"}, 
-        {value: ">0",  text: "Own at least one"}, 
-        {value: "<4",  text: "Missing at least one"}, 
-        {value: "=4",  text: "Full Playset"}, 
-        {value: "all", text: "Show All Cards"} 
+        {value: "=0",  text: "None"},
+        {value: ">0",  text: "Own at least one"},
+        {value: "<4",  text: "Missing at least one"},
+        {value: "=4",  text: "Full Playset"},
+        {value: "all", text: "Show All Cards"}
     ];
 
     const renderShowListButtons = showListButtons.map( (button) => {
@@ -23,10 +25,14 @@ function SetDetailsOptions() {
         if ( button.value !== showCards) {
             buttonClass += " basic";
         }
-        return <CustomButton action={setShowCards} className={buttonClass} value={button.value} text={button.text} key={button.value} />
+        return (
+            <CustomButton 
+                action={setShowCards} className={buttonClass} value={button.value}
+                text={button.text} key={button.value} 
+            />
+        );
     });
 
-    const raritySelected = useSelector(state => state.detailsOptions.rarity);
     const rarityButtons = [
         {value: 'mythic'},
         {value: 'rare'},
@@ -43,7 +49,7 @@ function SetDetailsOptions() {
         return <CustomButton action={selectRarity} className={buttonClass} value={button.value} key={button.value} />
     });
 
-    return (<div className="setDetailsOptions">
+    return (<div className="DisplayOptions">
         <SearchBar/>
         
         {/* Buttons that select cards to show based on number in inventory */}
@@ -63,4 +69,4 @@ function SetDetailsOptions() {
     </div>);
 }
 
-export default SetDetailsOptions;
+export default DisplayOptions;

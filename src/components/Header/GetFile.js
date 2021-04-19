@@ -9,7 +9,7 @@ import '../../css/GetFile.css'
 // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
 // const sets = ['znr'];
 
-function GetFile(props) {
+function GetFile() {
 
     // Get access to Redux dispatch function
     const dispatch = useDispatch();

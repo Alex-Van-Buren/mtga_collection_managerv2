@@ -8,9 +8,9 @@ import '../../css/CardModal.css';
 function CardModal() {
     const dispatch = useDispatch();
 
-    const show = useSelector(state => state.modal.showModal);
-    const index = useSelector(state => state.modal.content);
-    const imageList = useSelector(state => state.detailsOptions.imageList);
+    const show      = useSelector(state => state.modal.showModal);
+    const index     = useSelector(state => state.modal.content);
+    const imageList = useSelector(state => state.displayOptions.imageList);
 
     // Add listener for escape key
     useEffect(() => {

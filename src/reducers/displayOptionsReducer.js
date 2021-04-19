@@ -20,7 +20,7 @@ const INITIAL_STATE = {
     imageList: []
 }
 
-export default function selectDetailsOptionsReducer(state = INITIAL_STATE, action) {
+export default function displayOptionsReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case SELECT_COLOR: {
 
