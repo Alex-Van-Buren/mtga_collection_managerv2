@@ -1,6 +1,6 @@
 .cardModal {
     /* Keep model fixed, but allow background scroll */
-    position: fixed;
+    position: fixed !important;
 }
 
 .basic.button.icon.massive.ui {
