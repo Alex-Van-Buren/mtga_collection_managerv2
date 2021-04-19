@@ -73,7 +73,7 @@ function CardModal() {
     const renderedContent =
     <>
         {/* Display exit button */}
-        <div className="modalExit">
+        <div className="modalClose">
             {exit}
         </div>
 

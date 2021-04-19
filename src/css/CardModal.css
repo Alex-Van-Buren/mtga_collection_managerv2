@@ -10,7 +10,7 @@
     vertical-align: bottom;
 }
 
-.modalExit {
+.modalClose {
     height: 10%;
     display: flex;
     justify-content: flex-end;
