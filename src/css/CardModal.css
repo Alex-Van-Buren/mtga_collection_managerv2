@@ -10,6 +10,10 @@
     vertical-align: bottom;
 }
 
+.basic.button.icon.massive.ui:hover {
+    color: black !important;
+}
+
 .modalClose {
     height: 10%;
     display: flex;
