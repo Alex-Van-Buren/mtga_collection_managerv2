@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 
+import '../../css/SetDetailsMenu.css';
+
 function SetDetailsMenu() {
     const [activeMenuItem, setActiveMenuItem] = useState('Card Filters');
-    let cardFiltersClass = 'item';
-    let packsClass = 'item';
-    let draftsClass = 'item';
+    let cardFiltersClass = 'link item';
+    let packsClass = 'link item';
+    let draftsClass = 'link item';
 
     switch (activeMenuItem) {
         case 'Card Filters':
