@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import CardList from './CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
+import SetDetailsMenu from './SetDetailsMenu';
 import DisplayOptions from './DisplayOptions';
 import setInfo from '../../data/setInfo.json';
 import CardModal from './CardModal';
@@ -63,6 +64,7 @@ function SetDetails() {
 
             {/* Display options for SetDetails */}
             <div className="ten wide column">
+                <SetDetailsMenu />
                 <DisplayOptions/>
             </div>
         </div>
