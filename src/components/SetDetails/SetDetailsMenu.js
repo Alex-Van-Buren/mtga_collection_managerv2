@@ -5,14 +5,16 @@ import { selectDetailsMenu } from '../../actions';
 import '../../css/SetDetailsMenu.css';
 
 function SetDetailsMenu() {
+    // Get dispatch function
     const dispatch = useDispatch();
 
+    // Get active tab info from redux
     const activeTab = useSelector(state => state.displayOptions.activeTab);
     
-    let cardFiltersClass = 'link item';
-    let packsClass = 'link item';
-    let draftsClass = 'link item';
+    // Fill each class with common class names
+    let [cardFiltersClass, packsClass, draftsClass] = Array(3).fill('link item');
 
+    // Add additional class 'active' if tab is active
     switch (activeTab) {
         case 'Card Filters':
             cardFiltersClass += ' active';
@@ -27,9 +29,10 @@ function SetDetailsMenu() {
             break;
             
         default:
-           break
+           break;
     }
     
+    // Return JSX for tab menu
     return (
         <div className="ui pointing menu compact">
             <div className={cardFiltersClass} onClick={()=> dispatch(selectDetailsMenu('Card Filters'))}>
@@ -42,7 +45,7 @@ function SetDetailsMenu() {
                 Drafts
             </div>
         </div>
-    )
+    );
 }
 
 export default SetDetailsMenu;
