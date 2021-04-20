@@ -21,3 +21,8 @@ p.ui.container {
 .numCardsShown {
     font-size: 1.2em;
 }
+
+.ui.fluid.card.removeBoxShadow:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+}
