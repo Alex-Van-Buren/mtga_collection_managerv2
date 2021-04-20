@@ -4,7 +4,10 @@ import { useParams } from 'react-router-dom';
 
 import CardList from './CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
+import SetDetailsMenu from './SetDetailsMenu';
 import DisplayOptions from './DisplayOptions';
+import PacksCalculator from './PacksCalculator';
+import DraftsCalculator from './DraftsCalculator';
 import setInfo from '../../data/setInfo.json';
 import CardModal from './CardModal';
 import '../../css/SetDetails.css';
@@ -13,6 +16,9 @@ function SetDetails() {
     
     // Get set Id from url
     const { setId } = useParams();
+
+    // Get active tab from redux
+    const activeTab = useSelector(state => state.displayOptions.activeTab);
 
     /*
      * Calculate totals from redux state 
@@ -35,8 +41,24 @@ function SetDetails() {
         return sum;
     });
 
+    // Calculate and round percent owned
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
     const setName = setInfo[setId].name;
+
+    // Determine active tab and resulting component to display
+    const activeTabComponent = (() => {
+
+        switch (activeTab) {
+            case 'Card Filters':
+                return <DisplayOptions />;
+            case 'Packs':
+                return <PacksCalculator />;
+            case 'Drafts':
+                return <DraftsCalculator />;
+            default:
+                return null;
+        }
+    })();
 
     return (<>
         {/* Card modal is only shown when a card is clicked */}
@@ -63,7 +85,8 @@ function SetDetails() {
 
             {/* Display options for SetDetails */}
             <div className="ten wide column">
-                <DisplayOptions/>
+                <SetDetailsMenu />
+                {activeTabComponent}
             </div>
         </div>
         

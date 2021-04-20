@@ -1,6 +1,6 @@
 import {
     GET_CARD_COLLECTION, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
-    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT, UPDATE_IMAGE_LIST
+    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -80,5 +80,12 @@ export function setModalContent(content) {
     return {
         type: SET_MODAL_CONTENT,
         payload: content
+    };
+}
+
+export function selectDetailsMenu(tab) {
+    return {
+        type: SELECT_DETAILS_MENU,
+        payload: tab
     };
 }
