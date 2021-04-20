@@ -1,4 +1,6 @@
-import { SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SET_SEARCH_TERM, UPDATE_IMAGE_LIST } from '../actions/types';
+import { 
+    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SET_SEARCH_TERM, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
+ } from '../actions/types';
 
 const INITIAL_STATE = {
     colors: {
@@ -17,7 +19,9 @@ const INITIAL_STATE = {
 
     searchTerm: "",
 
-    imageList: []
+    imageList: [],
+
+    activeTab: "Card Filters"
 }
 
 export default function displayOptionsReducer(state = INITIAL_STATE, action) {
@@ -62,8 +66,14 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             return { ...state, searchTerm: action.payload };
         }
 
+        // Set the active card images
         case UPDATE_IMAGE_LIST: {
-            return { ...state, imageList: action.payload }
+            return { ...state, imageList: action.payload };
+        }
+
+        // Set active details menu tab
+        case SELECT_DETAILS_MENU: {
+            return { ...state, activeTab: action.payload };
         }
 
         default:
