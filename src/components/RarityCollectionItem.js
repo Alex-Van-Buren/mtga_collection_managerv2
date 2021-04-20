@@ -32,10 +32,17 @@ function RarityCollectionItem({ setId, rarity }) {
 
     return (
         <div className="item " id="collectionItem" >
-            <div className="content">
-                <span className="right floated"> {ownedTotal} / {setTotal} ({percentOwned}%)</span>
-                <i className={`ss ss-${setId} ss-${rarity} ss-fw mtgIcon`}></i>
-                <span className="rarityText">{rarity}</span>
+            <div className="rarityContainer">
+
+                <div className="rarityText">
+                    <i className={`ss ss-${setId} ss-${rarity} ss-fw mtgIcon`}/>
+                    &nbsp; {/* Force a non-CSS space between icon and text */}
+                    {rarity}
+                </div>
+
+                <div className="rarityNumber">
+                    <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
+                </div>
             </div>
         </div>
     );

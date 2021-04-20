@@ -13,8 +13,26 @@
     color: var(--common);
 }
 
+.rarityContainer {
+    /* Keep text and numbers separate, center text & icon, and properly wrap */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .rarityText {
-    padding: 0 0.5em;
+    /* Prevent text from wrapping */
+    flex-shrink: 0;
+    /* Maintain space from .rarityNumber */
+    margin-right: 0.5em;
+}
+
+.rarityNumber {
+    /* Prevent text from wrapping */
+    flex-shrink: 0;
+    /* Keep numbers on right side */
+    margin-left: auto;
 }
 
 .ui.middle.aligned.divided.list .item#collectionItem {
