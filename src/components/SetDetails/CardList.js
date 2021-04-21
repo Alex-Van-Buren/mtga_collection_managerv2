@@ -141,7 +141,7 @@ function CardList({ setId }) {
     return (<>
         {/* Counter for number of cards being displayed */}
         <p className="ui container">
-            Displaying <span className="numCardsShown">{currentPictures.length}</span> card(s):
+            Displaying <span className="numCardsShown">{renderCards.length}</span> card(s):
         </p>
 
         {/* JSX for matching cards */}
