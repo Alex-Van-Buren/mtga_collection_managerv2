@@ -12,55 +12,28 @@ function totalOwned(set, cardCollection, rarity ) {
     let setTotal = 0;
     let ownedTotal = 0;
 
-    // Check if rarity was defined
-    if (rarity) {
+    // Check each card on arena
+    allArenaCards.forEach( card => {
 
-        // Check each card on arena
-        allArenaCards.forEach( card => {
-    
-            // Filter Out basic lands
-            if (!(card.type_line.includes('Basic Land'))) {
+        // Filter Out basic lands
+        if ( !(card.type_line.includes('Basic') && card.type_line.includes('Land')) ) {
 
-                // Check if the card is from the right set, rarity, and is in a booster
-                if (card.set === set && card.rarity === rarity && card.booster ) {
-                    // Update total possible                    
-                    setTotal +=4;
-    
-                    // Find the amount owned by user 
-                    const id = card.arena_id;
-                    if (cardCollection && cardCollection[id])
-                        ownedTotal += cardCollection[id];
-    
+            // Check if the card is from the right set, rarity, and is in a booster
+            if (card.set === set && card.rarity === rarity && card.booster ) {
+
+                // Update total possible
+                setTotal +=4;
+
+                // Find the amount owned by user
+                const id = card.arena_id;
+                if (cardCollection && cardCollection[id]) {
+                    ownedTotal += cardCollection[id];
                 }
             }
-        });
+        }
+    });
 
-        return {ownedTotal, setTotal};
-
-    } else {
-
-        // Check each card on arena
-        allArenaCards.forEach( card => {
-    
-            // Filter Out basic lands
-            if ( !(card.type_line.includes('Basic Land')) ) {
-    
-                // Check if the card is from the right set and is in a booster
-                if (card.set === set && card.booster ) {
-
-                    // Update total possible
-                    setTotal +=4;
-    
-                    // Find the amount owned by user 
-                    const id = card.arena_id;
-                    if (cardCollection && cardCollection[id])
-                        ownedTotal += cardCollection[id];
-                }
-            }
-        });
-
-        return {ownedTotal, setTotal};
-    }
+    return { ownedTotal, setTotal };
 }
 
 export default totalOwned;
