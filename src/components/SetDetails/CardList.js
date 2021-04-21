@@ -138,10 +138,13 @@ function CardList({ setId }) {
     else if ( width < 990 )  numCols = 'three';
     else if ( width < 1200 ) numCols = 'four';
     
+    // Calculate number of card images being displayed
+    const cardsDisplayedNum = (useSelector(state => state.displayOptions.imageList)).length;
+    
     return (<>
         {/* Counter for number of cards being displayed */}
         <p className="ui container">
-            Displaying <span className="numCardsShown">{renderCards.length}</span> card(s):
+            Displaying <span className="numCardsShown">{cardsDisplayedNum}</span> card(s):
         </p>
 
         {/* JSX for matching cards */}
