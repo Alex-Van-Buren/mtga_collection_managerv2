@@ -1,0 +1,14 @@
+div.calculator {
+    padding-top: 2rem;
+    color: var(--clr-txt);
+}
+
+div.calculator>h3 {
+    padding-left: 5%;
+    width: 12rem;
+    max-width: 80%;
+}
+.packNumber {
+    color: var(--clr-txt);
+    float: right;
+}

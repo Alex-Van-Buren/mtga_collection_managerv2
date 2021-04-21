@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import '../css/SetCard.css'
 import RarityCollectionItem from './RarityCollectionItem';
-import setInfo from '../data/setInfo.json'
+import { setInfo } from '../data/setInfo'
 
 function SetCard({ setId }) {   
     
