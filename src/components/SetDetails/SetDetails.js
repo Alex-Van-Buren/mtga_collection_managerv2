@@ -8,12 +8,12 @@ import SetDetailsMenu from './SetDetailsMenu';
 import DisplayOptions from './DisplayOptions';
 import PacksCalculator from './PacksCalculator';
 import DraftsCalculator from './DraftsCalculator';
-import setInfo from '../../data/setInfo.json';
+import { setInfo } from '../../data/setInfo';
 import CardModal from './CardModal';
 import '../../css/SetDetails.css';
 
 function SetDetails() {
-    
+
     // Get set Id from url
     const { setId } = useParams();
 
