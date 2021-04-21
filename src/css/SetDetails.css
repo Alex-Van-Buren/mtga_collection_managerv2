@@ -5,6 +5,6 @@
 .lineBreak {
     border: none;
     border-top: 1px solid var(--border-clr);
-    padding: 1em 0;
+    margin: 2em auto;
     width: 93%;
 }
