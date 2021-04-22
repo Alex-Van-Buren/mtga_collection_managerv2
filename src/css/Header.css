@@ -55,10 +55,7 @@
 
     #header {
         border-bottom: none !important;
-    }
-
-    #rightOptions, #leftOptions {
-        float: right;
+        box-shadow: none;
     }
 
     .hamburger.icon {
