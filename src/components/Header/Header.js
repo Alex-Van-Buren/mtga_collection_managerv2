@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import DarkModeToggle from './DarkModeToggle';
@@ -11,34 +11,52 @@ import '../../css/Header.css';
  * TODO: Hamburgerize at small screen size (that rhymes)
  */
 function Header() {
-    return (
 
-        // NOTE: ADD "bordered" CLASS TO ALL ITEMS IN THIS COMPONENT TO ENSURE THEIR BORDER
-        // APPEARS PROPERLY IN DARK MODE
+    const [hamburgerClicked, setHamburgerClicked] = useState(false);
 
-        <div className="ui stackable menu">
+    // Icon is an x when hamburger expanded, and 3 bars when collapsed
+    const hamburgerClass = hamburgerClicked? "x" : "bars";
+
+    // Hide menu at mobile sizes when hamburger isn't clicked
+    const hideMenu = hamburgerClicked? "" : "hideMenu";
+
+    return (<div id="headerMarginBottom">
+
+        <div id="header">
+
             {/* Options on Left Side */}
-            <Link to='/' className="bordered item">Home</Link>
-            <div className="bordered item">Another thing</div> {/* Here for testing only */}
+            <div className={hideMenu} id="leftOptions">
+                <Link to='/' className="heading">Home</Link>
 
-            {/* Options on Right Side */}
-            <div className="right menu">
-
-                {/* File Selector */}
-                <div className="bordered ui input">
-                    <GetFile />
-                </div>
-
-                {/* Help Menu */}
-                <div className="bordered item">Help</div>
-
-                {/* Dark Mode Toggle */}
-                <div className="bordered item">
-                    <DarkModeToggle />
+                <div className="heading">
+                    Another thing {/* Here for testing only */}
                 </div>
             </div>
-        </div>           
-    );
+
+            {/* Options on Right Side */}
+            <div className={hideMenu} id="rightOptions">
+
+                {/* File Selector */}
+                <GetFile />
+
+                {/* Help Menu */}
+                <div className="heading">
+                    Help
+                </div>
+
+                {/* Dark Mode Toggle */}
+                <DarkModeToggle className="heading" />
+            </div>
+
+        </div>
+
+        {/* Hamburger menu */}
+        <div id="hamburger"
+            onClick={(e) => setHamburgerClicked(!hamburgerClicked)}
+        >
+            <i className={`hamburger icon ${hamburgerClass}`} />
+        </div>
+    </div>);
 }
 
 export default Header;

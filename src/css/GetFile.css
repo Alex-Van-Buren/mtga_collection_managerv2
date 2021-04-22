@@ -11,5 +11,5 @@ input[type="file"] {
 }
 
 label:focus-within {
-    outline: 5px black;
+  outline: 5px black;
 }

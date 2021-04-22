@@ -69,7 +69,7 @@ function GetFile() {
     const ref = useRef();
 
     return (
-        <div className="item ">
+        <div className="heading">
             <label className="ui positive button" ref={ref}>
                 <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeKeyboardClickable(e, ref)}>
                     <i className="upload icon"></i>

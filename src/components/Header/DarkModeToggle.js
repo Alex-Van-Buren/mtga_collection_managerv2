@@ -34,7 +34,7 @@ function DarkModeToggle() {
     return (
         <div
             // Accessibility
-            className="darkmodeToggle" tabIndex="0"
+            className="darkmodeToggle heading" tabIndex="0"
             onKeyDown={ e => {if (e.key === "Enter") toggleDarkMode(darkModeEnabled)} }
             role="checkbox" aria-checked={darkModeEnabled} aria-label="Dark Mode Toggle"
         >
