@@ -20,6 +20,7 @@ function CardList({ setId }) {
     const searchTerm     = useSelector(state => state.displayOptions.searchTerm);
     const rarity         = useSelector(state => state.displayOptions.rarity);
     const showCards      = useSelector(state => state.displayOptions.showCards);
+    const cardCount      = useSelector(state => state.displayOptions.cardCount);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -64,7 +65,6 @@ function CardList({ setId }) {
     }, [colorOption, searchTerm, setId, rarity]);
 
     // Track currently shown pictures
-    let cardCount = 0;
     let currentPictures = [];
 
     // render the cards based on how many the user owns and the showCards option
@@ -97,7 +97,6 @@ function CardList({ setId }) {
             }
 
             // Track images to be displayed
-            cardCount++;
             currentPictures.push(img);
 
             // Build card JSX

@@ -21,6 +21,8 @@ const INITIAL_STATE = {
 
     imageList: [],
 
+    cardCount: 0,
+
     activeTab: "Card Filters"
 }
 
@@ -68,7 +70,7 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
 
         // Set the active card images
         case UPDATE_IMAGE_LIST: {
-            return { ...state, imageList: action.payload };
+            return { ...state, imageList: action.payload, cardCount: action.payload.length };
         }
 
         // Set active details menu tab
