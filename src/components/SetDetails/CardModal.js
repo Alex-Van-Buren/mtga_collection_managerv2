@@ -60,7 +60,7 @@ function CardModal() {
                 prevRef.current.blur();
             } }
             // Add "disabled" to class if not clickable (first image in list)
-            className={BUTTON_CLASS}
+            className={index > 0 ? BUTTON_CLASS : `disabled ${BUTTON_CLASS}`}
         >
             <i className="chevron left icon"></i>
         </button>
@@ -78,7 +78,7 @@ function CardModal() {
                 nextRef.current.blur();
             } }
             // Add "disabled" to class if not clickable (first image in list)
-            className={BUTTON_CLASS}
+            className={index < imageList.length-1 ? BUTTON_CLASS : `disabled ${BUTTON_CLASS}`}
         >
             <i className="chevron right icon"></i>
         </button>
