@@ -64,6 +64,7 @@ function CardList({ setId }) {
     }, [colorOption, searchTerm, setId, rarity]);
 
     // Track currently shown pictures
+    let cardCount = 0;
     let currentPictures = [];
 
     // render the cards based on how many the user owns and the showCards option
@@ -96,6 +97,7 @@ function CardList({ setId }) {
             }
 
             // Track images to be displayed
+            cardCount++;
             currentPictures.push(img);
 
             // Build card JSX
@@ -126,8 +128,10 @@ function CardList({ setId }) {
     }, [cardCollection, cards, dispatch, showCards]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect( () => dispatch(updateImageList(currentPictures)), [renderCards] );
+    useEffect( () => {
+        dispatch(updateImageList(currentPictures));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [renderCards] );
 
     // Find optimal number of columns for card display based on screen width
     const width = useResizeWidth();
@@ -138,13 +142,10 @@ function CardList({ setId }) {
     else if ( width < 990 )  numCols = 'three';
     else if ( width < 1200 ) numCols = 'four';
     
-    // Calculate number of card images being displayed
-    const cardsDisplayedNum = (useSelector(state => state.displayOptions.imageList)).length;
-    
     return (<>
         {/* Counter for number of cards being displayed */}
         <p className="ui container">
-            Displaying <span className="numCardsShown">{cardsDisplayedNum}</span> card(s):
+            Displaying <span className="numCardsShown">{cardCount}</span> card(s):
         </p>
 
         {/* JSX for matching cards */}
