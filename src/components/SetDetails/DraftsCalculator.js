@@ -60,21 +60,21 @@ function DraftsCalculator() {
         mythicCost = { gold: mythicDraftsNeeded*10000, gems: mythicDraftsNeeded*1500 };
 
     if (draftType === "quick") {
-        rareCost.gold = rareCost.gold / 2;
-        rareCost.gems = rareCost.gems / 2;
-        mythicCost.gold = mythicCost.gold / 2;
-        mythicCost.gems = mythicCost.gems / 2;
+        rareCost.gold = (rareCost.gold / 2);
+        rareCost.gems = (rareCost.gems / 2);
+        mythicCost.gold = (mythicCost.gold / 2);
+        mythicCost.gems = (mythicCost.gems / 2);
     }
 
-    const totalRareGemReward = Math.floor(rareDraftsNeeded * gems);
-    const totalMythicGemReward = Math.floor(mythicDraftsNeeded * gems);
+    const totalRareGemReward = Math.floor(rareDraftsNeeded * gems).toLocaleString();
+    const totalMythicGemReward = Math.floor(mythicDraftsNeeded * gems).toLocaleString();
 
     // Dropdown selects draft type
     const renderDropDown = (
         <div>
             {/* Dropdown menu */}
-            <label htmlFor="draftType">Draft Type</label>
-            <div className="ui compact menu">
+            <label htmlFor="draftType">Draft Type: </label>
+            <div className="ui compact menu small">
                 <div className="ui simple dropdown item" id="draftType">
                     {draftType}
                     <i className="dropdown icon"></i>
@@ -112,17 +112,28 @@ function DraftsCalculator() {
 
     const renderOutput = (
         <div>
-            <div>Drafts needed to complete rares: {rareDraftsNeeded}</div>
-            <div>Total costs to complete rares:</div>
-            <div>Gold: {rareCost.gold}, Gems: {rareCost.gems}</div>
-            <div>Total gem rewards from drafts: {totalRareGemReward}</div>
-            <div>Difference: {rareCost.gems - totalRareGemReward}</div>
+            <hr />
+            <h4>Drafts Needed To Complete:</h4>
+            <div className="draftRequired">
+                <h5>Rares: {rareDraftsNeeded} Drafts</h5>
+                <p>Cost: {(rareCost.gold).toLocaleString()} Gold or {(rareCost.gems).toLocaleString()} Gems</p>
+                <p>Rewards: {totalRareGemReward} Gems</p>
 
-            <div>Drafts needed to complete mythics: {mythicDraftsNeeded}</div>
-            <div>Total costs to complete mythics:</div>
-            <div>Gold: {mythicCost.gold}, Gems: {mythicCost.gems}</div>
-            <div>Total gem rewards from drafts: {totalMythicGemReward}</div>
-            <div>Difference: {mythicCost.gems - totalMythicGemReward}</div>
+                <h5>Mythics: {mythicDraftsNeeded} Drafts</h5>
+                <p>Cost: {(mythicCost.gold).toLocaleString()} Gold or {(mythicCost.gems).toLocaleString()} Gems</p>
+                <p>Rewards: {totalMythicGemReward} Gems</p>
+            </div>
+            {/* <div>Drafts needed to complete rares: {rareDraftsNeeded}</div> */}
+            {/* <div>Total costs to complete rares:</div> */}
+            {/* <div>Gold: {rareCost.gold}, Gems: {rareCost.gems}</div> */}
+            {/* <div>Total gem rewards from drafts: {totalRareGemReward}</div> */}
+            {/* <div>Difference: {rareCost.gems - totalRareGemReward}</div> */}
+
+            {/* <div>Drafts needed to complete mythics: {mythicDraftsNeeded}</div> */}
+            {/* <div>Total costs to complete mythics:</div> */}
+            {/* <div>Gold: {mythicCost.gold}, Gems: {mythicCost.gems}</div> */}
+            {/* <div>Total gem rewards from drafts: {totalMythicGemReward}</div> */}
+            {/* <div>Difference: {mythicCost.gems - totalMythicGemReward}</div> */}
         </div>
     );
 
