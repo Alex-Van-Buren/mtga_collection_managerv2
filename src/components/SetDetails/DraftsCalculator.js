@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import useDraft from '../../hooks/useDraft';
 import draftsNeeded from '../../data/draftsNeeded';
+import '../../css/DraftsCalculator.css';
 
 function DraftsCalculator() {
     const [draftType, setDraftType] = useState("premier");
