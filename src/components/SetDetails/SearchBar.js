@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setSearchTerm } from '../../actions';
 import '../../css/SearchBar.css';
@@ -16,8 +16,12 @@ function SearchBar() {
     // Get access to dispatch
     const dispatch = useDispatch();
 
-    // Clear any search term in state on render
-    useEffect(() => dispatch(setSearchTerm("")), [dispatch]);
+    // Get initial search term from redux
+    const initialSearchTerm = useSelector(state => state.displayOptions.searchTerm);
+
+    // Update initial Search Term on first load
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => setTerm(initialSearchTerm), []);
 
     // Track change in search bar
     useEffect(() => {
