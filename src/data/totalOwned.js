@@ -44,7 +44,7 @@ function totalOwned(cardCollection) {
             continue;
         }
 
-        // If card is in a tracked set, add it to that set in inventory 
+        // If card is in a tracked set, add that card to inventory 
         if (inventory[card.set]) {
 
             // Update total possible in set
