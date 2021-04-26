@@ -12,8 +12,10 @@ function DraftsCalculator() {
     const [draftType, setDraftType] = useState("premier");
     const [winRate, setWinRate] = useState(50);
     const [debouncedWinRate, setDebouncedWinRate] = useState(winRate);
-    const [cardsPicked, setCardsPicked] = useState(2.5);
-    const [debouncedCardsPicked, setDebouncedCardsPicked] = useState(cardsPicked);
+    const [raresPicked, setRaresPicked] = useState(2.625);
+    const [debouncedRaresPicked, setDebouncedRaresPicked] = useState(raresPicked);
+    const [mythicsPicked, setMythicsPicked] = useState(0.375);
+    const [debouncedMythicsPicked, setDebouncedMythicsPicked] = useState(mythicsPicked);
 
     // Grab set id from url
     const { setId } = useParams();
@@ -36,24 +38,36 @@ function DraftsCalculator() {
         return () => clearTimeout(timeoutid);
     }, [debouncedWinRate])
 
-    // Track change in new cards picked
+    // Track change in new rares picked
     useEffect(() => {
 
          // Wait for user to stop typing
          const timeoutid = setTimeout( () => {
-            setCardsPicked(debouncedCardsPicked);
+            setRaresPicked(debouncedRaresPicked);
         }, 500);
 
         // Cleanup function to stop timer
         return () => clearTimeout(timeoutid);
-    }, [debouncedCardsPicked]);
+    }, [debouncedRaresPicked]);
+
+    // Track change in new mythics picked
+    useEffect(() => {
+
+        // Wait for user to stop typing
+        const timeoutid = setTimeout( () => {
+           setMythicsPicked(debouncedMythicsPicked);
+       }, 500);
+
+       // Cleanup function to stop timer
+       return () => clearTimeout(timeoutid);
+   }, [debouncedMythicsPicked]);
 
     // Get the average gems/packs per draft
     const { gems, packs: rewardPacks } = useDraft(draftType, winRate/100);
 
     // Calculate number of drafts required to complete rare/mythic collection for this set
-    const rareDraftsNeeded = draftsNeeded(setId, "rare", rareOwnedTotal, rareSetTotal, cardsPicked, rewardPacks);
-    const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicOwnedTotal, mythicSetTotal, cardsPicked, rewardPacks);
+    const rareDraftsNeeded = draftsNeeded(setId, "rare", rareOwnedTotal, rareSetTotal, raresPicked, rewardPacks);
+    const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicOwnedTotal, mythicSetTotal, mythicsPicked, rewardPacks);
 
     // Calculate cost of drafts (include gems returned)
 
@@ -96,18 +110,29 @@ function DraftsCalculator() {
             <label htmlFor="winRate">Average Win Percentage:</label>
             <input
                 type="number" name="winRate" id="winRate" min="0" max="100" value={debouncedWinRate}
-                onChange={(e) => setDebouncedWinRate(e.target.value)}
+                onChange={(e) => {console.log(typeof e.target.value, e.target.value); setDebouncedWinRate(e.target.value)}}
             />
         </div>
     );
 
-    // Slider for average number of new rares/mythics picked during draft
-    const renderCardsPickedInput = (
+    // Input for average number of new rares picked during draft
+    const renderRaresPickedInput = (
         <div>
-            <label htmlFor="cardsPicked">Average New Rares/Mythics Picked per Draft:</label>
+            <label htmlFor="raresPicked">Average New Rares Picked per Draft:</label>
             <input
-                type="number" name="cardsPicked" id="cardsPicked" min="0" max="10" step="0.1" value={debouncedCardsPicked}
-                onChange={(e) => setDebouncedCardsPicked(e.target.value)}
+                type="number" name="raresPicked" id="raresPicked" min="0" max="10" step="0.1" value={debouncedRaresPicked}
+                onChange={(e) => setDebouncedRaresPicked(e.target.value)}
+            />
+        </div>
+    );
+
+    // Input for average number of new mythics picked during draft
+    const renderMythicsPickedInput = (
+        <div>
+            <label htmlFor="mythicsPicked">Average New Mythics Picked per Draft:</label>
+            <input
+                type="number" name="mythicsPicked" id="mythicsPicked" min="0" max="10" step="0.1" value={debouncedMythicsPicked}
+                onChange={(e) => setDebouncedMythicsPicked(e.target.value)}
             />
         </div>
     );
@@ -125,17 +150,6 @@ function DraftsCalculator() {
                 <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/>{(mythicCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}</p>
                 <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} </p>
             </div>
-            {/* <div>Drafts needed to complete rares: {rareDraftsNeeded}</div> */}
-            {/* <div>Total costs to complete rares:</div> */}
-            {/* <div>Gold: {rareCost.gold}, Gems: {rareCost.gems}</div> */}
-            {/* <div>Total gem rewards from drafts: {totalRareGemReward}</div> */}
-            {/* <div>Difference: {rareCost.gems - totalRareGemReward}</div> */}
-
-            {/* <div>Drafts needed to complete mythics: {mythicDraftsNeeded}</div> */}
-            {/* <div>Total costs to complete mythics:</div> */}
-            {/* <div>Gold: {mythicCost.gold}, Gems: {mythicCost.gems}</div> */}
-            {/* <div>Total gem rewards from drafts: {totalMythicGemReward}</div> */}
-            {/* <div>Difference: {mythicCost.gems - totalMythicGemReward}</div> */}
         </div>
     );
 
@@ -143,7 +157,8 @@ function DraftsCalculator() {
         <div id="draftsCalculator">
             {renderDropDown}
             {renderWinRate}
-            {renderCardsPickedInput}
+            {renderRaresPickedInput}
+            {renderMythicsPickedInput}
             {renderOutput}
         </div>
     );
