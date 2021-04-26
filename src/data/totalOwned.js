@@ -1,11 +1,10 @@
 import allArenaCards from './arenaCards20210412165933.json';
 
 /**
- * 
- * @param {String} set Three letter mtg set code. Should be all lowercase
+ * Counts the number of cards in each set and the number the user owns from that set.
  * @param {Object} cardCollection Object containing arena ids as keys and number owned as values
- * @param {String} rarity  Optional string of card rarity to find total, if not set will find total for all rarities
- * @returns {Object} {ownedTotal, setTotal} Returns object with total owned of given or all rarities first and set total second
+ * @returns {Object} Returns an object that describes the number of cards owned/total for each set and 
+ * each rarity in that set
  */
 function totalOwned(cardCollection) {
 
