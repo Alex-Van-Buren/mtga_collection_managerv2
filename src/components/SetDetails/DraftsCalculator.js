@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import useDraft from '../../hooks/useDraft';
 import draftsNeeded from '../../data/draftsNeeded';
 import '../../css/DraftsCalculator.css';
+import gem_img from '../../images/arena/Gem.png';
+import gold_img from '../../images/arena/Gold.png';
 
 function DraftsCalculator() {
     const [draftType, setDraftType] = useState("premier");
@@ -116,12 +118,12 @@ function DraftsCalculator() {
             <h4>Drafts Needed To Complete:</h4>
             <div className="draftRequired">
                 <h5>Rares: {rareDraftsNeeded} Drafts</h5>
-                <p>Cost: {(rareCost.gold).toLocaleString()} Gold or {(rareCost.gems).toLocaleString()} Gems</p>
-                <p>Rewards: {totalRareGemReward} Gems</p>
+                <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/> {(rareCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(rareCost.gems).toLocaleString()}</p>
+                <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} </p>
 
                 <h5>Mythics: {mythicDraftsNeeded} Drafts</h5>
-                <p>Cost: {(mythicCost.gold).toLocaleString()} Gold or {(mythicCost.gems).toLocaleString()} Gems</p>
-                <p>Rewards: {totalMythicGemReward} Gems</p>
+                <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/>{(mythicCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}</p>
+                <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} </p>
             </div>
             {/* <div>Drafts needed to complete rares: {rareDraftsNeeded}</div> */}
             {/* <div>Total costs to complete rares:</div> */}

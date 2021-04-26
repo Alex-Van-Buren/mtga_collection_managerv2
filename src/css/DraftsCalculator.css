@@ -1,7 +1,6 @@
 #draftsCalculator {
     color: var(--clr-txt);
     padding-top: 1em;
-
 }
 
 #draftsCalculator hr {
@@ -33,4 +32,9 @@
 #draftType>div.menu>div.item {
     padding-top: 0.5em !important;
     padding-bottom: 0.5em !important;
+}
+
+img.gemImg, img.goldImg {
+    width: 1.5rem;
+    transform: translateY(3px);
 }
