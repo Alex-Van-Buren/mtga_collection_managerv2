@@ -1,4 +1,5 @@
-import allArenaCards from './arenaCards20210412165933.json';
+import allArenaCards from './arenaCards20210427172602.json';
+import { historicSets as sets } from '../data/setInfo';
 
 /**
  * Counts the number of cards in each set and the number the user owns from that set.
@@ -8,9 +9,8 @@ import allArenaCards from './arenaCards20210412165933.json';
  */
 function totalOwned(cardCollection) {
 
-    // TODO: replace with redux
     // Get card sets to check
-    const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
+    // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
 
     // Create inventory for each set
     const inventory = {};

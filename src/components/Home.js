@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import SetCard from './SetCard';
+import { standardSets as sets } from '../data/setInfo';
 import useResizeWidth from '../hooks/useResizeWidth';
 
 /**
  * Outputs JSX for each of the card sets to be displayed
  * - Current default sets are: 'eld', 'thb', 'iko', 'm21', 'znr', & 'khm'
  */
-function renderSets(sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm']) {
+function renderSets() {
 
+    // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
     // sets = ['znr'];
     
     // Create each card set Component based on 'sets' input
