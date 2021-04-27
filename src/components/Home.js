@@ -53,7 +53,7 @@ function Home() {
             <div id="standardLabel">Standard</div>
 
             {/* Standard/Historic Toggle */}
-            <div className="ui fitted toggle checkbox">
+            <div className="ui fitted toggle checkbox" id="labelColorStandardToggle">
                 <input 
                     type="checkbox" name="StandardToggle" id="StandardToggle" tabIndex="-1"
                     checked={!showStandard} onChange={() => toggleStandard(showStandard)}

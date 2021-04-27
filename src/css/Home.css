@@ -8,3 +8,7 @@
     color: var(--clr-txt);
     margin: 0 0.5rem;
 }
+
+.ui.fitted.toggle.checkbox#labelColorStandardToggle input:not(:checked) ~ label:before {
+    background: var(--border-clr) !important;
+}
