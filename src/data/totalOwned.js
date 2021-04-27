@@ -9,9 +9,6 @@ import { historicSets as sets } from '../data/setInfo';
  */
 function totalOwned(cardCollection) {
 
-    // Get card sets to check
-    // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
-
     // Create inventory for each set
     const inventory = {};
     for (const set of sets) {

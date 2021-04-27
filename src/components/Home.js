@@ -10,9 +10,6 @@ import useResizeWidth from '../hooks/useResizeWidth';
  * - Current default sets are: 'eld', 'thb', 'iko', 'm21', 'znr', & 'khm'
  */
 function renderSets() {
-
-    // const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
-    // sets = ['znr'];
     
     // Create each card set Component based on 'sets' input
     const setCards = sets.map( (setId) => {
