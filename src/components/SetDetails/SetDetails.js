@@ -10,6 +10,7 @@ import PacksCalculator from './PacksCalculator';
 import DraftsCalculator from './DraftsCalculator';
 import { setInfo } from '../../data/setInfo';
 import CardModal from './CardModal';
+import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/SetDetails.css';
 
 function SetDetails() {
@@ -60,6 +61,16 @@ function SetDetails() {
         }
     })();
 
+    // Break up set details and display options at small width
+    const width = useResizeWidth();
+    let setDetailsColumns = "six";
+    let displayOptionsColumns = "ten";
+
+    if (width < 740) {
+        setDetailsColumns = "sixteen";
+        displayOptionsColumns = "sixteen";
+    }
+
     return (<>
         {/* Card modal is only shown when a card is clicked */}
         <CardModal/>
@@ -67,7 +78,7 @@ function SetDetails() {
         <div className="ui grid container" id="setDetailsSpacer">
 
             {/* Set Details */}
-            <div className="six wide column">
+            <div className={`${setDetailsColumns} wide column`}>
                 <div className="ui center aligned header">{setName}</div>
                 <div className="ui center aligned sub header">
                     Set Progress:
@@ -84,7 +95,7 @@ function SetDetails() {
             </div>
 
             {/* Display options for SetDetails */}
-            <div className="ten wide column">
+            <div className={`${displayOptionsColumns} wide column`}>
                 <SetDetailsMenu />
                 {activeTabComponent}
             </div>
