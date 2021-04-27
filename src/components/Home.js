@@ -38,12 +38,13 @@ function Home() {
         else {
             setShowStandard(true);
         }
-    }, [])
+    }, []);
 
     // Use shown sets to determine title
     const collectionTitle = showStandard ? "Standard Collection" : "Historic Collection";
 
-    const renderToggle = (<>
+    // Render the standard/historic toggle
+    const renderToggle = (
         <div
             // Accessibility
             id="standardToggle" tabIndex="0"
@@ -63,7 +64,7 @@ function Home() {
 
             <div id="historicLabel">Historic</div>
         </div>
-    </>);
+    );
 
     /**
      * Toggles between standard and historic modes
