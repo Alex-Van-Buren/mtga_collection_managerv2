@@ -103,6 +103,26 @@ function DraftsCalculator() {
             </div>
         </div>
     );
+    // Validation function for winRate that will keep the input between 0 and 100
+    function checkWinRate(value){
+        let valueNum = value;
+        if ( valueNum > 100 ) {
+            valueNum = 100;
+        } 
+        if ( valueNum < 0 ) {
+            valueNum = 0;
+        }
+        return valueNum;
+    }
+
+    // Validation function for Rare and mythic Cards Picked during drafts. Prevents negative numbers and sets to 0.
+    function checkCardsPicked(value) {
+        let valueNum = value;
+        if ( valueNum < 0 ) {
+            valueNum = 0;
+        }
+        return valueNum;
+    }
 
     // Input selects estimated win percentage
     const renderWinRate = (
@@ -110,18 +130,18 @@ function DraftsCalculator() {
             <label htmlFor="winRate">Average Win Percentage:</label>
             <input
                 type="number" name="winRate" id="winRate" min="0" max="100" value={debouncedWinRate}
-                onChange={(e) => {console.log(typeof e.target.value, e.target.value); setDebouncedWinRate(e.target.value)}}
+                onChange={(e) => setDebouncedWinRate(checkWinRate(e.target.value))}
             />
         </div>
     );
-
+    
     // Input for average number of new rares picked during draft
     const renderRaresPickedInput = (
         <div>
             <label htmlFor="raresPicked">Average New Rares Picked per Draft:</label>
             <input
                 type="number" name="raresPicked" id="raresPicked" min="0" max="10" step="0.1" value={debouncedRaresPicked}
-                onChange={(e) => setDebouncedRaresPicked(e.target.value)}
+                onChange={(e) => setDebouncedRaresPicked(checkCardsPicked(e.target.value))}
             />
         </div>
     );
@@ -132,7 +152,7 @@ function DraftsCalculator() {
             <label htmlFor="mythicsPicked">Average New Mythics Picked per Draft:</label>
             <input
                 type="number" name="mythicsPicked" id="mythicsPicked" min="0" max="10" step="0.1" value={debouncedMythicsPicked}
-                onChange={(e) => setDebouncedMythicsPicked(e.target.value)}
+                onChange={(e) => setDebouncedMythicsPicked(checkCardsPicked(e.target.value))}
             />
         </div>
     );
