@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SetCard from './SetCard';
 import { standardSets, historicSets } from '../data/setInfo';
 import useResizeWidth from '../hooks/useResizeWidth';
+import '../css/Home.css';
 
 /**
  * Home Page Component - Displays current card sets and other general info/options
@@ -34,7 +35,7 @@ function Home() {
         if (standardPreference === "false") {
             setShowStandard(false);
         }
-        else if (standardPreference === "true") {
+        else {
             setShowStandard(true);
         }
     }, [])
@@ -42,12 +43,12 @@ function Home() {
     // Use shown sets to determine title
     const collectionTitle = showStandard ? "Standard Collection" : "Historic Collection";
 
-    const renderToggle = (
+    const renderToggle = (<>
         <div
             // Accessibility
-            className="standardToggle" tabIndex="0"
+            id="standardToggle" tabIndex="0"
             onKeyDown={ e => {if (e.key === "Enter") toggleStandard(showStandard)} }
-            role="checkbox" aria-checked={showStandard} aria-label="Standard Mode Toggle"
+            role="checkbox" aria-checked={!showStandard} aria-label="Standard Mode Toggle"
         >
             <div id="standardLabel">Standard</div>
 
@@ -55,14 +56,14 @@ function Home() {
             <div className="ui fitted toggle checkbox">
                 <input 
                     type="checkbox" name="StandardToggle" id="StandardToggle" tabIndex="-1"
-                    checked={showStandard} onChange={() => toggleStandard(showStandard)}
+                    checked={!showStandard} onChange={() => toggleStandard(showStandard)}
                 />
                 <label tabIndex="-1"></label>
             </div>
 
             <div id="historicLabel">Historic</div>
         </div>
-    );
+    </>);
 
     /**
      * Toggles between standard and historic modes
@@ -104,13 +105,17 @@ function Home() {
     }
 
     return(
-        <div className="ui container">
-            <div className="ui huge center aligned header">{collectionTitle}</div>
-            <div className={`ui ${numCards} cards`}>
-                {renderToggle}
-                {renderSets()}
+        <>
+            {renderToggle}
+
+            <div className="ui container">
+                <div className="ui huge center aligned header">{collectionTitle}</div>
+
+                <div className={`ui ${numCards} cards`}>
+                    {renderSets()}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

@@ -1,0 +1,10 @@
+#standardToggle {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2rem;
+}
+
+#standardLabel, #historicLabel {
+    color: var(--clr-txt);
+    margin: 0 0.5rem;
+}

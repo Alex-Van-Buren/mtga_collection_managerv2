@@ -14,7 +14,6 @@ function App() {
     return (
         <Router >
             <Header />
-            <br/>
             <Switch>
                 <Route exact component={Home} path='/' />
                 <Route component={SetDetails} path='/set/:setId' />
