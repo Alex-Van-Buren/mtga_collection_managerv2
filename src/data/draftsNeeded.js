@@ -1,7 +1,6 @@
 import { setInfo } from './setInfo';
 
 function draftsNeeded(setId, rarity, ownedTotal, setTotal, cardsPicked, rewardPacks, ownedPacks=0) {
-
     const mythicUpgradeRate = setInfo[setId].mythic_upgrade;
     const numMissing = setTotal - ownedTotal;
 
@@ -17,11 +16,11 @@ function draftsNeeded(setId, rarity, ownedTotal, setTotal, cardsPicked, rewardPa
     }
 
     // This is the number of additional cards gained picking them IN the draft
-    const rarityCardsPicked = cardsPicked * rarityOpenRate;
+    // const rarityCardsPicked = cardsPicked * rarityOpenRate;
 
     const numerator = numMissing - ownedPacks * rarityOpenRate * nonWildcardRate;
 
-    const denominator = rarityCardsPicked + rewardPacks * rarityOpenRate * nonWildcardRate;
+    const denominator = parseFloat(cardsPicked) + rewardPacks * rarityOpenRate * nonWildcardRate;
 
     // Round number of drafts up to whole number
     return Math.ceil(numerator / denominator);
