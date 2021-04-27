@@ -1,0 +1,14 @@
+#standardToggle {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 2rem;
+}
+
+#standardLabel, #historicLabel {
+    color: var(--clr-txt);
+    margin: 0 0.5rem;
+}
+
+.ui.fitted.toggle.checkbox#labelColorStandardToggle input:not(:checked) ~ label:before {
+    background: var(--border-clr) !important;
+}

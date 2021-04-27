@@ -1,5 +1,6 @@
-// import allArenaCards from './arenaCards20210314173019.json';
-const allArenaCards = require('./arenaCards20210412165933.json');
+// import allArenaCards from './arenaCards20210427172602.json';
+const allArenaCards = require('./arenaCards20210427172602.json');
+
 /**
  * 
  * @param {*} searchOptions Object of options to filter the cards on Arena. Define as an object eg{set:'setId', name:'cardName', color: ['W', 'G'] 

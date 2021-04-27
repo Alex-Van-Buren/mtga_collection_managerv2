@@ -64,7 +64,7 @@ function SetDetails() {
         {/* Card modal is only shown when a card is clicked */}
         <CardModal/>
 
-        <div className="ui grid container">
+        <div className="ui grid container" id="setDetailsSpacer">
 
             {/* Set Details */}
             <div className="six wide column">
