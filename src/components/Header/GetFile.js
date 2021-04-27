@@ -37,17 +37,17 @@ function GetFile() {
             // After the file loads and is read by the reader
             reader.onloadend = () =>{
 
-                // Define the Regex 
-                const cardRegex = /(?<=UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+)\{.*\}(?=})/g;
+                // Define the Regex (can't use backlookup because of safari)
+                const cardRegex = /\[UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+({.*})\}/g;
                 
                 // Use regex to extract the inventory data from the log
                 const match = cardRegex.exec(reader.result);
     
                 // Check if regex returned valid data
-                if( match && match[0]){
+                if( match && match[1]){
 
                     // Parse the data into a JSON that can be more easily manipulated
-                    const inventory = JSON.parse(match[0]);
+                    const inventory = JSON.parse(match[1]);
         
                     // Use getCollection action creator to put the basic inventory into Redux
                     dispatch( getCollection(inventory) );
