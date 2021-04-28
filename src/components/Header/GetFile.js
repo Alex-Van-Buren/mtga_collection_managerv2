@@ -17,6 +17,9 @@ function GetFile() {
         // Get and process initially empty card set
         dispatch( getCollection(null) );
         dispatch( processSetCollection(null) );
+        // Make empty player inventory for initial load
+        const emptyPlayerInventory = {wcCommon: 0, wcUncommon: 0, wcRare: 0, wcMythic: 0, gold: 0, gems: 0, vaultProgress: 0, boosters: []};
+        dispatch( getPlayerInventory(emptyPlayerInventory));
     },
     [dispatch]); // Only updates if dispatch changes value. Just here to make ESLint happy
 
