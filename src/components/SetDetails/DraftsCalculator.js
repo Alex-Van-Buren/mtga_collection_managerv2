@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import useBooster from '../../hooks/useBooster';
 import useDraft from '../../hooks/useDraft';
 import draftsNeeded from '../../data/draftsNeeded';
 import '../../css/DraftsCalculator.css';
@@ -19,6 +20,8 @@ function DraftsCalculator() {
 
     // Grab set id from url
     const { setId } = useParams();
+
+    const ownedBoosters = useBooster(setId);
 
     // Get mythic/rare totals from redux
     const mythicOwnedTotal = useSelector(state => state.inventory.set[setId].mythic.ownedTotal);
@@ -66,8 +69,8 @@ function DraftsCalculator() {
     const { gems, packs: rewardPacks } = useDraft(draftType, winRate/100);
 
     // Calculate number of drafts required to complete rare/mythic collection for this set
-    const rareDraftsNeeded = draftsNeeded(setId, "rare", rareOwnedTotal, rareSetTotal, raresPicked, rewardPacks);
-    const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicOwnedTotal, mythicSetTotal, mythicsPicked, rewardPacks);
+    const rareDraftsNeeded = draftsNeeded(setId, "rare", rareOwnedTotal, rareSetTotal, raresPicked, rewardPacks, ownedBoosters);
+    const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicOwnedTotal, mythicSetTotal, mythicsPicked, rewardPacks, ownedBoosters);
 
     // Calculate cost of drafts (include gems returned)
 
@@ -160,6 +163,7 @@ function DraftsCalculator() {
     const renderOutput = (
         <div>
             <hr />
+            <h4>Packs Owned: {ownedBoosters}</h4>
             <h4>Drafts Needed To Complete:</h4>
             <div className="draftRequired">
                 <h5>Rares: {rareDraftsNeeded} Drafts</h5>
