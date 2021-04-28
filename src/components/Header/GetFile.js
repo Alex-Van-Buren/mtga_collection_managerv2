@@ -6,9 +6,6 @@ import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
 
-// const sets = ['eld', 'thb', 'iko', 'm21', 'znr', 'khm'];
-// const sets = ['znr'];
-
 function GetFile() {
 
     // Get access to Redux dispatch function
@@ -22,6 +19,54 @@ function GetFile() {
         dispatch( processSetCollection(null) );
     },
     [dispatch]); // Only updates if dispatch changes value. Just here to make ESLint happy
+
+    /**
+     * Uses regular expression to extract card inventory from player log
+     * @param {*} file Result from the file reader
+     */
+    function extractCardInventory(file) {
+
+        // Define the Regex (can't use backlookup because of safari)
+        const cardRegex = /\[UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+({.*})\}/g;
+                
+        // Use regex to extract the inventory data from the log
+        const match = cardRegex.exec(file);
+
+        // Check if regex returned valid data
+        if( match && match[1]){
+
+            // Parse the data into a JSON that can be more easily manipulated
+            const inventory = JSON.parse(match[1]);
+
+            // Use getCollection action creator to put the basic inventory into Redux
+            dispatch( getCollection(inventory) );
+            
+            // Put processed set information into Redux                
+            dispatch( processSetCollection(inventory) );
+        }
+
+        // Alert user of invalid Player Log
+        else alert(NO_INVENTORY_FOUND);
+    }
+
+    function extractPlayerInventory(file) {
+
+        // Define Regex
+        const inventoryRegex = /PlayerInventory\.GetPlayerInventory.+payload.+("wcCommon":\d*).*("wcUncommon":\d*).*("wcRare":\d*).*("wcMythic":\d*).*("gold":\d*).*("gems":\d*).*("vaultProgress":[\d.]*).*("boosters":\[.*?\])/g;
+
+        // Use regex on the file
+        const match = inventoryRegex.exec(file);
+        console.log(match);
+
+        // Check if regex returned valid data
+        if ( match && match[1]) {
+
+            for(let i = 1; i<=8; i++){
+                console.info(match[i]);
+            }
+        }
+        else alert('extractPlayerInventory found nothing');
+    }
 
     const handleFile = (event) =>{
     
@@ -37,27 +82,10 @@ function GetFile() {
             // After the file loads and is read by the reader
             reader.onloadend = () =>{
 
-                // Define the Regex (can't use backlookup because of safari)
-                const cardRegex = /\[UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+({.*})\}/g;
+                // Use functions to extract the information from player log
+                extractCardInventory(reader.result);
+                extractPlayerInventory(reader.result);
                 
-                // Use regex to extract the inventory data from the log
-                const match = cardRegex.exec(reader.result);
-    
-                // Check if regex returned valid data
-                if( match && match[1]){
-
-                    // Parse the data into a JSON that can be more easily manipulated
-                    const inventory = JSON.parse(match[1]);
-        
-                    // Use getCollection action creator to put the basic inventory into Redux
-                    dispatch( getCollection(inventory) );
-                    
-                    // Put processed set information into Redux                
-                    dispatch( processSetCollection(inventory) );
-                }
-
-                // Alert user of invalid Player Log
-                else alert(NO_INVENTORY_FOUND);
             }
         }
         
