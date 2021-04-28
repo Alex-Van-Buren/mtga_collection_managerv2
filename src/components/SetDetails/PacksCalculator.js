@@ -1,12 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import useBooster from '../../hooks/useBooster';
 
 import packsNeeded from '../../data/packsNeeded';
 import '../../css/PacksCalculator.css';
 
 function PacksCalculator() {
     const { setId } = useParams();
+
+    const ownedBoosters = useBooster(setId);
+    console.log(ownedBoosters)
 
     // Grab values from redux and compute the average number of packs required to 100% complete rare collection
     const raresOwned = useSelector( state => state.inventory.set[setId].rare.ownedTotal);
