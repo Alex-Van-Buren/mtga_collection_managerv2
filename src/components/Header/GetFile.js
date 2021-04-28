@@ -49,6 +49,10 @@ function GetFile() {
         else alert(NO_INVENTORY_FOUND);
     }
 
+    /**
+     * Uses regular expression to extract player inventory from player log
+     * @param {*} file Result from the file reader
+     */
     function extractPlayerInventory(file) {
 
         // Define Regex
@@ -56,16 +60,29 @@ function GetFile() {
 
         // Use regex on the file
         const match = inventoryRegex.exec(file);
-        console.log(match);
 
         // Check if regex returned valid data
         if ( match && match[1]) {
+            
+            // Make the JSON by composing strings
+            let playerInventoryString = "{";
 
-            for(let i = 1; i<=8; i++){
-                console.info(match[i]);
+            for (let i=1; i<=8; i++) {
+                playerInventoryString += match[i];
+                if (i !== 8) {
+                    playerInventoryString += ",";
+                }
             }
+            
+            playerInventoryString += "}";
+
+            // Parse the JSON (String)
+            const playerInventory = JSON.parse(playerInventoryString);
+
+            console.log(playerInventory)
         }
-        else alert('extractPlayerInventory found nothing');
+        // Alert user of invalid Player Log
+        else alert(NO_INVENTORY_FOUND);
     }
 
     const handleFile = (event) =>{
