@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getCollection, processSetCollection } from '../../actions';
+import { getCollection, getPlayerInventory, processSetCollection } from '../../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
@@ -78,8 +78,9 @@ function GetFile() {
 
             // Parse the JSON (String)
             const playerInventory = JSON.parse(playerInventoryString);
-
-            console.log(playerInventory)
+            
+            // Dispatch playerInventory to Redux
+            dispatch(getPlayerInventory(playerInventory));
         }
         // Alert user of invalid Player Log
         else alert(NO_INVENTORY_FOUND);
