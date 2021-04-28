@@ -17,6 +17,7 @@ function GetFile() {
         // Get and process initially empty card set
         dispatch( getCollection(null) );
         dispatch( processSetCollection(null) );
+
         // Make empty player inventory for initial load
         const emptyPlayerInventory = {wcCommon: 0, wcUncommon: 0, wcRare: 0, wcMythic: 0, gold: 0, gems: 0, vaultProgress: 0, boosters: []};
         dispatch( getPlayerInventory(emptyPlayerInventory));
@@ -30,7 +31,7 @@ function GetFile() {
     function extractCardInventory(file) {
 
         // Define the Regex (can't use backlookup because of safari)
-        const cardRegex = /\[UnityCrossThreadLogger\]<== PlayerInventory\.GetPlayerCards.+payload.+({.*})\}/g;
+        const cardRegex = /(?:GetPlayerCards.+payload)[\s\S]+({[\d":,]+})/g;
                 
         // Use regex to extract the inventory data from the log
         const match = cardRegex.exec(file);
@@ -58,8 +59,14 @@ function GetFile() {
      */
     function extractPlayerInventory(file) {
 
-        // Define Regex
-        const inventoryRegex = /PlayerInventory\.GetPlayerInventory.+payload.+("wcCommon":\d*).*("wcUncommon":\d*).*("wcRare":\d*).*("wcMythic":\d*).*("gold":\d*).*("gems":\d*).*("vaultProgress":[\d.]*).*("boosters":\[.*?\])/g;
+        /**
+         * Define Regex: only captures last instance of properties in the match
+         * - matches GetPlayerInventory followed by payload in non-capturing group
+         * - needs to start match at first instance to check if a latter instance exists
+         * - captures only the last instance of the payload, but match size grows with number of calls 
+         *   to GetPlayerInventory in file
+         */
+        const inventoryRegex = /(?:GetPlayerInventory.+payload)[\s\S]+("wcCommon":\d*).*("wcUncommon":\d*).*("wcRare":\d*).*("wcMythic":\d*).*("gold":\d*).*("gems":\d*).*("vaultProgress":[\d.]*).*("boosters":\[[\w{}:",]*\])/g;
 
         // Use regex on the file
         const match = inventoryRegex.exec(file);
