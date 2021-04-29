@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import findCards from '../../data/findCards';
 import useResizeWidth from '../../hooks/useResizeWidth';
-import { setModalContent, updateImageList, showModal } from '../../actions';
+import CardListImage from './CardListImage';
+import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
 /**
@@ -72,7 +73,12 @@ function CardList({ setId }) {
         return cards.map( (card) => {
 
             // Get image from card
-            const img = card.image_uris.border_crop;
+            const imgs = { front: card.image_uris.border_crop };
+
+            // Check if backside exists
+            if (card.backside) {
+                imgs.back = card.backside.image_uris.border_crop;
+            }
 
             // Get number of card owned, if any
             const numOwned = cardCollection && cardCollection[card.arenaId] ? 
@@ -97,34 +103,16 @@ function CardList({ setId }) {
             }
 
             // Track images to be displayed
-            currentPictures.push(img);
+            currentPictures.push(imgs);
 
             // Build card JSX
             return (
-                <div className="column" key={card.arenaId}>
-                    <div className="ui fluid card removeBoxShadow">
-                        <div className="content">
-                            <div className="right floated content" >{numOwned} / 4 </div>
-                        </div>                    
-                        <div
-                            className="image"
-                            // Display larger card image on click
-                            onClick={ () => {
-                                // Get the index of the image on click
-                                dispatch( setModalContent( currentPictures.indexOf(img) ) );
-                                // Then show the modal
-                                dispatch( showModal(true) );
-                            } }
-                        >
-                            <img src={img} alt={card.name}/>
-                        </div>
-                    </div>
-                </div>
+                <CardListImage card={card} numOwned={numOwned} imgs={imgs} imgIndex={currentPictures.indexOf(imgs)} key={card.arenaId}/>
             );
             
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardCollection, cards, dispatch, showCards]);
+    }, [cardCollection, cards, showCards]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
     useEffect( () => {

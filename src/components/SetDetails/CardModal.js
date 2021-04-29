@@ -104,7 +104,7 @@ function CardModal() {
 
             {/* Display current card image from imageList using index */}
             <div className="cardImage">
-                <img src={imageList[index]} alt="Card"/>
+                <img src={imageList[index].front} alt="Card"/>
             </div>
 
             {/* Display next button */}
