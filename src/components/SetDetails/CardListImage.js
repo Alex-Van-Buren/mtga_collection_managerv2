@@ -12,19 +12,18 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
     // Default image side to front (=true)
     const [imgSide, setImgSide] = useState(true);
 
+    // Declare the flip button for double-sided cards and the default image to display
     let flipButton = null;
-    let flipIconClass;
-
-    let frontClass = "front cardImg";
-
     let cardImages = (
-        <img src={imgs.front} alt={card.name} className={frontClass}/>
+        <img src={imgs.front} alt={card.name} className="front cardImg"/>
     );
 
     // Decide whether to show the flip button
     if (card.backside) {
 
+        let frontClass = "front cardImg";
         let backClass = "back cardImg";
+        let flipIconClass;
 
         // Choose flip icon to show and image class
         if (imgSide) { // front
@@ -49,6 +48,7 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
             </button>
         );
 
+        // One image will be hidden
         cardImages = <>
             <img src={imgs.front} alt={card.name} className={frontClass}/>
             <img src={imgs.back} alt={card.name} className={backClass} />
@@ -75,8 +75,8 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}
                 </div>
-                {flipButton}
             </div>
+            {flipButton}
         </div>
     );
 }
