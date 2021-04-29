@@ -21,8 +21,8 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
     // Decide whether to show the flip button
     if (card.backside) {
 
-        let frontClass = "";
-        let backClass = "";
+        let frontClass = "card__face";
+        let backClass = "backside card__face";
         let flipIconClass;
         let flipButtonClass = "circular ui icon button flipButton";
 
@@ -31,25 +31,20 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
             
             flipIconClass = "reply icon";
             flipButtonClass = "front " + flipButtonClass;
-            backClass = "invisible " + backClass;
-
         }
-        else { // back
-    
+        else { // back    
             flipIconClass = "share icon";
-            frontClass = "invisible " + frontClass;
-
         }
         
         flipButton = (
             <button
-                class={flipButtonClass}
+                className={flipButtonClass}
                 onClick={(event) => {
                     event.stopPropagation();
                     setImgSide(!imgSide);
                 }}
             >
-                <i class={flipIconClass}/>
+                <i className={flipIconClass}/>
             </button>
         );
 
@@ -67,7 +62,9 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
                     <div className="right floated content" >{numOwned} / 4 </div>
                 </div>                    
                 <div
-                    className="image"
+                
+                    // Ternary operator adds the flipped class if needed
+                    className={imgSide ? "image" : "flipped image"}
 
                     // Display larger card image on click
                     onClick={ () => {
