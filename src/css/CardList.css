@@ -22,7 +22,7 @@ p.ui.container {
     font-size: 1.2em;
 }
 
-.ui.fluid.card.removeBoxShadow:hover {
+.bouncy.column:hover {
     cursor: pointer;
     transform: translateY(-3px);
 }

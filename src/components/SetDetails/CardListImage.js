@@ -21,14 +21,16 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
     // Decide whether to show the flip button
     if (card.backside) {
 
-        let frontClass = "front cardImg";
-        let backClass = "back cardImg";
+        let frontClass = "";
+        let backClass = "";
         let flipIconClass;
+        let flipButtonClass = "circular ui icon button flipButton";
 
         // Choose flip icon to show and image class
         if (imgSide) { // front
             
             flipIconClass = "reply icon";
+            flipButtonClass = "front " + flipButtonClass;
             backClass = "invisible " + backClass;
 
         }
@@ -41,8 +43,11 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
         
         flipButton = (
             <button
-                class="circular ui icon button"
-                onClick={() => setImgSide(!imgSide)}
+                class={flipButtonClass}
+                onClick={(event) => {
+                    event.stopPropagation();
+                    setImgSide(!imgSide);
+                }}
             >
                 <i class={flipIconClass}/>
             </button>
@@ -56,7 +61,7 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
     }
 
     return (
-        <div className="column">
+        <div className="bouncy column">
             <div className="ui fluid card removeBoxShadow">
                 <div className="content">
                     <div className="right floated content" >{numOwned} / 4 </div>

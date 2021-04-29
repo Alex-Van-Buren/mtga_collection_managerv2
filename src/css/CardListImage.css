@@ -1,3 +1,18 @@
 .invisible {
     display: none !important;
 }
+
+.circular.ui.icon.button.flipButton {
+    position: absolute;
+    top: 47%;
+    left: 10%;
+    opacity: 70%;
+}
+
+.circular.ui.icon.button.flipButton:hover {
+    opacity: 100%;
+}
+
+.circular.ui.icon.button.flipButton.front {
+    left: 75%;
+}
