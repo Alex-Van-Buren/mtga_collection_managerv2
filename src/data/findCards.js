@@ -336,6 +336,12 @@ function getCardProperties(cardList, returnOptions) {
                     
                     // Put option in the newCard
                     newCard[option] = card.card_faces[0][option];
+
+                    // Put the backside option onto key property backside
+                    if (!newCard.backside) {
+                        newCard.backside = {};
+                    }
+                    newCard.backside[option] = card.card_faces[1][option];
                 }
 
                 // Else the option is not found so do nothing                
