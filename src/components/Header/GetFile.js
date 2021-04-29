@@ -30,14 +30,17 @@ function GetFile() {
      */
     function extractCardInventory(file) {
 
-        // Define the Regex (can't use backlookup because of safari)
-        const cardRegex = /(?:GetPlayerCards.+payload)[\s\S]+({[\d":,]+})/g;
+        // Define the Regex to get all owned arena cards
+        const cardRegex = /GetPlayerCards.+payload.+({[\d":,]+})/g;
                 
         // Use regex to extract the inventory data from the log
-        const match = cardRegex.exec(file);
+        const matches = [...file.matchAll(cardRegex)];
 
         // Check if regex returned valid data
-        if( match && match[1]){
+        if (matches.length > 0) {
+
+            // Get the last match in the file
+            const match = matches[matches.length-1];
 
             // Parse the data into a JSON that can be more easily manipulated
             const inventory = JSON.parse(match[1]);
@@ -59,20 +62,17 @@ function GetFile() {
      */
     function extractPlayerInventory(file) {
 
-        /**
-         * Define Regex: only captures last instance of properties in the match
-         * - matches GetPlayerInventory followed by payload in non-capturing group
-         * - needs to start match at first instance to check if a latter instance exists
-         * - captures only the last instance of the payload, but match size grows with number of calls 
-         *   to GetPlayerInventory in file
-         */
-        const inventoryRegex = /(?:GetPlayerInventory.+payload)[\s\S]+("wcCommon":\d*).*("wcUncommon":\d*).*("wcRare":\d*).*("wcMythic":\d*).*("gold":\d*).*("gems":\d*).*("vaultProgress":[\d.]*).*("boosters":\[[\w{}:",]*\])/g;
+        // Define Regex to get the player inventory
+        const inventoryRegex = /GetPlayerInventory.+payload.+("wcCommon":\d*).*("wcUncommon":\d*).*("wcRare":\d*).*("wcMythic":\d*).*("gold":\d*).*("gems":\d*).*("vaultProgress":[\d.]*).*("boosters":\[[\w{}:",]*\])/g;
 
-        // Use regex on the file
-        const match = inventoryRegex.exec(file);
-
+        // Use regex on the file - finds all matches
+        const matches = [...file.matchAll(inventoryRegex)];
+        
         // Check if regex returned valid data
-        if ( match && match[1]) {
+        if  (matches.length > 0 ) {
+
+            // Only use the last match in the file
+            const match = matches[matches.length-1];
             
             // Make the JSON by composing strings
             let playerInventoryString = "{";
@@ -83,7 +83,6 @@ function GetFile() {
                     playerInventoryString += ",";
                 }
             }
-            
             playerInventoryString += "}";
 
             // Parse the JSON (String)
