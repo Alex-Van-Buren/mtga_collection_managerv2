@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-function DropDown() {
+import '../css/DropDown.css'
+
+function DropDown(props) {
+    const [open, setOpen] = useState(false);
     return (
-        <div>Im a DropDown</div>
+        <div className="dd-title" onClick={() => setOpen(!open)}>{props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>
+            <ul className={open ? "dd-items" : "dd-items hidden"}>
+                <li className="dd-item">Eldraine</li>
+                <li className="dd-item">Strixhaven</li>
+                <li className="dd-item">Ikoria</li>
+            </ul>
+        </div>
     )
 }
 

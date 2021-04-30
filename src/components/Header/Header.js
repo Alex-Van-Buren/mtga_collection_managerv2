@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import DarkModeToggle from './DarkModeToggle';
+import DropDown from '../DropDown';
 import GetFile from './GetFile';
 import '../../css/Header.css';
 
@@ -29,7 +30,7 @@ function Header() {
                 <Link to='/' className="heading">Home</Link>
 
                 <div className="heading">
-                    Another thing {/* Here for testing only */}
+                    <DropDown title="Sets"/>
                 </div>
             </div>
 

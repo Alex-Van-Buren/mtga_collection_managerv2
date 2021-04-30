@@ -1,0 +1,16 @@
+li.dd-item {
+    list-style: none;
+}
+
+.dd-items {
+    position: absolute;
+    background-color: var(--clr-prm);
+    padding: 5px;
+    color: var(--clr-txt);
+    z-index: 15;
+}
+
+.dd-items.hidden {
+    display: none;
+    transform: translateY(-100%);
+}
