@@ -3,7 +3,7 @@
     top: 47%;
     left: 10%;
     opacity: 70%;
-    transition: left 1s, opacity 0s ;
+    transition: left 0.75s, opacity 0s ;
 }
 
 .circular.ui.icon.button.flipButton:hover {
@@ -32,7 +32,7 @@
 .image {
     transition: 1s;
     transform-style: preserve-3d;
-  }
+}
 
 .flipped {
     transform: rotateY(-180deg);
