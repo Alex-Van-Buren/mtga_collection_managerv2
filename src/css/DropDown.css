@@ -1,16 +1,37 @@
+.dd-title.active {
+    background-color: var(--clr-prm-focus);
+}
 li.dd-item {
     list-style: none;
+    border-bottom: 1px solid var(--border-clr);
+    padding: 3px;
+}
+
+li.dd-item:hover {
+    background-color: var(--clr-prm-focus);
+    cursor: pointer;
+}
+
+li.dd-item:last-child {
+    border-bottom: none;
 }
 
 .dd-items {
     position: absolute;
+    background-color: var(--background-clr);
     background-color: var(--clr-prm);
-    padding: 5px;
     color: var(--clr-txt);
+    width: 8em;
+    padding: 0;
     z-index: 15;
+    transition: opacity 0.3s, transform 0.3s, z-index 0.3s;
+    transform: translate(0, 85%);
+    opacity: 1;
+    box-shadow: 1px 1px 1px var(--border-clr);
 }
 
 .dd-items.hidden {
-    display: none;
-    transform: translateY(-100%);
+    opacity: 0;
+    z-index: -15;
+    transform: translate(0, 0);
 }

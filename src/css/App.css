@@ -1,6 +1,7 @@
 :root {
     --background-clr: #eeeeee;
     --border-clr: rgba(34, 36, 38, 0.15);
+    --clr-prm: #eeeeee;
     --clr-prm-focus: #DEDEDE;
     --clr-txt: rgba(0,0,0,0.87);
     --clr-txt-inverse: #FFF;
