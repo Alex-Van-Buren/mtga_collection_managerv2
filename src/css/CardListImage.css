@@ -10,7 +10,7 @@
 }
 
 .bouncy.column {
-    perspective: 600px;
+    perspective: 900px;
 }
 
 .cardImg {
@@ -21,7 +21,8 @@
 }
 
 .backside {
-    transform: rotateY(-180deg)
+    transform: rotateY(-180deg);
+    backface-visibility: hidden;
 }
 
 .image,.reply.icon {

@@ -42,7 +42,7 @@ function CardListImage({ name, backside, numOwned, index }) {
         // One image will be hidden
         cardImages = <>
             <img src={imgs.front} alt={name} className="cardImg"/>
-            <img src={imgs.back} alt={name} className="backside cardImg"/>
+            <img src={imgs.back} alt={name} className="backside"/>
         </>;
     }
 
