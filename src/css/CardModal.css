@@ -47,3 +47,8 @@
 .backButton, .forwardButton {
     flex-basis: 10%;
 }
+
+.modalContent > .cardImage > button.circular.ui.icon.button.flipButton {
+    top: 53%;
+    left: 65%;
+}

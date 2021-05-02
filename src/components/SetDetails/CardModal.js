@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,7 +10,9 @@ function CardModal() {
 
     const show      = useSelector(state => state.modal.showModal);
     const index     = useSelector(state => state.modal.content);
-    const imageList = useSelector(state => state.displayOptions.imageList);
+    const { img, imgLength } = useSelector(({ displayOptions: {imageList} }) => {
+        return { img: imageList[index], imgLength: imageList.length };
+    });
 
     // Add listener for escape key
     useEffect(() => {
@@ -28,9 +30,14 @@ function CardModal() {
         return () => window.removeEventListener('keydown', onEscape);
     }, [dispatch]);
 
-    // Reference DOM for previous and next buttons
+    // Reference DOM for previous and next buttons for blur
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+
+    // Track image side to be shown (front=true)
+    const [imgSide, setImgSide] = useState(true);
+
+    /* Hooks need to be called before checking show, so that they're not called conditionally */
 
     // Return nothing when modal not shown
     if (!show) {
@@ -72,17 +79,45 @@ function CardModal() {
         ref={nextRef}
             // Update image to display if possible
             onClick={ () => {
-                if (index < imageList.length-1) {
+                if (index < imgLength-1) {
                     dispatch(setModalContent(index + 1));
                 }
                 nextRef.current.blur();
             } }
             // Add "disabled" to class if not clickable (first image in list)
-            className={index < imageList.length-1 ? BUTTON_CLASS : `disabled ${BUTTON_CLASS}`}
+            className={index < imgLength-1 ? BUTTON_CLASS : `disabled ${BUTTON_CLASS}`}
         >
             <i className="chevron right icon"></i>
         </button>
     );
+
+    // Only double-sided cards will have two images, otherwise create one if the image is initialized
+    let cardImage = <img src={img.front} alt="modal card"/>;
+    let flipButton = null; // Regular cards don't have a flip button
+
+    // Flip button for double-sided cards
+    if (img.back) {
+        // Choose flip icon to show based on side showing
+        const flipIconClass = imgSide? "reply icon" : "flipped reply icon";
+
+        flipButton = (
+            <button
+                className="circular ui icon button flipButton"
+                onClick={(event) => { event.stopPropagation(); setImgSide(!imgSide); }}
+            >
+                <i className={flipIconClass}/>
+            </button>
+        );
+
+        // One image will be hidden
+        cardImage = (
+            // Add flipped class when back image shown
+            <div className={imgSide ? "image" : "flipped image"}>
+                <img src={img.front} alt="modal card front" className="cardImg"/>
+                <img src={img.back} alt="modal card back" className="backside"/>
+            </div>
+        );
+    }
 
     // Render Modal Content
     const renderedContent =
@@ -104,7 +139,8 @@ function CardModal() {
 
             {/* Display current card image from imageList using index */}
             <div className="cardImage">
-                <img src={imageList[index].front} alt="Card"/>
+                {cardImage}
+                {flipButton}
             </div>
 
             {/* Display next button */}
