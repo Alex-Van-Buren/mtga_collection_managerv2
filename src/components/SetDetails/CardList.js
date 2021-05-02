@@ -107,7 +107,7 @@ function CardList({ setId }) {
 
             // Build card JSX
             return (
-                <CardListImage card={card} numOwned={numOwned} imgs={imgs} imgIndex={currentPictures.indexOf(imgs)} key={card.arenaId}/>
+                <CardListImage name={card.name} backside={card.backside} numOwned={numOwned} index={currentPictures.indexOf(imgs)} key={card.arenaId}/>
             );
             
         });
@@ -120,14 +120,29 @@ function CardList({ setId }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
 
-    // Find optimal number of columns for card display based on screen width
+    // Get width
     const width = useResizeWidth();
+    
+    // Find optimal number of columns for card display based on screen width
+    // Locking aspect ratio at 250px by 350px, allowing for margin
+    const numCols = useMemo(() => {
 
-    // Calculate how many columns of cards to show
-    let numCols = 'five';
-    if      ( width < 640 )  numCols = 'two';
-    else if ( width < 990 )  numCols = 'three';
-    else if ( width < 1200 ) numCols = 'four';
+        // Turing parameters
+        const MIN_CARD_WIDTH = 250; // Min card width in px
+        const MARGIN_DECIMAL = 0.05; // Percent margin on left or right / 100
+        
+        // Number of cards shown = (width - 2*margin) / minumum card width rounded down
+        let numCards = Math.floor(width * (1 - 2*MARGIN_DECIMAL) / MIN_CARD_WIDTH);
+
+        // Ensure at least one card is shown
+        if (numCards < 1) numCards = 1;
+
+        // Map the number onto a class (zero is a placeholder for indexing)
+        const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine', 'ten'];
+        
+        return numberWords[numCards];
+
+    }, [width]);
     
     return (<>
         {/* Counter for number of cards being displayed */}
@@ -136,7 +151,7 @@ function CardList({ setId }) {
         </p>
 
         {/* JSX for matching cards */}
-        <div className={`ui ${numCols} column grid container`}> 
+        <div className={`ui ${numCols} column grid container`}>
             {renderCards}
         </div>
     </>);

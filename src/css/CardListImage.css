@@ -1,21 +1,16 @@
 .circular.ui.icon.button.flipButton {
     position: absolute;
     top: 47%;
-    left: 10%;
+    left: 75%;
     opacity: 70%;
-    transition: left 0.75s, opacity 0s ;
 }
 
 .circular.ui.icon.button.flipButton:hover {
     opacity: 100%;
 }
 
-.circular.ui.icon.button.flipButton.front {
-    left: 75%;
-}
-
 .bouncy.column {
-    perspective: 500px;
+    perspective: 600px;
 }
 
 .cardImg {
@@ -29,8 +24,8 @@
     transform: rotateY(-180deg)
 }
 
-.image {
-    transition: 1s;
+.image,.reply.icon {
+    transition: 1s !important;
     transform-style: preserve-3d;
 }
 

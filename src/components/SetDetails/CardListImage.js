@@ -1,44 +1,38 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setModalContent, showModal } from '../../actions';
 import '../../css/CardListImage.css';
 
-function CardListImage({ card, numOwned, imgs, imgIndex }) {
+function CardListImage({ name, backside, numOwned, index }) {
 
     // Get redux dispatcher
     const dispatch = useDispatch();
 
-    // Default image side to front (=true)
+    // Get image from redux
+    const imgs = useSelector(state => {
+
+        // Return the image only when initialized
+        return (state.displayOptions.imageList)?
+            state.displayOptions.imageList[index] : null;
+    });
+
+    // Track image side to be shown (front=true)
     const [imgSide, setImgSide] = useState(true);
 
-    // Declare the flip button for double-sided cards and the default image to display
-    let flipButton = null;
-    let cardImages = (
-        <img src={imgs.front} alt={card.name}/>
-    );
+    // Only double-sided cards will have two images, otherwise create one if the image is initialized
+    let cardImages = imgs? <img src={imgs.front} alt={name}/> : null;
+    let flipButton = null; // Regular cards don't have a flip button
 
     // Decide whether to show the flip button
-    if (card.backside) {
+    if (backside && imgs) {
 
-        let frontClass = "cardImg";
-        let backClass = "backside cardImg";
-        let flipIconClass;
-        let flipButtonClass = "circular ui icon button flipButton";
+        // Choose flip icon to show based on side showing
+        const flipIconClass = imgSide? "reply icon" : "flipped reply icon";
 
-        // Choose flip icon to show and image class
-        if (imgSide) { // front
-            
-            flipIconClass = "reply icon";
-            flipButtonClass = "front " + flipButtonClass;
-        }
-        else { // back    
-            flipIconClass = "share icon";
-        }
-        
         flipButton = (
             <button
-                className={flipButtonClass}
+                className="circular ui icon button flipButton"
                 onClick={(event) => { event.stopPropagation(); setImgSide(!imgSide); }}
             >
                 <i className={flipIconClass}/>
@@ -47,8 +41,8 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
 
         // One image will be hidden
         cardImages = <>
-            <img src={imgs.front} alt={card.name} className={frontClass}/>
-            <img src={imgs.back} alt={card.name} className={backClass} />
+            <img src={imgs.front} alt={name} className="cardImg"/>
+            <img src={imgs.back} alt={name} className="backside cardImg"/>
         </>;
     }
 
@@ -60,13 +54,15 @@ function CardListImage({ card, numOwned, imgs, imgIndex }) {
                 </div>                    
                 <div
                 
-                    // Ternary operator adds the flipped class if needed
+                    // Add flipped class when back image shown
                     className={imgSide ? "image" : "flipped image"}
 
-                    // Display larger card image on click
+                    // Display larger card image (modal) on click
                     onClick={ () => {
+
                         // Get the index of the image on click
-                        dispatch( setModalContent( imgIndex ) );
+                        dispatch( setModalContent(index) );
+
                         // Then show the modal
                         dispatch( showModal(true) );
                     } }
