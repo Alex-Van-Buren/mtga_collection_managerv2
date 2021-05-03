@@ -12,12 +12,12 @@ function DropDown(props) {
 
     return (
         <div className={titleClass} onClick={() => setOpen(!open)}>{props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>
-            <ul className={open ? "dd-items" : "dd-items hidden"}>
-                <li className="dd-item">Eldraine</li>
-                <li className="dd-item">Strixhaven</li>
-                <li className="dd-item">Ikoria</li>
+            <div className={open ? "dd-items" : "dd-items hidden"}>
+                <div className="dd-item ">Eldraine</div>
+                <div className="dd-item">Strixhaven</div>
+                <div className="dd-item">Ikoria</div>
                 
-            </ul>
+            </div>
         </div>
     )
 }

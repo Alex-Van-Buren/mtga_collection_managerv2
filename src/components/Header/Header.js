@@ -30,7 +30,9 @@ function Header() {
                 <Link to='/' className="heading">Home</Link>
 
                 
-                <DropDown title="Sets" extraClass="heading"/>
+                <DropDown title="Sets" extraClass="heading">
+                    
+                </DropDown>
                 
             </div>
 
