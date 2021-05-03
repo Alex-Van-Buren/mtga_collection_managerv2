@@ -128,8 +128,8 @@ function CardList({ setId }) {
     const numCols = useMemo(() => {
 
         // Turing parameters
-        const MIN_CARD_WIDTH = 250; // Min card width in px
-        const MARGIN_DECIMAL = 0.05; // Percent margin on left or right / 100
+        const MIN_CARD_WIDTH = 225; // Min card width in px
+        const MARGIN_DECIMAL = 0.10; // Percent margin on left or right / 100
         
         // Number of cards shown = (width - 2*margin) / minumum card width rounded down
         let numCards = Math.floor(width * (1 - 2*MARGIN_DECIMAL) / MIN_CARD_WIDTH);
