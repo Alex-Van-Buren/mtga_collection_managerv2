@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { setInfo , historicSets } from '../../data/setInfo';
 import DarkModeToggle from './DarkModeToggle';
 import HeaderDropDown from './HeaderDropDown';
 import GetFile from './GetFile';
@@ -9,7 +10,6 @@ import '../../css/Header.css';
 /**
  * Header Component displayed on every page in App.
  * - Displays Links to different Components
- * TODO: Hamburgerize at small screen size (that rhymes)
  */
 function Header() {
 
@@ -21,6 +21,13 @@ function Header() {
     // Hide menu at mobile sizes when hamburger isn't clicked
     const hideMenu = hamburgerClicked? "" : "hideMenu";
 
+    const setLinks = historicSets.map((setId) => {
+        const title = setInfo[setId].name;   
+        return (
+            <Link className="dd-item" key={setId} to={'/set/'+setId}>{title}</Link>
+        )
+    });
+    
     return (<div id="headerMarginBottom">
 
         <div id="header">
@@ -30,10 +37,8 @@ function Header() {
                 <Link to='/' className="heading">Home</Link>
 
                 
-                <HeaderDropDown title="Sets" extraClass="heading">
-                    <div className="dd-item ">Eldraine</div>
-                    <div className="dd-item">Strixhaven</div>
-                    <div className="dd-item">Ikoria</div>
+                <HeaderDropDown title="Sets" titleClass="heading" itemsClass="sets">
+                    {setLinks}
                 </HeaderDropDown>
                 
             </div>

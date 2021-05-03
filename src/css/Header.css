@@ -40,6 +40,11 @@
     display: none;
 }
 
+/* Set where dropdown menu for sets left position */
+.dd-items.sets{
+    left: 124px;
+}
+
 /*
  Display hamburger menu at mobile sizes 
  - show x when menu expanded and hide menu when hamburger shown 
