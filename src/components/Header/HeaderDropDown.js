@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-import useResizeWidth from '../hooks/useResizeWidth';
-import '../css/DropDown.css'
+import useResizeWidth from '../../hooks/useResizeWidth';
+import '../../css/DropDown.css'
 
-function DropDown(props) {
+function HeaderDropDown(props) {
     const [open, setOpen] = useState(false);
 
     let titleClass = "dd-title " + props.extraClass;
@@ -12,10 +12,7 @@ function DropDown(props) {
     }
     const items = (
     <div className={open ? "dd-items" : "dd-items hidden"}>
-        <div className="dd-item ">Eldraine</div>
-        <div className="dd-item">Strixhaven</div>
-        <div className="dd-item">Ikoria</div>
-
+        {props.children}
     </div>)
 
     let hamburgerItems, normalItems ;
@@ -39,4 +36,4 @@ function DropDown(props) {
     )
 }
 
-export default DropDown;
+export default HeaderDropDown;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import DarkModeToggle from './DarkModeToggle';
-import DropDown from '../DropDown';
+import HeaderDropDown from './HeaderDropDown';
 import GetFile from './GetFile';
 import '../../css/Header.css';
 
@@ -30,9 +30,11 @@ function Header() {
                 <Link to='/' className="heading">Home</Link>
 
                 
-                <DropDown title="Sets" extraClass="heading">
-                    
-                </DropDown>
+                <HeaderDropDown title="Sets" extraClass="heading">
+                    <div className="dd-item ">Eldraine</div>
+                    <div className="dd-item">Strixhaven</div>
+                    <div className="dd-item">Ikoria</div>
+                </HeaderDropDown>
                 
             </div>
 
