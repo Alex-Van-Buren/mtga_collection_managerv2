@@ -17,7 +17,10 @@ function HeaderDropDown(props) {
     const location = useLocation();
     useEffect(() => {
         setOpen(false);
-    },[location])
+    },[location]);
+
+    // Close Dropdown on all clicks outside of dropdown
+    document.body.addEventListener('click', () => {if(open) setOpen(false)})
    
     // Define all the items within the dropdown from props.children
     const items = (
@@ -40,7 +43,7 @@ function HeaderDropDown(props) {
 
     return (
         <>        
-            <div className={titleClass} onClick={() => setOpen(!open)}>{props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>
+            <div className={titleClass} onClick={(e) => {e.stopPropagation(); setOpen(!open)}}>{props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>
                 {normalItems}
             </div>
             {hamburgerItems}
