@@ -36,6 +36,11 @@
     transform: translate(0, 0);
 }
 @media only screen and (max-width:739px) {
+    .dd-title.active {
+        border-bottom: none !important;
+        box-shadow: none;
+    }
+
     .dd-items {
         display: flex;
         width: 100%;
@@ -45,6 +50,11 @@
         align-items: center;
         justify-content: center;
     }
+    .dd-item {
+        width: 100%;
+        text-align: center;
+    }
+
     .dd-items.hidden {
         display: none;
     }
