@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/DropDown.css'
@@ -11,10 +12,16 @@ function HeaderDropDown(props) {
     if (open) {
         titleClass +=" active";
     }
-    
+
+    // Closes the dropdown when location changes
+    const location = useLocation();
+    useEffect(() => {
+        setOpen(false);
+    },[location])
+   
     // Define all the items within the dropdown from props.children
     const items = (
-    <div className={open ? `dd-items ${props.itemsClass}` : `dd-items hidden ${props.itemsClass}`}>
+    <div className={open ? `dd-items ${props.itemsClass}` : `dd-items hidden ${props.itemsClass}`} >
         {props.children}
     </div>)
 
