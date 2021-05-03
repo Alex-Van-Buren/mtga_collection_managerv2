@@ -38,6 +38,7 @@
 
 .cardImage {
     flex-basis: 80%;
+    position: relative;
 }
 
 .cardImage>img {
@@ -49,6 +50,7 @@
 }
 
 .modalContent > .cardImage > button.circular.ui.icon.button.flipButton {
-    top: 53%;
-    left: 65%;
+    position: absolute;
+    top: 50.3%;
+    left: 85%;
 }
