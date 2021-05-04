@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import findCards from '../../data/findCards';
 import useResizeWidth from '../../hooks/useResizeWidth';
-import { setModalContent, updateImageList, showModal } from '../../actions';
+import CardListImage from './CardListImage';
+import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
 /**
@@ -72,7 +73,12 @@ function CardList({ setId }) {
         return cards.map( (card) => {
 
             // Get image from card
-            const img = card.image_uris.border_crop;
+            const imgs = { front: card.image_uris.border_crop };
+
+            // Check if backside exists
+            if (card.backside) {
+                imgs.back = card.backside.image_uris.border_crop;
+            }
 
             // Get number of card owned, if any
             const numOwned = cardCollection && cardCollection[card.arenaId] ? 
@@ -97,34 +103,16 @@ function CardList({ setId }) {
             }
 
             // Track images to be displayed
-            currentPictures.push(img);
+            currentPictures.push(imgs);
 
             // Build card JSX
             return (
-                <div className="column" key={card.arenaId}>
-                    <div className="ui fluid card removeBoxShadow">
-                        <div className="content">
-                            <div className="right floated content" >{numOwned} / 4 </div>
-                        </div>                    
-                        <div
-                            className="image"
-                            // Display larger card image on click
-                            onClick={ () => {
-                                // Get the index of the image on click
-                                dispatch( setModalContent( currentPictures.indexOf(img) ) );
-                                // Then show the modal
-                                dispatch( showModal(true) );
-                            } }
-                        >
-                            <img src={img} alt={card.name}/>
-                        </div>
-                    </div>
-                </div>
+                <CardListImage name={card.name} backside={card.backside} numOwned={numOwned} index={currentPictures.indexOf(imgs)} key={card.arenaId}/>
             );
             
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardCollection, cards, dispatch, showCards]);
+    }, [cardCollection, cards, showCards]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
     useEffect( () => {
@@ -132,14 +120,29 @@ function CardList({ setId }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
 
-    // Find optimal number of columns for card display based on screen width
+    // Get width
     const width = useResizeWidth();
+    
+    // Find optimal number of columns for card display based on screen width
+    // Locking aspect ratio at 250px by 350px, allowing for margin
+    const numCols = useMemo(() => {
 
-    // Calculate how many columns of cards to show
-    let numCols = 'five';
-    if      ( width < 640 )  numCols = 'two';
-    else if ( width < 990 )  numCols = 'three';
-    else if ( width < 1200 ) numCols = 'four';
+        // Turing parameters
+        const MIN_CARD_WIDTH = 225; // Min card width in px
+        const MARGIN_DECIMAL = 0.10; // Percent margin on left or right / 100
+        
+        // Number of cards shown = (width - 2*margin) / minumum card width rounded down
+        let numCards = Math.floor(width * (1 - 2*MARGIN_DECIMAL) / MIN_CARD_WIDTH);
+
+        // Ensure at least one card is shown
+        if (numCards < 1) numCards = 1;
+
+        // Map the number onto a class (zero is a placeholder for indexing)
+        const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine', 'ten'];
+        
+        return numberWords[numCards];
+
+    }, [width]);
     
     return (<>
         {/* Counter for number of cards being displayed */}
@@ -148,7 +151,7 @@ function CardList({ setId }) {
         </p>
 
         {/* JSX for matching cards */}
-        <div className={`ui ${numCols} column grid container`}> 
+        <div className={`ui ${numCols} column grid container`}>
             {renderCards}
         </div>
     </>);
