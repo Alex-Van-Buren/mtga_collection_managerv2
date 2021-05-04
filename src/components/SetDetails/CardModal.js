@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,9 @@ import '../../css/CardModal.css';
 function CardModal() {
     const dispatch = useDispatch();
 
-    const show      = useSelector(state => state.modal.showModal);
+    const show = useSelector(state => state.modal.showModal);
+
+    // Destructuring from redux gets dicey, so these look kind of silly
     const { index, imgSide } = useSelector(({ modal: {content} }) => {
         if (content)
             return { index: content.index, imgSide: content.imgSide };
@@ -17,6 +19,7 @@ function CardModal() {
         else
             return { index: 0, imgSide: true };
     });
+
     const { img, imgLength } = useSelector(({ displayOptions: {imageList} }) => {
         if (imageList)
             return { img: imageList[index], imgLength: imageList.length };
@@ -55,6 +58,7 @@ function CardModal() {
         return null;
     }
 
+    // Basic button classes for semantic ui. Additional class added when button disabled
     const BUTTON_CLASS = "massive basic ui icon button";
 
     // Close modal button
@@ -71,12 +75,14 @@ function CardModal() {
         <button
             ref={prevRef}
             // Update image to display if possible
-            onClick={ () => {
+            onClick={() => {
                 if (index > 0) {
                     dispatch(setModalContent({ index: index - 1, imgSide: true }));
                 }
+
+                // Clear focus after going to next image
                 prevRef.current.blur();
-            } }
+            }}
             // Add "disabled" to class if not clickable (first image in list)
             className={index > 0 ? BUTTON_CLASS : `disabled ${BUTTON_CLASS}`}
         >
@@ -89,12 +95,14 @@ function CardModal() {
         <button
         ref={nextRef}
             // Update image to display if possible
-            onClick={ () => {
+            onClick={() => {
                 if (index < imgLength-1) {
                     dispatch(setModalContent({ index: index + 1, imgSide: true }));
                 }
+
+                // Clear focus after going to next image
                 nextRef.current.blur();
-            } }
+            }}
             // Add "disabled" to class if not clickable (first image in list)
             className={index < imgLength-1 ? BUTTON_CLASS : `disabled ${BUTTON_CLASS}`}
         >
@@ -108,6 +116,7 @@ function CardModal() {
 
     // Flip button for double-sided cards
     if (img.back) {
+
         // Choose flip icon to show based on side showing
         const flipIconClass = imgSide? "reply icon" : "flipped reply icon";
 
@@ -115,31 +124,43 @@ function CardModal() {
             <button
                 className="circular ui icon button flipButton"
                 onClick={(event) => {
+
                     // Prevent any additional actions when clicking over image
                     event.stopPropagation();
 
                     // Keep same card, but flip to other side
                     dispatch(setModalContent({ index, imgSide: !imgSide }));
+
+                    // Set animations for flipping action on card and flip button
+                    flipRef.current.style.transition = "1s";
+                    imgRef.current.style.transition = "1s";
+
+                    // Clear animations after short delay
+                    setTimeout(() => {
+                        flipRef.current.style.transition = "0s";
+                        imgRef.current.style.transition = "0s";
+                    }, 100);
                 }}
             >
-                <i className={flipIconClass} id="flipButton"/>
+                <i className={flipIconClass} id="flipButton" ref={flipRef} />
             </button>
         );
 
         // One image will be hidden
         cardImage = (
+
             // Add flipped class when back image shown
-            <div id="modalImage" className={imgSide? "" : "flipped"}>
-                <img src={img.front} alt="modal card front" className="cardImg"/>
-                <img src={img.back} alt="modal card back" className="backside"/>
+            <div id="modalImage" className={imgSide? "" : "flipped"} ref={imgRef} >
+                <img src={img.front} alt="modal card front" className="cardImg" />
+                <img src={img.back}  alt="modal card back"  className="backside" />
             </div>
         );
     }
 
-    // Render Modal Content
+    // Compose all modal content
     const renderedContent =
     <>
-        {/* Display exit button */}
+        {/* Exit button */}
         <div
             className="modalClose"
             onClick={() => dispatch(showModal(false))}
@@ -149,35 +170,38 @@ function CardModal() {
 
         <div className="modalContent">
             
-            {/* Display previous button */}
+            {/* Previous button */}
             <div className="backButton">
                 {prev}
             </div>
 
-            {/* Display current card image from imageList using index */}
+            {/* Current card image and flip button */}
             <div className="cardImage">
                 {cardImage}
                 {flipButton}
             </div>
 
-            {/* Display next button */}
+            {/* Next button */}
             <div className="forwardButton">
                 {next}
             </div>
         </div>
     </>
 
-    // Render Modal
+    // Render Modal over content using a portal to the div with id="modal" in index.html
     return createPortal(
         <div
+            // Initially hide the modal
             onClick={() => dispatch(showModal(false))}
             className="ui dimmer modals visible active cardModal"
         >
             
             <div
+                // Don't allow clicks to propigate to lower elements
                 onClick={e => e.stopPropagation()}
                 className="modelContainer"
             >
+                {/* Get modal content from above methods */}
                 {renderedContent}
             </div>
 

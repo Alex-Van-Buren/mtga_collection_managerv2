@@ -25,7 +25,7 @@
     backface-visibility: hidden;
 }
 
-.image, .ui.button>.icon:not(.button) {
+.image, .ui.button>.reply.icon:not(.button) {
     transition: 1s;
     transform-style: preserve-3d;
 }
