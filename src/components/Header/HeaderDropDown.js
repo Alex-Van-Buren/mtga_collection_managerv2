@@ -1,8 +1,6 @@
 import React, {useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
-import useResizeWidth from '../../hooks/useResizeWidth';
-import '../../css/DropDown.css'
+import '../../css/HeaderDropDown.css'
 
 function HeaderDropDown(props) {
     // State for if dropdown is open or closed
@@ -13,14 +11,14 @@ function HeaderDropDown(props) {
         titleClass +=" active";
     }
 
-    // Closes the dropdown when location changes
-    const location = useLocation();
-    useEffect(() => {
-        setOpen(false);
-    },[location]);
-
     // Close Dropdown on all clicks outside of dropdown
-    document.body.addEventListener('click', () => {if(open) setOpen(false)})
+    useEffect(() => {
+        document.body.addEventListener('click', () => setOpen(false));
+
+        return () => {
+            document.body.removeEventListener('click', () => setOpen(false));
+        }
+    }, []);
    
     // Define all the items within the dropdown from props.children
     const items = (
@@ -28,25 +26,12 @@ function HeaderDropDown(props) {
         {props.children}
     </div>)
 
-    /*  The items need to be put inside or outside the title div for css ease
-        so one variable contains the items while the other is set to null based on the screen width.
-    */
-    let hamburgerItems, normalItems ;
-    const width = useResizeWidth();
-    if ( width <= 739 ) {
-        hamburgerItems = items;
-        normalItems = null;
-    } else {
-        hamburgerItems = null;
-        normalItems = items;
-    }
-
     return (
         <>        
-            <div className={titleClass} onClick={(e) => {e.stopPropagation(); setOpen(!open)}}>{props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>
-                {normalItems}
+            <div className={titleClass} onClick={(e) => {e.stopPropagation(); setOpen(!open)}} tabIndex='0'>
+                {props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>                
             </div>
-            {hamburgerItems}
+            {items}
         </>
     )
 }

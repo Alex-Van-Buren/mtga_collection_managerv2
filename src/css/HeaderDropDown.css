@@ -1,8 +1,9 @@
 .dd-title.active {
     background-color: var(--clr-prm-focus);
 }
-.dd-item {
+a.dd-item {
     display: block;
+    color: var(--clr-txt);
     border-bottom: 1px solid var(--border-clr);
     padding: 3px;
     padding-left: 10px;
