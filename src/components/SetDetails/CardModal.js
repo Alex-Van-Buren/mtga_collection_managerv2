@@ -9,9 +9,21 @@ function CardModal() {
     const dispatch = useDispatch();
 
     const show      = useSelector(state => state.modal.showModal);
-    const index     = useSelector(state => state.modal.content);
+    const { index, imgSide } = useSelector(({ modal: {content} }) => {
+        if (content)
+            return { index: content.index, imgSide: content.imgSide };
+
+        // Initial render default values
+        else
+            return { index: 0, imgSide: true };
+    });
     const { img, imgLength } = useSelector(({ displayOptions: {imageList} }) => {
-        return { img: imageList[index], imgLength: imageList.length };
+        if (imageList)
+            return { img: imageList[index], imgLength: imageList.length };
+
+        // Initial render default values
+        else
+            return { img: null, imgLength: 0 };
     });
 
     // Add listener for escape key
@@ -30,12 +42,11 @@ function CardModal() {
         return () => window.removeEventListener('keydown', onEscape);
     }, [dispatch]);
 
-    // Reference DOM for previous and next buttons for blur
+    // Reference DOM
     const prevRef = useRef(null);
     const nextRef = useRef(null);
-
-    // Track image side to be shown (front=true)
-    const [imgSide, setImgSide] = useState(true);
+    const imgRef  = useRef(null);
+    const flipRef = useRef(null);
 
     /* Hooks need to be called before checking show, so that they're not called conditionally */
 
@@ -62,7 +73,7 @@ function CardModal() {
             // Update image to display if possible
             onClick={ () => {
                 if (index > 0) {
-                    dispatch(setModalContent(index - 1));
+                    dispatch(setModalContent({ index: index - 1, imgSide: true }));
                 }
                 prevRef.current.blur();
             } }
@@ -80,7 +91,7 @@ function CardModal() {
             // Update image to display if possible
             onClick={ () => {
                 if (index < imgLength-1) {
-                    dispatch(setModalContent(index + 1));
+                    dispatch(setModalContent({ index: index + 1, imgSide: true }));
                 }
                 nextRef.current.blur();
             } }
@@ -103,16 +114,22 @@ function CardModal() {
         flipButton = (
             <button
                 className="circular ui icon button flipButton"
-                onClick={(event) => { event.stopPropagation(); setImgSide(!imgSide); }}
+                onClick={(event) => {
+                    // Prevent any additional actions when clicking over image
+                    event.stopPropagation();
+
+                    // Keep same card, but flip to other side
+                    dispatch(setModalContent({ index, imgSide: !imgSide }));
+                }}
             >
-                <i className={flipIconClass}/>
+                <i className={flipIconClass} id="flipButton"/>
             </button>
         );
 
         // One image will be hidden
         cardImage = (
             // Add flipped class when back image shown
-            <div className={imgSide ? "image" : "flipped image"}>
+            <div id="modalImage" className={imgSide? "" : "flipped"}>
                 <img src={img.front} alt="modal card front" className="cardImg"/>
                 <img src={img.back} alt="modal card back" className="backside"/>
             </div>

@@ -61,7 +61,7 @@ function CardListImage({ name, backside, numOwned, index }) {
                     onClick={ () => {
 
                         // Get the index of the image on click
-                        dispatch( setModalContent(index) );
+                        dispatch( setModalContent({ index, imgSide }) );
 
                         // Then show the modal
                         dispatch( showModal(true) );

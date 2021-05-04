@@ -54,3 +54,8 @@
     top: 50.3%;
     left: 85%;
 }
+
+#modalImage, #flipButton {
+    transition: 0s;
+    transform-style: preserve-3d;
+}

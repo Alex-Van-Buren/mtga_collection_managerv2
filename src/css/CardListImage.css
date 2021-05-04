@@ -10,7 +10,7 @@
 }
 
 .bouncy.column {
-    perspective: 900px;
+    perspective: 600px;
 }
 
 .cardImg {
@@ -25,8 +25,8 @@
     backface-visibility: hidden;
 }
 
-.image,.reply.icon {
-    transition: 1s !important;
+.image, .ui.button>.icon:not(.button) {
+    transition: 1s;
     transform-style: preserve-3d;
 }
 
