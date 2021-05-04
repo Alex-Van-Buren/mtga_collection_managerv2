@@ -29,7 +29,7 @@ function HeaderDropDown(props) {
     return (
         <>        
             <div className={titleClass} onClick={(e) => {e.stopPropagation(); setOpen(!open)}} tabIndex='0'>
-                {props.title} <i className={open ? "icon chevron up" : "icon chevron down"}></i>                
+                {props.title} &nbsp;  <i className={open ? "icon chevron up" : "icon chevron down"}></i>                
             </div>
             {items}
         </>

@@ -1,6 +1,7 @@
 .dd-title.active {
     background-color: var(--clr-prm-focus);
 }
+
 a.dd-item {
     display: block;
     color: var(--clr-txt);
@@ -12,6 +13,7 @@ a.dd-item {
 .dd-item:hover {
     background-color: var(--clr-prm-focus);
     cursor: pointer;
+    font-size: 1.2rem;
 }
 
 .dd-item:last-child {
@@ -29,7 +31,7 @@ a.dd-item {
     transition: opacity 0.3s, top 0.5s, z-index 0.3s;
     top: 48px;
     opacity: 1;
-    box-shadow: 1px 1px 1px var(--border-clr);
+    border: 1px solid var(--border-clr);
 }
 
 .dd-items.hidden {
