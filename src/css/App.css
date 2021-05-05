@@ -4,6 +4,7 @@
     --clr-prm: #eeeeee;
     --clr-prm-focus: #DEDEDE;
     --clr-txt: rgba(0,0,0,0.87);
+    --clr-txt-light: rgba(0,0,0,0.5);
     --clr-txt-inverse: #FFF;
 
     --common:   rgb(26, 23, 24);
@@ -19,6 +20,7 @@
     --clr-prm-focus: rgba(60,60,60,0.98);
     --clr-sec: #383838;
     --clr-txt: #DEDEDE;
+    --clr-txt-light: rgba(222, 222, 222, 0.5);
     --clr-txt-inverse: #000;
 
     --common:   rgb(229, 232, 231);
