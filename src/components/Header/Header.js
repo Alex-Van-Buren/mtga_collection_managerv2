@@ -33,7 +33,7 @@ function Header() {
         <div id="header">
 
             {/* Options on Left Side */}
-            <div className={hideMenu} id="leftOptions">
+            <div className={`${hideMenu} leftOptions`}>
                 <Link to='/' className="heading">Home</Link>
 
                 
@@ -44,7 +44,7 @@ function Header() {
             </div>
 
             {/* Options on Right Side */}
-            <div className={hideMenu} id="rightOptions">
+            <div className={`${hideMenu} rightOptions`}>
 
                 {/* File Selector */}
                 <GetFile />

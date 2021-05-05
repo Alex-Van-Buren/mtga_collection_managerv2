@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './Header/Header';
+import Footer from './Footer';
 import Home from './Home';
 import SetDetails from './SetDetails/SetDetails';
 import ScrollTop from './ScrollTop';
@@ -13,12 +14,17 @@ import '../css/App.css';
 function App() {
     return (
         <Router >
+
             <Header />
+
             <Switch>
                 <Route exact component={Home} path='/' />
                 <Route component={SetDetails} path='/set/:setId' />
             </Switch>
+
             <ScrollTop />
+
+            <Footer />
         </Router>
     );
 }
