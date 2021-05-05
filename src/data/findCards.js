@@ -85,98 +85,84 @@ function filterBasicLands(cardList) {
 function filterColor(cardList, searchColors){
     let newCardList= [];
 
-    cardList.forEach( (card) => {
+    // Check if everything is false, if so do nothing and return original cardlist
+    if (!(searchColors.white || searchColors.blue || searchColors.black || searchColors.red || searchColors.green || searchColors.colorless || searchColors.multi)) {
+        return cardList;
+    }
+    // if multi AND colorless are true, return zero cards
+    if ( searchColors.multi && searchColors.colorless ) {
+        return newCardList;
+    }
 
-        // Check for colorless
-        if (searchColors[0] === 'colorless') {
+    // Check each card
+    for (const card of cardList) {
+        
+        // Check if multi is false
+        if ( !searchColors.multi ) {
+            // Multi false
+            // Check if the card contains any of the WUBRG colors that are being searched for
+            if ((searchColors.white && card.color_identity.includes('W')) || (searchColors.blue && card.color_identity.includes('U')) ||
+                (searchColors.black && card.color_identity.includes('B')) || (searchColors.red  && card.color_identity.includes('R')) ||
+                (searchColors.green && card.color_identity.includes('G'))) {
 
-            /* Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color */
-            // Using front face for color
-            if (!card.colors && card.card_faces) {
-                // Colorless cards have nothing in their color array
-                if (card.card_faces[0].colors.length === 0) {
-                    newCardList.push(card);
-                }
-            }
-
-            // Colorless cards have nothing in their color array
-            else if (card.colors.length === 0) {
+                // Add to newCardList and go to next card
                 newCardList.push(card);
-            }
-        }
-
-        // Check for all multicolored cards
-        else if (searchColors[0] === 'multi') {
-
-            /* Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color */
-            // Using front face for color
-            if (!card.colors && card.card_faces) {
-
-                // Multi-colored cards have more that 1 color in their colors array
-                if (card.card_faces[0].colors.length > 1) {
-                    newCardList.push(card);
-                }
+                continue;
             }
 
-            // Multi-colored cards have more that 1 color in their colors array
-            else if (card.colors.length > 1) {
+            // Check if colorless is true and if the card is colorless
+            if ( searchColors.colorless && (card.color_identity.length === 0) ) {
+
+                // Add to newCardList and go to next card
                 newCardList.push(card);
+                continue;
             }
+    
         }
+        // Multi true
+        else {
+            // Check if card has more than one color in color identity
+            if ( card.color_identity.length < 2 ) {
 
-        // Normal color search
-
-        // Edge Case cards with multiple faces where the color is stored under card.card_faces[front, back].color
-        // using front face for color
-        else if (!card.colors && card.card_faces) {
-
-            // Check if the card has the same number of colors
-            if (card.card_faces[0].colors.length === searchColors.length
-                && card.card_faces[0].colors[0] === searchColors[0]) {
-
-                // Initialize boolean to add this card
-                let addCard = true;
-
-                // Loop through each input color that is being filtered
-                for (const searchColor of searchColors) {
-
-                    // If the card doesn't contain the color make addCard false
-                    if ( !card.card_faces[0].colors.includes(searchColor) ) {
-                        addCard = false;
-                        break; // break if it doesn't include all of the desired colors
-                    }
-                }
-
-                // Use the addCard boolean to determine if the card should be added to newCardList
-                if (addCard) {
-                    newCardList.push(card);
-                }
+                // Don't add card and move on to next card
+                continue;
             }
-        }
+            
+            // Check if multi is the only color option that is true
+            if (searchColors.multi && !(searchColors.white || searchColors.blue || searchColors.black || searchColors.red || searchColors.green || searchColors.colorless)){
 
-        // Check if the card has the same number of colors
-        else if ( card.colors.length === searchColors.length ) {
+                // Add card to cardlist and move on to next card
+                newCardList.push(card);
+                continue;
+            }
 
-            // Initialize boolean to add this card
+            // Card must include ALL of the other colors but may include addtional colors
             let addCard = true;
+            const colors = [{name:'white' , symbol: 'W' }, 
+                            {name:'blue'  , symbol: 'U' }, 
+                            {name:'black' , symbol: 'B' }, 
+                            {name:'red'   , symbol: 'R' }, 
+                            {name:'green' , symbol: 'G' }];
+            
+            for (const color of colors) {
+                
+                // Check if searching for particular color and if the card does NOT include that color
+                if ( searchColors[color.name] && !card.color_identity.includes(color.symbol)) {
 
-            // Loop through each input color that is being filtered
-            for (const searchColor of searchColors) {
-
-                // If the card doesn't contain the color make addCard false
-                if (!card.colors.includes(searchColor)) {
+                    // Make addCard false and break loop on first mismatch
                     addCard = false;
-                    break; // break if it doesn't include all of the desired colors
-                }
+                    break;
+                } 
             }
-
-            // Use the addCard boolean to determine if the card should be added to newCardList
-            if (addCard) {
+            // Add the card that match the criteria
+            if ( addCard ) {
                 newCardList.push(card);
+                continue;
             }
         }
-    });
+    };
 
+        
     return newCardList;
 }
 

@@ -35,16 +35,13 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
 
             const { color, newValue } = action.payload;
 
-            // If multicolored or colorless, set all other colors to false
-            if (color === "multi" || color === "colorless") {
-                Object.keys(newState.colors).forEach( c => {
-                    newState.colors[c] = false;
-                });
-            }
-            // Otherwise multicolored and colorless must be set to false
-            else {
-                newState.colors.multi = false;
+            // If multicolored is true set colorless to false
+            if ( color === "multi" && newValue ){
                 newState.colors.colorless = false;
+            }
+            // If colorless is true set multi to false
+            if ( color === "colorless" && newValue) {
+                newState.colors.multi = false;
             }
 
             // Set selected color to true
