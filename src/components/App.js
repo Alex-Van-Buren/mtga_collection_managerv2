@@ -14,17 +14,22 @@ import '../css/App.css';
 function App() {
     return (
         <Router >
+            <div id="contentContainer">
+                <div id="keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage">
+                    <Header />
 
-            <Header />
+                    <Switch>
+                        <Route exact component={Home} path='/' />
+                        <Route component={SetDetails} path='/set/:setId' />
+                    </Switch>
 
-            <Switch>
-                <Route exact component={Home} path='/' />
-                <Route component={SetDetails} path='/set/:setId' />
-            </Switch>
+                    <ScrollTop />
+                </div>
 
-            <ScrollTop />
-
-            <Footer />
+                <div id="thisIsTheDivThatKeepsTheFooterAtTheBottomOfThePage">
+                    <Footer />
+                </div>
+            </div>
         </Router>
     );
 }

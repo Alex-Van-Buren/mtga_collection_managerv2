@@ -33,3 +33,19 @@ body {
     /* Always show scroll bar */
     overflow-y: scroll;
 }
+
+#contentContainer {
+    position: relative;
+    min-height: 100vh;
+}
+
+#keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage {
+    padding-bottom: 2.5rem;
+}
+
+#thisIsTheDivThatKeepsTheFooterAtTheBottomOfThePage {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+}
