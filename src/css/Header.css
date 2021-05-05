@@ -50,11 +50,11 @@
  - show x when menu expanded and hide menu when hamburger shown 
 */
 @media only screen and (max-width: 739px) {
-    .hideMenu {
+    .hideMenu>*:not(#home) {
         display: none !important;
     }
     
-    #header, #rightOptions, #leftOptions {
+    #header, .leftOptions {
         flex-direction: column;
     }
 
@@ -89,5 +89,6 @@
         border-bottom: 1px solid var(--border-clr) !important;
         border-right: none !important;
         display: flex;
+        width: 100%;
     }
 }

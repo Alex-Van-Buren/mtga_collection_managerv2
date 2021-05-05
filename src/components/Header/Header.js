@@ -34,7 +34,7 @@ function Header() {
 
             {/* Options on Left Side */}
             <div className={`${hideMenu} leftOptions`}>
-                <Link to='/' className="heading">Home</Link>
+                <Link to='/' className="heading" id="home">Home</Link>
 
                 
                 <HeaderDropDown title="Sets" titleClass="heading" itemsClass="sets">
