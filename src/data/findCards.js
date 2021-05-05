@@ -89,7 +89,14 @@ function filterColor(cardList, searchColors){
     if (!(searchColors.white || searchColors.blue || searchColors.black || searchColors.red || searchColors.green || searchColors.colorless || searchColors.multi)) {
         return cardList;
     }
+    // if multi AND colorless are true, return zero cards
+    if ( searchColors.multi && searchColors.colorless ) {
+        return newCardList;
+    }
+
+    // Check each card
     for (const card of cardList) {
+        
         // Check if multi is false
         if ( !searchColors.multi ) {
             // Multi false
