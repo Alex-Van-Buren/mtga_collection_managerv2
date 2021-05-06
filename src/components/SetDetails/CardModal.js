@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -29,9 +29,48 @@ function CardModal() {
             return { img: null, imgLength: 0 };
     });
    
+    /**
+     * Move left an image in the modal when possible
+     */
+    const goLeft = useCallback(() => {
+        if (index > 0) {
+            dispatch(setModalContent({ index: index - 1, imgSide: true }));
+        }
+    }, [dispatch, index]);
+
+    /**
+     * Move right an image in the modal when possible
+     */
+    const goRight = useCallback(() => {
+        if (index < imgLength-1) {
+            dispatch(setModalContent({ index: index + 1, imgSide: true }));
+        }
+    }, [dispatch, index, imgLength]);
+
+    /**
+     * Flip card in modal. (Only call when possible)
+     */
+    const flipCard = useCallback(() => {
+
+        // Keep same card, but flip to other side
+        dispatch(setModalContent({ index, imgSide: !imgSide }));
+
+        // Set animations for flipping action on card and flip button
+        flipRef.current.style.transition = "1s";
+        imgRef.current.style.transition = "1s";
+
+        // Clear animations after short delay
+        setTimeout(() => {
+            flipRef.current.style.transition = "0s";
+            imgRef.current.style.transition = "0s";
+        }, 100);
+
+    }, [dispatch, imgSide, index]);
+
     // Add listener for keypresses in modal
     useEffect(() => {
-        // only add the listener when the modal is open
+
+        // Only add the listener if the modal is open
         if (show) {
 
             // Function checks which key has been pressed and does appropriate action
@@ -41,19 +80,30 @@ function CardModal() {
                 if (event.keyCode === 27) {
                     dispatch(showModal(false));
                 }
+
                 // Left Arrow pressed --> go left (-1 to index unless at start)
                 else if (event.keyCode === 37) {
-                    if (index > 0) {
-                        dispatch(setModalContent({ index: index - 1, imgSide: true }));
-                    }
+                    goLeft();
                 }
+
                 // Right Arrow pressed --> go right (+1 to index unless at end)
                 else if (event.keyCode === 39) {
-                    if (index < imgLength-1) {
-                        dispatch(setModalContent({ index: index + 1, imgSide: true }));
+                    goRight();
+                }
+
+                // Flip card if possible
+                else if (event.keyCode === 32) {
+
+                    // Don't scroll background
+                    event.preventDefault();
+
+                    // Flip card if flippable
+                    if (img.back) {
+                        flipCard();
                     }
                 }
             }   
+            
             // Add listener for function
             window.addEventListener('keydown', modalKeydowns);
     
@@ -62,7 +112,9 @@ function CardModal() {
                 window.removeEventListener('keydown', modalKeydowns);
             }
         }
-    }, [dispatch, show, index, imgLength]);
+    },
+    
+    [dispatch, show, index, imgLength, goLeft, goRight, flipCard, img]);
 
     // Reference DOM
     const prevRef = useRef(null);
@@ -95,9 +147,9 @@ function CardModal() {
             ref={prevRef}
             // Update image to display if possible
             onClick={() => {
-                if (index > 0) {
-                    dispatch(setModalContent({ index: index - 1, imgSide: true }));
-                }
+                
+                // Move left
+                goLeft();
 
                 // Clear focus after going to next image
                 prevRef.current.blur();
@@ -115,9 +167,9 @@ function CardModal() {
         ref={nextRef}
             // Update image to display if possible
             onClick={() => {
-                if (index < imgLength-1) {
-                    dispatch(setModalContent({ index: index + 1, imgSide: true }));
-                }
+
+                // Move right
+                goRight();
 
                 // Clear focus after going to next image
                 nextRef.current.blur();
@@ -148,17 +200,7 @@ function CardModal() {
                     event.stopPropagation();
 
                     // Keep same card, but flip to other side
-                    dispatch(setModalContent({ index, imgSide: !imgSide }));
-
-                    // Set animations for flipping action on card and flip button
-                    flipRef.current.style.transition = "1s";
-                    imgRef.current.style.transition = "1s";
-
-                    // Clear animations after short delay
-                    setTimeout(() => {
-                        flipRef.current.style.transition = "0s";
-                        imgRef.current.style.transition = "0s";
-                    }, 100);
+                    flipCard();
                 }}
             >
                 <i className={flipIconClass} id="flipButton" ref={flipRef} />
