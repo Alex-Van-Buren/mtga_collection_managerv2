@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { showModal, setModalContent } from '../../actions';
+import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/CardModal.css';
 
 function CardModal() {
@@ -124,8 +125,10 @@ function CardModal() {
 
     /* Hooks need to be called before checking show, so that they're not called conditionally */
 
-    // Return nothing when modal not shown
-    if (!show) {
+    const width = useResizeWidth();
+    
+    // Return nothing when modal not shown or if screensize too small
+    if (!show || width < 563) {
         return null;
     }
 

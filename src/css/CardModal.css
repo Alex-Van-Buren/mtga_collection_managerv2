@@ -42,7 +42,7 @@
     position: relative;
 }
 
-.cardImage>img {
+.cardImage img {
     width: 100%;
 }
 
