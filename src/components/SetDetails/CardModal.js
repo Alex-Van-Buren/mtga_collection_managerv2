@@ -28,22 +28,41 @@ function CardModal() {
         else
             return { img: null, imgLength: 0 };
     });
-
-    // Add listener for escape key
+   
+    // Add listener for keypresses in modal
     useEffect(() => {
+        // only add the listener when the modal is open
+        if (show) {
 
-        // Function checks whether escape has been pressed
-        const onEscape = (event) => {
-            if (event.keyCode === 27)
-            dispatch(showModal(false));
+            // Function checks which key has been pressed and does appropriate action
+            const modalKeydowns = (event) => {
+
+                // Escape key pressed --> close modal
+                if (event.keyCode === 27) {
+                    dispatch(showModal(false));
+                }
+                // Left Arrow pressed --> go left (-1 to index unless at start)
+                else if (event.keyCode === 37) {
+                    if (index > 0) {
+                        dispatch(setModalContent({ index: index - 1, imgSide: true }));
+                    }
+                }
+                // Right Arrow pressed --> go right (+1 to index unless at end)
+                else if (event.keyCode === 39) {
+                    if (index < imgLength-1) {
+                        dispatch(setModalContent({ index: index + 1, imgSide: true }));
+                    }
+                }
+            }   
+            // Add listener for function
+            window.addEventListener('keydown', modalKeydowns);
+    
+            // Cleanup function
+            return () => {
+                window.removeEventListener('keydown', modalKeydowns);
+            }
         }
-
-        // Add listener for function
-        window.addEventListener('keydown', onEscape);
-
-        // Cleanup function
-        return () => window.removeEventListener('keydown', onEscape);
-    }, [dispatch]);
+    }, [dispatch, show, index, imgLength]);
 
     // Reference DOM
     const prevRef = useRef(null);
