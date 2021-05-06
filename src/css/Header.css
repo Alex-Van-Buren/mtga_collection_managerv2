@@ -54,7 +54,7 @@
         display: none !important;
     }
     
-    #header, .leftOptions {
+    #header, .leftOptions, .rightOptions {
         flex-direction: column;
     }
 
