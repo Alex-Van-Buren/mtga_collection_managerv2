@@ -67,8 +67,8 @@ function CardList({ setId }) {
             // Execute logic from showCards variable to determine whether card should be made
             if (( showCards === 'all' )                  ||
                 ( showCards === '=0' && numOwned === 0 ) ||
-                ( showCards === '>0' && numOwned > 0 )   ||
-                ( showCards === '<4' && numOwned < 4 )   ||
+                ( showCards === '>0' && numOwned  >  0 ) ||
+                ( showCards === '<4' && numOwned  <  4 ) ||
                 ( showCards === '=4' && numOwned === 4))
             {
                 makeCard = true;
