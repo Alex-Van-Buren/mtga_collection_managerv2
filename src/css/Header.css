@@ -30,6 +30,7 @@
 
 .heading:hover {
     background-color: var(--clr-prm-focus);
+    cursor: pointer;
 }
 
 .heading:last-of-type {
