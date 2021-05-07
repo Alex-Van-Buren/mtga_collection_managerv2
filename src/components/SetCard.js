@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 
-import '../css/SetCard.css'
+import '../css/SetCard.css';
 import RarityCollectionItem from './RarityCollectionItem';
 import { setInfo } from '../data/setInfo'
 
@@ -44,7 +44,7 @@ function SetCard({ setId }) {
             </div>
 
             {/* Owned cards by rarity */}
-            <div className="ui middle aligned divided list">
+            <div className="ui middle aligned list">
                 <RarityCollectionItem setId={setId} rarity="mythic" />                    
                 <RarityCollectionItem setId={setId} rarity="rare" />
                 <RarityCollectionItem setId={setId} rarity="uncommon" />

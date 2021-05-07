@@ -49,16 +49,6 @@ label {
     text-transform: capitalize;
     width: 6em;
 
-    /* Regular colors */
-    --mythic:   rgb(191, 68, 39);
-    --rare:     rgb(165, 142, 74);
-    --uncommon: rgb(112, 120, 131);
-    
-    
-    /* Opaque colors */
-    --mythic-o:   rgba(191, 68, 39, 0.8);
-    --rare-o:     rgba(165, 142, 74, 0.8);
-    --uncommon-o: rgba(112, 120, 131, 0.8);
 }
 
     /* - Mythic */

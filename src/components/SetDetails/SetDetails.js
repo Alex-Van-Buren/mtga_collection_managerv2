@@ -86,7 +86,7 @@ function SetDetails() {
                     <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
                 </div>
 
-                <div className="ui middle aligned divided list">
+                <div className="ui middle aligned list">
                     <RarityCollectionItem setId={setId} rarity="mythic" />                    
                     <RarityCollectionItem setId={setId} rarity="rare" />
                     <RarityCollectionItem setId={setId} rarity="uncommon" />
