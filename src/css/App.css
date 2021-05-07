@@ -30,8 +30,6 @@
 body {
     background-color: var(--background-clr);
     font-weight: bold;
-    /* Always show scroll bar */
-    overflow-y: scroll;
 }
 
 #contentContainer {
@@ -49,3 +47,31 @@ body {
     width: 100%;
     height: 2.5rem;
 }
+
+/* Scrollbar styling */
+html {
+    --scroll-area: rgb(207, 216, 220);
+    --scroll-bar: rgba(34, 36, 38, 0.45);
+  }
+
+  body::-webkit-scrollbar {
+    width: 17px;
+  }
+
+  body {
+    /* Always show scroll bar */
+    overflow-y: scroll;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--scroll-bar) var(--scroll-area);
+  }
+
+  body::-webkit-scrollbar-track {
+    background: var(--scroll-area);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar) ;
+    border-radius: 8px;
+    border: 2px solid var(--scroll-area);
+  }
