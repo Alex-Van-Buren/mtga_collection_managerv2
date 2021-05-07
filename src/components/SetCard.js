@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 
-import '../css/SetCard.css'
+import '../css/SetCard.css';
+import ProgressBar from './ProgressBar';
 import RarityCollectionItem from './RarityCollectionItem';
 import { setInfo } from '../data/setInfo'
 
@@ -41,10 +42,11 @@ function SetCard({ setId }) {
                 Set Progress:
                 &nbsp; &nbsp; &nbsp;
                 <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
+                <ProgressBar percent={percentOwned} />
             </div>
 
             {/* Owned cards by rarity */}
-            <div className="ui middle aligned divided list">
+            <div className="ui middle aligned list">
                 <RarityCollectionItem setId={setId} rarity="mythic" />                    
                 <RarityCollectionItem setId={setId} rarity="rare" />
                 <RarityCollectionItem setId={setId} rarity="uncommon" />

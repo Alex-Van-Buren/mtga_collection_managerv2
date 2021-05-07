@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import CardList from './CardList';
+import ProgressBar from '../ProgressBar';
 import RarityCollectionItem from '../RarityCollectionItem';
 import SetDetailsMenu from './SetDetailsMenu';
 import DisplayOptions from './DisplayOptions';
@@ -84,9 +85,10 @@ function SetDetails() {
                     Set Progress:
                     &nbsp; &nbsp; &nbsp; {/* Spacers */}
                     <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
+                    <ProgressBar percent={percentOwned} />
                 </div>
 
-                <div className="ui middle aligned divided list">
+                <div className="ui middle aligned list">
                     <RarityCollectionItem setId={setId} rarity="mythic" />                    
                     <RarityCollectionItem setId={setId} rarity="rare" />
                     <RarityCollectionItem setId={setId} rarity="uncommon" />

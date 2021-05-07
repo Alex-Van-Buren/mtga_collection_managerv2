@@ -1,5 +1,5 @@
 #collectionItem{
-    padding: 1.5em;
+    padding: 1em 1.5em;
     color: var(--clr-txt); 
     text-transform: capitalize;
 }
@@ -41,4 +41,11 @@
 
 .ui.middle.aligned.divided.list .item#collectionItem:first-of-type {
     border-top: none;
+}
+
+@media only screen and (max-width: 739px) {
+    #collectionItem {
+        max-width: 80%;
+        margin: auto;
+    }
 }

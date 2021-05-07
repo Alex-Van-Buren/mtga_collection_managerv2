@@ -45,7 +45,7 @@ function RarityCollectionItem({ setId, rarity }) {
                     <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
                 </div>
             </div>
-            <ProgressBar percent={percentOwned}/>
+            <ProgressBar percent={percentOwned} innerClass={rarity}/>
         </div>
     );
 }
