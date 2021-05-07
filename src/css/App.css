@@ -7,7 +7,16 @@
     --clr-txt-light: rgba(0,0,0,0.5);
     --clr-txt-inverse: #FFF;
 
+    /* Regular colors */
+    --mythic:   rgb(191, 68, 39);
+    --rare:     rgb(165, 142, 74);
+    --uncommon: rgb(112, 120, 131);
     --common:   rgb(26, 23, 24);
+        
+    /* Opaque colors */
+    --mythic-o:   rgba(191, 68, 39, 0.8);
+    --rare-o:     rgba(165, 142, 74, 0.8);
+    --uncommon-o: rgba(112, 120, 131, 0.8);
     --common-o: rgba(26, 23, 24, 0.9);
     
     scroll-behavior: smooth;
