@@ -69,7 +69,7 @@ function GetFile() {
         const matches = [...file.matchAll(inventoryRegex)];
         
         // Check if regex returned valid data
-        if  (matches.length > 0 ) {
+        if  (matches.length > 0) {
 
             // Only use the last match in the file
             const match = matches[matches.length-1];
@@ -107,12 +107,11 @@ function GetFile() {
             reader.readAsText(file);
             
             // After the file loads and is read by the reader
-            reader.onloadend = () =>{
+            reader.onloadend = () => {
 
                 // Use functions to extract the information from player log
                 extractCardInventory(reader.result);
                 extractPlayerInventory(reader.result);
-                
             }
         }
         
@@ -124,14 +123,21 @@ function GetFile() {
     const ref = useRef();
 
     return (
-        <div className="heading">
-            <label className="ui positive button" ref={ref}>
-                <span role="button" aria-controls="filename" tabIndex="0" onKeyDown={(e) => makeKeyboardClickable(e, ref)}>
-                    <i className="upload icon"></i>
+        <div
+            className="heading" tabIndex="0" aria-roledescription="Upload Player Log File Button"
+            // Send events to the input whenever the outer div is selected
+            onClick={() => { if (ref.current) ref.current.click() }}
+            onKeyDown={(e) => makeKeyboardClickable(e, ref)}
+        >
+            {/* Stop label from being clickable. Click/keyDown events sent to input via outer div. */}
+            <label className="ui positive button" ref={ref} onClick={e => e.stopPropagation()}>
+
+                <span role="button" aria-controls="filename">
+                    <i className="upload icon"/>
                     Upload Log File
                 </span>
+
                 <input type="file" id="filename" onChange={handleFile} accept=".log, .txt" tabIndex="-1" />
-                
             </label>                
         </div>
     ); 
