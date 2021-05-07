@@ -50,9 +50,8 @@ function Header() {
                 <GetFile />
 
                 {/* Help Menu */}
-                <div className="heading">
-                    Help
-                </div>
+                <Link to='/help' className="heading" id="help">Help</Link>
+
 
                 {/* Dark Mode Toggle */}
                 <DarkModeToggle className="heading" />
