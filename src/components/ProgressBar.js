@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
-function ProgressBar() {
+import '../css/ProgressBar.css'
+
+function ProgressBar({percent}) {
+    // Make a reference to the inner portion of the progress bar
+    const innerRef = useRef();
+
+    useEffect(()=> {
+        innerRef.current.style.width = `${percent}%`;
+
+    },[percent])
+
     return (
-        <div>Progress Bar</div>
+        <div className="progress-outer">
+            <div className="progress-inner" ref ={innerRef}></div>
+        </div>
     )
 }
 
