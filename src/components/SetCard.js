@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 
 import '../css/SetCard.css';
-import ProgressBar from './ProgressBar';
 import RarityCollectionItem from './RarityCollectionItem';
 import { setInfo } from '../data/setInfo'
 
@@ -42,7 +41,6 @@ function SetCard({ setId }) {
                 Set Progress:
                 &nbsp; &nbsp; &nbsp;
                 <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
-                <ProgressBar percent={percentOwned} />
             </div>
 
             {/* Owned cards by rarity */}
