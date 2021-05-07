@@ -54,7 +54,7 @@ function Header() {
 
 
                 {/* Dark Mode Toggle */}
-                <DarkModeToggle className="heading" />
+                <DarkModeToggle />
             </div>
 
         </div>
