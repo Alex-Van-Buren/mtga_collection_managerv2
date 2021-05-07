@@ -1,7 +1,9 @@
 /**
      * Helper function that allows screenreaders to click the input file type with keyboard
-     * @param {*} e Keydown event
-     * @param {*} ref Reference to click
+     * - Not technically a hook, but generally used like one. Avoids hooks being unable to 
+     *   be called conditionally.
+     * @param {Event} e Keydown event
+     * @param {ref} ref Reference to click
      */
  export default function makeKeyboardClickable(e, ref) {
 
