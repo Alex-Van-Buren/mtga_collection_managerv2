@@ -8,3 +8,23 @@
     height: 3.2rem;
     width: 100%;
 }
+
+.clearSearchBar {
+    position: absolute;
+    top: 35%;
+    right: 2%;
+    border-radius: 50%;
+    border: none;
+    width: 2em;
+    height: 2em;
+
+}
+
+.clearSearchBar:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+div.search {
+    position: relative;
+}

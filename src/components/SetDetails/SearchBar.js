@@ -36,17 +36,20 @@ function SearchBar() {
     }, [term, dispatch])
 
     return (
-        <input
-            // Data
-            type="search" placeholder="Search card text:" className="searchBar"
+        <div className="search">
+            <input
+                // Data
+                type="search" placeholder="Search Card Text:" className="searchBar"
 
-            // Accessibility
-            autoomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Names"
-            aria-controls="results" autoCapitalize="none" spellCheck="false" aria-haspopup="false"
-            
-            // Controlled input
-            value={term} onChange={ (e) => setTerm(e.target.value) }
-        />
+                // Accessibility
+                autoomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Text"
+                aria-controls="results" autoCapitalize="none" spellCheck="false" aria-haspopup="false"
+                
+                // Controlled input
+                value={term} onChange={ (e) => setTerm(e.target.value) }
+            />
+            <button className="clearSearchBar" onClick={() => setTerm("")}>x</button>
+        </div>
     );
 }
 
