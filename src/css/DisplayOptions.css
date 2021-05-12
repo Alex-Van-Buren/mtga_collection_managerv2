@@ -142,14 +142,14 @@ label {
 
 /* Color checkboxes */
 .colorIcon {
-    width: 2em;
+    width: 2.5em;
     transition-duration: 150ms;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 50%;
 }
 
 .big.colorIcon {
-    width: 3.5em;
+    width: 4em;
     transition-duration: 150ms;
 }
 
@@ -160,8 +160,8 @@ label {
 }
 
 .colorCheckbox {
-    width: 4em;
-    height: 3.5em;
+    width: 4.2em;
+    height: 4em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,7 +172,7 @@ label {
 }
 
 .colorIcon:hover, .colorIcon:focus {
-    width: 3.5em;
+    width: 4em;
     transition-duration: 150ms;
     outline: none;
 }
@@ -189,10 +189,10 @@ label {
     }
 
     .colorIcon:not(:focus) {
-        width: 2em;
+        width: 2.5em;
     }
 
     .big.colorIcon {
-        width: 3.5em;
+        width: 4em;
     }
 }
