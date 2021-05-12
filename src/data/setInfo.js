@@ -1,3 +1,7 @@
+import stx_logo from '../images/setLogos/stx_logo.png';
+import khm_logo from '../images/setLogos/khm_logo.png';
+import znr_logo from '../images/setLogos/znr_logo.png';
+
 /**
  * The set codes of the current standard sets
  */
@@ -14,12 +18,14 @@ export const setInfo = {
     stx: {
         name: "Strixhaven: School of Mages",
         mythic_upgrade: (1/8),
-        collationId: 100023
+        collationId: 100023,
+        logo: stx_logo
     },
     khm: {
         name: "Kaldheim",
         mythic_upgrade: (1/7.4),
-        collationId: 100022
+        collationId: 100022,
+        logo: khm_logo
     },
     klr: {
         name: "Kaladesh Remastered",
@@ -29,7 +35,8 @@ export const setInfo = {
     znr: {
         name: "Zendikar Rising",
         mythic_upgrade: (1/7.4),
-        collationId: 100020
+        collationId: 100020,
+        logo: znr_logo
     },
     akr: {
         name: "Amonkhet Remastered",
