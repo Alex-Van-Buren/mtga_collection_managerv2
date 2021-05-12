@@ -13,6 +13,7 @@
 .progress-inner {
     height: 100%;
     background-color: #21BA45;
+    border-radius: 10px;
 }
 
 .progress-inner.mythic {
