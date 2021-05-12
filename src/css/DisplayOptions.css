@@ -144,6 +144,8 @@ label {
 .colorIcon {
     width: 2em;
     transition-duration: 150ms;
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
 .big.colorIcon {
