@@ -144,6 +144,8 @@ label {
 .colorIcon {
     width: 2em;
     transition-duration: 150ms;
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
 .big.colorIcon {
@@ -180,7 +182,11 @@ label {
 }
 
 /* Proper icon resizing on touch screens */
-@media (hover: none) {
+@media (hover: none), (pointer: coarse) {
+
+    .colorIcon {
+        transition-duration: 0;
+    }
 
     .colorIcon:not(:focus) {
         width: 2em;
@@ -188,6 +194,5 @@ label {
 
     .big.colorIcon {
         width: 3.5em;
-        transition-duration: 150ms;
     }
 }

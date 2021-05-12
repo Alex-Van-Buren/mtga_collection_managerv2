@@ -14,7 +14,7 @@
     color: black !important;
 }
 
-@media (hover: none) {
+@media (hover: none), (pointer: coarse) {
     .basic.button.icon.massive.ui {
         color: aliceblue !important;
         background-color: transparent !important;
