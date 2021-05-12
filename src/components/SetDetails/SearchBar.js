@@ -42,7 +42,7 @@ function SearchBar() {
                 type="search" placeholder="Search Card Text:" className="searchBar"
 
                 // Accessibility
-                autocomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Text"
+                autoComplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Text"
                 aria-controls="results" autoCapitalize="none" spellCheck="false" aria-haspopup="false"
                 
                 // Controlled input
