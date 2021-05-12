@@ -42,13 +42,13 @@ function SearchBar() {
                 type="search" placeholder="Search Card Text:" className="searchBar"
 
                 // Accessibility
-                autocomplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Text"
+                autoComplete="off" aria-describedby="searchKeyboardControls" aria-label="Search Card Text"
                 aria-controls="results" autoCapitalize="none" spellCheck="false" aria-haspopup="false"
                 
                 // Controlled input
                 value={term} onChange={ (e) => setTerm(e.target.value) }
             />
-            <button className="clearSearchBar" onClick={() => setTerm("")}>x</button>
+            <button className="clearSearchBar" onClick={() => setTerm("")}><i className="close icon"/></button>
         </div>
     );
 }

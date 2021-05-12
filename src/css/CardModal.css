@@ -14,6 +14,22 @@
     color: black !important;
 }
 
+@media (hover: none) {
+    .basic.button.icon.massive.ui {
+        color: aliceblue !important;
+        background-color: transparent !important;
+    }
+    
+    .basic.button.icon.massive.ui:hover {
+        color: aliceblue !important;
+    }
+
+    .basic.button.icon.massive.ui:active {
+        color: black !important;
+        background-color: aliceblue !important;
+    }
+}
+
 /* Disabled for first or last card */
 .basic.button.icon.massive.ui.disabled {
     opacity: 0;

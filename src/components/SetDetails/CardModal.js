@@ -140,7 +140,7 @@ function CardModal() {
         <button
             className={`exit ${BUTTON_CLASS}`}
         >
-            <i className="close icon"></i>
+            <i className="close icon"/>
         </button>
     );
 
