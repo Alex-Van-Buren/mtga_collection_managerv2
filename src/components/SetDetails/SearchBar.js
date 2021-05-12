@@ -48,7 +48,7 @@ function SearchBar() {
                 // Controlled input
                 value={term} onChange={ (e) => setTerm(e.target.value) }
             />
-            <button className="clearSearchBar" onClick={() => setTerm("")}>x</button>
+            <button className="clearSearchBar" onClick={() => setTerm("")}><i className="close icon"/></button>
         </div>
     );
 }
