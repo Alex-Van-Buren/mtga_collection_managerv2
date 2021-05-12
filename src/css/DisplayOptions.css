@@ -178,3 +178,16 @@ label {
 .colorIcon:hover {
     cursor: pointer;
 }
+
+/* Proper icon resizing on touch screens */
+@media (hover: none) {
+
+    .colorIcon:not(:focus) {
+        width: 2em;
+    }
+
+    .big.colorIcon {
+        width: 3.5em;
+        transition-duration: 150ms;
+    }
+}

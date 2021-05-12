@@ -61,9 +61,9 @@ export default function ColorCheckboxes() {
                         aria-label={color} ref={ colorRefs[i] }
                         onKeyDown={ (e) => makeKeyboardClickable(e, colorRefs[i])}
 
-                        // Need to call blur so icon behavior works as expected with mouse
-                        // - icon doesn't keep focus after blur is called
+                        // Blur when hover ends and blur when deselected
                         onMouseLeave={ () => colorRefs[i].current.blur() }
+                        onClick={ () => colorRefs[i].current.blur() }
                     /> }
     
                     // Classes
