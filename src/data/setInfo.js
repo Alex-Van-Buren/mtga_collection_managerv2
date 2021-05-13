@@ -1,6 +1,21 @@
 import stx_logo from '../images/setLogos/stx_logo.png';
 import khm_logo from '../images/setLogos/khm_logo.png';
+import klr_logo from '../images/setLogos/klr_logo.png';
 import znr_logo from '../images/setLogos/znr_logo.png';
+import akr_logo from '../images/setLogos/akr_logo.png';
+import m21_logo from '../images/setLogos/m21_logo.png';
+import iko_logo from '../images/setLogos/iko_logo.png';
+import thb_logo from '../images/setLogos/thb_logo.png';
+import eld_logo from '../images/setLogos/eld_logo.png';
+import m20_logo from '../images/setLogos/m20_logo.png';
+import war_logo from '../images/setLogos/war_logo.png';
+import rna_logo from '../images/setLogos/rna_logo.webp';
+import grn_logo from '../images/setLogos/grn_logo.webp';
+import m19_logo from '../images/setLogos/m19_logo.png';
+import dom_logo from '../images/setLogos/dom_logo.png';
+import rix_logo from '../images/setLogos/rix_logo.png';
+import xln_logo from '../images/setLogos/xln_logo.png';
+
 
 /**
  * The set codes of the current standard sets
@@ -30,7 +45,8 @@ export const setInfo = {
     klr: {
         name: "Kaladesh Remastered",
         mythic_upgrade: (1/7),
-        collationId: 100021
+        collationId: 100021,
+        logo: klr_logo
     },
     znr: {
         name: "Zendikar Rising",
@@ -41,68 +57,81 @@ export const setInfo = {
     akr: {
         name: "Amonkhet Remastered",
         mythic_upgrade: (1/6),
-        collationId: 100019
+        collationId: 100019,
+        logo: akr_logo
     },
     m21: {
         name: "Core Set 2021",
         mythic_upgrade: (1/8),
-        collationId: 100018
+        collationId: 100018,
+        logo: m21_logo
     },
     iko: {
         name: "Ikoria: Lair of Behemoths",
         mythic_upgrade: (1/8),
-        collationId: 100017
+        collationId: 100017,
+        logo: iko_logo
     },
     thb: {
         name: "Theros Beyond Death",
         mythic_upgrade: (1/8),
-        collationId: 100016
+        collationId: 100016,
+        logo: thb_logo
     },
     eld: {
         name:"Throne of Eldraine",
         mythic_upgrade: (1/8),
-        collationId: 100015
+        collationId: 100015,
+        logo: eld_logo
     },
     m20: {
         name: "Core Set 2020",
         mythic_upgrade: (1/8),
-        collationId: 100014
+        collationId: 100014,
+        logo: m20_logo
     },
     war: {
         name: "War of the Spark",
         mythic_upgrade: (1/8),
-        collationId: 100013
+        collationId: 100013,
+        logo: war_logo
     },
     rna: {
         name: "Ravnica Allegiance",
         mythic_upgrade: (1/8),
-        collationId: 100010
+        collationId: 100010,
+        logo: rna_logo
     },
     grn: {
         name: "Guilds of Ravnica",
         mythic_upgrade: (1/8),
-        collationId: 100009
+        collationId: 100009,
+        logo: grn_logo
     },
     m19: {
         name: "Core Set 2019",
         mythic_upgrade: (1/8),
-        collationId: 100008
+        collationId: 100008,
+        logo: m19_logo
     },
     // "dom" also uses set code "dar"
     dom: {
         name: "Dominaria",
         mythic_upgrade: (1/8),
-        collationId: 100007
+        collationId: 100007,
+        logo: dom_logo
     },
     rix: {
         name: "Rivals of Ixalan",
         mythic_upgrade: (1/8),
-        collationId: 100006
+        collationId: 100006,
+        logo: rix_logo
     },
     xln: {
         name: "Ixalan",
         mythic_upgrade: (1/8),
-        collationId: 100005
+        collationId: 100005,
+        logo: xln_logo
     }
 }
 
