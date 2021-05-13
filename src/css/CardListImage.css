@@ -25,11 +25,31 @@
     backface-visibility: hidden;
 }
 
-.image, .ui.button>.reply.icon:not(.button) {
+.image, .ui.button>.undo.icon:not(.button) {
     transition: 1s;
     transform-style: preserve-3d;
 }
 
 .flipped {
     transform: rotateY(-180deg);
+}
+
+/* Front side flip button animation */
+@keyframes turned {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Back side flip button animation */
+@keyframes turning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
 }
