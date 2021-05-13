@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setModalContent, showModal } from '../../actions';
@@ -24,18 +24,31 @@ function CardListImage({ name, backside, numOwned, index }) {
     let cardImages = imgs? <img src={imgs.front} alt={name}/> : null;
     let flipButton = null; // Regular cards don't have a flip button
 
+    // Ref for flip button icon
+    const flipRef = useRef();
+
     // Decide whether to show the flip button
     if (backside && imgs) {
-
-        // Choose flip icon to show based on side showing
-        const flipIconClass = imgSide? "reply icon" : "flipped reply icon";
 
         flipButton = (
             <button
                 className="circular ui icon button flipButton"
-                onClick={(event) => { event.stopPropagation(); setImgSide(!imgSide); }}
+                onClick={(event) => {
+
+                    // Don't allow flip button click to propagate onto card
+                    event.stopPropagation();
+                    
+                    // Set state for card side displayed
+                    setImgSide(!imgSide);
+
+                    // Animate flip button
+                    if (imgSide)
+                        flipRef.current.style.animation = "turned .6s linear";
+                    else
+                        flipRef.current.style.animation = "turning .6s linear";
+                }}
             >
-                <i className={flipIconClass}/>
+                <i className="undo icon" ref={flipRef}/>
             </button>
         );
 
