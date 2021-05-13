@@ -56,13 +56,20 @@ function CardModal() {
         // Keep same card, but flip to other side
         dispatch(setModalContent({ index, imgSide: !imgSide }));
 
-        // Set animations for flipping action on card and flip button
-        flipRef.current.style.transition = "1s";
+        // Set animation for flipping action on card
         imgRef.current.style.transition = "1s";
 
-        // Clear animations after short delay
+        // Determine which animation to show
+        const sideBoolean = flipRef.current.style.animation.includes("turning");
+
+        // Animate flip button
+        if (sideBoolean)
+            flipRef.current.style.animation = "turned .6s linear";
+        else
+            flipRef.current.style.animation = "turning .6s linear";
+
+        // Clear animation after short delay
         setTimeout(() => {
-            flipRef.current.style.transition = "0s";
             imgRef.current.style.transition = "0s";
         }, 100);
 
@@ -191,9 +198,6 @@ function CardModal() {
     // Flip button for double-sided cards
     if (img.back) {
 
-        // Choose flip icon to show based on side showing
-        const flipIconClass = imgSide? "reply icon" : "flipped reply icon";
-
         flipButton = (
             <button
                 className="circular ui icon button flipButton"
@@ -206,7 +210,7 @@ function CardModal() {
                     flipCard();
                 }}
             >
-                <i className={flipIconClass} id="flipButton" ref={flipRef} />
+                <i className="undo icon" id="flipButton" ref={flipRef} />
             </button>
         );
 
