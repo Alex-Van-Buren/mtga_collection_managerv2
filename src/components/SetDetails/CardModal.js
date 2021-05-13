@@ -59,8 +59,11 @@ function CardModal() {
         // Set animation for flipping action on card
         imgRef.current.style.transition = "1s";
 
+        // Determine which animation to show
+        const sideBoolean = flipRef.current.style.animation.includes("turning");
+
         // Animate flip button
-        if (imgSide)
+        if (sideBoolean)
             flipRef.current.style.animation = "turned .6s linear";
         else
             flipRef.current.style.animation = "turning .6s linear";
