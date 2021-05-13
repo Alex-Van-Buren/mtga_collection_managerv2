@@ -12,3 +12,8 @@
 .ui.fitted.toggle.checkbox#labelColorStandardToggle input:not(:checked) ~ label:before {
     background: var(--border-clr) !important;
 }
+
+.ui.huge.center.aligned.header {
+    margin-bottom: 2rem;
+    font-size: 2.7rem;
+}
