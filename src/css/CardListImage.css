@@ -9,6 +9,11 @@
     opacity: 100%;
 }
 
+.circular.ui.icon.button.flipButton:focus {
+    opacity: 100%;
+    border: 3px solid black;
+}
+
 .bouncy.column {
     perspective: 600px;
 }

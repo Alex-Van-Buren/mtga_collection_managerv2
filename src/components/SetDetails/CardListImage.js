@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setModalContent, showModal } from '../../actions';
+import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/CardListImage.css';
 
 function CardListImage({ name, backside, numOwned, index }) {
@@ -24,8 +25,28 @@ function CardListImage({ name, backside, numOwned, index }) {
     let cardImages = imgs? <img src={imgs.front} alt={name}/> : null;
     let flipButton = null; // Regular cards don't have a flip button
 
-    // Ref for flip button icon
+    // Refs
     const flipRef = useRef();
+    const cardRef = useRef();
+
+    /**
+     * Flips card and turns flip button
+     * @param {Event} event 
+     */
+    function flip(event) {
+
+        // Don't allow flip button click to propagate onto card
+        event.stopPropagation();
+        
+        // Set state for card side displayed
+        setImgSide(!imgSide);
+
+        // Animate flip button
+        if (imgSide)
+            flipRef.current.style.animation = "turned .6s linear";
+        else
+            flipRef.current.style.animation = "turning .6s linear";
+    }
 
     // Decide whether to show the flip button
     if (backside && imgs) {
@@ -33,19 +54,17 @@ function CardListImage({ name, backside, numOwned, index }) {
         flipButton = (
             <button
                 className="circular ui icon button flipButton"
-                onClick={(event) => {
+                onClick={e => flip(e)}
+                onKeyDown={e => {
+                    // If they hit enter
+                    if (e.key === "Enter" || e.key === "Space") {
 
-                    // Don't allow flip button click to propagate onto card
-                    event.stopPropagation();
-                    
-                    // Set state for card side displayed
-                    setImgSide(!imgSide);
+                        // Prevent the default action
+                        e.preventDefault(); 
 
-                    // Animate flip button
-                    if (imgSide)
-                        flipRef.current.style.animation = "turned .6s linear";
-                    else
-                        flipRef.current.style.animation = "turning .6s linear";
+                        // And flip card
+                        flip(e);
+                    }
                 }}
             >
                 <i className="undo icon" ref={flipRef}/>
@@ -60,12 +79,14 @@ function CardListImage({ name, backside, numOwned, index }) {
     }
 
     return (
-        <div className="bouncy column">
+        <div className="bouncy column" tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
             <div className="ui fluid card removeBoxShadow">
                 <div className="content">
                     <div className="right floated content" >{numOwned} / 4 </div>
                 </div>                    
                 <div
+
+                    ref={cardRef}
                 
                     // Add flipped class when back image shown
                     className={imgSide ? "image" : "flipped image"}

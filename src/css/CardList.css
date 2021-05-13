@@ -22,7 +22,7 @@ p.ui.container {
     font-size: 1.2em;
 }
 
-.bouncy.column:hover {
+.bouncy.column:hover, .bouncy.column:focus-visible {
     cursor: pointer;
     transform: translateY(-3px);
 }
