@@ -84,3 +84,7 @@ html {
     border-radius: 8px;
     border: 2px solid var(--scroll-area);
   }
+
+  .ui.card, .ui.cards>.card {
+    box-shadow: 0 1px 3px 0 var(--border-clr), 0 0 0 2px var(--border-clr);
+  }
