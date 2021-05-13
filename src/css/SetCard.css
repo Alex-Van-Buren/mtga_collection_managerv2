@@ -2,6 +2,9 @@
     margin-top: 5%;
     color: var(--clr-txt);
 }
+#setCardHeader>img {
+    width: 80%;
+}
 
 .ui.center.aligned.sub.header {
     color: var(--clr-txt);

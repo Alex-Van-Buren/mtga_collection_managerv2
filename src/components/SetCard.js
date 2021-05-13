@@ -30,11 +30,17 @@ function SetCard({ setId }) {
 
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
     const setName = setInfo[setId].name;
+    let setCardHeader = <div className="ui center aligned header" id="setCardHeader">{setName}</div>;
+
+    if ( setInfo[setId].logo ) {
+        setCardHeader = <div className="ui center aligned header" id="setCardHeader" ><img src={setInfo[setId].logo} alt={setName} /></div>;
+    }
     
     return (
         <div className="mtgaSetCard">
             {/* The specific card set */}
-            <div className="ui center aligned header" id="setCardHeader">{setName}</div>
+            {/* <div className="ui center aligned header" id="setCardHeader">{setName}</div> */}
+            {setCardHeader}
 
             {/* Owned cards from this set */}
             <div className="ui center aligned sub header">
