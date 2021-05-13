@@ -12,6 +12,7 @@
 
 .progress-inner {
     height: 100%;
+    border-radius: 10px;
     background-color: #21BA45;
 }
 
