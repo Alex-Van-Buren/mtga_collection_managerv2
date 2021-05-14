@@ -13,7 +13,7 @@ const INITIAL_STATE = {
         colorless: false
     },
 
-    rarity: { common: false, uncommon: false, rare: false, mythic: false },
+    rarity: { mythic: false, rare: false, uncommon: false, common: false },
     
     showCards: "all",
 
