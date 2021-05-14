@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 /**
@@ -14,8 +14,22 @@ export default function CustomButton({ action, value, className="", text=value }
     // Access redux reducer
     const dispatch = useDispatch();
 
+    // Add a ref to blur button
+    const ref = useRef();
+
     return (
-        <button className={className} onClick={() => dispatch(action(value))} >
+        <button 
+            className={className}
+            ref={ref}
+            onClick={ () => {
+
+                // Dispatch the action
+                dispatch(action(value));
+
+                // Deselect the button
+                ref.current.blur();
+            } }
+        >
             {text}
         </button>
     );
