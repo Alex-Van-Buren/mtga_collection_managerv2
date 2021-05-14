@@ -13,7 +13,7 @@ const INITIAL_STATE = {
         colorless: false
     },
 
-    rarity: "all",
+    rarity: { common: false, uncommon: false, rare: false, mythic: false },
     
     showCards: "all",
 
@@ -50,9 +50,14 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             return newState;
         }
 
-        // Rarity must be one of: { common, uncommon, rare, mythic, all }
+        // Rarity can be any of: { common, uncommon, rare, mythic }
         case SELECT_RARITY: {
-            return { ...state, rarity: action.payload };
+            const rarity = {...state.rarity};
+
+            // Flip value of the input rarity
+            rarity[action.payload] = !rarity[action.payload];
+
+            return {...state, rarity};
         }
 
         // showCards must be one of: { unowned, owned, all }
