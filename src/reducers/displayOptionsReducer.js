@@ -52,12 +52,12 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
 
         // Rarity can be any of: { common, uncommon, rare, mythic }
         case SELECT_RARITY: {
-            const newState = {...state};
+            const rarity = {...state.rarity};
 
             // Flip value of the input rarity
-            newState.rarity[action.payload] = !newState.rarity[action.payload];
+            rarity[action.payload] = !rarity[action.payload];
 
-            return newState;
+            return {...state, rarity};
         }
 
         // showCards must be one of: { unowned, owned, all }

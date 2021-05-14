@@ -44,8 +44,6 @@ function CardList({ setId }) {
         if (rarityOption.length < 1 || rarityOption.length > 3)
             rarityOption = undefined;
 
-        console.log(rarityOption)
-
         // Put all search options into a single object for findCards function
         const searchOptions = {set: setId, color: colors, booster: true, rarity: rarityOption, term: searchTerm};
 
