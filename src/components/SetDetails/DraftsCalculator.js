@@ -13,11 +13,38 @@ function DraftsCalculator() {
     const [draftType, setDraftType] = useState("premier");
     const [winRate, setWinRate] = useState(50);
     const [debouncedWinRate, setDebouncedWinRate] = useState(winRate);
-    const [raresPicked, setRaresPicked] = useState(2.625);
+    const [raresPicked, setRaresPicked] = useState(2.6);
     const [debouncedRaresPicked, setDebouncedRaresPicked] = useState(raresPicked);
-    const [mythicsPicked, setMythicsPicked] = useState(0.375);
+    const [mythicsPicked, setMythicsPicked] = useState(0.4);
     const [debouncedMythicsPicked, setDebouncedMythicsPicked] = useState(mythicsPicked);
+    
+    // Reset the default values for winRate, raresPicked, mythicsPicked, and draftType to values from localstate if possible
+    useEffect(() => {
+        // Get the values from localstorage --> will be null if user hasn't used before or cleared the localStorage
+        const draftWinRate = window.localStorage.getItem('draftWinRate');
+        const draftRaresPicked = window.localStorage.getItem('draftRaresPicked');
+        const draftMythicsPicked = window.localStorage.getItem('draftMythicsPicked');
+        const preferredDraftType = window.localStorage.getItem('preferredDraftType');
 
+        // set the values and debounced values to the localStorage values if the value was found in localStorage
+        if ( draftWinRate ){
+            setDebouncedWinRate(draftWinRate);
+            setWinRate(draftWinRate);
+        }
+        if ( draftRaresPicked ){
+            setDebouncedRaresPicked(draftRaresPicked);
+            setRaresPicked(draftRaresPicked);
+        }
+        if ( draftMythicsPicked ){
+            setDebouncedMythicsPicked(draftMythicsPicked);
+            setMythicsPicked(draftMythicsPicked);
+        }
+        if ( preferredDraftType ) {
+            setDraftType(preferredDraftType);
+        }
+
+    },[])
+    
     // Grab set id from url
     const { setId } = useParams();
 
@@ -35,6 +62,7 @@ function DraftsCalculator() {
         // Wait for user to stop typing
         const timeoutid = setTimeout( () => {
             setWinRate(debouncedWinRate);
+            window.localStorage.setItem('draftWinRate', debouncedWinRate);
         }, 500);
 
         // Cleanup function to stop timer
@@ -47,6 +75,7 @@ function DraftsCalculator() {
          // Wait for user to stop typing
          const timeoutid = setTimeout( () => {
             setRaresPicked(debouncedRaresPicked);
+            window.localStorage.setItem('draftRaresPicked',debouncedRaresPicked);
         }, 500);
 
         // Cleanup function to stop timer
@@ -59,6 +88,7 @@ function DraftsCalculator() {
         // Wait for user to stop typing
         const timeoutid = setTimeout( () => {
            setMythicsPicked(debouncedMythicsPicked);
+           window.localStorage.setItem('draftMythicsPicked',debouncedMythicsPicked);
        }, 500);
 
        // Cleanup function to stop timer
@@ -98,9 +128,10 @@ function DraftsCalculator() {
                     {draftType}
                     <i className="dropdown icon"></i>
                     <div className="menu">
-                        <div className="item" onClick={() => setDraftType("premier")}>Premier</div>
-                        <div className="item" onClick={() => setDraftType("traditional")}>Traditional</div>
-                        <div className="item" onClick={() => setDraftType("quick")}>Quick</div>
+                        {/* onClick function sets the state and also puts the preferred draft type into localStorage for easier use on subsequent visits to site*/}
+                        <div className="item" onClick={() => {setDraftType("premier"); window.localStorage.setItem('preferredDraftType', 'premier')}}>Premier</div>
+                        <div className="item" onClick={() => {setDraftType("traditional"); window.localStorage.setItem('preferredDraftType', 'traditional')}}>Traditional</div>
+                        <div className="item" onClick={() => {setDraftType("quick"); window.localStorage.setItem('preferredDraftType', 'quick')}}>Quick</div>
                     </div>
                 </div>
             </div>
