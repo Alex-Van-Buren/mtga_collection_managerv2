@@ -19,7 +19,7 @@ function CardList({ setId }) {
     const cardCollection = useSelector(state => state.inventory.cardCollection);
     const colors         = useSelector(state => state.displayOptions.colors);
     const searchTerm     = useSelector(state => state.displayOptions.searchTerm);
-    const rarity         = useSelector(state => state.displayOptions.rarity);
+    const rarities       = useSelector(state => state.displayOptions.rarity);
     const showCards      = useSelector(state => state.displayOptions.showCards);
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
 
@@ -29,8 +29,22 @@ function CardList({ setId }) {
     // Get the cards using the findCards Function
     const cards = useMemo(() => {
 
-        // If rarity is set to all, set rarityOption to undefined so findCards will not filter by rarity
-        const rarityOption = rarity !== 'all' ? [rarity] : undefined;
+        // If all/none of the rarities selected, set rarityOption to undefined so findCards will not filter by rarity
+        let rarityOption = []; let index = 0;
+        for (const rarity in rarities) {
+
+            // Add rarity to rarityOption if it's selected
+            if (rarities[rarity]) {
+                rarityOption[index] = rarity;
+                index++;
+            }
+        }
+
+        // Set rarityOption to undefined if all or none of the rarities are added to it
+        if (rarityOption.length < 1 || rarityOption.length > 3)
+            rarityOption = undefined;
+
+        console.log(rarityOption)
 
         // Put all search options into a single object for findCards function
         const searchOptions = {set: setId, color: colors, booster: true, rarity: rarityOption, term: searchTerm};
@@ -40,7 +54,7 @@ function CardList({ setId }) {
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, setId, rarity]);
+    }, [colors, searchTerm, setId, rarities]);
 
     // Track currently shown pictures
     let currentPictures = [];

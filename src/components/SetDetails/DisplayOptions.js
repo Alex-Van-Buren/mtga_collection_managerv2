@@ -10,7 +10,7 @@ import '../../css/DisplayOptions.css';
 function DisplayOptions() {
 
     const showCards = useSelector(state => state.displayOptions.showCards);
-    const raritySelected = useSelector(state => state.displayOptions.rarity);
+    const rarities  = useSelector(state => state.displayOptions.rarity);
 
     const showListButtons = [
         {value: "=0",  text: "None"},
@@ -32,22 +32,21 @@ function DisplayOptions() {
             />
         );
     });
-
-    const rarityButtons = [
-        {value: 'mythic'},
-        {value: 'rare'},
-        {value: 'uncommon'},
-        {value: 'common'},
-        {value: 'all'}
-    ];
     
-    const renderRarityButtons = rarityButtons.map((button) => {
-        let buttonClass = `ui button primary rarityButton ${button.value}`;
-        if ( button.value !== raritySelected) {
+    // Create array of rarity buttons
+    const renderRarityButtons = [];
+
+    // Loop through each rarity and check whether it's currently selected
+    for (const rarity in rarities) {
+        let buttonClass = `ui button primary rarityButton ${rarity}`;
+
+        // If the rarity isn't currently selected, add "basic" to its class
+        if ( !rarities[rarity] )
             buttonClass += ' basic';
-        }
-        return <CustomButton action={selectRarity} className={buttonClass} value={button.value} key={button.value} />
-    });
+        
+        // Then push that rarity button to the array
+        renderRarityButtons.push(<CustomButton action={selectRarity} className={buttonClass} value={rarity} key={rarity} />);
+    }
 
     return (<div className="DisplayOptions">
         <SearchBar/>
