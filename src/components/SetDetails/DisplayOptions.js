@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import CustomDropDown from './CustomDropDown';
+import BoosterDropDown from './BoosterDropDown';
 import ColorCheckboxes from './ColorCheckboxes';
 import CustomButton from './CustomButton';
 import SearchBar from './SearchBar';
@@ -57,7 +57,7 @@ function DisplayOptions() {
         <div className="showList">            
             {renderShowListButtons}
         </div>
-        <CustomDropDown items={['All', 'In Boosters', 'Not In Boosters']} firstSelection= "All"/>
+        <BoosterDropDown/>
 
         {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
         <ColorCheckboxes/>
