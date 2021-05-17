@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { showModal } from '../actions';
-
+import '../css/Modal.css';
 /**
  * A generic modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
  * by pressing escape. Can be passed functions to call when specified keys are pressed.
@@ -78,7 +78,6 @@ function Modal({ content, keyEvents }) {
             <div
                 // Don't allow clicks to propagate to lower elements
                 onClick={e => e.stopPropagation()}
-                className="modelContainer"
             >
                 {/* Get modal content from props */}
                 {content}
