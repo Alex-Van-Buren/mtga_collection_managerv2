@@ -1,14 +1,16 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Modal from '../Modal';
 import { showModal, setModalContent } from '../../actions';
 import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/CardModal.css';
 
 function CardModal() {
+
     const dispatch = useDispatch();
 
+    // Determine whether modal should currently be shown
     const show = useSelector(state => state.modal.showModal);
 
     // Destructuring from redux gets dicey, so these look kind of silly
@@ -49,80 +51,34 @@ function CardModal() {
     }, [dispatch, index, imgLength]);
 
     /**
-     * Flip card in modal. (Only call when possible)
+     * Flip card in modal.
      */
     const flipCard = useCallback(() => {
 
-        // Keep same card, but flip to other side
-        dispatch(setModalContent({ index, imgSide: !imgSide }));
+        if (img.back) {
 
-        // Set animation for flipping action on card
-        imgRef.current.style.transition = "1s";
-
-        // Determine which animation to show
-        const sideBoolean = flipRef.current.style.animation.includes("turning");
-
-        // Animate flip button
-        if (sideBoolean)
-            flipRef.current.style.animation = "turned .6s linear";
-        else
-            flipRef.current.style.animation = "turning .6s linear";
-
-        // Clear animation after short delay
-        setTimeout(() => {
-            imgRef.current.style.transition = "0s";
-        }, 100);
-
-    }, [dispatch, imgSide, index]);
-
-    // Add listener for keypresses in modal
-    useEffect(() => {
-
-        // Only add the listener if the modal is open
-        if (show) {
-
-            // Function checks which key has been pressed and does appropriate action
-            const modalKeydowns = (event) => {
-
-                // Escape key pressed --> close modal
-                if (event.keyCode === 27) {
-                    dispatch(showModal(false));
-                }
-
-                // Left Arrow pressed --> go left (-1 to index unless at start)
-                else if (event.keyCode === 37) {
-                    goLeft();
-                }
-
-                // Right Arrow pressed --> go right (+1 to index unless at end)
-                else if (event.keyCode === 39) {
-                    goRight();
-                }
-
-                // Flip card if possible
-                else if (event.keyCode === 32) {
-
-                    // Don't scroll background
-                    event.preventDefault();
-
-                    // Flip card if flippable
-                    if (img.back) {
-                        flipCard();
-                    }
-                }
-            }   
-            
-            // Add listener for function
-            window.addEventListener('keydown', modalKeydowns);
+            // Keep same card, but flip to other side
+            dispatch(setModalContent({ index, imgSide: !imgSide }));
     
-            // Cleanup function
-            return () => {
-                window.removeEventListener('keydown', modalKeydowns);
-            }
+            // Set animation for flipping action on card
+            imgRef.current.style.transition = "1s";
+    
+            // Determine which animation to show
+            const sideBoolean = flipRef.current.style.animation.includes("turning");
+    
+            // Animate flip button
+            if (sideBoolean)
+                flipRef.current.style.animation = "turned .6s linear";
+            else
+                flipRef.current.style.animation = "turning .6s linear";
+    
+            // Clear animation after short delay
+            setTimeout(() => {
+                imgRef.current.style.transition = "0s";
+            }, 100);
         }
-    },
-    
-    [dispatch, show, index, imgLength, goLeft, goRight, flipCard, img]);
+
+    }, [dispatch, imgSide, index, img]);
 
     // Reference DOM
     const prevRef = useRef(null);
@@ -256,25 +212,22 @@ function CardModal() {
         </div>
     </>
 
-    // Render Modal over content using a portal to the div with id="modal" in index.html
-    return createPortal(
-        <div
-            // Initially hide the modal
-            onClick={() => dispatch(showModal(false))}
-            className="ui dimmer modals visible active cardModal"
-        >
-            
-            <div
-                // Don't allow clicks to propigate to lower elements
-                onClick={e => e.stopPropagation()}
-                className="modelContainer"
-            >
-                {/* Get modal content from above methods */}
-                {renderedContent}
-            </div>
+    // Create keyEvents Object to be passed to Modal; set key and function
+    const keyEvents = [
 
-        </div>,
-        document.querySelector("#modal")
+        // Left Arrow pressed --> go left (-1 to index unless at start)
+        { key: 37, keyFunction: goLeft },
+
+        // Right Arrow pressed --> go right (+1 to index unless at end)
+        { key: 39, keyFunction: goRight },
+
+        // Space bar pressed --> Flip card if possible
+        { key: 32, keyFunction: flipCard }
+    ];
+
+    // Render Modal
+    return (
+        <Modal content={renderedContent} keyEvents={keyEvents} />
     );
 }
 

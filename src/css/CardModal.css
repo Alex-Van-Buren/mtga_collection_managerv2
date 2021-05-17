@@ -1,8 +1,3 @@
-.cardModal {
-    /* Keep model fixed, but allow background scroll */
-    position: fixed !important;
-}
-
 .basic.button.icon.massive.ui {
     color: aliceblue !important;
     height: 100%;

@@ -1,0 +1,4 @@
+.cardModal {
+    /* Keep model fixed, but allow background scroll */
+    position: fixed !important;
+}
