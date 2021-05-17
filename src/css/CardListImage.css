@@ -9,7 +9,7 @@
     opacity: 100%;
 }
 
-.circular.ui.icon.button.flipButton:focus {
+.circular.ui.icon.button.flipButton:focus-visible {
     opacity: 100%;
     border: 3px solid black;
 }
