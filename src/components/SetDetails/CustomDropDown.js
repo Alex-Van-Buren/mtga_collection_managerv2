@@ -12,10 +12,21 @@ function CustomDropDown({items, firstSelection}) {
             <div className='dropDown-item' onClick={() =>{setSelected(item); setOpen(false)} }>{item}</div>
         )
     });
-    const itemsClass = open ? 'dropDown-items' : 'dropDown-items dropDown-closed';
+    // Closed dropdown classes
+    let iconClass = 'icon chevron down';
+    let itemsClass = 'dropDown-items dropDown-closed';
+    let selectedClass = 'dropDown-selected dropDown-closed'
+
+    // Change classes if dropDown is open
+    if (open) {
+        iconClass = 'icon chevron up';
+        itemsClass = 'dropDown-items';
+        selectedClass = 'dropDown-selected'
+    }
+
     return (
         <div className="dropDown">
-            <div className="dropDown-selected" onClick={() => setOpen(!open)}>{selected}</div>
+            <div className={selectedClass} onClick={() => setOpen(!open)}>{selected} <span><i className={iconClass}></i></span></div>
             <div className={itemsClass}>{dropDownItems}</div>
         </div>
     )
