@@ -4,7 +4,8 @@ import CustomDropDown from './CustomDropDown';
 
 function BoosterDropDown() {
     return (
-        <CustomDropDown items={['All', 'In Boosters', 'Not In Boosters']} firstSelection= "All"/>
+        
+        <CustomDropDown items={['All', 'In Boosters', 'Not In Boosters']} firstSelection= "In Boosters"/>
     )
 }
 
