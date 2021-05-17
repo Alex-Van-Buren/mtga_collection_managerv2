@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showModal } from '../../actions';
 
 /**
+ * A generic modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
+ * by pressing escape. Can be passed functions to call when specified keys are pressed.
  * 
+ * @param {JSX} props.content The modal content to display.
  * @param {Array} props.keyEvents Describes the keys to listen for the the functions to execute upon that key being pressed.
  * - keyEvents is an Array of objects; each object contains a key and a function: { key: {Number}, keyFunction: {Function}}
  * - Events for key code 27 (escape) are ignored; it will always close the modal. 
@@ -13,7 +16,7 @@ import { showModal } from '../../actions';
  * @param {Function} props.keyEvents[].keyFunction The function to execute when the key is pressed. Inside an object on
  * the keyEvents array.
  */
-function Modal({ keyEvents }) {
+function Modal({ content, keyEvents }) {
 
     // Access redux dispatcher
     const dispatch = useDispatch();
@@ -53,9 +56,28 @@ function Modal({ keyEvents }) {
                 window.removeEventListener('keydown', modalKeydowns);
             }
         }
-    },
-    
-    [dispatch, show, keyEvents]);
+    }, [dispatch, show, keyEvents]);
+
+    // Render Modal over content using a portal to the div with id="modal" in index.html
+    return createPortal(
+        <div
+            // Initially hide the modal
+            onClick={() => dispatch(showModal(false))}
+            className="ui dimmer modals visible active cardModal"
+        >
+            
+            <div
+                // Don't allow clicks to propagate to lower elements
+                onClick={e => e.stopPropagation()}
+                className="modelContainer"
+            >
+                {/* Get modal content from props */}
+                {content}
+            </div>
+
+        </div>,
+        document.querySelector("#modal")
+    );
 }
 
 export default Modal;
