@@ -1,0 +1,19 @@
+.dropDown {
+    color: var(--clr-txt);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    cursor: pointer;
+}
+.dropDown-closed {
+    display: none;
+}
+.dropDown-items {
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+.dropDown-item {
+    border-bottom: 1px solid var(--clr-txt);
+}
