@@ -58,7 +58,7 @@ export default function ColorCheckboxes() {
 
                         // Keyboard accessibility
                         aria-controls={color} role="checkbox" aria-checked={colorValues[color]} tabIndex="0"
-                        aria-label={color} ref={ colorRefs[i] }
+                        aria-label={color} ref={ colorRefs[i] } title={color.charAt(0).toUpperCase() + color.slice(1)}
                         onKeyDown={ (e) => makeKeyboardClickable(e, colorRefs[i])}
 
                         // Blur when hover ends and blur when deselected
