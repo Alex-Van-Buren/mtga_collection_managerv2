@@ -22,6 +22,7 @@ function CardList({ setId }) {
     const rarities       = useSelector(state => state.displayOptions.rarity);
     const showCards      = useSelector(state => state.displayOptions.showCards);
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
+    const boosterVal     = useSelector(state => state.displayOptions.booster);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -44,15 +45,31 @@ function CardList({ setId }) {
         if (rarityOption.length < 1 || rarityOption.length > 3)
             rarityOption = undefined;
 
+        // Set booster to true, false, or undefined based on the value in redux
+        let booster;
+        switch (boosterVal) {
+            case "In Boosters":
+                booster = true;
+                break;
+            case "Not In Boosters":
+                booster = false;
+                break;
+            case "All Cards":
+                booster = undefined;
+                break;
+            default:
+                break;
+        }
+
         // Put all search options into a single object for findCards function
-        const searchOptions = {set: setId, color: colors, booster: true, rarity: rarityOption, term: searchTerm};
+        const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm};
 
         // Need to get images as well as name and arenaId
         const returnOptions = ['image_uris'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, setId, rarities]);
+    }, [colors, searchTerm, setId, rarities, boosterVal]);
 
     // Track currently shown pictures
     let currentPictures = [];

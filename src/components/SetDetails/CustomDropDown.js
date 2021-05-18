@@ -11,6 +11,8 @@ import '../../css/CustomDropDown.css';
  */
 function CustomDropDown({items, firstSelection, selectfn=undefined}) {
     const [open, setOpen] = useState(false);
+
+    // In some cases keeping track of selected might be redundant
     const [selected, setSelected] = useState(firstSelection);
 
     // Close Dropdown on all clicks outside of dropdown
@@ -21,15 +23,6 @@ function CustomDropDown({items, firstSelection, selectfn=undefined}) {
             document.body.removeEventListener('click', () => setOpen(false));
         }
     }, []);
-
-    // Call the additional selection function on first render if it exists (for initializing redux states)
-    // TODO: This use case might be unwanted
-    useEffect(()=> {
-        if ( selectfn ) {
-            selectfn(firstSelection);
-            setSelected(firstSelection);
-        }
-    },[firstSelection, selectfn])
 
     // Helper function for clicking an item in the dropdown
     function clickItem(item) {

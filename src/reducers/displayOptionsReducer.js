@@ -17,7 +17,7 @@ const INITIAL_STATE = {
     
     showCards: "all",
 
-    booster: "",
+    booster: "In Boosters",
 
     searchTerm: "",
 
