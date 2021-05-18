@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setInfo , historicSets } from '../../data/setInfo';
 import DarkModeToggle from './DarkModeToggle';
 import HeaderDropDown from './HeaderDropDown';
+import PlayerInventory from './PlayerInventory';
 import GetFile from './GetFile';
 import '../../css/Header.css';
 
@@ -65,6 +66,9 @@ function Header() {
         >
             <i className={`hamburger icon ${hamburgerClass}`} />
         </div>
+
+        {/* Player Inventory */}
+        <PlayerInventory />
     </div>);
 }
 

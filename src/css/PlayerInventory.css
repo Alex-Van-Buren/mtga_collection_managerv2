@@ -1,0 +1,21 @@
+#playerInventory {
+    display: flex;
+    color: var(--clr-txt);
+    justify-content: flex-end;
+    text-align: center;
+    height: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#playerInventory img {
+    height: 1.5rem;
+    padding-right: 0.3rem;
+}
+
+#playerInventory > div {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    padding-right: 1rem;
+}
