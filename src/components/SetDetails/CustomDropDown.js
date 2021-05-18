@@ -27,6 +27,7 @@ function CustomDropDown({items, firstSelection, selectfn=undefined}) {
     useEffect(()=> {
         if ( selectfn ) {
             selectfn(firstSelection);
+            setSelected(firstSelection);
         }
     },[firstSelection, selectfn])
 

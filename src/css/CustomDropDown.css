@@ -7,13 +7,11 @@
     cursor: pointer;
 }
 
-.dropDown-items.dropDown-closed {
-    visibility:hidden;
-}
 .dropDown-selected{
     padding: 2%;
     border: 1px solid var(--clr-txt);
 }
+
 .dropDown-selected.dropDown-closed {
     border-radius: 5px;
 }
@@ -30,6 +28,10 @@
 
 .dropDown-selected>span {
     float: right;
+}
+
+.dropDown-items.dropDown-closed {
+    visibility:hidden;
 }
 
 .dropDown-items {
