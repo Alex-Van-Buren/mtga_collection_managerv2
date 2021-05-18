@@ -1,5 +1,5 @@
 import { 
-    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SET_SEARCH_TERM, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
+    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,6 +16,8 @@ const INITIAL_STATE = {
     rarity: { mythic: false, rare: false, uncommon: false, common: false },
     
     showCards: "all",
+
+    booster: "",
 
     searchTerm: "",
 
@@ -65,6 +67,11 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             return { ...state, showCards: action.payload };
         }
 
+        // 
+        case SELECT_BOOSTER: {
+            return {...state, booster: action.payload }
+        }
+        
         // Set the search term from the search bar
         case SET_SEARCH_TERM: {
             return { ...state, searchTerm: action.payload };
