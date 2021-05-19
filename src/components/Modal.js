@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { showModal } from '../actions';
 import '../css/Modal.css';
 /**
  * A generic modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
@@ -17,13 +16,10 @@ import '../css/Modal.css';
  * @param {Function} props.keyEvents[].keyFunction The function to execute when the key is pressed. Inside an object on
  * the keyEvents array.
  */
-function Modal({ content, keyEvents }) {
+function Modal({ content, keyEvents, show, showModal }) {
 
     // Access redux dispatcher
     const dispatch = useDispatch();
-
-    // Determine whether modal should currently be shown
-    const show = useSelector(state => state.modal.showModal);
 
     // Add listener to handle keyboard inputs
     useEffect(() => {
@@ -70,7 +66,6 @@ function Modal({ content, keyEvents }) {
     // Render Modal over content using a portal to the div with id="modal" in index.html
     return createPortal(
         <div
-            // Initially hide the modal
             onClick={() => dispatch(showModal(false))}
             className="ui dimmer modals visible active cardModal"
         >
@@ -80,7 +75,7 @@ function Modal({ content, keyEvents }) {
                 onClick={e => e.stopPropagation()}
             >
                 {/* Get modal content from props */}
-                {content}
+                {content ? content : null}
             </div>
 
         </div>,

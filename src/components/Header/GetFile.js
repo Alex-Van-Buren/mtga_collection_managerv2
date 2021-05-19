@@ -1,10 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getCollection, getPlayerInventory, processSetCollection } from '../../actions';
+import {
+    getCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent
+} from '../../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
+
+import Modal from '../Modal';
 
 function GetFile() {
 
@@ -50,10 +54,17 @@ function GetFile() {
             
             // Put processed set information into Redux                
             dispatch( processSetCollection(inventory) );
+
+            // Successful
+            return true;
         }
 
         // Alert user of invalid Player Log
-        else alert(NO_INVENTORY_FOUND);
+        else {
+
+            // Unsuccessful
+            return false;
+        }
     }
 
     /**
@@ -90,9 +101,16 @@ function GetFile() {
             
             // Dispatch playerInventory to Redux
             dispatch(getPlayerInventory(playerInventory));
+
+            // Successful
+            return true;
         }
         // Alert user of invalid Player Log
-        else alert(NO_INVENTORY_FOUND);
+        else {
+
+            // Unsuccessful
+            return false;
+        }
     }
 
     const handleFile = (event) =>{
@@ -109,9 +127,19 @@ function GetFile() {
             // After the file loads and is read by the reader
             reader.onloadend = () => {
 
+                // Check for error reading file
+                let inventoryFound = true;
+
                 // Use functions to extract the information from player log
-                extractCardInventory(reader.result);
-                extractPlayerInventory(reader.result);
+                inventoryFound = extractCardInventory(reader.result);
+                inventoryFound = extractPlayerInventory(reader.result) && inventoryFound;
+
+                // Show error if no inventory found
+                if (!inventoryFound) {
+                    
+                    dispatch(setHeaderModalContent(NO_INVENTORY_FOUND));
+                    dispatch(showHeaderModal(true));
+                }
             }
         }
         

@@ -1,6 +1,7 @@
 import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
-    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
+    SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST, 
+    SELECT_DETAILS_MENU
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -57,16 +58,29 @@ export function updateImageList(list) {
     }
 }
 
-export function showModal(showBoolean) {
+export function showCardModal(showBoolean) {
     return {
-        type: SHOW_MODAL,
+        type: SHOW_CARD_MODAL,
         payload: showBoolean
     };
 }
 
-export function setModalContent(content) {
+export function setCardModalContent(content) {
     return {
-        type: SET_MODAL_CONTENT,
+        type: SET_CARD_MODAL_CONTENT,
+        payload: content
+    };
+}
+export function showHeaderModal(showBoolean) {
+    return {
+        type: SHOW_HEADER_MODAL,
+        payload: showBoolean
+    };
+}
+
+export function setHeaderModalContent(content) {
+    return {
+        type: SET_HEADER_MODAL_CONTENT,
         payload: content
     };
 }

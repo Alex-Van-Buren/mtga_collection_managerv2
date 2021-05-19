@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setModalContent, showModal } from '../../actions';
+import { setCardModalContent, showCardModal } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/CardListImage.css';
 
@@ -95,10 +95,10 @@ function CardListImage({ name, backside, numOwned, index }) {
                     onClick={ () => {
 
                         // Get the index of the image on click
-                        dispatch( setModalContent({ index, imgSide }) );
+                        dispatch( setCardModalContent({ index, imgSide }) );
 
                         // Then show the modal
-                        dispatch( showModal(true) );
+                        dispatch( showCardModal(true) );
                     } }
                 >
                     {/* Display one image for regular cards, and two for double-faced cards */}
