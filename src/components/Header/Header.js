@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { setInfo , historicSets } from '../../data/setInfo';
 import DarkModeToggle from './DarkModeToggle';
-import HeaderDropDown from './HeaderDropDown';
+import HeaderDropdown from './HeaderDropdown';
 import PlayerInventory from './PlayerInventory';
 import GetFile from './GetFile';
 import '../../css/Header.css';
@@ -38,9 +38,9 @@ function Header() {
                 <Link to='/' className="heading" id="home">Home</Link>
 
                 
-                <HeaderDropDown title="Sets" titleClass="heading" itemsClass="sets">
+                <HeaderDropdown title="Sets" titleClass="heading" itemsClass="sets">
                     {setLinks}
-                </HeaderDropDown>
+                </HeaderDropdown>
                 
             </div>
 
