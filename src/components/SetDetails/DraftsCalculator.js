@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import CustomDropdown from './CustomDropdown';
 import useBooster from '../../hooks/useBooster';
 import useDraft from '../../hooks/useDraft';
 import draftsNeeded from '../../data/draftsNeeded';
@@ -118,23 +119,17 @@ function DraftsCalculator() {
     const totalRareGemReward = Math.floor(rareDraftsNeeded * gems).toLocaleString();
     const totalMythicGemReward = Math.floor(mythicDraftsNeeded * gems).toLocaleString();
 
+    // Callback for CustomDropdown
+    function selectDraftType(item) {
+        setDraftType(item);
+        window.localStorage.setItem('preferredDraftType', item);
+    }
     // Dropdown selects draft type
     const renderDropDown = (
-        <div>
+        <div className="drafttype-dropdown">
             {/* Dropdown menu */}
-            <label htmlFor="draftType">Draft Type: </label>
-            <div className="ui compact menu small">
-                <div className="ui simple dropdown item" id="draftType">
-                    {draftType}
-                    <i className="dropdown icon"></i>
-                    <div className="menu">
-                        {/* onClick function sets the state and also puts the preferred draft type into localStorage for easier use on subsequent visits to site*/}
-                        <div className="item" onClick={() => {setDraftType("premier"); window.localStorage.setItem('preferredDraftType', 'premier')}}>Premier</div>
-                        <div className="item" onClick={() => {setDraftType("traditional"); window.localStorage.setItem('preferredDraftType', 'traditional')}}>Traditional</div>
-                        <div className="item" onClick={() => {setDraftType("quick"); window.localStorage.setItem('preferredDraftType', 'quick')}}>Quick</div>
-                    </div>
-                </div>
-            </div>
+            <label>Draft Type: </label>
+            <CustomDropdown items={['quick', 'premier', 'traditional']} key={draftType} firstSelection={draftType} selectfn={selectDraftType} />
         </div>
     );
     // Validation function for winRate that will keep the input between 0 and 100

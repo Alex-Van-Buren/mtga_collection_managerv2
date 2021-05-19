@@ -14,7 +14,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
 
     // In some cases keeping track of selected might be redundant
     const [selected, setSelected] = useState(firstSelection);
-
+    
     // Close Dropdown on all clicks outside of dropdown
     useEffect(() => {   
         document.body.addEventListener('click', () => setOpen(false));
@@ -41,7 +41,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
 
         return (
             <div 
-                className='dropdown-item' key={item} tabindex='0' 
+                className='dropdown-item' key={item} tabIndex='0' 
                 onKeyDown={(e) => { if (e.key === 'Enter') clickItem(item) }} 
                 onClick={() => clickItem(item)}
                 role='button' title={item}
