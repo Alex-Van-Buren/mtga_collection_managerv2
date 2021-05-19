@@ -26,7 +26,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
 
     // Helper function for clicking an item in the dropdown
     function clickItem(item) {
-        
+
         setSelected(item);
         setOpen(false);
 
@@ -40,10 +40,11 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
     const dropdownItems = items.map((item) => {
 
         return (
-            <div className='dropdown-item' key={item} tabindex='0' 
-            onKeyDown={(e) => {if (e.key === 'Enter'){clickItem(item)}}} 
-            onClick={() =>clickItem(item)}
-            role='button' title={item}
+            <div 
+                className='dropdown-item' key={item} tabindex='0' 
+                onKeyDown={(e) => { if (e.key === 'Enter') clickItem(item) }} 
+                onClick={() => clickItem(item)}
+                role='button' title={item}
             >
                 {item}
             </div>
@@ -69,12 +70,13 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
 
     return (
         <div className="dropdown">
-            <div className={selectedClass} tabIndex='0' 
-            onKeyDown={(e) => {if (e.key === 'Enter'){toggleDropdown(e)}}} 
-            onClick={(e) => toggleDropdown(e)}
-            role='button' title={selected} aria-expanded={open}
+            <div
+                className={selectedClass} tabIndex='0' 
+                onKeyDown={(e) => { if (e.key === 'Enter') toggleDropdown(e) }} 
+                onClick={(e) => toggleDropdown(e)}
+                role='button' title={selected} aria-expanded={open}
             >
-                {selected} <span><i className={iconClass}></i></span>
+                {selected} <span><i className={iconClass}/></span>
 
             </div>
             <div className={itemsClass}>{dropdownItems}</div>

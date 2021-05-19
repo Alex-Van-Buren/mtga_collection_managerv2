@@ -30,15 +30,15 @@ function DisplayOptions() {
 
     return (<div className="DisplayOptions">
         <SearchBar/>
-        
-        {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
-        <ColorCheckboxes/>
 
         {/* Buttons that select rarity: Mythic, Rare, Uncommon, Common */}
         <label className="rarityLabel">Rarity:</label>
         <div className="showList">
             {renderRarityButtons}
         </div>
+
+        {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
+        <ColorCheckboxes/>
 
         {/* DropDowns that select cards to show based on number in inventory and whether they are in boosters*/}
         <div className="display-options-dropdowns">            
