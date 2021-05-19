@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import '../../css/CustomDropDown.css';
+import '../../css/CustomDropdown.css';
 
 /**
  * Creates a dropdown menu where the selected item is displayed
@@ -9,7 +9,7 @@ import '../../css/CustomDropDown.css';
  * @param {Function} props.selectfn Optional. An additional callback function that uses the item selected as an argument.
  * 
  */
-function CustomDropDown({items, firstSelection, selectfn=undefined}) {
+function CustomDropdown({items, firstSelection, selectfn=undefined}) {
     const [open, setOpen] = useState(false);
 
     // In some cases keeping track of selected might be redundant
@@ -36,22 +36,28 @@ function CustomDropDown({items, firstSelection, selectfn=undefined}) {
     }
 
     // Map the Items
-    const dropDownItems = items.map((item) => {
+    const dropdownItems = items.map((item) => {
         return (
-            <div className='dropDown-item' key={item} onClick={() =>clickItem(item)}>{item}</div>
+            <div className='dropdown-item' key={item} tabindex='0' 
+            onKeyDown={(e) => {if (e.key === 'Enter'){clickItem(item)}}} 
+            onClick={() =>clickItem(item)}
+            role='button' title={item}
+            >
+                {item}
+            </div>
         )
     });
 
     // Closed dropdown classes
     let iconClass = 'icon chevron down';
-    let itemsClass = 'dropDown-items dropDown-closed';
-    let selectedClass = 'dropDown-selected dropDown-closed'
+    let itemsClass = 'dropdown-items dropdown-closed';
+    let selectedClass = 'dropdown-selected dropdown-closed'
 
-    // Change classes if dropDown is open
+    // Change classes if dropdown is open
     if (open) {
         iconClass = 'icon chevron up';
-        itemsClass = 'dropDown-items';
-        selectedClass = 'dropDown-selected'
+        itemsClass = 'dropdown-items';
+        selectedClass = 'dropdown-selected';
     }
 
     function toggleDropdown(event) {
@@ -60,11 +66,18 @@ function CustomDropDown({items, firstSelection, selectfn=undefined}) {
     }
 
     return (
-        <div className="dropDown">
-            <div className={selectedClass} onClick={(e) => toggleDropdown(e)}>{selected} <span><i className={iconClass}></i></span></div>
-            <div className={itemsClass}>{dropDownItems}</div>
+        <div className="dropdown">
+            <div className={selectedClass} tabIndex='0' 
+            onKeyDown={(e) => {if (e.key === 'Enter'){toggleDropdown(e)}}} 
+            onClick={(e) => toggleDropdown(e)}
+            role='button' title={selected} aria-expanded={open}
+            >
+                {selected} <span><i className={iconClass}></i></span>
+
+            </div>
+            <div className={itemsClass}>{dropdownItems}</div>
         </div>
     )
 }
 
-export default CustomDropDown;
+export default CustomDropdown;

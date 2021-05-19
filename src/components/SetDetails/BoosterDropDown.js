@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CustomDropDown from './CustomDropDown';
+import CustomDropdown from './CustomDropdown';
 import { selectBooster }  from '../../actions/index'
 
 function BoosterDropDown() {
@@ -13,8 +13,11 @@ function BoosterDropDown() {
         dispatch(selectBooster(item));
     }
 
-    return (        
-        <CustomDropDown items={['All Cards', 'In Boosters', 'Not In Boosters']} firstSelection={firstSelection} selectfn={selectfnBooster}/>
+    return (
+        <div className="boosterDropdown">
+            <label>Booster:</label>
+            <CustomDropdown items={['All Cards', 'In Boosters', 'Not In Boosters']} firstSelection={firstSelection} selectfn={selectfnBooster}/>
+        </div>        
     )
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import NumberOwnedDropdown from './NumberOwnedDropdown';
-import BoosterDropDown from './BoosterDropDown';
+import BoosterDropdown from './BoosterDropdown';
 import ColorCheckboxes from './ColorCheckboxes';
 import CustomButton from './CustomButton';
 import SearchBar from './SearchBar';
@@ -41,9 +41,9 @@ function DisplayOptions() {
         </div>
 
         {/* DropDowns that select cards to show based on number in inventory and whether they are in boosters*/}
-        <div className="showList">            
+        <div className="display-options-dropdowns">            
             <NumberOwnedDropdown />
-            <BoosterDropDown/>
+            <BoosterDropdown/>
         </div>
     </div>);
 }

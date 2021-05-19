@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import CustomDropDown from './CustomDropDown';
+import CustomDropdown from './CustomDropdown';
 import { setShowCards } from '../../actions';
 
 function NumberOwnedDropDown() {
@@ -33,7 +33,10 @@ function NumberOwnedDropDown() {
     }
 
     return (
-        <CustomDropDown items={items} firstSelection="Show All Cards" selectfn={selectfnNumberOwned} />
+        <div className="numberOwnedDropdown">
+            <label>Number Owned:</label>
+            <CustomDropdown items={items} firstSelection="Show All Cards" selectfn={selectfnNumberOwned} />
+        </div>
     )
 }
 
