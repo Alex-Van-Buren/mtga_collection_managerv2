@@ -8,8 +8,6 @@ import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
 
-import Modal from '../Modal';
-
 function GetFile() {
 
     // Get access to Redux dispatch function

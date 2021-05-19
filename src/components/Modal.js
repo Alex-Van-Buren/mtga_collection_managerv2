@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import '../css/Modal.css';
 /**
@@ -61,7 +61,7 @@ function Modal({ content, keyEvents, show, showModal }) {
                 window.removeEventListener('keydown', modalKeydowns);
             }
         }
-    }, [dispatch, show, keyEvents]);
+    }, [dispatch, show, showModal, keyEvents]);
 
     // Render Modal over content using a portal to the div with id="modal" in index.html
     return createPortal(
