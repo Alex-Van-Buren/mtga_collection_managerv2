@@ -9,14 +9,14 @@ function BoosterDropdown() {
     const dispatch = useDispatch();
     const firstSelection = useSelector(state => state.displayOptions.booster);
 
-    function selectfnBooster(item) {
-        dispatch(selectBooster(item));
-    }
-
     return (
         <div className="boosterDropdown">
             <label>Booster:</label>
-            <CustomDropdown items={['All Cards', 'In Boosters', 'Not In Boosters']} firstSelection={firstSelection} selectfn={selectfnBooster}/>
+            <CustomDropdown 
+                items={['All Cards', 'In Boosters', 'Not In Boosters']} 
+                firstSelection={firstSelection}
+                selectfn={(item) => dispatch(selectBooster(item))}
+            />
         </div>        
     )
 }
