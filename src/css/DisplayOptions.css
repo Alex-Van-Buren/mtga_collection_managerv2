@@ -139,6 +139,24 @@ label {
     width: 100%;
 }
 
+.display-options-dropdowns {
+    display: flex;
+    margin-top: 1em;  
+    gap: 10px;
+}
+
+.numberOwnedDropdown .dropdown {
+    width: 11.5em;
+}
+
+.boosterDropdown .dropdown {
+    width: 10em;
+}
+
+.numberOwnedDropdown .dropdown, .boosterDropdown .dropdown {
+    margin-left: 18px;
+    margin-top: 7px;
+}
 
 /* Color checkboxes */
 .colorIcon {

@@ -1,6 +1,6 @@
 import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
-    SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
+    SELECT_BOOSTER, SET_SEARCH_TERM, SHOW_MODAL, SET_MODAL_CONTENT, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -40,6 +40,14 @@ export function setShowCards(showCards) {
         type: SET_SHOWCARDS,
         // Return the selection of which cards to show
         payload: showCards
+    };
+}
+
+export function selectBooster(booster) {
+    return {
+        type: SELECT_BOOSTER,
+        // Return the selection of whether to show cards in/not in booster
+        payload: booster
     };
 }
 

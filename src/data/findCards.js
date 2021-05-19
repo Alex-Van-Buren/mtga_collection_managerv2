@@ -44,6 +44,9 @@ function findCards(searchOptions, returnOptions) {
         cardList = filterBooster(cardList, booster);
     }
 
+    // Filter out Alternate Art for cards
+    cardList = filterAltArt(cardList);
+
     // Sort the cards 
     cardList = sortCards(cardList);
 
@@ -183,35 +186,11 @@ function filterRarity(cardList, rarity) {
 function filterBooster(cardList, booster) {
     let newCardList = [];
 
-    // If booster true, just put cards in list if card.booster is true
-    if (booster === true) {
-        cardList.forEach( (card) => {
-            if (card.booster === booster) {
-                newCardList.push(card);
-            }
-        });
-    }
-
-    // If booster is false, card needs to have card.booster= false and card.promo_types NOT contain "boosterfun"
-    if (booster === false) {
-
-        cardList.forEach( (card) => {
-
-            // Check if it has property promo_types
-            if (card.promo_types) {
-                if (card.booster === booster && card.promo_types.includes("boosterfun") === false) {
-                    newCardList.push(card);
-                }
-
-            // If it doesn't have card.promo_types just check if the booster property is correct
-            } else {
-                if ( card.booster === booster) {
-                    newCardList.push(card);
-                }
-            }
-
-        });
-    }
+    cardList.forEach((card) => {
+        if (card.booster === booster){
+            newCardList.push(card);
+        }
+    });
 
     return newCardList;
 }
@@ -338,6 +317,42 @@ function getCardProperties(cardList, returnOptions) {
         newCardList.push(newCard);
     });
 
+    // Return newCardList
+    return newCardList;
+}
+
+// Helper function that filters out alternate art
+function filterAltArt(cardList) {
+    let newCardList = [];
+
+    for (const card of cardList) {
+
+        // Problem cards that require a special filter
+        // Realmwalker and Orah buy-a-box promos that also appear in the regular set
+        // Special alt art of Reflections of Littjara doesn't appear in-game but has arena_id for some reason
+        if (card.arena_id === 75382 || card.arena_id === 75910 || card.arena_id === 75381) {
+            // Don't add
+            continue;
+        }
+
+        // Check if the card has promo types
+        if ( card.promo_types ) {
+
+            // TODO: For special sets this might not work (eg mystical archives)
+            // if the card doesn't have boosterfun in promo types --> keep it
+            if ( card.promo_types.includes("boosterfun") === false ) {
+
+                newCardList.push(card);
+            }
+        }
+        // The card doesn't have promo_types
+        else {          
+
+            // Keep the card and push it into the list
+            newCardList.push(card);
+        }
+    }
+    
     // Return newCardList
     return newCardList;
 }

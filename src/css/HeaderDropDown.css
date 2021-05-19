@@ -3,9 +3,9 @@
 }
 
 a.dd-item {
-    display: block;
     color: var(--clr-txt);
     border-bottom: 1px solid var(--border-clr);
+    display: block;
     padding: 3px;
     padding-left: 10px;
 }
