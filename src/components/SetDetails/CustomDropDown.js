@@ -26,6 +26,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
 
     // Helper function for clicking an item in the dropdown
     function clickItem(item) {
+        
         setSelected(item);
         setOpen(false);
 
@@ -37,6 +38,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
 
     // Map the Items
     const dropdownItems = items.map((item) => {
+
         return (
             <div className='dropdown-item' key={item} tabindex='0' 
             onKeyDown={(e) => {if (e.key === 'Enter'){clickItem(item)}}} 

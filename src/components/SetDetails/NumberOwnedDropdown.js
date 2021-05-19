@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import CustomDropdown from './CustomDropdown';
 import { setShowCards } from '../../actions';
 
-function NumberOwnedDropDown() {
+function NumberOwnedDropdown() {
     const dispatch = useDispatch();
 
     const items = ['None', 'Own at Least One', 'Missing at Least One', 'Full Playset', 'Show All Cards'];
@@ -40,4 +40,4 @@ function NumberOwnedDropDown() {
     )
 }
 
-export default NumberOwnedDropDown;
+export default NumberOwnedDropdown;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CustomDropdown from './CustomDropdown';
 import { selectBooster }  from '../../actions/index'
 
-function BoosterDropDown() {
+function BoosterDropdown() {
 
     const dispatch = useDispatch();
     const firstSelection = useSelector(state => state.displayOptions.booster);
@@ -21,4 +21,4 @@ function BoosterDropDown() {
     )
 }
 
-export default BoosterDropDown;
+export default BoosterDropdown;

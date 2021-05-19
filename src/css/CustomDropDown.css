@@ -34,16 +34,16 @@
 }
 
 .dropdown-items {
-    position: absolute;
-    left: 0;
-    top: 100%;
     background-color: var(--background-clr);
-    width: 100%;
     border: 1px solid var(--clr-txt);
     border-top: none;
     border-radius: 5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
     z-index: 10;
 }
 
