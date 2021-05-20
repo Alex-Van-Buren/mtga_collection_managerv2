@@ -1,5 +1,5 @@
 import { 
-    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
+    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
 
     rarity: { mythic: false, rare: false, uncommon: false, common: false },
     
-    showCards: "all",
+    showCards: "Show All Cards",
 
     booster: "In Boosters",
 
@@ -85,6 +85,11 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
         // Set active details menu tab
         case SELECT_DETAILS_MENU: {
             return { ...state, activeTab: action.payload };
+        }
+
+        // Reset button
+        case RESET: {
+            return INITIAL_STATE 
         }
 
         default:

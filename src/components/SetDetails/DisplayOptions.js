@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import NumberOwnedDropdown from './NumberOwnedDropdown';
 import BoosterDropdown from './BoosterDropdown';
 import ColorCheckboxes from './ColorCheckboxes';
+import Reset from './Reset';
 import CustomButton from './CustomButton';
 import SearchBar from './SearchBar';
 import { selectRarity } from '../../actions';
@@ -44,6 +45,7 @@ function DisplayOptions() {
         <div className="display-options-dropdowns">            
             <NumberOwnedDropdown />
             <BoosterDropdown/>
+            <Reset />
         </div>
     </div>);
 }
