@@ -2,13 +2,11 @@ label {
     color: var(--clr-txt);
 }
 
-
 /* Set primary color */
 .ui.button {
     --primary:  rgb(33, 133, 208);
     --primary-o:  rgba(33, 133, 208, 0.8);
 }
-
 
 /* Number-owned buttons */
 .ui.button.showButton {
@@ -131,18 +129,20 @@ label {
         background-color: var(--primary-o) !important;
         color: var(--clr-txt) !important;
     }
+/*----------------------------------------------------------  */
 
-
-/* Number-owned AND Rarity button divs */
+/*Rarity button div */
 .showList {
     padding-left: 1em;
     width: 100%;
 }
 
+/* dropdowns and reset button */
 .display-options-dropdowns {
-    display: flex;
-    margin-top: 1em;  
-    gap: 10px;
+    display: flex; 
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .numberOwnedDropdown .dropdown {
@@ -158,6 +158,9 @@ label {
     margin-top: 7px;
 }
 
+.ui.button.positive.reset-button {
+    margin-left: 18px;
+}
 /* Color checkboxes */
 .colorIcon {
     width: 2.5em;
