@@ -1,8 +1,8 @@
 import React, {useState, useEffect } from 'react';
 
-import '../../css/HeaderDropDown.css'
+import '../../css/HeaderDropdown.css'
 
-function HeaderDropDown(props) {
+function HeaderDropdown(props) {
     // State for if dropdown is open or closed
     const [open, setOpen] = useState(false);
 
@@ -36,4 +36,4 @@ function HeaderDropDown(props) {
     )
 }
 
-export default HeaderDropDown;
+export default HeaderDropdown;

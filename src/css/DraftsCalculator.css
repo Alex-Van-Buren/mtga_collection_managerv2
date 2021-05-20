@@ -38,3 +38,15 @@ img.gemImg, img.goldImg {
     width: 1.5rem;
     transform: translateY(3px);
 }
+
+.drafttype-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.drafttype-dropdown .dropdown{
+    width: 8em;
+    text-transform: capitalize;
+    
+}
