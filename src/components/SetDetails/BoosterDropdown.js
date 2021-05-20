@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CustomDropdown from './CustomDropdown';
-import { selectBooster }  from '../../actions/index'
+import { selectBooster }  from '../../actions/index';
 
 function BoosterDropdown() {
 

@@ -41,9 +41,9 @@ function Header() {
                 <div className={`${hideMenu} leftOptions`}>
                     <Link to='/' className="heading" id="home">Home</Link>
                     
-                    <HeaderDropDown title="Sets" titleClass="heading" itemsClass="sets">
+                    <HeaderDropdown title="Sets" titleClass="heading" itemsClass="sets">
                         {setLinks}
-                    </HeaderDropDown>
+                    </HeaderDropdown>
                     
                 </div>
 
