@@ -1,8 +1,7 @@
 import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
     SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST, 
-    SELECT_DETAILS_MENU, SELECT_BOOSTER
-
+    SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -60,6 +59,12 @@ export function setSearchTerm(searchTerm) {
     };
 }
 
+export function resetDisplayOptions() {
+    return {
+        type: RESET
+    };
+}
+ 
 export function updateImageList(list) {
     return {
         type: UPDATE_IMAGE_LIST,

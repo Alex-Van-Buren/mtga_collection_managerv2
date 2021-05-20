@@ -20,8 +20,7 @@ function SearchBar() {
     const initialSearchTerm = useSelector(state => state.displayOptions.searchTerm);
 
     // Update initial Search Term on first load
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => setTerm(initialSearchTerm), []);
+    useEffect(() => setTerm(initialSearchTerm), [initialSearchTerm]);
 
     // Track change in search bar
     useEffect(() => {

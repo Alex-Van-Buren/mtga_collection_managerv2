@@ -13,10 +13,13 @@ function HeaderDropdown(props) {
 
     // Close Dropdown on all clicks outside of dropdown
     useEffect(() => {
-        document.body.addEventListener('click', () => setOpen(false));
+        function closeOnOutsideClick() {
+            setOpen(false);
+        }
+        document.body.addEventListener('click', closeOnOutsideClick);
 
         return () => {
-            document.body.removeEventListener('click', () => setOpen(false));
+            document.body.removeEventListener('click', closeOnOutsideClick);
         }
     }, []);
    

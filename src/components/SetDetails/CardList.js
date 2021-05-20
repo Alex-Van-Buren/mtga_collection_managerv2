@@ -94,11 +94,11 @@ function CardList({ setId }) {
             let makeCard = false;
 
             // Execute logic from showCards variable to determine whether card should be made
-            if (( showCards === 'all' )                  ||
-                ( showCards === '=0' && numOwned === 0 ) ||
-                ( showCards === '>0' && numOwned  >  0 ) ||
-                ( showCards === '<4' && numOwned  <  4 ) ||
-                ( showCards === '=4' && numOwned === 4))
+            if (( showCards === 'Show All Cards' )                         ||
+                ( showCards === 'None' && numOwned === 0 )                 ||
+                ( showCards === 'Own at Least One' && numOwned  >  0 )     ||
+                ( showCards === 'Missing at Least One' && numOwned  <  4 ) ||
+                ( showCards === 'Full Playset' && numOwned === 4))
             {
                 makeCard = true;
             }
