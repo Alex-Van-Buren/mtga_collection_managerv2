@@ -89,7 +89,21 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
 
         // Reset button
         case RESET: {
-            return INITIAL_STATE 
+
+            return {...state, colors: {
+                white: false,
+                blue: false,
+                black: false,
+                red: false,
+                green: false,
+                multi: false,
+                colorless: false
+            },
+            rarity: { mythic: false, rare: false, uncommon: false, common: false },
+            showCards: "Show All Cards",
+            booster: "In Boosters",
+            searchTerm: ""
+            }
         }
 
         default:
