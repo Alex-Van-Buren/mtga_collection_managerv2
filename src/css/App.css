@@ -6,6 +6,7 @@
     --clr-txt: rgba(0,0,0,0.87);
     --clr-txt-light: rgba(0,0,0,0.5);
     --clr-txt-inverse: #FFF;
+    --modal-clr: rgba(0, 0, 0, 0.9);
 
     /* Regular colors */
     --mythic:   rgb(191, 68, 39);
@@ -31,6 +32,7 @@
     --clr-txt: #DEDEDE;
     --clr-txt-light: rgba(222, 222, 222, 0.5);
     --clr-txt-inverse: #000;
+    --modal-clr: rgba(0, 0, 0, 0.85);
 
     --common:   rgb(229, 232, 231);
     --common-o: rgba(229, 232, 231, 0.9);

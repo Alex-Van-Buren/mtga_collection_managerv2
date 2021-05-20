@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import {
     getCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent
 } from '../../actions';
-import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
 
@@ -115,6 +114,9 @@ function GetFile() {
     
         // Grab file from user
         const file = event.target.files[0];
+
+        // Clear target value to allow error on each upload regardless of same file being uploaded
+        event.target.value = null;
     
         // Check that a valid file exists
         if (file != null && file.size > 0) {
@@ -135,14 +137,18 @@ function GetFile() {
                 // Show error if no inventory found
                 if (!inventoryFound) {
                     
-                    dispatch(setHeaderModalContent(NO_INVENTORY_FOUND));
+                    dispatch(setHeaderModalContent("NO_INVENTORY_FOUND"));
                     dispatch(showHeaderModal(true));
                 }
             }
         }
         
         // Alert user of invalid file
-        else alert(INVALID_FILE);
+        else {
+
+            dispatch(setHeaderModalContent("INVALID_FILE"));
+            dispatch(showHeaderModal(true));
+        }
     }
 
     // Make a ref

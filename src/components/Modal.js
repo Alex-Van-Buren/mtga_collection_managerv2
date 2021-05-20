@@ -68,6 +68,7 @@ function Modal({ content, keyEvents, show, showModal }) {
         <div
             onClick={() => dispatch(showModal(false))}
             className="ui dimmer modals visible active cardModal"
+            aria-keyshortcuts="Esc (escape) closes pop-up"
         >
             
             <div
@@ -75,7 +76,7 @@ function Modal({ content, keyEvents, show, showModal }) {
                 onClick={e => e.stopPropagation()}
             >
                 {/* Get modal content from props */}
-                {content ? content : null}
+                {content}
             </div>
 
         </div>,
