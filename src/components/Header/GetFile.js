@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getCollection, getPlayerInventory, processSetCollection } from '../../actions';
-import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
+import {
+    getCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent
+} from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
 
@@ -50,10 +51,17 @@ function GetFile() {
             
             // Put processed set information into Redux                
             dispatch( processSetCollection(inventory) );
+
+            // Successful
+            return true;
         }
 
         // Alert user of invalid Player Log
-        else alert(NO_INVENTORY_FOUND);
+        else {
+
+            // Unsuccessful
+            return false;
+        }
     }
 
     /**
@@ -90,15 +98,25 @@ function GetFile() {
             
             // Dispatch playerInventory to Redux
             dispatch(getPlayerInventory(playerInventory));
+
+            // Successful
+            return true;
         }
         // Alert user of invalid Player Log
-        else alert(NO_INVENTORY_FOUND);
+        else {
+
+            // Unsuccessful
+            return false;
+        }
     }
 
     const handleFile = (event) =>{
     
         // Grab file from user
         const file = event.target.files[0];
+
+        // Clear target value to allow error on each upload regardless of same file being uploaded
+        event.target.value = null;
     
         // Check that a valid file exists
         if (file != null && file.size > 0) {
@@ -109,14 +127,28 @@ function GetFile() {
             // After the file loads and is read by the reader
             reader.onloadend = () => {
 
+                // Check for error reading file
+                let inventoryFound = true;
+
                 // Use functions to extract the information from player log
-                extractCardInventory(reader.result);
-                extractPlayerInventory(reader.result);
+                inventoryFound = extractCardInventory(reader.result);
+                inventoryFound = extractPlayerInventory(reader.result) && inventoryFound;
+
+                // Show error if no inventory found
+                if (!inventoryFound) {
+                    
+                    dispatch(setHeaderModalContent("NO_INVENTORY_FOUND"));
+                    dispatch(showHeaderModal(true));
+                }
             }
         }
         
         // Alert user of invalid file
-        else alert(INVALID_FILE);
+        else {
+
+            dispatch(setHeaderModalContent("INVALID_FILE"));
+            dispatch(showHeaderModal(true));
+        }
     }
 
     // Make a ref

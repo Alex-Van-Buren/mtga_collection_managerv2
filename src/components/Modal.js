@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { showModal } from '../actions';
 import '../css/Modal.css';
 /**
- * A generic modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
- * by pressing escape. Can be passed functions to call when specified keys are pressed.
+ * A generic Redux modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
+ * by pressing escape. Can be passed functions to call when specified keys are pressed. Recommend creating new actions to
+ * show modal and set modal content for each unique modal type used (to avoid mistakenly processing modal content across
+ * multiple modal files).
  * 
  * @param {JSX} props.content The modal content to display.
  * @param {Array} props.keyEvents Describes the keys to listen for the the functions to execute upon that key being pressed.
@@ -16,14 +17,14 @@ import '../css/Modal.css';
  * @param {Number} props.keyEvents[].key The key to set an event listener for. Inside an object on the keyEvents array.
  * @param {Function} props.keyEvents[].keyFunction The function to execute when the key is pressed. Inside an object on
  * the keyEvents array.
+ * @param {boolean} props.show The true/false value indicating whether this modal currently needs to be displayed.
+ * @param {Function} props.showModal The function used to close/open this modal. Used to close modal when clicked off of
+ * or when Esc is pressed.
  */
-function Modal({ content, keyEvents }) {
+function Modal({ content, keyEvents, show, showModal }) {
 
     // Access redux dispatcher
     const dispatch = useDispatch();
-
-    // Determine whether modal should currently be shown
-    const show = useSelector(state => state.modal.showModal);
 
     // Add listener to handle keyboard inputs
     useEffect(() => {
@@ -65,14 +66,14 @@ function Modal({ content, keyEvents }) {
                 window.removeEventListener('keydown', modalKeydowns);
             }
         }
-    }, [dispatch, show, keyEvents]);
+    }, [dispatch, show, showModal, keyEvents]);
 
     // Render Modal over content using a portal to the div with id="modal" in index.html
     return createPortal(
         <div
-            // Initially hide the modal
             onClick={() => dispatch(showModal(false))}
             className="ui dimmer modals visible active cardModal"
+            aria-keyshortcuts="Esc (escape) closes pop-up"
         >
             
             <div

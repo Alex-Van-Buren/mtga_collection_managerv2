@@ -10,6 +10,7 @@ import PacksCalculator from './PacksCalculator';
 import DraftsCalculator from './DraftsCalculator';
 import { setInfo } from '../../data/setInfo';
 import CardModal from './CardModal';
+import SetNotFound from '../SetNotFound.js';
 import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/SetDetails.css';
 
@@ -17,6 +18,9 @@ function SetDetails() {
 
     // Get set Id from url
     const { setId } = useParams();
+
+    // Get current screen width
+    const width = useResizeWidth();
 
     // Get active tab from redux
     const activeTab = useSelector(state => state.displayOptions.activeTab);
@@ -26,7 +30,7 @@ function SetDetails() {
      */
     const ownedTotal = useSelector( ({ inventory: {set} }) => {
         let sum = 0;
-        if (set) {
+        if (set && set[setId]) {
             // Sum the total cards owned
             Object.keys(set[setId]).forEach( rarity => {sum += set[setId][rarity].ownedTotal} );
         }
@@ -35,12 +39,19 @@ function SetDetails() {
 
     const setTotal = useSelector( ({ inventory: {set} }) => {
         let sum = 0;
-        if (set) {
+        if (set && set[setId]) {
             // Sum the total cards in the set
             Object.keys(set[setId]).forEach( rarity => {sum += set[setId][rarity].setTotal} );
         }
         return sum;
     });
+
+    // Check if set exists
+    if (!setInfo[setId]) {
+        
+        // Return error page if set doesn't exist
+        return <SetNotFound/>;
+    }
 
     // Calculate and round percent owned
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
@@ -62,7 +73,6 @@ function SetDetails() {
     })();
 
     // Break up set details and display options at small width
-    const width = useResizeWidth();
     let setDetailsColumns = "six";
     let displayOptionsColumns = "ten";
 

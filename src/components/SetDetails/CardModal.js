@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Modal';
-import { showModal, setModalContent } from '../../actions';
+import { showCardModal, setCardModalContent } from '../../actions';
 import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/CardModal.css';
 
@@ -11,10 +11,10 @@ function CardModal() {
     const dispatch = useDispatch();
 
     // Determine whether modal should currently be shown
-    const show = useSelector(state => state.modal.showModal);
+    const show = useSelector(state => state.modal.showCardModal);
 
     // Destructuring from redux gets dicey, so these look kind of silly
-    const { index, imgSide } = useSelector(({ modal: {content} }) => {
+    const { index, imgSide } = useSelector(({ modal: {cardContent: content} }) => {
         if (content)
             return { index: content.index, imgSide: content.imgSide };
 
@@ -37,7 +37,7 @@ function CardModal() {
      */
     const goLeft = useCallback(() => {
         if (index > 0) {
-            dispatch(setModalContent({ index: index - 1, imgSide: true }));
+            dispatch(setCardModalContent({ index: index - 1, imgSide: true }));
         }
     }, [dispatch, index]);
 
@@ -46,7 +46,7 @@ function CardModal() {
      */
     const goRight = useCallback(() => {
         if (index < imgLength-1) {
-            dispatch(setModalContent({ index: index + 1, imgSide: true }));
+            dispatch(setCardModalContent({ index: index + 1, imgSide: true }));
         }
     }, [dispatch, index, imgLength]);
 
@@ -58,7 +58,7 @@ function CardModal() {
         if (img.back) {
 
             // Keep same card, but flip to other side
-            dispatch(setModalContent({ index, imgSide: !imgSide }));
+            dispatch(setCardModalContent({ index, imgSide: !imgSide }));
     
             // Set animation for flipping action on card
             imgRef.current.style.transition = "1s";
@@ -187,7 +187,7 @@ function CardModal() {
         {/* Exit button */}
         <div
             className="modalClose"
-            onClick={() => dispatch(showModal(false))}
+            onClick={() => dispatch(showCardModal(false))}
         >
             {exit}
         </div>
@@ -227,7 +227,7 @@ function CardModal() {
 
     // Render Modal
     return (
-        <Modal content={renderedContent} keyEvents={keyEvents} />
+        <Modal content={renderedContent} keyEvents={keyEvents} show={show} showModal={showCardModal}/>
     );
 }
 

@@ -6,6 +6,7 @@ import DarkModeToggle from './DarkModeToggle';
 import HeaderDropdown from './HeaderDropdown';
 import PlayerInventory from './PlayerInventory';
 import GetFile from './GetFile';
+import HeaderModal from './HeaderModal';
 import '../../css/Header.css';
 
 /**
@@ -29,47 +30,50 @@ function Header() {
         )
     });
     
-    return (<div id="headerMarginBottom">
+    return (<>
+        <HeaderModal />
 
-        <div id="header">
+        <div id="headerMarginBottom">
 
-            {/* Options on Left Side */}
-            <div className={`${hideMenu} leftOptions`}>
-                <Link to='/' className="heading" id="home">Home</Link>
+            <div id="header">
 
-                
-                <HeaderDropdown title="Sets" titleClass="heading" itemsClass="sets">
-                    {setLinks}
-                </HeaderDropdown>
-                
+                {/* Options on Left Side */}
+                <div className={`${hideMenu} leftOptions`}>
+                    <Link to='/' className="heading" id="home">Home</Link>
+                    
+                    <HeaderDropdown title="Sets" titleClass="heading" itemsClass="sets">
+                        {setLinks}
+                    </HeaderDropdown>
+                    
+                </div>
+
+                {/* Options on Right Side */}
+                <div className={`${hideMenu} rightOptions`}>
+
+                    {/* File Selector */}
+                    <GetFile />
+
+                    {/* Help Menu */}
+                    <Link to='/help' className="heading" id="help">Help</Link>
+
+
+                    {/* Dark Mode Toggle */}
+                    <DarkModeToggle />
+                </div>
+
             </div>
 
-            {/* Options on Right Side */}
-            <div className={`${hideMenu} rightOptions`}>
-
-                {/* File Selector */}
-                <GetFile />
-
-                {/* Help Menu */}
-                <Link to='/help' className="heading" id="help">Help</Link>
-
-
-                {/* Dark Mode Toggle */}
-                <DarkModeToggle />
+            {/* Hamburger menu */}
+            <div id="hamburger"
+                onClick={(e) => setHamburgerClicked(!hamburgerClicked)}
+            >
+                <i className={`hamburger icon ${hamburgerClass}`} />
             </div>
 
+            {/* Player Inventory */}
+            <PlayerInventory />
         </div>
-
-        {/* Hamburger menu */}
-        <div id="hamburger"
-            onClick={(e) => setHamburgerClicked(!hamburgerClicked)}
-        >
-            <i className={`hamburger icon ${hamburgerClass}`} />
-        </div>
-
-        {/* Player Inventory */}
-        <PlayerInventory />
-    </div>);
+    </>);
 }
 
 export default Header;
