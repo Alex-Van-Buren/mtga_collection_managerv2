@@ -10,6 +10,7 @@
     background-color: var(--background-clr);
     color: var(--clr-txt);
 }
+
 p#displayingNumberCards {
     color: var(--clr-txt);
     margin: 0 40px;
@@ -27,12 +28,13 @@ p#displayingNumberCards {
 .cardList-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    gap: 15px;
-    margin: 0 20px
+    justify-content: center;
+    gap: 0px 20px;
+    margin: 0 20px;
 }
+
 .cardList-cards>.bouncy.column {
-    width: 225px
+    width: 225px;
 }
 
 @media only screen and (max-width: 562px) {
