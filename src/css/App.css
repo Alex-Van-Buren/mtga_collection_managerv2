@@ -3,6 +3,7 @@
     --border-clr: rgba(34, 36, 38, 0.15);
     --clr-prm: #eeeeee;
     --clr-prm-focus: #DEDEDE;
+    --clr-sec: rgba(0,0,0,.03);
     --clr-txt: rgba(0,0,0,0.87);
     --clr-txt-light: rgba(0,0,0,0.5);
     --clr-txt-inverse: #FFF;
