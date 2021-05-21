@@ -6,6 +6,9 @@ import { showHeaderModal } from '../../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import '../../css/HeaderModal.css';
 
+/**
+ * An implementation of the Modal Component used to show errors in the Header component.
+ */
 function HeaderModal() {
 
     const show = useSelector(state => state.modal.showHeaderModal);

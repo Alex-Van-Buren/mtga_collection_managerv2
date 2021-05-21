@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import '../css/Modal.css';
 /**
- * A generic modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
- * by pressing escape. Can be passed functions to call when specified keys are pressed.
+ * A generic Redux modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
+ * by pressing escape. Can be passed functions to call when specified keys are pressed. Recommend creating new actions to
+ * show modal and set modal content for each unique modal type used (to avoid mistakenly processing modal content across
+ * multiple modal files).
  * 
  * @param {JSX} props.content The modal content to display.
  * @param {Array} props.keyEvents Describes the keys to listen for the the functions to execute upon that key being pressed.
@@ -15,6 +17,9 @@ import '../css/Modal.css';
  * @param {Number} props.keyEvents[].key The key to set an event listener for. Inside an object on the keyEvents array.
  * @param {Function} props.keyEvents[].keyFunction The function to execute when the key is pressed. Inside an object on
  * the keyEvents array.
+ * @param {boolean} props.show The true/false value indicating whether this modal currently needs to be displayed.
+ * @param {Function} props.showModal The function used to close/open this modal. Used to close modal when clicked off of
+ * or when Esc is pressed.
  */
 function Modal({ content, keyEvents, show, showModal }) {
 
