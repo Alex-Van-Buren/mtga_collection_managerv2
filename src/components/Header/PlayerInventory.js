@@ -21,17 +21,22 @@ function PlayerInventory() {
         // Return player inventory if it exists
         if ( inventory && inventory.player ) return inventory.player;
 
-        // Else initialize to 0
-        const temp = {};
-        const playerProps = [ "wcMythic", "wcRare", "wcUncommon", "wcCommon", "gems", "gold", "vaultProgress" ];
-        for (const prop of playerProps) {
-            temp[prop] = 0;
-        }
-        return temp;
+        // Else return null
+        return null;
     });
+
+    // Don't display Player Inventory if inventory isn't initialized
+    if (!inventory) {
+        return null;
+    }
 
     // Destructure values from inventory
     const { wcMythic, wcRare, wcUncommon, wcCommon, gems, gold, vaultProgress } = inventory;
+
+    // Don't display inventory if all inventory values are 0 (assuming this means log file not uploaded)
+    if (wcMythic===0 && wcRare===0 && wcUncommon===0 && wcCommon===0 && gems===0 && gold===0 && vaultProgress===0) {
+        return null;
+    }
 
     return (
         <div id="playerInventory">
