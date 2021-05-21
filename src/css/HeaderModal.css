@@ -2,6 +2,7 @@
     color: white;
     font-size: 1.5rem;
     text-align: start;
+    max-width: 85vw;
 }
 
 .errorTitle {
@@ -23,4 +24,13 @@
 
 .ui.dimmer {
     background-color: var(--modal-clr);
+}
+
+@media screen and (max-width:739px) {
+    .errorMessage {
+        font-size: 1.0rem;
+    }
+    .errorTitle {
+        font-size: 1.5rem;
+    }
 }
