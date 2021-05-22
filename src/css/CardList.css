@@ -2,10 +2,6 @@
     box-shadow: none !important;
 }
 
-.ui.grid>.column:not(.row) {
-    padding: 0.5em 1em;
-}
-
 .ui.card>.content {
     padding: 0.5em 1em;
 }
@@ -14,8 +10,10 @@
     background-color: var(--background-clr);
     color: var(--clr-txt);
 }
-p.ui.container {
+
+p#displayingNumberCards {
     color: var(--clr-txt);
+    margin: 0 40px;
 }
 
 .numCardsShown {
@@ -25,6 +23,18 @@ p.ui.container {
 .bouncy.column:hover, .bouncy.column:focus-visible {
     cursor: pointer;
     transform: translateY(-3px);
+}
+
+.cardList-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0px 20px;
+    margin: 0 20px;
+}
+
+.cardList-cards>.bouncy.column {
+    width: 225px;
 }
 
 @media only screen and (max-width: 562px) {

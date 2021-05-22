@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import findCards from '../../data/findCards';
-import useResizeWidth from '../../hooks/useResizeWidth';
 import CardListImage from './CardListImage';
 import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
@@ -125,40 +124,17 @@ function CardList({ setId }) {
         dispatch(updateImageList(currentPictures));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
-
-    // Get width
-    const width = useResizeWidth();
-    
-    // Find optimal number of columns for card display based on screen width
-    // Locking aspect ratio at 250px by 350px, allowing for margin
-    const numCols = useMemo(() => {
-
-        // Turing parameters
-        const MIN_CARD_WIDTH = 225; // Min card width in px
-        const MARGIN_DECIMAL = 0.10; // Percent margin on left or right / 100
-        
-        // Number of cards shown = (width - 2*margin) / minumum card width rounded down
-        let numCards = Math.floor(width * (1 - 2*MARGIN_DECIMAL) / MIN_CARD_WIDTH);
-
-        // Ensure at least one card is shown
-        if (numCards < 1) numCards = 1;
-
-        // Map the number onto a class (zero is a placeholder for indexing)
-        const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine', 'ten'];
-        
-        return numberWords[numCards];
-
-    }, [width]);
     
     return (<>
         {/* Counter for number of cards being displayed */}
-        <p className="ui container">
+        <p id="displayingNumberCards">
             Displaying <span className="numCardsShown">{cardCount}</span> card(s):
         </p>
 
         {/* JSX for matching cards */}
-        <div className={`ui ${numCols} column grid container`}>
-            {renderCards}
+
+        <div className="cardList-cards">
+            {renderCards}  
         </div>
     </>);
 }
