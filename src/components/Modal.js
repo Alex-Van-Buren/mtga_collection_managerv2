@@ -10,7 +10,7 @@ import '../css/Modal.css';
  * multiple modal files).
  * 
  * @param {JSX} props.content The modal content to display.
- * @param {Array} props.keyEvents Describes the keys to listen for the the functions to execute upon that key being pressed.
+ * @param {Array} props.keyEvents (Optional) Describes the keys to listen for the the functions to execute upon that key being pressed.
  * - keyEvents is an Array of objects; each object contains a key and a function: { key: {Number}, keyFunction: {Function}}
  * - Events for key code 27 (escape) are ignored; it will always close the modal.
  * - Prevents default actions when key pressed.
