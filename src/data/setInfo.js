@@ -132,6 +132,42 @@ export const setInfo = {
         mythic_upgrade: (1/8),
         collationId: 100005,
         logo: xln_logo
+    },
+    sta: {
+        name: "Strixhaven Mystical Archives",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha1: {
+        name: "Historic Anthology",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha2: {
+        name: "Historic Anthology 2",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha3: {
+        name: "Historic Anthology 3",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha4: {
+        name: "Historic Anthology 4",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    jmp: {
+        name: "Jumpstart",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
     }
 }
 
