@@ -233,7 +233,7 @@ function sortCards(cardList) {
  * @param {boolean} advanced Regular search if unspecified or false, advanced search if true.
  * @param {string} advancedSearchType "name", "type_line", and "oracle_text" are the allowed advanced search types.
  * Indicates specific card section to search.
- * @returns 
+ * @returns True if the card contains the search term, false otherwise. (Or matches advanced search options if specified)
  */
 function filterByTerm(card, term, advanced=false, advancedSearchType=null) {
 
@@ -318,7 +318,12 @@ function filterByTerm(card, term, advanced=false, advancedSearchType=null) {
     }
 }
 
-// Helper function that takes the input cardlist and returns the desired properties of that card to make it easier to use
+/**
+ * Helper function that takes the input cardlist and returns the desired properties of that card to make it easier to use
+ * @param {Array} cardList The array of cards
+ * @param {Array} returnOptions Properties to keep from the card list.
+ * @returns New card list with only the properties specified in returnOptions
+ */
 function getCardProperties(cardList, returnOptions) {
     let newCardList = [];
     cardList.forEach( (card) => {
@@ -333,7 +338,7 @@ function getCardProperties(cardList, returnOptions) {
         }
 
         // Otherwise just grab the name from the top level name
-        else{
+        else {
             newCard.name = card.name;
         }
 
@@ -342,13 +347,16 @@ function getCardProperties(cardList, returnOptions) {
 
         // Check for other optional card Properties
         if (returnOptions) {
+
             returnOptions.forEach((option) => {
+
                 // Check if the option is directly defined
                 if( card[option]) {
 
                     // Then just put the option in the newCard
                     newCard[option] = card[option];
                 } 
+
                 // Check if the option is defined under card_faces (using front face)
                 else if ( card.card_faces && card.card_faces[0][option]) {
                     
@@ -359,6 +367,7 @@ function getCardProperties(cardList, returnOptions) {
                     if (!newCard.backside) {
                         newCard.backside = {};
                     }
+
                     newCard.backside[option] = card.card_faces[1][option];
                 }
 
@@ -374,40 +383,37 @@ function getCardProperties(cardList, returnOptions) {
     return newCardList;
 }
 
-// Helper function that filters out alternate art
-function filterAltArt(cardList) {
-    let newCardList = [];
+/**
+ * Filter out alternate art and problem cards.
+ * @param {number} cardId ID of the card.
+ * @param {Array} cardPromoTypes 
+ * @returns True if the card is not an alternate art card, false otherwise.
+ */
+function filterAltArt(cardId, cardPromoTypes) {
 
-    for (const card of cardList) {
-
-        // Problem cards that require a special filter
-        // Realmwalker and Orah buy-a-box promos that also appear in the regular set
-        // Special alt art of Reflections of Littjara doesn't appear in-game but has arena_id for some reason
-        if (card.arena_id === 75382 || card.arena_id === 75910 || card.arena_id === 75381) {
-            // Don't add
-            continue;
-        }
-
-        // Check if the card has promo types
-        if ( card.promo_types ) {
-
-            // TODO: For special sets this might not work (eg mystical archives)
-            // if the card doesn't have boosterfun in promo types --> keep it
-            if ( card.promo_types.includes("boosterfun") === false ) {
-
-                newCardList.push(card);
-            }
-        }
-        // The card doesn't have promo_types
-        else {          
-
-            // Keep the card and push it into the list
-            newCardList.push(card);
-        }
+    // Problem cards that require a special filter
+    // Realmwalker and Orah buy-a-box promos that also appear in the regular set
+    // Special alt art of Reflections of Littjara doesn't appear in-game but has arena_id for some reason
+    if (cardId === 75382 || cardId === 75910 || cardId === 75381) {
+        // Don't add
+        return false;
     }
-    
-    // Return newCardList
-    return newCardList;
+
+    // Check if the card has promo types
+    if ( cardPromoTypes ) {
+
+        // TODO: For special sets this might not work (eg mystical archives)
+        // if the card doesn't have boosterfun in promo types --> keep it
+        if ( cardPromoTypes.includes("boosterfun") === false ) {
+
+            return true
+        }
+
+        // Otherwise filter out this alt-art card
+        return false;
+    }
+    // Else the card doesn't have promo_types and no filtering is necessary        
+    return true;
 }
 
 // export default findCards;
