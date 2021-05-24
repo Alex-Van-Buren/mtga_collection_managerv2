@@ -8,6 +8,8 @@ import { historicSets as sets } from '../data/setInfo';
  * each rarity in that set
  */
 function totalOwned(cardCollection) {
+    // Historic Anthologies
+    const anthologies = ['ha1', 'ha2', 'ha3', 'ha4', 'ha5'];
 
     // Create inventory for each set
     const inventory = {};
@@ -22,6 +24,18 @@ function totalOwned(cardCollection) {
         }
     }
 
+    // Helper function that updates the inventory ownedTotal and setTotal given a card
+    function updateInventory(card) {
+        // Update total possible in set
+        inventory[card.set][card.rarity].setTotal += 4;
+    
+        // Find number owned by user
+        const id = card.arena_id;
+        if (cardCollection && cardCollection[id]) {
+            inventory[card.set][card.rarity].ownedTotal += cardCollection[id];
+        }
+    }
+
     // Check each card on arena
     for (const card of allArenaCards) {
 
@@ -32,7 +46,16 @@ function totalOwned(cardCollection) {
             continue;
         }
 
-        // TODO: May need to change in the future to include specific non-booster sets
+        // Weird sets logic
+        // Check if the card is in one the strange sets
+        
+        if (anthologies.includes(card.set)) {
+            // For anthologies, include all the cards don't check if booster
+            // Update the inventory
+            updateInventory(card);
+            continue; // Card has been added so go to next card
+        }
+        
         // Filter out non-booster cards
         if (!card.booster) {
 
@@ -42,19 +65,13 @@ function totalOwned(cardCollection) {
 
         // If card is in a tracked set, add that card to inventory 
         if (inventory[card.set]) {
-
-            // Update total possible in set
-            inventory[card.set][card.rarity].setTotal += 4;
-
-            // Find number owned by user
-            const id = card.arena_id;
-            if (cardCollection && cardCollection[id]) {
-                inventory[card.set][card.rarity].ownedTotal += cardCollection[id];
-            }
+            // Update the inventory 
+            updateInventory(card);
         }
     }
-
+    
     return inventory;
 }
+
 
 export default totalOwned;
