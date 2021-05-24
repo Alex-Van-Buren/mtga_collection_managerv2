@@ -9,6 +9,7 @@ import draftsNeeded from '../../data/draftsNeeded';
 import '../../css/DraftsCalculator.css';
 import gem_img from '../../images/arena/Gem.png';
 import gold_img from '../../images/arena/Gold.png';
+import { setInfo } from '../../data/setInfo';
 
 function DraftsCalculator() {
     const [draftType, setDraftType] = useState("premier");
@@ -99,6 +100,16 @@ function DraftsCalculator() {
     // Get the average gems/packs per draft
     const { gems, packs: rewardPacks } = useDraft(draftType, winRate/100);
 
+    // Check if the set is not draftable (the collationId is the value for the booster pack of the set)
+    // TODO:Strixhaven Mytical Archives is different
+    if (!setInfo[setId].collationId) {
+        const message = `${setInfo[setId].name} is not a draftable set`;
+        return (
+            <div id="draftsCalculator">
+                <h2>{message}</h2>
+            </div>
+        )
+    }
     // Calculate number of drafts required to complete rare/mythic collection for this set
     const rareDraftsNeeded = draftsNeeded(setId, "rare", rareOwnedTotal, rareSetTotal, raresPicked, rewardPacks, ownedBoosters);
     const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicOwnedTotal, mythicSetTotal, mythicsPicked, rewardPacks, ownedBoosters);

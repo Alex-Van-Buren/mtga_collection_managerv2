@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useBooster from '../../hooks/useBooster';
 
 import packsNeeded from '../../data/packsNeeded';
+import { setInfo } from '../../data/setInfo';
 import '../../css/PacksCalculator.css';
 
 function PacksCalculator() {
@@ -21,6 +22,16 @@ function PacksCalculator() {
     const mythicsTotal = useSelector( state => state.inventory.set[setId].mythic.setTotal);
     const packsToCompleteMythics = packsNeeded(setId, 'mythic' , mythicsOwned, mythicsTotal);
 
+    // Check if the set is obtainable from normal boosters
+    // TODO: Mystical Archives is different
+    if ( !setInfo[setId].collationId ) {
+        const message = `${setInfo[setId].name} is not obtainable from normal Booster Packs`;
+        return (
+            <div className="calculator">
+                <h2>{message}</h2>
+            </div>
+        )
+    }
     return (
         <div className="calculator"> 
             <h2>Packs Owned: {ownedBoosters}</h2>

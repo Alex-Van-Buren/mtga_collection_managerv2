@@ -37,6 +37,12 @@ export const setInfo = {
         collationId: 100023,
         logo: stx_logo
     },
+    sta: {
+        name: "Strixhaven Mystical Archives",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
     khm: {
         name: "Kaldheim",
         mythic_upgrade: (1/7.4),
@@ -133,12 +139,6 @@ export const setInfo = {
         mythic_upgrade: (1/8),
         collationId: 100005,
         logo: xln_logo
-    },
-    sta: {
-        name: "Strixhaven Mystical Archives",
-        mythic_upgrade: null,
-        collationId: null,
-        logo: null
     },
     ha1: {
         name: "Historic Anthology",
