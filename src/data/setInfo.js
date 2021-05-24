@@ -15,6 +15,7 @@ import m19_logo from '../images/setLogos/m19_logo.png';
 import dom_logo from '../images/setLogos/dom_logo.png';
 import rix_logo from '../images/setLogos/rix_logo.png';
 import xln_logo from '../images/setLogos/xln_logo.png';
+import jmp_logo from '../images/setLogos/jmp_logo.png';
 
 
 /**
@@ -167,7 +168,7 @@ export const setInfo = {
         name: "Jumpstart",
         mythic_upgrade: null,
         collationId: null,
-        logo: null
+        logo: jmp_logo
     }
 }
 
