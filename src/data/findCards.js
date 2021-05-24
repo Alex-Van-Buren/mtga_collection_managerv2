@@ -101,7 +101,8 @@ function filterBasicLands(cardTypeLine) {
  * Filter by Color helper function
  * @param {Array} cardColor Array of strings containing the color identities of the card to be checked.
  * @param {Object} searchColors Object containing the boolean values for the desired colors.
- * @returns 
+ * @returns True if the card colors match the search colors (logic is more complex for multi and colorless).
+ * Returns false if the card colors don't match.
  */
 function filterColor(cardColor, searchColors) {
         
@@ -165,33 +166,41 @@ function filterColor(cardColor, searchColors) {
 
 }
 
-// Filter by rarity helper function
-function filterRarity(cardList, rarity) {
-    let newCardList = [];
-    cardList.forEach( (card) => {
+/**
+ * Check if the card's rarity is in the rarity array
+ * @param {String} cardRarity The rarity of the card to be checked.
+ * @param {Array} rarity The array of desired rarities.
+ * @returns True when the card's rarity is in the rarities array.
+ */
+function filterRarity(cardRarity, rarity) {
 
-        // check if the rarity array contains the rarity of the card
-        if (rarity.includes(card.rarity))
-            newCardList.push(card);
-    });
-
-    return newCardList;
+    // Check if the rarity array contains the rarity of the card
+    if (rarity.includes(cardRarity)) {
+        return true;
+    }
+    return false;
+        
 }
 
-// Filter by booster boolean value helper function
-function filterBooster(cardList, booster) {
-    let newCardList = [];
+/**
+ * Checks if the card's booster value and the desired booster value match
+ * @param {boolean} cardBooster The card's booster value
+ * @param {boolean} booster The desired booster value.
+ * @returns True if the desired value for booster and the card's booster value match.
+ */
+function filterBooster(cardBooster, booster) {
 
-    cardList.forEach((card) => {
-        if (card.booster === booster){
-            newCardList.push(card);
-        }
-    });
-
-    return newCardList;
+    if (cardBooster === booster) {
+        return true;
+    }
+    return false;
 }
 
-// Helper function that sorts the cards 
+/**
+ * Sorts a list of MTG Arena cards 
+ * @param {Array} cardList The array containing the cards to be sorted.
+ * @returns An array of cards sorted by converted mana cost, then alphabetically within each cmc group.
+ */
 function sortCards(cardList) {
 
     // First sorts alphabetically
@@ -215,47 +224,95 @@ function sortCards(cardList) {
     return cardList;
 }
 
-// Find cards by name helper function
-// - includes partial matches
-function filterByTerm(cardList, term) {
-    const newCardList = [];
-    
-    for (const card of cardList) {
-        let toPush = false;
+/**
+ * Searches card for specified search term (includes partial matches).
+ * - If advanced is specified, and is true, an advanced search is performed.
+ * - Advanced search searches only the card section specified by the string in advancedSearchType.
+ * @param {Object} card Card object to search. Only uses name, type_line, oracle_text, and card_faces properties.
+ * @param {string} term The search term to match.
+ * @param {boolean} advanced Regular search if unspecified or false, advanced search if true.
+ * @param {string} advancedSearchType "name", "type_line", and "oracle_text" are the allowed advanced search types.
+ * Indicates specific card section to search.
+ * @returns 
+ */
+function filterByTerm(card, term, advanced=false, advancedSearchType=null) {
 
+    // Normal search
+    if (!advanced) {
+
+        // Check name
         if ( match(card.name) ) {
-            toPush = true;
+            return true;
         }
-        else if ( match(card.type_line) ) {
-            toPush = true;
+    
+        // Check type line
+        if ( match(card.type_line) ) {
+            return true;
         }
-
-        else if (card.oracle_text && match(card.oracle_text)) {
-            toPush = true;
+    
+        // Check oracle text
+        if (card.oracle_text && match(card.oracle_text)) {
+            return true;
         }
-
+    
         // Need to check card faces in order to find some cards
-        else if (card.card_faces) {
-
+        if (card.card_faces) {
+    
             // Check oracle_text for each face
             for (const face of card.card_faces) {
-
+    
                 if ( face.oracle_text && match(face.oracle_text) ) {
-                    toPush = true;
-                    break;
+                    return true;
                 }
             }
         }
-
-        if (toPush) {
-            newCardList.push(card);
-        }
-
     }
 
-    return newCardList;
+    // Advanced search
+    else {
+        switch (advancedSearchType) {
 
-    // Make check less verbose
+            case "name":
+                // Check name only
+                if ( match(card.name) ) {
+                    return true;
+                }
+                return false;
+
+            case "type_line":
+                // Check type line only
+                if ( match(card.type_line) ) {
+                    return true;
+                }
+                return false;
+
+            case "oracle_text": {
+                // Check oracle text
+                if (card.oracle_text && match(card.oracle_text)) {
+                    return true;
+                }
+
+                // Need to check card faces in order to find some cards
+                if (card.card_faces) {
+            
+                    // Check oracle_text for each face
+                    for (const face of card.card_faces) {
+            
+                        if ( face.oracle_text && match(face.oracle_text) )
+                            return true;
+                    }
+                }
+                return false;
+            }
+
+            default:
+                return false;
+        }
+    }
+    // False if no match found above
+    return false;
+
+    // Helper function to make comparing the search term less verbose. Compares input to search term
     function match(checkText) {
         return checkText.toUpperCase().includes(term.toUpperCase());
     }
