@@ -9,7 +9,6 @@ const allArenaCards = require('./arenaCards20210427172602.json');
  * @returns An array of the cards founds with each card as an object with properties: name, arenaId, and the additional properties defined (if found)
  */
 function findCards(searchOptions, returnOptions) {
-    // TODO: Filter booster still weird, might add a filter alt arts
 
     const { set, color, rarity, booster, term, excludeBasicLands=true } = searchOptions;
     let cardList = allArenaCards;
@@ -26,7 +25,18 @@ function findCards(searchOptions, returnOptions) {
 
     // Filter by color if needed
     if (color) {
-        cardList = filterColor(cardList, color);
+
+        // If all colors are false, don't run function
+        if (!(color.white || color.blue || color.black || color.red || color.green || color.colorless || color.multi)) {
+            // Don't run function
+
+        } else if ( color.multi && color.colorless ) {
+            // TODO: If multi AND colorless are true, return zero cards
+
+        } else {
+            
+            cardList = filterColor(cardList, color);
+        }
     }
 
     // Filter by rarity if needed
@@ -56,117 +66,103 @@ function findCards(searchOptions, returnOptions) {
     return cardList;
 }
 
-// Filter Set helper function
-function filterSet(cardList, set) {
-    let newCardList = [];
-    cardList.forEach( (card) => {
-        if (card.set === set) {
-            newCardList.push(card);
-        }
-    });
+/**
+ * Filter cards not in specified set.
+ * @param {String} cardSet Set code of the card
+ * @param {String} set The set that the card needs to match to return true
+ * @returns True if cardSet and set match, false otherwise.
+ */
+ function filterSet(cardSet, set) {
 
-    return newCardList;
-}
-
-// Filter Out Basic lands helper funciton
-function filterBasicLands(cardList) {
-    let newCardList = []
-    cardList.forEach( (card) => {
-        if ( card.type_line.includes('Basic') && card.type_line.includes('Land') ){
-            // Skip
-        }
-        
-        else {
-            newCardList.push(card);
-        }
-    });
-
-    return newCardList
-}
-
-// Filter by Color helper function
-function filterColor(cardList, searchColors){
-    let newCardList= [];
-
-    // Check if everything is false, if so do nothing and return original cardlist
-    if (!(searchColors.white || searchColors.blue || searchColors.black || searchColors.red || searchColors.green || searchColors.colorless || searchColors.multi)) {
-        return cardList;
-    }
-    // if multi AND colorless are true, return zero cards
-    if ( searchColors.multi && searchColors.colorless ) {
-        return newCardList;
+    // Filter cards not in the set
+    if (cardSet === set) {
+        return true;
     }
 
-    // Check each card
-    for (const card of cardList) {
-        
-        // Check if multi is false
-        if ( !searchColors.multi ) {
-            // Multi false
-            // Check if the card contains any of the WUBRG colors that are being searched for
-            if ((searchColors.white && card.color_identity.includes('W')) || (searchColors.blue && card.color_identity.includes('U')) ||
-                (searchColors.black && card.color_identity.includes('B')) || (searchColors.red  && card.color_identity.includes('R')) ||
-                (searchColors.green && card.color_identity.includes('G'))) {
+    return false;
+}
 
-                // Add to newCardList and go to next card
-                newCardList.push(card);
-                continue;
-            }
+/**
+ * Filter out Basic Lands.
+ * @param {String} cardTypeLine The type line of the card to check
+ * @returns True if the card is not a basic land, false if it is.
+ */
+function filterBasicLands(cardTypeLine) {
 
-            // Check if colorless is true and if the card is colorless
-            if ( searchColors.colorless && (card.color_identity.length === 0) ) {
-
-                // Add to newCardList and go to next card
-                newCardList.push(card);
-                continue;
-            }
+    // Skip basic lands
+    if ( cardTypeLine.includes('Basic') && cardTypeLine.includes('Land') ){
+        return false;
+    }
     
-        }
-        // Multi true
-        else {
-            // Check if card has more than one color in color identity
-            if ( card.color_identity.length < 2 ) {
+    return true;
+}
 
-                // Don't add card and move on to next card
-                continue;
-            }
-            
-            // Check if multi is the only color option that is true
-            if (searchColors.multi && !(searchColors.white || searchColors.blue || searchColors.black || searchColors.red || searchColors.green || searchColors.colorless)){
-
-                // Add card to cardlist and move on to next card
-                newCardList.push(card);
-                continue;
-            }
-
-            // Card must include ALL of the other colors but may include addtional colors
-            let addCard = true;
-            const colors = [{name:'white' , symbol: 'W' }, 
-                            {name:'blue'  , symbol: 'U' }, 
-                            {name:'black' , symbol: 'B' }, 
-                            {name:'red'   , symbol: 'R' }, 
-                            {name:'green' , symbol: 'G' }];
-            
-            for (const color of colors) {
-                
-                // Check if searching for particular color and if the card does NOT include that color
-                if ( searchColors[color.name] && !card.color_identity.includes(color.symbol)) {
-
-                    // Make addCard false and break loop on first mismatch
-                    addCard = false;
-                    break;
-                } 
-            }
-            // Add the card that match the criteria
-            if ( addCard ) {
-                newCardList.push(card);
-                continue;
-            }
-        }
-    };
-
+/**
+ * Filter by Color helper function
+ * @param {Array} cardColor Array of strings containing the color identities of the card to be checked.
+ * @param {Object} searchColors Object containing the boolean values for the desired colors.
+ * @returns 
+ */
+function filterColor(cardColor, searchColors) {
         
-    return newCardList;
+    // Multi false logic
+    if ( !searchColors.multi ) {
+
+        // If the card contains any of the WUBRG colors that are being searched for
+        if ((searchColors.white && cardColor.includes('W')) ||
+            (searchColors.blue  && cardColor.includes('U')) ||
+            (searchColors.black && cardColor.includes('B')) ||
+            (searchColors.red   && cardColor.includes('R')) ||
+            (searchColors.green && cardColor.includes('G')))
+        {
+            // Card matches a color
+            return true;
+        }
+
+        // Check if colorless is true and the card is colorless
+        if ( searchColors.colorless && (cardColor.length === 0) ) {
+
+            // Card matches colorless
+            return true;
+        }
+    }
+
+    // Multi true
+    else {
+
+        // Check if card has more than one color in color identity
+        if ( cardColor.length < 2 ) {
+
+            // Card isn't multi-color
+            return false;
+        }
+        
+        // Check if multi is the only color option that is true
+        if ( searchColors.multi && 
+             !( searchColors.white || searchColors.blue  || searchColors.black || 
+                searchColors.red   || searchColors.green || searchColors.colorless )
+           )
+        {
+            // Card is multi-color
+            return true;
+        }
+
+        // Card must include ALL required colors but may include addtional colors
+        const colors = { 'white' : 'W', 'blue'  : 'U', 'black' : 'B', 'red'   : 'R', 'green' : 'G' };
+        
+        for (const [name, symbol] of Object.entries(colors)) {
+            
+            // Make sure card has all required colors
+            if ( searchColors[name] && !cardColor.includes(symbol) ) {
+
+                // Card doesn't include a required color
+                return false;
+            } 
+        }
+        // Card includes all required colors
+        return true;
+    }
+
 }
 
 // Filter by rarity helper function
