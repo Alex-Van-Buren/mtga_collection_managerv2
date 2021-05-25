@@ -47,7 +47,7 @@ function findCards(searchOptions, returnOptions) {
             return [];
 
         } else {
-            filterFunctions.push( (card) => filterColor(card.color_identity, term) );
+            filterFunctions.push( (card) => filterColor(card.color_identity, color) );
         }
     }
 
@@ -69,21 +69,19 @@ function findCards(searchOptions, returnOptions) {
     // Filter out Alternate Art for cards
     filterFunctions.push( (card) => filterAltArt(card.arena_id, card.promo_types) );
 
-    // Remove undesired properties from each card
-    filterFunctions.push( (card) => getCardProperties(card, returnOptions) );
 
 /* Call each chosen filter function on each card */
 
     // Card list will hold chosen cards
     let cardList = [];
 
-    for (const card in allArenaCards) { // Loop over cards
+    for (const card of allArenaCards) { // Loop over cards
         let addCard = true;
 
-        for (const filter in filterFunctions) { // Loop over filter functions
+        for (let i=0; i<filterFunctions.length; i++) { // Loop over filter functions
 
             // Call filter function on card and stop calling filter functions if one returns false
-            if (!filter(card)) {
+            if (!filterFunctions[i](card)) {
                 addCard = false;
                 break;
             }
@@ -91,7 +89,9 @@ function findCards(searchOptions, returnOptions) {
         
         // Decide whether to add card to card list
         if (addCard) {
-            cardList.push(card);
+
+            // Push card with desired properties to card list
+            cardList.push(getCardProperties(card, returnOptions));
         }
     }
 
