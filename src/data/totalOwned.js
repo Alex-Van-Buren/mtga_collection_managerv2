@@ -46,16 +46,16 @@ function totalOwned(cardCollection) {
             continue;
         }
 
-        // Weird sets logic
+        // -----------------------Weird sets logic----------------------------------
         // Check if the card is in one the strange sets
         
-        if (anthologies.includes(card.set)) {
-            // For anthologies, include all the cards don't check if booster
+        if (anthologies.includes(card.set) || card.set === 'sta') {
+            // For anthologies and strixhaven mystical archives, include all the cards don't check if booster
             // Update the inventory
             updateInventory(card);
             continue; // Card has been added so go to next card
         }
-        
+        // --------------------- Normal Sets---------------------------------------
         // Filter out non-booster cards
         if (!card.booster) {
 
