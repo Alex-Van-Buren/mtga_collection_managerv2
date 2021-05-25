@@ -1,5 +1,5 @@
 // import allArenaCards from './arenaCards20210427172602.json';
-const allArenaCards = require('./arenaCards20210427172602.json');
+const allArenaCards = require('./arenaCards20210525161144.json');
 
 /**
  * 
