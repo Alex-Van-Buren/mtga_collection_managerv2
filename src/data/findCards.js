@@ -10,58 +10,93 @@ const allArenaCards = require('./arenaCards20210427172602.json');
  */
 function findCards(searchOptions, returnOptions) {
 
+    // Destructure search options
     const { set, color, rarity, booster, term, excludeBasicLands=true } = searchOptions;
-    let cardList = allArenaCards;
+
+    /**
+     * An array of ananymous functions to be called on each card
+     * - Each function must take ONLY the card as a parameter.
+     * @param {Object} card The card to be tested.
+     */
+    const filterFunctions = [];
+
+/* DETERMINE WHICH FUNCTIONS NEED TO BE CALLED ON EACH CARD */
 
     // First filter by set if needed
     if (set) {
-        cardList = filterSet(cardList, set);
+        filterFunctions.push( (card) => filterSet(card.set, set) );
     }
 
     // Filter by name if needed
     if (term) {
-        cardList = filterByTerm(cardList, term);
+        filterFunctions.push( (card) => filterByTerm(card, term) );
     }
 
     // Filter by color if needed
     if (color) {
 
-        // If all colors are false, don't run function
+        // If all colors are false, don't filter by color
         if (!(color.white || color.blue || color.black || color.red || color.green || color.colorless || color.multi)) {
-            // Don't run function
+            // Don't add function
 
-        } else if ( color.multi && color.colorless ) {
-            // TODO: If multi AND colorless are true, return zero cards
+        }
+        // If multi AND colorless are selected, 0 cards returned from findCards function
+        else if ( color.multi && color.colorless ) {
+            
+            // Exit filterFunction definition and return empty array
+            return [];
 
         } else {
-            
-            cardList = filterColor(cardList, color);
+            filterFunctions.push( (card) => filterColor(card.color_identity, term) );
         }
     }
 
     // Filter by rarity if needed
     if (rarity) {
-        cardList = filterRarity(cardList, rarity);
+        filterFunctions.push( (card) => filterRarity(card.rarity, rarity) );
     }
 
     // Filter Out Basic Lands
     if (excludeBasicLands) {
-        cardList = filterBasicLands(cardList);
+        filterFunctions.push( (card) => filterBasicLands(card.type_line) );
     }
 
     // Filter booster if needed
     if (booster !== undefined) {
-        cardList = filterBooster(cardList, booster);
+        filterFunctions.push( (card) => filterBooster(card.booster, booster) );
     }
 
     // Filter out Alternate Art for cards
-    cardList = filterAltArt(cardList);
+    filterFunctions.push( (card) => filterAltArt(card.arena_id, card.promo_types) );
+
+    // Remove undesired properties from each card
+    filterFunctions.push( (card) => getCardProperties(card, returnOptions) );
+
+/* Call each chosen filter function on each card */
+
+    // Card list will hold chosen cards
+    let cardList = [];
+
+    for (const card in allArenaCards) { // Loop over cards
+        let addCard = true;
+
+        for (const filter in filterFunctions) { // Loop over filter functions
+
+            // Call filter function on card and stop calling filter functions if one returns false
+            if (!filter(card)) {
+                addCard = false;
+                break;
+            }
+        }
+        
+        // Decide whether to add card to card list
+        if (addCard) {
+            cardList.push(card);
+        }
+    }
 
     // Sort the cards 
-    cardList = sortCards(cardList);
-
-    // Get the desired properties
-    cardList = getCardProperties(cardList, returnOptions);    
+    cardList = sortCards(cardList);  
 
     return cardList;
 }
@@ -126,6 +161,9 @@ function filterColor(cardColor, searchColors) {
             // Card matches colorless
             return true;
         }
+
+        // No multi-color match found
+        return false;
     }
 
     // Multi true
@@ -226,19 +264,18 @@ function sortCards(cardList) {
 
 /**
  * Searches card for specified search term (includes partial matches).
- * - If advanced is specified, and is true, an advanced search is performed.
- * - Advanced search searches only the card section specified by the string in advancedSearchType.
+ * - If advancedSearchType is specified, an advanced search is performed.
+ * - An advanced search searches only the card section specified by the string in advancedSearchType.
  * @param {Object} card Card object to search. Only uses name, type_line, oracle_text, and card_faces properties.
  * @param {string} term The search term to match.
- * @param {boolean} advanced Regular search if unspecified or false, advanced search if true.
- * @param {string} advancedSearchType "name", "type_line", and "oracle_text" are the allowed advanced search types.
- * Indicates specific card section to search.
+ * @param {string} advancedSearchType Regular search if unspecified. If specified, creates an advanced search.
+ * "name", "type_line", and "oracle_text" are the allowed advanced search types, indicating the specific card section to search.
  * @returns True if the card contains the search term, false otherwise. (Or matches advanced search options if specified)
  */
-function filterByTerm(card, term, advanced=false, advancedSearchType=null) {
+function filterByTerm(card, term, advancedSearchType=null) {
 
     // Normal search
-    if (!advanced) {
+    if (!advancedSearchType) {
 
         // Check name
         if ( match(card.name) ) {
@@ -320,67 +357,62 @@ function filterByTerm(card, term, advanced=false, advancedSearchType=null) {
 
 /**
  * Helper function that takes the input cardlist and returns the desired properties of that card to make it easier to use
- * @param {Array} cardList The array of cards
+ * @param {Array} card The card to remove properties from.
  * @param {Array} returnOptions Properties to keep from the card list.
  * @returns New card list with only the properties specified in returnOptions
  */
-function getCardProperties(cardList, returnOptions) {
-    let newCardList = [];
-    cardList.forEach( (card) => {
-        
-        // initialize card object to add
-        let newCard = {};
+function getCardProperties(card, returnOptions) {
 
-        // Add the name to the newCard
-        // For modal_dfc and adventure cards the desired card name is the name on the front face
-        if ( card.layout === 'adventure' || card.layout === 'modal_dfc') {
-            newCard.name = card.card_faces[0].name;
-        }
+    // Initialize card object to add
+    let newCard = {};
 
-        // Otherwise just grab the name from the top level name
-        else {
-            newCard.name = card.name;
-        }
+    // Add the name to the newCard
+    // For modal_dfc and adventure cards the desired card name is the name on the front face
+    if ( card.layout === 'adventure' || card.layout === 'modal_dfc') {
+        newCard.name = card.card_faces[0].name;
+    }
 
-        // Add the arena id to newCard
-        newCard.arenaId = card.arena_id;
+    // Otherwise just grab the name from the top level name
+    else {
+        newCard.name = card.name;
+    }
 
-        // Check for other optional card Properties
-        if (returnOptions) {
+    // Add the arena id to newCard
+    newCard.arenaId = card.arena_id;
 
-            returnOptions.forEach((option) => {
+    // Add cmc to newCard
+    newCard.cmc = card.cmc;
 
-                // Check if the option is directly defined
-                if( card[option]) {
+    // Check for other optional card Properties
+    if (returnOptions) {
 
-                    // Then just put the option in the newCard
-                    newCard[option] = card[option];
-                } 
+        returnOptions.forEach((option) => {
 
-                // Check if the option is defined under card_faces (using front face)
-                else if ( card.card_faces && card.card_faces[0][option]) {
-                    
-                    // Put option in the newCard
-                    newCard[option] = card.card_faces[0][option];
+            // Check if the option is directly defined
+            if( card[option]) {
 
-                    // Put the backside option onto key property backside
-                    if (!newCard.backside) {
-                        newCard.backside = {};
-                    }
+                // Then just put the option in the newCard
+                newCard[option] = card[option];
+            } 
 
-                    newCard.backside[option] = card.card_faces[1][option];
+            // Check if the option is defined under card_faces (using front face)
+            else if ( card.card_faces && card.card_faces[0][option]) {
+
+                // Put option in the newCard
+                newCard[option] = card.card_faces[0][option];
+
+                // Put the backside option onto key property backside
+                if (!newCard.backside) {
+                    newCard.backside = {};
                 }
 
-                // Else the option is not found so do nothing                
-            });
-        }
+                newCard.backside[option] = card.card_faces[1][option];
+            }
 
-        // Add the newCard with desired Properties to newCardList
-        newCardList.push(newCard);
-    });
-
-    // Return newCardList
-    return newCardList;
+            // Else the option is not found so do nothing                
+        });
+    }
+    return newCard;
 }
 
 /**
