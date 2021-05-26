@@ -22,7 +22,7 @@ function CardListImage({ name, backside, numOwned, index }) {
     const [imgSide, setImgSide] = useState(true);
 
     // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    let cardImages = imgs? <img src={imgs.front} alt={name}/> : null;
+    let cardImages = imgs? <img src={imgs.front} alt={name} loading="lazy"/> : null;
     let flipButton = null; // Regular cards don't have a flip button
 
     // Refs
@@ -73,8 +73,8 @@ function CardListImage({ name, backside, numOwned, index }) {
 
         // One image will be hidden
         cardImages = <>
-            <img src={imgs.front} alt={name} className="cardImg"/>
-            <img src={imgs.back} alt={name} className="backside"/>
+            <img src={imgs.front} alt={name} className="cardImg" loading="lazy"/>
+            <img src={imgs.back} alt={name} className="backside" loading="lazy"/>
         </>;
     }
 
