@@ -46,6 +46,18 @@
     left: 124px;
 }
 
+.logo {
+    margin-right: 0.5rem;
+    width: 2rem;
+}
+
+#home {
+    font-size: 1.2rem;
+    font-family: 'Kadwa', serif;
+    font-weight: 400;
+    padding: 0 1rem;
+}
+
 /*
  Display hamburger menu at mobile sizes 
  - show x when menu expanded and hide menu when hamburger shown 

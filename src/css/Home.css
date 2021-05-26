@@ -1,12 +1,16 @@
 #standardToggle {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     margin: 1rem 2rem;
 }
 
 #standardLabel, #historicLabel {
     color: var(--clr-txt);
+    font-family: 'Kadwa', serif;
+    font-weight: 400;
     margin: 0 0.5rem;
+    padding-top: 0.15rem;
 }
 
 .ui.fitted.toggle.checkbox#labelColorStandardToggle input:not(:checked) ~ label:before {
@@ -14,6 +18,8 @@
 }
 
 .ui.huge.center.aligned.header {
+    font-family: 'Kadwa', serif;
+    font-size: 3rem;
+    font-weight: 400;
     margin-bottom: 2rem;
-    font-size: 2.7rem;
 }

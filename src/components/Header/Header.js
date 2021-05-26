@@ -7,6 +7,7 @@ import HeaderDropdown from './HeaderDropdown';
 import PlayerInventory from './PlayerInventory';
 import GetFile from './GetFile';
 import HeaderModal from './HeaderModal';
+import logo from '../../images/logo-192x192.png';
 import '../../css/Header.css';
 
 /**
@@ -39,7 +40,10 @@ function Header() {
 
                 {/* Options on Left Side */}
                 <div className={`${hideMenu} leftOptions`}>
-                    <Link to='/' className="heading" id="home">Home</Link>
+                    <Link to='/' className="heading" id="home">
+                        <img src={logo} alt="logo" className="logo" />
+                        Collection Manager
+                    </Link>
                     
                     <HeaderDropdown title="Sets" titleClass="heading" itemsClass="sets">
                         {setLinks}
