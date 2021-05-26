@@ -10,28 +10,37 @@ import { setInfo } from './setInfo';
  */
 function packsNeeded(setId, rarity, numCardsOwned, numCardsTotal) {
 
-    // use setId to get the mythic upgrade rate from setInfo
-    const mythicUpgradeRate = setInfo[setId].mythic_upgrade;
-
-    // Calculate the number of cards missing
-    const numMissing = numCardsTotal - numCardsOwned;
+    // use setId to get the mythic upgrade rate from setInfo and get rareRate using this value
+    let mythicUpgradeRate = setInfo[setId].mythic_upgrade;
+    let rareRate = 1 - mythicUpgradeRate;
 
     // This is the rate that the card does NOT upgrade into a wildcard of the same rarity
     // This value is commonly used by other trackers/websites. Might need further verification.
     const nonWildcardRate = 11/12;
 
+    // For strixhaven mystical archive the rareRate is explicit since a rare/mythic is not in every pack
+    if ( setId === 'sta' ) {
+        // Mystical archive cards can NOT upgrade to wildcards
+        // therefore these values are divided by the nonWildcardRate in order to cancel out the term in the packsToComplete calculation
+        rareRate = setInfo[setId].rare_rate / nonWildcardRate;
+        mythicUpgradeRate = mythicUpgradeRate / nonWildcardRate;
+    }
+
+    // Calculate the number of cards missing
+    const numMissing = numCardsTotal - numCardsOwned;
+
     let packsToComplete;
 
     // If the rarity of the missing cards is "rare", we subtract the mythic upgrade rate from 1 to get the rare rate
     if ( rarity === 'rare' ) {
-        packsToComplete = numMissing / ((1 - mythicUpgradeRate) * nonWildcardRate);
+        packsToComplete = numMissing / (rareRate * nonWildcardRate);
     }
     // rarity === 'mythic'
     else {
         packsToComplete = numMissing / (mythicUpgradeRate * nonWildcardRate);
     }
 
-    packsToComplete = Math.round(packsToComplete)
+    packsToComplete = Math.ceil(packsToComplete)
 
     return packsToComplete; 
 

@@ -39,8 +39,9 @@ export const setInfo = {
     },
     sta: {
         name: "Strixhaven Mystical Archives",
-        mythic_upgrade: null,
-        collationId: null,
+        mythic_upgrade: 0.066,
+        rare_rate: 0.264,
+        collationId: 100023,
         logo: null
     },
     khm: {
