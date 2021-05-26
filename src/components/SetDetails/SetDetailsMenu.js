@@ -39,7 +39,7 @@ function SetDetailsMenu() {
                 Card Filters
             </div>
             <div className={packsClass} onClick={()=> dispatch(selectDetailsMenu('Packs'))}>
-                Packs
+               Booster Packs
             </div>
             <div className={draftsClass} onClick={()=> dispatch(selectDetailsMenu('Drafts'))}>
                 Drafts
