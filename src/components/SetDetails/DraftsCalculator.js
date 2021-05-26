@@ -101,7 +101,6 @@ function DraftsCalculator() {
     const { gems, packs: rewardPacks } = useDraft(draftType, winRate/100);
 
     // Check if the set is not draftable (the collationId is the value for the booster pack of the set)
-    // TODO:Strixhaven Mytical Archives is different
     if (!setInfo[setId].collationId) {
         const message = `${setInfo[setId].name} is not a draftable set`;
         return (

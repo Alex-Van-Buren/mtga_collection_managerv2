@@ -23,7 +23,6 @@ function PacksCalculator() {
     const packsToCompleteMythics = packsNeeded(setId, 'mythic' , mythicsOwned, mythicsTotal);
 
     // Check if the set is obtainable from normal boosters
-    // TODO: Mystical Archives is different
     if ( !setInfo[setId].collationId ) {
         const message = `${setInfo[setId].name} is not obtainable from normal Booster Packs`;
         return (

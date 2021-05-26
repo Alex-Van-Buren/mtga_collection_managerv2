@@ -32,6 +32,7 @@ function RarityCollectionItem({ setId, rarity }) {
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
 
     let rarityNumber;
+    // Check if percentOwned is a number and don't show the percentage to user if NaN
     if (percentOwned >= 0 ) {
         rarityNumber = `${ownedTotal} / ${setTotal} (${percentOwned}%)`;
     } else {
