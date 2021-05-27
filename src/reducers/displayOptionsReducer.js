@@ -17,7 +17,7 @@ const INITIAL_STATE = {
     
     showCards: "Show All Cards",
 
-    booster: "In Boosters",
+    booster: "All Cards",
 
     searchTerm: "",
 
@@ -101,7 +101,7 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             },
             rarity: { mythic: false, rare: false, uncommon: false, common: false },
             showCards: "Show All Cards",
-            booster: "In Boosters",
+            booster: "All Cards",
             searchTerm: ""
             }
         }

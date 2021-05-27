@@ -15,6 +15,7 @@ import m19_logo from '../images/setLogos/m19_logo.png';
 import dom_logo from '../images/setLogos/dom_logo.png';
 import rix_logo from '../images/setLogos/rix_logo.png';
 import xln_logo from '../images/setLogos/xln_logo.png';
+import jmp_logo from '../images/setLogos/jmp_logo.png';
 
 
 /**
@@ -35,6 +36,13 @@ export const setInfo = {
         mythic_upgrade: (1/8),
         collationId: 100023,
         logo: stx_logo
+    },
+    sta: {
+        name: "Strixhaven Mystical Archives",
+        mythic_upgrade: 0.066,
+        rare_rate: 0.264,
+        collationId: 100023,
+        logo: null
     },
     khm: {
         name: "Kaldheim",
@@ -132,6 +140,36 @@ export const setInfo = {
         mythic_upgrade: (1/8),
         collationId: 100005,
         logo: xln_logo
+    },
+    ha1: {
+        name: "Historic Anthology",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha2: {
+        name: "Historic Anthology 2",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha3: {
+        name: "Historic Anthology 3",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    ha4: {
+        name: "Historic Anthology 4",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
+    jmp: {
+        name: "Jumpstart",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: jmp_logo
     }
 }
 

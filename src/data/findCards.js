@@ -1,5 +1,5 @@
-// import allArenaCards from './arenaCards20210427172602.json';
-const allArenaCards = require('./arenaCards20210427172602.json');
+// import allArenaCards from './arenaCards20210525185440.json';
+const allArenaCards = require('./arenaCards20210525185440.json');
 
 /**
  * 
@@ -65,10 +65,6 @@ function findCards(searchOptions, returnOptions) {
     if (booster !== undefined) {
         filterFunctions.push( (card) => filterBooster(card.booster, booster) );
     }
-
-    // Filter out Alternate Art for cards
-    filterFunctions.push( (card) => filterAltArt(card.arena_id, card.promo_types) );
-
 
 /* Call each chosen filter function on each card */
 
@@ -413,39 +409,6 @@ function getCardProperties(card, returnOptions) {
         });
     }
     return newCard;
-}
-
-/**
- * Filter out alternate art and problem cards.
- * @param {number} cardId ID of the card.
- * @param {Array} cardPromoTypes 
- * @returns True if the card is not an alternate art card, false otherwise.
- */
-function filterAltArt(cardId, cardPromoTypes) {
-
-    // Problem cards that require a special filter
-    // Realmwalker and Orah buy-a-box promos that also appear in the regular set
-    // Special alt art of Reflections of Littjara doesn't appear in-game but has arena_id for some reason
-    if (cardId === 75382 || cardId === 75910 || cardId === 75381) {
-        // Don't add
-        return false;
-    }
-
-    // Check if the card has promo types
-    if ( cardPromoTypes ) {
-
-        // TODO: For special sets this might not work (eg mystical archives)
-        // if the card doesn't have boosterfun in promo types --> keep it
-        if ( cardPromoTypes.includes("boosterfun") === false ) {
-
-            return true
-        }
-
-        // Otherwise filter out this alt-art card
-        return false;
-    }
-    // Else the card doesn't have promo_types and no filtering is necessary        
-    return true;
 }
 
 // export default findCards;

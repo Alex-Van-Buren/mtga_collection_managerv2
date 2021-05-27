@@ -31,6 +31,13 @@ function RarityCollectionItem({ setId, rarity }) {
     // Calculate percent of cards owned (to one decimal) from specified set of specified rarity
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
 
+    let rarityNumber;
+    // Check if percentOwned is a number and don't show the percentage to user if NaN
+    if (percentOwned >= 0 ) {
+        rarityNumber = `${ownedTotal} / ${setTotal} (${percentOwned}%)`;
+    } else {
+        rarityNumber = `${ownedTotal} / ${setTotal}`;
+    }
     return (
         <div className="item " id="collectionItem" >
             <div className="rarityContainer">
@@ -42,7 +49,7 @@ function RarityCollectionItem({ setId, rarity }) {
                 </div>
 
                 <div className="rarityNumber">
-                    <span>{ownedTotal} / {setTotal} ({percentOwned}%)</span>
+                    <span>{rarityNumber}</span>
                 </div>
             </div>
             <ProgressBar percent={percentOwned} innerClass={rarity}/>

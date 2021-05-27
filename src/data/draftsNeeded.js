@@ -14,12 +14,19 @@ function draftsNeeded(setId, rarity, ownedTotal, setTotal, cardsPicked, rewardPa
     if (rarity === "mythic") {
         rarityOpenRate = mythicUpgradeRate;
     }
-
-    // This is the number of additional cards gained picking them IN the draft
-    // const rarityCardsPicked = cardsPicked * rarityOpenRate;
+    // Strixhaven mytical archive works differently and has a rare rate as well as a mythic rate
+    if (setId === 'sta') {
+        // Mystical archive cards also can NOT upgrade to wildcards
+        // therefore these values are divided by the nonWildcardRate in order to cancel out the term in the numerator/denominator calculation
+        if (rarity === 'rare') {
+            rarityOpenRate = setInfo[setId].rare_rate / nonWildcardRate;
+        }
+        if ( rarity === 'mythic') {
+            rarityOpenRate = setInfo[setId].mythic_upgrade / nonWildcardRate;
+        }
+    }
 
     const numerator = numMissing - ownedPacks * rarityOpenRate * nonWildcardRate;
-
     const denominator = parseFloat(cardsPicked) + rewardPacks * rarityOpenRate * nonWildcardRate;
 
     // Round number of drafts up to whole number
