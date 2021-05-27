@@ -35,13 +35,25 @@ function SetDetailsMenu() {
     // Return JSX for tab menu
     return (
         <div className="ui pointing menu compact">
-            <div className={cardFiltersClass} onClick={()=> dispatch(selectDetailsMenu('Card Filters'))}>
+            <div className={cardFiltersClass} 
+            onClick={()=> dispatch(selectDetailsMenu('Card Filters'))}
+            onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Card Filters'))}}}
+            tabIndex="0" role="button" 
+            >
                 Card Filters
             </div>
-            <div className={packsClass} onClick={()=> dispatch(selectDetailsMenu('Packs'))}>
+            <div className={packsClass} 
+            onClick={()=> dispatch(selectDetailsMenu('Packs'))}
+            onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Packs'))}}}
+            tabIndex="0" role="button" 
+            >
                Booster Packs
             </div>
-            <div className={draftsClass} onClick={()=> dispatch(selectDetailsMenu('Drafts'))}>
+            <div className={draftsClass}
+            onClick={()=> dispatch(selectDetailsMenu('Drafts'))}
+            onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Drafts'))}}}
+            tabIndex="0" role="button" 
+            >
                 Drafts
             </div>
         </div>

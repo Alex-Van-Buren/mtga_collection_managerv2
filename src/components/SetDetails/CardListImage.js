@@ -22,7 +22,7 @@ function CardListImage({ name, backside, numOwned, index }) {
     const [imgSide, setImgSide] = useState(true);
 
     // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    let cardImages = imgs? <img src={imgs.front} alt={name} loading="lazy"/> : null;
+    let cardImages = imgs? <img src={imgs.front} alt={name} loading="lazy" title={name} aria-label={name} /> : null;
     let flipButton = null; // Regular cards don't have a flip button
 
     // Refs
@@ -66,6 +66,7 @@ function CardListImage({ name, backside, numOwned, index }) {
                         flip(e);
                     }
                 }}
+                aria-label="Flip Card" title="Flip Card"
             >
                 <i className="undo icon" ref={flipRef}/>
             </button>
@@ -73,8 +74,8 @@ function CardListImage({ name, backside, numOwned, index }) {
 
         // One image will be hidden
         cardImages = <>
-            <img src={imgs.front} alt={name} className="cardImg" loading="lazy"/>
-            <img src={imgs.back} alt={name} className="backside" loading="lazy"/>
+            <img src={imgs.front} alt={name} className="cardImg" loading="lazy" title={name} aria-label={name}/>
+            <img src={imgs.back} alt={name} className="backside" loading="lazy" title={name} aria-label={name}/>
         </>;
     }
 

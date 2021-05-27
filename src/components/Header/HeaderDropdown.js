@@ -37,7 +37,10 @@ function HeaderDropdown(props) {
 
     return (
         <div className="headerDropdown heading">        
-            <div className={titleClass} onClick={(e) => {e.stopPropagation(); setOpen(!open)}} tabIndex='0' onKeyDown={(e)=> keyboardToggle(e)}>
+            <div className={titleClass} 
+            onClick={(e) => {e.stopPropagation(); setOpen(!open)}} 
+            tabIndex='0' role="button" aria-expanded={open}
+            onKeyDown={(e)=> keyboardToggle(e)}>
                 <span>{props.title} &nbsp;  <i className={open ? "icon chevron up" : "icon chevron down"}></i> </span>               
             </div>
             {items}

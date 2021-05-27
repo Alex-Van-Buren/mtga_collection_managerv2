@@ -361,17 +361,7 @@ function getCardProperties(card, returnOptions) {
 
     // Initialize card object to add
     let newCard = {};
-
-    // Add the name to the newCard
-    // For modal_dfc and adventure cards the desired card name is the name on the front face
-    if ( card.layout === 'adventure' || card.layout === 'modal_dfc') {
-        newCard.name = card.card_faces[0].name;
-    }
-
-    // Otherwise just grab the name from the top level name
-    else {
-        newCard.name = card.name;
-    }
+    newCard.name = card.name;    
 
     // Add the arena id to newCard
     newCard.arenaId = card.arena_id;
