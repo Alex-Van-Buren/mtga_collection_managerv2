@@ -1,8 +1,8 @@
 :root {
   --background-clr: rgb(238, 238, 238);
   --border-clr: rgba(34, 36, 38, 0.15);
-  --clr-prm: #eeeeee;
-  --clr-prm-focus: #DEDEDE;
+  --clr-prm: rgba(238, 238, 238, .7);
+  --clr-prm-focus: rgb(222, 222, 222);
   --clr-sec: rgba(230, 230, 230, .7);
   --clr-txt: rgba(0,0,0,0.87);
   --clr-txt-light: rgba(0,0,0,0.5);
@@ -12,13 +12,13 @@
   /* Regular colors */
   --mythic:   rgb(218, 35, 17);
   --rare:     rgb(167, 139, 55);
-  --uncommon: rgb(112, 120, 131);
+  --uncommon: rgb(159, 165, 175);
   --common:   rgb(26, 23, 24);
       
   /* Opaque colors */
   --mythic-o:   rgba(218, 35, 17, 0.8);
   --rare-o:     rgba(167, 139, 55, 0.8);
-  --uncommon-o: rgba(112, 120, 131, 0.8);
+  --uncommon-o: rgba(159, 165, 175, 0.8);
   --common-o:   rgba(26, 23, 24, 0.9);
   
   scroll-behavior: smooth;
@@ -27,9 +27,9 @@
 .darkMode {
   --background-clr: #212121;
   --border-clr: rgba(255, 255, 255, 0.40);
-  --clr-prm: rgba(51,51,51);
-  --clr-prm-focus: rgba(60,60,60,0.98);
-  --clr-sec: rgba(56, 56, 56, 0.7);
+  --clr-prm: rgba(51, 51, 51, 0.6);
+  --clr-prm-focus: rgba(60, 60, 60, 0.98);
+  --clr-sec: rgba(56, 56, 56, 0.6);
   --clr-txt: #DEDEDE;
   --clr-txt-light: rgba(222, 222, 222, 0.5);
   --clr-txt-inverse: #000;
