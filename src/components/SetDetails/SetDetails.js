@@ -83,7 +83,9 @@ function SetDetails() {
 
     let detailsHeader = <div className="ui center aligned header">{setName}</div>
     if ( setInfo[setId].logo ) {
-        detailsHeader = <div className="ui center aligned header"><img src={setInfo[setId].logo} alt={setName} /></div>
+        detailsHeader = <div className="ui center aligned header">
+                <img src={setInfo[setId].logo} alt={setName} aria-label={setName} title={setName}/>
+            </div>
     }
     return (<>
         {/* Card modal is only shown when a card is clicked */}
