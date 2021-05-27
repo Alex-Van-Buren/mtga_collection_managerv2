@@ -1,7 +1,7 @@
 :root {
   --background-clr: rgb(238, 238, 238);
   --border-clr: rgba(34, 36, 38, 0.15);
-  --clr-prm: rgba(238, 238, 238, .7);
+  --clr-prm: rgba(238, 238, 238, .95);
   --clr-prm-focus: rgb(222, 222, 222);
   --clr-sec: rgba(230, 230, 230, .7);
   --clr-txt: rgba(0,0,0,0.87);
@@ -27,7 +27,7 @@
 .darkMode {
   --background-clr: #212121;
   --border-clr: rgba(255, 255, 255, 0.40);
-  --clr-prm: rgba(51, 51, 51, 0.6);
+  --clr-prm: rgba(51, 51, 51, 0.9);
   --clr-prm-focus: rgba(60, 60, 60, 0.98);
   --clr-sec: rgba(56, 56, 56, 0.6);
   --clr-txt: #DEDEDE;
