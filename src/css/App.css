@@ -45,7 +45,7 @@ body {
   background-image: url(../images/watermark_light.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100vh;
+  background-size: contain;
   font-weight: bold;
 }
 
