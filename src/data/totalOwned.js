@@ -69,9 +69,8 @@ function totalOwned(cardCollection) {
             updateInventory(card);
         }
     }
-    
+
     return inventory;
 }
-
 
 export default totalOwned;

@@ -100,7 +100,7 @@ function DraftsCalculator() {
     // Get the average gems/packs per draft
     const { gems, packs: rewardPacks } = useDraft(draftType, winRate/100);
 
-    // Check if the set is not draftable (the collationId is the value for the booster pack of the set)
+    // Check if the set is not draftable (reminder: the collationId is the value for the booster pack of the set)
     if (!setInfo[setId].collationId) {
         const message = `${setInfo[setId].name} is not a draftable set`;
         return (
