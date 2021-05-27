@@ -45,7 +45,7 @@ function Header() {
                         Collection Manager
                     </Link>
                     
-                    <HeaderDropdown title="Sets" titleClass="heading" itemsClass="sets">
+                    <HeaderDropdown title="Sets" titleClass="" itemsClass="sets">
                         {setLinks}
                     </HeaderDropdown>
                     

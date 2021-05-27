@@ -1,3 +1,20 @@
+
+.headerDropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.dd-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 3em;
+    height: 100%;
+    text-align: center;
+}
+
 .dd-title.active {
     background-color: var(--clr-prm-focus);
 }
@@ -27,18 +44,16 @@ a.dd-item {
     color: var(--clr-txt);
     width: 15em;
     padding: 0;
-    z-index: 15;
-    transition: opacity 0.3s, top 0.5s, z-index 0.3s;
-    top: 48px;
-    opacity: 1;
+    top: 100%;
+    left: 0;
     border: 1px solid var(--border-clr);
+    z-index: 5;
 }
 
 .dd-items.hidden {
-    opacity: 0;
-    z-index: -15;
-    top: -500px;
+    display: none;
 }
+
 @media only screen and (max-width:739px) {
     .dd-title.active {
         border-bottom: none !important;
@@ -55,13 +70,18 @@ a.dd-item {
         transform: none;
         align-items: center;
         justify-content: center;
+        border: none;
     }
+
     .dd-item {
         color: var(--clr-txt);
         width: 100%;
         text-align: center;
     }
 
+    .dd-item:first-child {
+        border-top: 1px solid var(--border-clr);
+    }
     .dd-items.hidden {
         display: none;
     }
