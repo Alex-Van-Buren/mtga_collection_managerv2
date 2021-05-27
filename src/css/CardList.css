@@ -7,7 +7,7 @@
 }
 
 .ui.fluid.card {
-    background-color: var(--background-clr);
+    background-color: transparent;
     color: var(--clr-txt);
 }
 

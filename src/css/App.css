@@ -1,93 +1,102 @@
 :root {
-    --background-clr: #eeeeee;
-    --border-clr: rgba(34, 36, 38, 0.15);
-    --clr-prm: #eeeeee;
-    --clr-prm-focus: #DEDEDE;
-    --clr-sec: rgba(0,0,0,.03);
-    --clr-txt: rgba(0,0,0,0.87);
-    --clr-txt-light: rgba(0,0,0,0.5);
-    --clr-txt-inverse: #FFF;
-    --modal-clr: rgba(0, 0, 0, 0.9);
+  --background-clr: rgb(238, 238, 238);
+  --border-clr: rgba(34, 36, 38, 0.15);
+  --clr-prm: #eeeeee;
+  --clr-prm-focus: #DEDEDE;
+  --clr-sec: rgba(230, 230, 230, .7);
+  --clr-txt: rgba(0,0,0,0.87);
+  --clr-txt-light: rgba(0,0,0,0.5);
+  --clr-txt-inverse: #FFF;
+  --modal-clr: rgba(0, 0, 0, 0.9);
 
-    /* Regular colors */
-    --mythic:   rgb(218, 35, 17);
-    --rare:     rgb(167, 139, 55);
-    --uncommon: rgb(112, 120, 131);
-    --common:   rgb(26, 23, 24);
-        
-    /* Opaque colors */
-    --mythic-o:   rgba(218, 35, 17, 0.8);
-    --rare-o:     rgba(167, 139, 55, 0.8);
-    --uncommon-o: rgba(112, 120, 131, 0.8);
-    --common-o:   rgba(26, 23, 24, 0.9);
-    
-    scroll-behavior: smooth;
+  /* Regular colors */
+  --mythic:   rgb(218, 35, 17);
+  --rare:     rgb(167, 139, 55);
+  --uncommon: rgb(112, 120, 131);
+  --common:   rgb(26, 23, 24);
+      
+  /* Opaque colors */
+  --mythic-o:   rgba(218, 35, 17, 0.8);
+  --rare-o:     rgba(167, 139, 55, 0.8);
+  --uncommon-o: rgba(112, 120, 131, 0.8);
+  --common-o:   rgba(26, 23, 24, 0.9);
+  
+  scroll-behavior: smooth;
 }
 
 .darkMode {
-    --background-clr: #212121;
-    --border-clr: rgba(255, 255, 255, 0.40);
-    --clr-prm: rgba(51,51,51);
-    --clr-prm-focus: rgba(60,60,60,0.98);
-    --clr-sec: #383838;
-    --clr-txt: #DEDEDE;
-    --clr-txt-light: rgba(222, 222, 222, 0.5);
-    --clr-txt-inverse: #000;
-    --modal-clr: rgba(0, 0, 0, 0.85);
+  --background-clr: #212121;
+  --border-clr: rgba(255, 255, 255, 0.40);
+  --clr-prm: rgba(51,51,51);
+  --clr-prm-focus: rgba(60,60,60,0.98);
+  --clr-sec: rgba(56, 56, 56, 0.7);
+  --clr-txt: #DEDEDE;
+  --clr-txt-light: rgba(222, 222, 222, 0.5);
+  --clr-txt-inverse: #000;
+  --modal-clr: rgba(0, 0, 0, 0.85);
 
-    --common:   rgb(229, 232, 231);
-    --common-o: rgba(229, 232, 231, 0.9);
+  --common:   rgb(229, 232, 231);
+  --common-o: rgba(229, 232, 231, 0.9);
 }
 
 body {
-    background-color: var(--background-clr);
-    font-weight: bold;
+  background-color: var(--background-clr);
+  background-attachment: fixed;
+  background-image: url(../images/watermark_light.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100vh;
+  font-weight: bold;
+}
+
+body.darkMode {
+  background-image: url(../images/watermark_dark.svg);
 }
 
 #contentContainer {
-    position: relative;
-    min-height: 100vh;
+  position: relative;
+  min-height: 100vh;
 }
 
 #keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage {
-    padding-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 #thisIsTheDivThatKeepsTheFooterAtTheBottomOfThePage {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 
 /* Scrollbar styling */
 html {
-    --scroll-area: rgb(207, 216, 220);
-    --scroll-bar: rgba(34, 36, 38, 0.45);
-  }
+  --scroll-area: rgb(207, 216, 220);
+  --scroll-bar: rgba(34, 36, 38, 0.45);
+}
 
-  body::-webkit-scrollbar {
-    width: 17px;
-  }
+body::-webkit-scrollbar {
+  width: 17px;
+}
 
-  body {
-    /* Always show scroll bar */
-    overflow-y: scroll;
+body {
+  /* Always show scroll bar */
+  overflow-y: scroll;
 
-    scrollbar-width: thin;
-    scrollbar-color: var(--scroll-bar) var(--scroll-area);
-  }
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) var(--scroll-area);
+}
 
-  body::-webkit-scrollbar-track {
-    background: var(--scroll-area);
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: var(--scroll-bar) ;
-    border-radius: 8px;
-    border: 2px solid var(--scroll-area);
-  }
+body::-webkit-scrollbar-track {
+  background: var(--scroll-area);
+}
 
-  .ui.card, .ui.cards>.card {
-    box-shadow: 0 1px 3px 0 var(--border-clr), 0 0 0 2px var(--border-clr);
-  }
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-bar) ;
+  border-radius: 8px;
+  border: 2px solid var(--scroll-area);
+}
+
+.ui.card, .ui.cards>.card {
+  box-shadow: 0 1px 3px 0 var(--border-clr), 0 0 0 2px var(--border-clr);
+}
