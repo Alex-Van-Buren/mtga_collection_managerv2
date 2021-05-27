@@ -41,11 +41,6 @@
     display: none;
 }
 
-/* Set where dropdown menu for sets left position */
-.dd-items.sets{
-    left: 124px;
-}
-
 .logo {
     margin-right: 0.5rem;
     width: 2rem;
