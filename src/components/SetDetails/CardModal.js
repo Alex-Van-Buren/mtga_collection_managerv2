@@ -110,6 +110,7 @@ function CardModal() {
     // "Go to previous card" button to be rendered inside modal
     const prev = (
         <button
+            aria-label="Previous Card" title="Previous Card" aria-keyshortcuts="ArrowLeft"
             ref={prevRef}
             // Update image to display if possible
             onClick={() => {
@@ -130,6 +131,7 @@ function CardModal() {
     // "Go to next card" button to be rendered inside modal
     const next = (
         <button
+        aria-label="Next Card" title="Next Card" aria-keyshortcuts="ArrowRight"
         ref={nextRef}
             // Update image to display if possible
             onClick={() => {
@@ -156,6 +158,7 @@ function CardModal() {
 
         flipButton = (
             <button
+                aria-label="Flip Card" title="Flip Card" aria-keyshortcuts="Space"
                 className="circular ui icon button flipButton"
                 onClick={(event) => {
 
