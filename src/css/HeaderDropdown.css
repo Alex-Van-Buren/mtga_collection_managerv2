@@ -47,7 +47,20 @@ a.dd-item {
     top: 100%;
     left: 0;
     border: 1px solid var(--border-clr);
-    z-index: 5;
+    z-index: 10;
+    max-height: 400px;
+    overflow-y: scroll;
+    scrollbar-color: var(--scroll-bar) var(--scroll-area);
+}
+
+.dd-items::-webkit-scrollbar-track {
+    background: var(--scroll-area);
+}
+
+.dd-items::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar);
+    border-radius: 8px;
+    border: 1px solid var(--scroll-area);
 }
 
 .dd-items.hidden {

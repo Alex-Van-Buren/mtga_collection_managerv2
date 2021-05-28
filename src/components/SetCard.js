@@ -33,13 +33,14 @@ function SetCard({ setId }) {
     let setCardHeader = <div className="ui center aligned header" id="setCardHeader">{setName}</div>;
 
     if ( setInfo[setId].logo ) {
-        setCardHeader = <div className="ui center aligned header" id="setCardHeader" ><img src={setInfo[setId].logo} alt={setName} /></div>;
+        setCardHeader = <div className="ui center aligned header" id="setCardHeader" >
+            <img src={setInfo[setId].logo} alt={setName} aria-label={setName} title={setName}/>
+            </div>;
     }
     
     return (
         <div className="mtgaSetCard">
             {/* The specific card set */}
-            {/* <div className="ui center aligned header" id="setCardHeader">{setName}</div> */}
             {setCardHeader}
 
             {/* Owned cards from this set */}

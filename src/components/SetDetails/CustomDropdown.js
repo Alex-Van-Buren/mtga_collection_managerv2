@@ -48,7 +48,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
                 className='dropdown-item' key={item} tabIndex='0' 
                 onKeyDown={(e) => { if (e.key === 'Enter') clickItem(item) }} 
                 onClick={() => clickItem(item)}
-                role='button' title={item}
+                role='button' 
             >
                 {item}
             </div>
@@ -78,7 +78,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined}) {
                 className={selectedClass} tabIndex='0' 
                 onKeyDown={(e) => { if (e.key === 'Enter') toggleDropdown(e) }} 
                 onClick={(e) => toggleDropdown(e)}
-                role='button' title={selected} aria-expanded={open}
+                role='button' aria-expanded={open}
             >
                 {selected} <span><i className={iconClass}/></span>
 
