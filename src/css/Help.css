@@ -1,8 +1,12 @@
+.helpTitle {
+    text-align: center;
+    color: var(--clr-txt);
+}
 .helpPage {
     color: var(--clr-txt);
 }
 
-.detailedLogs {
+.helpPage>div {
     margin-top: 30px;
 }
 
@@ -17,6 +21,11 @@
     width: 280px;
 }
 
-.FAQ {
-    margin-top: 30px;
+li {
+    margin: 30px auto;
+}
+
+.contactInfo {
+    background-color: yellow;
+    color: black;
 }
