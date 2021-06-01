@@ -72,7 +72,7 @@ function Modal({ content, keyEvents, show, showModal }) {
     return createPortal(
         <div
             onClick={() => dispatch(showModal(false))}
-            className="ui dimmer modals visible active cardModal"
+            className="ui dimmer modals visible active fixedModal"
             aria-keyshortcuts="Esc (escape) closes pop-up"
         >
             
