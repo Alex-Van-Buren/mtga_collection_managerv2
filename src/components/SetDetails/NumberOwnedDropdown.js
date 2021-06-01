@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CustomDropdown from './CustomDropdown';
+import CustomDropdown from '../Templates/CustomDropdown';
 import { setShowCards } from '../../actions';
 
 function NumberOwnedDropdown() {

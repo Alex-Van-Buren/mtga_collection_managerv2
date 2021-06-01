@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Custombutton from './CustomButton';
+import Custombutton from '../Templates/CustomButton';
 import { resetDisplayOptions } from '../../actions';
 
 function Reset() {

@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Modal from '../Modal';
+import Modal from '../Templates/Modal';
 import { showCardModal, setCardModalContent } from '../../actions';
 import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/CardModal.css';

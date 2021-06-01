@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 
-import '../css/Modal.css';
+import '../../css/Modal.css';
 /**
  * A generic Redux modal that displays whatever content is passed to it as a prop. Closed when clicking off the modal or
  * by pressing escape. Can be passed functions to call when specified keys are pressed. Recommend creating new actions to

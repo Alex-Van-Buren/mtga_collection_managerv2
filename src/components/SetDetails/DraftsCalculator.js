@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import CustomDropdown from './CustomDropdown';
+import CustomDropdown from '../Templates/CustomDropdown';
 import useBooster from '../../hooks/useBooster';
 import useDraft from '../../hooks/useDraft';
 import draftsNeeded from '../../data/draftsNeeded';
+import { setInfo } from '../../data/setInfo';
 import '../../css/DraftsCalculator.css';
+
 import gem_img from '../../images/arena/Gem.png';
 import gold_img from '../../images/arena/Gold.png';
-import { setInfo } from '../../data/setInfo';
 
 function DraftsCalculator() {
     const [draftType, setDraftType] = useState("premier");

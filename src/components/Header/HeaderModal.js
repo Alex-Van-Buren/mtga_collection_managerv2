@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Modal from '../Modal';
+import Modal from '../Templates/Modal';
 import { showHeaderModal } from '../../actions';
 import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
 import '../../css/HeaderModal.css';

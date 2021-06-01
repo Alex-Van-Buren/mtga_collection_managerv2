@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectColor } from '../../actions';
-import CustomCheckbox from './CustomCheckbox';
+import CustomCheckbox from '../Templates/CustomCheckbox';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/ColorCheckboxes.css';
 
