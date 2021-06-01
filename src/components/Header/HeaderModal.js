@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Templates/Modal';
 import { showHeaderModal } from '../../actions';
-import { NO_INVENTORY_FOUND, INVALID_FILE } from '../../errors';
+import NoInventoryFound from '../../errors/NoInventoryFound';
+import InvalidFile from '../../errors/InvalidFile';
 import '../../css/HeaderModal.css';
 
 /**
@@ -30,28 +31,30 @@ function HeaderModal() {
     const renderedMessage = (() => {
         switch (message) {
             case "NO_INVENTORY_FOUND":
-                return NO_INVENTORY_FOUND;
+                return <NoInventoryFound/>;
 
             case "INVALID_FILE":
-                return INVALID_FILE;
+                return <InvalidFile/>;
         
             default:
-                return;
+                return null;
         }
     })();
 
     // Clicking anywhere will close the modal
     const renderedContent = (
-        <div onClick={closeModal}>
+        <div>
 
             {/* Add "fake" close button (clicking anywhere closes modal) */}
-            <div id="headerModalClose">
+            <div id="headerModalClose" onClick={closeModal}>
                 <button className={"exit massive basic ui icon button"}>
                     <i className="close icon"/>
                 </button>
             </div>
 
-            {renderedMessage}
+            <div tabIndex="0">
+                {renderedMessage}
+            </div>
         </div>
     );
 

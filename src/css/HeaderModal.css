@@ -10,6 +10,37 @@
     text-align: center;
 }
 
+.errorSublist {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.errorSublist > * > * {
+    margin-top: 1rem;
+}
+
+.errorText {
+    margin-left: 3rem;;
+}
+
+.errorButton {
+    border-radius: 8px;
+    cursor: pointer;
+    height: 100%;
+    margin-left: 2rem;
+    opacity: 0.6;
+    width: 9rem;
+}
+
+.errorButton {
+    text-align: center;
+}
+
+.errorButton:hover, .errorButton:active {
+    opacity: 1;
+}
+
 .yourUserName {
     color: yellow;
 }
