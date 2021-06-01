@@ -1,3 +1,5 @@
+// const copyablePath = "%USERPROFILE%\\AppData\\LocalLow\\Wizards Of The Coast\\MTGA";
+
 export const NO_INVENTORY_FOUND = (
     <div className="errorMessage">
         <h1 className="errorTitle">No inventory Data found!</h1>
@@ -10,12 +12,12 @@ export const NO_INVENTORY_FOUND = (
             <br />
             <li>
                 <div>Windows users will typically find their ".log" files at:</div>
-                <div>&emsp;&emsp;C:\Users\<span id="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</div>
+                <div>&emsp;&emsp;C:\Users\<span className="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</div>
             </li>
             <br />
             <li>
-            <div>Mac users will typically find their ".log" files at:</div>
-            <div>&emsp;&emsp;C:/Users/<span id="yourUserName">(Your User Name)</span>/Library/Logs/Wizards Of The Coast/MTGA</div>
+                <div>Mac users will typically find their ".log" files at:</div>
+                <div>&emsp;&emsp;C:/Users/<span className="yourUserName">(Your User Name)</span>/Library/Logs/Wizards Of The Coast/MTGA</div>
             </li>
         </ul>
         
@@ -25,9 +27,16 @@ export const NO_INVENTORY_FOUND = (
 export const INVALID_FILE = (
     <div className="errorMessage">
         <h1 className="errorTitle">File not recognized!</h1>
-        <p>Windows users will typically find their ".log" files at:</p>
-        <p>&emsp;&emsp;C:\Users\<span id="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</p>
-        <p>Mac users will typically find their ".log" files at:</p>
-        <p>&emsp;&emsp;C:/Users/<span id="yourUserName">(Your User Name)</span>/Library/Logs/Wizards Of The Coast/MTGA</p>
+        <ul>
+            <li>
+                <div>Windows users will typically find their ".log" files at:</div>
+                <div>&emsp;&emsp;C:\Users\<span class="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</div>
+            </li>
+            <br />
+            <li>
+                <div>Mac users will typically find their ".log" files at:</div>
+                <div>&emsp;&emsp;C:/Users/<span class="yourUserName">(Your User Name)</span>/Library/Logs/Wizards Of The Coast/MTGA</div>
+            </li>
+        </ul>
     </div>
 );
