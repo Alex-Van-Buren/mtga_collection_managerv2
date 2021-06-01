@@ -1,94 +1,50 @@
 import React from 'react';
 
+import '../css/Help.css';
+import optionsImg from '../images/arena/options.png';
+import accountImg from '../images/arena/Account.png';
+import detailedLogsImg from '../images/arena/detailedLogs.png';
+
 /**
  * The help page.
  * @returns 
  */
 function Help() {
 
-    /* Template:
-    <label htmlFor="" className="helpLabel">
-
-        </label>
-        <div id="" className="helpDiv">
-            
-        </div>
-    */
-
-    return (<>
-
-        <label htmlFor="useage" className="helpLabel">
-            How to use
-        </label>
-        <div id="useage" className="helpDiv">
-            {/* For MTG Arena.  */}
-            {/* Upload player log for set progress tracking, packs/drafts needed to complete set, deck builder, ... */}
-            {/* Toggle between standard/historic sets */}
-            {/* Selecting a set: click on set tag or select from dropdown */}
-            {/* Detail Card Filters, Packs, and Drafts tabs. Include full useage details */}
-            {/* Enlarge card: click. Use keyboard or arrows to navigate */}
-            {/* Using on mobile:  */}
-            {/* Supported browsers:  */}
-        </div>
-
-
-        <label htmlFor="uploading" className="helpLabel">
-            Finding your player log file
-        </label>
-        <div id="uploading" className="helpDiv">
-            <h3>Player logs typically found at:</h3>
-            <p>Windows filepath: %USERPROFILE%\AppData\LocalLow\Wizards Of The Coast\MTGA</p>
-            <h4>Example:</h4>
-            <p>C:\Users\UserName\AppData\LocalLow\Wizards Of The Coast\MTGA</p>
-
-            {/* Enable detailed logs (images?) */}
-        </div>
-
-
-        <label htmlFor="upcomingFeatures" className="helpLabel">
-            Upcoming Features
-        </label>
-        <div id="upcomingFeatures" className="helpDiv">
-            {/* Planned/upcoming features:  */}
-        </div>
-
-
-        <label htmlFor="accessibility" className="helpLabel">
-            Accessibility Options
-        </label>
-        <div id="accessibility" className="helpDiv">
-            {/* Navigate between cards with left and right arrow keys. Escape closes. Spacebar flips. */}
-        </div>
-
-
-        <label htmlFor="faqs" className="helpLabel">
-            FAQS
-        </label>
-        <div id="faqs" className="helpDiv">
+    return (
+    <div className=' ui container helpPage'>
+       
+        <div>
+            <h2>Finding Your Log file</h2>
+            <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It can be 
+                found at one of the following locations inside the drive where Arena is installed:
+            </p>
             <ul>
-                {/* How soon after a new set is released do you update? */}
+                <li>Windows filepath: %USERPROFILE%\AppData\LocalLow\Wizards Of The Coast\MTGA</li>
+                <li>Mac OS filepath: ~/Library/Logs/Wizards Of The Coast/MTGA</li>
             </ul>
+            <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>
         </div>
 
-
-        <label htmlFor="cookiesAndTracking" className="helpLabel">
-            Cookies and Tracking
-        </label>
-        <div id="cookiesAndTracking" className="helpDiv">
-            {/* Details about cookies and tracking (TBD) */}
+        <div className="detailedLogs">
+            <h2>Enabling Detailed Logs</h2>
+            <p>In order for this application to work properly, detailed logs need to enabled in MTG Arena. 
+            This can be found at:   
+            </p>
+            <p>Options ➞ Account ➞ Detailed Logs</p>
+            <div className="detailedLogImages">
+                <img src={optionsImg} alt="" />
+                <img src={accountImg} alt="" />
+                <img src={detailedLogsImg} alt="" />
+            </div>
         </div>
 
+        <div className="FAQ">
+            <h2>FAQ's</h2>
 
-        <label htmlFor="contactUs" className="helpLabel">
-            Contact us or report a problem:
-        </label>
-        <div id="contactUs" className="helpDiv">
-            {/* How to report a problem:  */}
-            {/* Contact/message us:  */}
-            {/* Request features:  */}
-            {/* Github link? Don't know if we want to share our code or not */}
         </div>
-    </>);
+
+    </ div>);
 }
 
 export default Help;
