@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Templates/Modal';
 import { showHeaderModal } from '../../actions';
 import NoInventoryFound from '../../errors/NoInventoryFound';
 import InvalidFile from '../../errors/InvalidFile';
+import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/HeaderModal.css';
 
 /**
@@ -16,6 +17,8 @@ function HeaderModal() {
     const message = useSelector(state => state.modal.headerContent);
 
     const dispatch = useDispatch();
+
+    const ref = useRef();
 
     // Show nothing when hidden
     if (!show) {
@@ -46,8 +49,8 @@ function HeaderModal() {
         <div>
 
             {/* Add "fake" close button (clicking anywhere closes modal) */}
-            <div id="headerModalClose" onClick={closeModal}>
-                <button className={"exit massive basic ui icon button"}>
+            <div id="headerModalClose" onClick={closeModal} ref={ref}>
+                <button className={"exit massive basic ui icon button"} onKeyDown={e => makeKeyboardClickable(e, ref)} tabIndex="0">
                     <i className="close icon"/>
                 </button>
             </div>
