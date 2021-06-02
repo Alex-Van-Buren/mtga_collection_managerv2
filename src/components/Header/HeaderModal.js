@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from '../Templates/Modal';
 import { showHeaderModal } from '../../actions';
-import NoInventoryFound from '../../errors/NoInventoryFound';
-import InvalidFile from '../../errors/InvalidFile';
+import NoInventoryFound from '../Errors/NoInventoryFound';
+import InvalidFile from '../Errors/InvalidFile';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/HeaderModal.css';
 
