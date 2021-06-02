@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import makeKeyboardClickable from '../hooks/makeKeyboardClickable';
 
 /**
- * Helper function to create button to copy path to keyboard
+ * Button to copy path to keyboard
  * @param {string} text Button text
  * @param {function} setText Set button text function
  * @param {ref} ref Button ref
@@ -11,7 +11,7 @@ import makeKeyboardClickable from '../hooks/makeKeyboardClickable';
  */
 function renderPathButton(text, setText, ref, path) {
     return (
-        <button className="errorButton" tabindex="0" ref={ref} onKeyDown={e => makeKeyboardClickable(e, ref)}
+        <button className="errorButton" tabIndex="0" ref={ref} onKeyDown={e => makeKeyboardClickable(e, ref)}
             onClick={() => {
                 // Write path to clipboard
                 navigator.clipboard.writeText(path);
@@ -37,7 +37,7 @@ export default function NoInventoryFound() {
     return (
         <div className="errorMessage">
             <h1 className="errorTitle">No inventory Data found!</h1>
-            <h2>Ensure file is a valid Player Log with "Detailed Logs" enabled.</h2>
+            <div className="errorSubtitle">File must be a Player Log with <strong>Detailed Logs</strong> enabled.</div>
 
             <div className="errorSublist">
                 <div>
@@ -49,7 +49,7 @@ export default function NoInventoryFound() {
             <br />
             <div className="errorSublist">
                 <div>
-                    Windows users will typically find their ".log" files at:
+                    <strong>Windows -</strong> Default filepath for ".log" files:
 
                     <div className="errorText">C:\Users\<span className="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</div>
                 </div>
@@ -60,7 +60,7 @@ export default function NoInventoryFound() {
             <br />
             <div className="errorSublist">
                 <div>
-                    Mac users will typically find their ".log" files at:
+                    <strong>Mac -</strong> Default filepath for ".log" files:
 
                     <div className="errorText">Macintosh HD/Users/<span className="yourUserName">(Your User Name)</span>/Library/Logs/Wizards Of The Coast/MTGA</div>
 
