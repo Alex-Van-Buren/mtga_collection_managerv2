@@ -111,7 +111,7 @@ function CardModal() {
     const prev = (
         <button
             aria-label="Previous Card" title="Previous Card" aria-keyshortcuts="ArrowLeft"
-            ref={prevRef}
+            ref={prevRef} disabled={index <= 0}
             // Update image to display if possible
             onClick={() => {
                 
@@ -132,7 +132,7 @@ function CardModal() {
     const next = (
         <button
         aria-label="Next Card" title="Next Card" aria-keyshortcuts="ArrowRight"
-        ref={nextRef}
+        ref={nextRef} disabled={index >= imgLength-1}
             // Update image to display if possible
             onClick={() => {
 
