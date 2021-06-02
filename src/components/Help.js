@@ -4,6 +4,7 @@ import '../css/Help.css';
 import optionsImg from '../images/arena/options.png';
 import accountImg from '../images/arena/Account.png';
 import detailedLogsImg from '../images/arena/detailedLogs.png';
+import Accordion from './Templates/Accordion';
 
 /**
  * The help page.
@@ -17,15 +18,17 @@ function Help() {
     <div className=' ui container helpPage'>
        
         <div className='findLogFile'>
-            <h2>Finding Your Log file</h2>
-            <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It can be 
-                found at one of the following locations inside the drive where Arena is installed:
-            </p>
-            <ul>
-                <li>Windows filepath: %USERPROFILE%\AppData\LocalLow\Wizards Of The Coast\MTGA</li>
-                <li>Mac OS filepath: ~/Library/Logs/Wizards Of The Coast/MTGA</li>
-            </ul>
-            <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>
+            <Accordion>
+                <h2>Finding Your Log file </h2>
+                <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It can be 
+                    found at one of the following locations inside the drive where Arena is installed:
+                </p>
+                <ul>
+                    <li>Windows filepath: %USERPROFILE%\AppData\LocalLow\Wizards Of The Coast\MTGA</li>
+                    <li>Mac OS filepath: ~/Library/Logs/Wizards Of The Coast/MTGA</li>
+                </ul>
+                <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>
+            </Accordion>
         </div>
 
         <div className="detailedLogs">
