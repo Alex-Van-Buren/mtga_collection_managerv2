@@ -6,22 +6,23 @@ function Accordion(props) {
     const [open, setOpen] = useState(false);
     const panelRef = useRef();
 
+    // Copy All the children elements and put into an array
+    const elements = React.Children.toArray(props.children);
+    
+    // Change the height of the collapsable panel based on open state
     useEffect(() => {
         if (open) {
             panelRef.current.style.maxHeight = panelRef.current.scrollHeight +"px";
         } else {
             panelRef.current.style.maxHeight = 0;
         }
-    },[open])
-
-    // Copy All the children elements and put into an array
-    const elements = React.Children.toArray(props.children);
+    },[open]);    
 
     // Make a button to expand/collapse the accordion to put in the first child element
     const iconClass = open ? "minus icon" : "plus icon";
 
     const expandButton = ( 
-        <button className="ui icon button" key="expandButton" onClick={()=> setOpen(!open)}>
+        <button className="expandButton" key="expandButton" onClick={()=> setOpen(!open)}>
             <i className={iconClass}></i>
         </button>
     )
@@ -32,7 +33,7 @@ function Accordion(props) {
 
     // Put the rest of the elements into a div that will show/hide based on open state
     const collapsableStuff = (
-        <div className={open ? "panel panelExpanded" : "panel panelCollapsed"} ref={panelRef}>
+        <div className="panel" ref={panelRef}>
             {elements.slice(1)}
         </div>
     )

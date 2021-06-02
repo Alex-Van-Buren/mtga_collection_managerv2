@@ -1,4 +1,20 @@
 .panel {
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    /* the max height is changed in a useEffect of Accordion component */
+    transition: max-height 0.2s ease-in-out;
+}
+
+.expandButton {
+    float: right;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.expandButton:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+.expandButton i.icon {
+    margin: 0;
 }

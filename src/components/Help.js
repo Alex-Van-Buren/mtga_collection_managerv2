@@ -12,6 +12,25 @@ import Accordion from './Templates/Accordion';
  */
 function Help() {
 
+    const FAQs = [
+        {question:'What does "Collection Manager" do with my log file/info?',
+        answer: "When a user uploads their log file, they are allowing their own browser to analzye it. We do NOT keep your log file or information."},
+
+        {question:"How do I upload my log file on mobile?",
+        answer: 'While "Collection Manager" can be used on mobile, the mobile application for MTG Arena does not seem to generate a log file that "Collection Manager" can parse.'}
+    ]
+
+    const renderFAQS = FAQs.map((FAQ, index) => {
+        return (
+            <Accordion key={index}>
+                <li>{FAQ.question}</li>
+                <ul>
+                    <li>{FAQ.answer}</li>
+                </ul>
+            </Accordion>
+        )
+    });
+
     return (
     <>
     <h1 className='helpTitle'>Help</h1>
@@ -32,34 +51,27 @@ function Help() {
         </div>
 
         <div className="detailedLogs">
-            <h2>Enabling Detailed Logs</h2>
-            <p>In order for this application to work properly, detailed logs need to enabled in MTG Arena. 
-            This can be found at:   
-            </p>
-            <p>Options ➞ Account ➞ Detailed Logs</p>
-            <div className="detailedLogImages">
-                <img src={optionsImg} alt="" />
-                <img src={accountImg} alt="" />
-                <img src={detailedLogsImg} alt="" />
-            </div>
+            <Accordion>
+                <h2>Enabling Detailed Logs</h2>
+                <p>In order for this application to work properly, detailed logs need to enabled in MTG Arena. 
+                This can be found at:   
+                </p>
+                <p>Options ➞ Account ➞ Detailed Logs</p>
+                <div className="detailedLogImages">
+                    <img src={optionsImg} alt="" />
+                    <img src={accountImg} alt="" />
+                    <img src={detailedLogsImg} alt="" />
+                </div>
+            </Accordion>
         </div>
 
         <div className="FAQ">
-            <h2>FAQ's</h2>
-            <ol>
-                <li>What does "Collection Manager" do with my log file/info?
-                    <ul>
-                        <li>When a user uploads their log file, they are allowing their own browser to analzye it. We do NOT keep
-                        your log file or information.</li>
-                    </ul>
-                </li>
-                <li>How do I upload my log file on mobile?
-                    <ul>
-                        <li>While "Collection Manager" can be used on mobile, the mobile application for MTG Arena does not seem to 
-                        generate a log file that "Collection Manager" can parse.</li>
-                    </ul>
-                </li>
-            </ol>
+            <Accordion>
+                <h2>FAQ's</h2>
+                <ol className="FAQList">
+                    {renderFAQS}
+                </ol>
+            </Accordion>
 
         </div>
 

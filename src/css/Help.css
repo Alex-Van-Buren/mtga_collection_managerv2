@@ -4,10 +4,13 @@
 }
 .helpPage {
     color: var(--clr-txt);
+    font-size: 1.15rem ;
 }
 
 .helpPage>div {
     margin-top: 30px;
+    border-bottom: solid 1px var(--clr-txt);
+    padding-bottom: 8px
 }
 
 .detailedLogImages {
@@ -29,3 +32,8 @@ li {
     background-color: yellow;
     color: black;
 }
+
+.FAQList {
+    width: 60%;
+}
+
