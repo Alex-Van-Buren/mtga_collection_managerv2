@@ -29,7 +29,8 @@ export default function NoInventoryFound() {
     const [windowsButton, setWindowsButton] = useState("Copy Path");
     const [macButton, setMacButton] = useState("Copy Path");
 
-    const ref = useRef();
+    const wRef = useRef();
+    const mRef = useRef();
 
     const windowsPath = "%USERPROFILE%\\AppData\\LocalLow\\Wizards Of The Coast\\MTGA";
     const macPath = "~/Library/Logs/Wizards Of The Coast/MTGA";
@@ -54,7 +55,7 @@ export default function NoInventoryFound() {
                     <div className="errorText">C:\Users\<span className="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</div>
                 </div>
 
-                <div>{renderPathButton(windowsButton, setWindowsButton, ref, windowsPath)}</div>
+                <div>{renderPathButton(windowsButton, setWindowsButton, wRef, windowsPath)}</div>
 
             </div>
             <br />
@@ -66,7 +67,7 @@ export default function NoInventoryFound() {
 
                 </div>
 
-                <div>{renderPathButton(macButton, setMacButton, ref, macPath)}</div>
+                <div>{renderPathButton(macButton, setMacButton, mRef, macPath)}</div>
             </div>
         </div>
     );

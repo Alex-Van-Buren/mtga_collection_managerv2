@@ -9,6 +9,11 @@
     color: black !important;
 }
 
+.basic.button.icon.massive.ui:active, .basic.button.icon.massive.ui:focus {
+    color: black !important;
+    background-color: aliceblue !important;
+}
+
 @media (hover: none), (pointer: coarse) {
     .basic.button.icon.massive.ui {
         color: aliceblue !important;

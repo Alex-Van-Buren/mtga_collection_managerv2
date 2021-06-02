@@ -55,7 +55,7 @@ function HeaderModal() {
                 </button>
             </div>
 
-            <div tabIndex="0">
+            <div>
                 {renderedMessage}
             </div>
         </div>

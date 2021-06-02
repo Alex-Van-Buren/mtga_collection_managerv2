@@ -49,7 +49,7 @@
     text-align: center;
 }
 
-.errorButton:hover, .errorButton:active {
+.errorButton:hover, .errorButton:focus {
     opacity: 1;
 }
 

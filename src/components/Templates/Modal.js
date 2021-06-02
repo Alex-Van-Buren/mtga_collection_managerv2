@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
+import FocusTrap from 'focus-trap-react';
 
 import '../../css/Modal.css';
 /**
@@ -26,6 +27,8 @@ function Modal({ content, keyEvents, show, showModal }) {
     // Access redux dispatcher
     const dispatch = useDispatch();
 
+    const [tabbing, setTabbing] = useState(false);
+
     // Add listener to handle keyboard inputs
     useEffect(() => {
 
@@ -38,6 +41,11 @@ function Modal({ content, keyEvents, show, showModal }) {
                 // Escape key pressed --> close modal
                 if (event.keyCode === 27) {
                     dispatch(showModal(false));
+                }
+
+                // Set tabbing when first tab entered
+                if (!tabbing && event.keyCode === 9) {
+                    setTabbing(true);
                 }
 
                 // Only listen for additional keys if keyEvents is defined
@@ -55,7 +63,6 @@ function Modal({ content, keyEvents, show, showModal }) {
                         }
                     }
                 }
-
             }
             
             // Add listener for function
@@ -66,25 +73,28 @@ function Modal({ content, keyEvents, show, showModal }) {
                 window.removeEventListener('keydown', modalKeydowns);
             }
         }
-    }, [dispatch, show, showModal, keyEvents]);
+    }, [dispatch, show, showModal, keyEvents, tabbing]);
+
+    
 
     // Render Modal over content using a portal to the div with id="modal" in index.html
     return createPortal(
-        <div
-            onClick={() => dispatch(showModal(false))}
-            className="ui dimmer modals visible active fixedModal"
-            aria-keyshortcuts="Esc (escape) closes pop-up"
-        >
-            
+        <FocusTrap active={tabbing}>
             <div
-                // Don't allow clicks to propagate to lower elements
-                onClick={e => e.stopPropagation()}
+                onClick={() => dispatch(showModal(false))}
+                className="ui dimmer modals visible active fixedModal"
+                aria-keyshortcuts="Esc (escape) closes pop-up"
             >
-                {/* Get modal content from props */}
-                {content}
-            </div>
+                <div
+                    // Don't allow clicks to propagate to lower elements
+                    onClick={e => e.stopPropagation()}
+                >
+                    {/* Get modal content from props */}
+                    {content}
+                </div>
 
-        </div>,
+            </div>
+        </FocusTrap>,
         document.querySelector("#modal")
     );
 }
