@@ -50,8 +50,8 @@ export default function NoInventoryFound() {
             <br />
             <div className="errorSublist">
                 <div>
-                    <strong>Windows -</strong> Default filepath for ".log" files:
-
+                    Windows
+                    <div className="errorText">Default filepath for ".log" files:</div>
                     <div className="errorText">C:\Users\<span className="yourUserName">(Your User Name)</span>\AppData\LocalLow\Wizards Of The Coast\MTGA</div>
                 </div>
 
@@ -61,8 +61,8 @@ export default function NoInventoryFound() {
             <br />
             <div className="errorSublist">
                 <div>
-                    <strong>Mac -</strong> Default filepath for ".log" files:
-
+                    Mac
+                    <div className="errorText">Default filepath for ".log" files:</div>
                     <div className="errorText">Macintosh HD/Users/<span className="yourUserName">(Your User Name)</span>/Library/Logs/Wizards Of The Coast/MTGA</div>
 
                 </div>

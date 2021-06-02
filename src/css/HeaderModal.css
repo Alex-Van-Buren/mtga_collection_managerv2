@@ -19,8 +19,9 @@
 
 .errorSublist {
     display: flex;
-    align-items: center;
+    align-items:flex-end;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .errorSublist > * > * {
@@ -39,8 +40,8 @@
 .errorButton {
     border-radius: 8px;
     cursor: pointer;
-    height: 4rem;
-    margin-left: 2rem;
+    height: 3em;
+    margin-left: 2em;
     opacity: 0.6;
     width: 9rem;
 }
