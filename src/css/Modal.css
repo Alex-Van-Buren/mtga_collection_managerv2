@@ -1,4 +1,9 @@
-.cardModal {
+.fixedModal {
     /* Keep model fixed, but allow background scroll */
     position: fixed !important;
+
+    /* Make Modal text selectable */
+    user-select: auto !important;
+    -webkit-user-select: auto !important;
+    -moz-user-select: auto !important;
 }
