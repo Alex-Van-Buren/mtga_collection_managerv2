@@ -14,11 +14,17 @@ function Help() {
 
     // Frequently asked questions array of {question: "", answer: ""}
     const FAQs = [
-        {question:'What does "Collection Manager" do with my log file/info?',
-        answer: "When a user uploads their log file, they are allowing their own browser to analzye it. We do NOT keep your log file or information."},
-
-        {question:"How do I upload my log file on mobile?",
-        answer: 'While "Collection Manager" can be used on mobile, the mobile application for MTG Arena does not seem to generate a log file that "Collection Manager" can parse.'}
+        {
+            question:'What does "Collection Manager" do with my log file/info?',
+            answer: "When a user uploads their log file, they are allowing their own internet browser to analyze it. " + 
+            "We do NOT keep your log file or information."
+        },
+        {
+            question:"How do I upload my log file on mobile?",
+            answer: 'While "Collection Manager" can be used on mobile, the mobile application for MTG Arena does not seem ' + 
+            'to generate a log file that "Collection Manager" can parse. If you wish, you could copy a log file to your phone' +
+            ' from the desktop application.'
+        }
     ]
 
     // Map the FAQs to JSX
