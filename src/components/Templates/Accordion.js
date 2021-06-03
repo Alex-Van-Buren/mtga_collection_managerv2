@@ -1,7 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import '../../css/Accordion.css';
-
+/**
+ * Make a collapsible section with a right floated button to expand/collapse the section. 
+ * To Use just wrap the elements with the Accordion Element. The first element will be the title element with a 
+ * button on the right and will always be visible. The remaining elements will be expandable. Ex: 
+ * @example
+ * <Accordion> 
+ *      <div> title </div> 
+ *      <div> content </div> 
+ *      <div> more content </div> 
+ * </Accordion> 
+ * @param {*} props Grabs the children of Accordion
+ * @returns Collapsible section
+ */
 function Accordion(props) {
     const [open, setOpen] = useState(false);
     const panelRef = useRef();
@@ -22,7 +34,9 @@ function Accordion(props) {
     const iconClass = open ? "minus icon" : "plus icon";
 
     const expandButton = ( 
-        <button className="expandButton" key="expandButton" onClick={()=> setOpen(!open)}>
+        <button className="expandButton" key="expandButton" 
+        onClick={()=> setOpen(!open)}
+        aria-expanded={open} aria-label="Expand/Collapse Section">
             <i className={iconClass}></i>
         </button>
     )
@@ -37,7 +51,6 @@ function Accordion(props) {
             {elements.slice(1)}
         </div>
     )
-
 
     return(
         <>
