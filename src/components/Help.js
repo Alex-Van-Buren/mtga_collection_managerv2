@@ -12,6 +12,7 @@ import Accordion from './Templates/Accordion';
  */
 function Help() {
 
+    // Frequently asked questions array of {question: "", answer: ""}
     const FAQs = [
         {question:'What does "Collection Manager" do with my log file/info?',
         answer: "When a user uploads their log file, they are allowing their own browser to analzye it. We do NOT keep your log file or information."},
@@ -20,14 +21,14 @@ function Help() {
         answer: 'While "Collection Manager" can be used on mobile, the mobile application for MTG Arena does not seem to generate a log file that "Collection Manager" can parse.'}
     ]
 
-    const renderFAQS = FAQs.map((FAQ, index) => {
+    // Map the FAQs to JSX
+    const renderFAQs = FAQs.map((FAQ, index) => {
         return (
-            <Accordion key={index}>
-                <li>{FAQ.question}</li>
+            <li key={index}>{FAQ.question}
                 <ul>
                     <li>{FAQ.answer}</li>
                 </ul>
-            </Accordion>
+            </li>            
         )
     });
 
@@ -58,9 +59,9 @@ function Help() {
                 </p>
                 <p>Options ➞ Account ➞ Detailed Logs</p>
                 <div className="detailedLogImages">
-                    <img src={optionsImg} alt="" />
-                    <img src={accountImg} alt="" />
-                    <img src={detailedLogsImg} alt="" />
+                    <img src={optionsImg} alt="Find Options" title="Find Options" aria-label="Find Options" />
+                    <img src={accountImg} alt="Find Account" title="Find Account" aria-label="Find Account" />
+                    <img src={detailedLogsImg} alt="Enable Detailed Options" title="Enable Detailed Options" aria-label="Enable Detailed Options"/>
                 </div>
             </Accordion>
         </div>
@@ -69,7 +70,7 @@ function Help() {
             <Accordion>
                 <h2>FAQ's</h2>
                 <ol className="FAQList">
-                    {renderFAQS}
+                    {renderFAQs}
                 </ol>
             </Accordion>
 
