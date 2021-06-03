@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Kadwa";
+    src: local("Kadwa"), url("../fonts/Kadwa-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Kadwa";
+    src: local("Kadwa"), url("../fonts/Kadwa-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
