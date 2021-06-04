@@ -16,11 +16,14 @@
     text-transform: capitalize;
 }
 
-.draftRequired, .draftRequired p {
-    margin-left: 1.5rem;
+.draftsRequired {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-left: 2rem;
 }
 
-.draftRequired p {
+.draftsRequired p {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -48,5 +51,32 @@ img.gemImg, img.goldImg {
 .drafttype-dropdown .dropdown{
     width: 8em;
     text-transform: capitalize;
-    
+}
+
+#draftsCalculator .typeAndWinRate, #draftsCalculator .cardsPicked{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cardsPicked {
+    margin-left: 2rem;
+}
+
+#draftsCalculator p {
+    margin: 0.5rem 0;
+}
+
+#draftsCalculator input[type='number'] {
+    font-size: large;
+    border: 1px solid var(--clr-txt);
+    border-radius: 5px;
+}
+
+#notAvailable {
+    color: var(--clr-txt);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 42px);
 }

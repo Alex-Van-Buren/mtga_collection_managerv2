@@ -26,7 +26,8 @@ function PacksCalculator() {
     if ( !setInfo[setId].collationId ) {
         const message = `${setInfo[setId].name} is not obtainable from normal Booster Packs`;
         return (
-            <div className="calculator">
+            // The styling for this id is reused from PackCalculator.css
+            <div id="notAvailable">
                 <h2>{message}</h2>
             </div>
         )

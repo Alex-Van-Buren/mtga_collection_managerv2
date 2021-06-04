@@ -105,7 +105,7 @@ function DraftsCalculator() {
     if (!setInfo[setId].collationId) {
         const message = `${setInfo[setId].name} is not a draftable set`;
         return (
-            <div id="draftsCalculator">
+            <div id="notAvailable">
                 <h2>{message}</h2>
             </div>
         )
@@ -167,7 +167,7 @@ function DraftsCalculator() {
     // Input selects estimated win percentage
     const renderWinRate = (
         <div>
-            <label htmlFor="winRate">Average Win Percentage:</label>
+            <label htmlFor="winRate">Win Rate: </label>
             <input
                 type="number" name="winRate" id="winRate" min="0" max="100" value={debouncedWinRate}
                 onChange={(e) => setDebouncedWinRate(checkWinRate(e.target.value))}
@@ -178,7 +178,7 @@ function DraftsCalculator() {
     // Input for average number of new rares picked during draft
     const renderRaresPickedInput = (
         <div>
-            <label htmlFor="raresPicked">Average New Rares Picked per Draft:</label>
+            <label htmlFor="raresPicked">Rares: </label>
             <input
                 type="number" name="raresPicked" id="raresPicked" min="0" max="10" step="0.1" value={debouncedRaresPicked}
                 onChange={(e) => setDebouncedRaresPicked(checkCardsPicked(e.target.value))}
@@ -189,7 +189,7 @@ function DraftsCalculator() {
     // Input for average number of new mythics picked during draft
     const renderMythicsPickedInput = (
         <div>
-            <label htmlFor="mythicsPicked">Average New Mythics Picked per Draft:</label>
+            <label htmlFor="mythicsPicked">Mythics: </label>
             <input
                 type="number" name="mythicsPicked" id="mythicsPicked" min="0" max="10" step="0.1" value={debouncedMythicsPicked}
                 onChange={(e) => setDebouncedMythicsPicked(checkCardsPicked(e.target.value))}
@@ -200,26 +200,38 @@ function DraftsCalculator() {
     const renderOutput = (
         <div>
             <hr />
-            <h4>Packs Owned: {ownedBoosters}</h4>
             <h4>Drafts Needed To Complete:</h4>
-            <div className="draftRequired">
-                <h5>Rares: {rareDraftsNeeded} Drafts</h5>
-                <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/> {(rareCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(rareCost.gems).toLocaleString()}</p>
-                <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} </p>
-
-                <h5>Mythics: {mythicDraftsNeeded} Drafts</h5>
-                <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/>{(mythicCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}</p>
-                <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} </p>
+            <div className="draftsRequired">
+                <div className="rares">
+                    <h5>Rares: {rareDraftsNeeded} Drafts</h5>
+                    <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/> {(rareCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(rareCost.gems).toLocaleString()}</p>
+                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} </p>
+                </div>
+                <div className="mythics">
+                    <h5>Mythics: {mythicDraftsNeeded} Drafts</h5>
+                    <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/>{(mythicCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}</p>
+                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} </p>
+                </div>
             </div>
         </div>
     );
 
     return (
         <div id="draftsCalculator">
-            {renderDropDown}
-            {renderWinRate}
-            {renderRaresPickedInput}
-            {renderMythicsPickedInput}
+            <h3>Draft Calculator</h3>
+            <div className="top">
+                <div className="typeAndWinRate">
+                    {renderDropDown}
+                    {renderWinRate}
+                </div>
+                <p>New Cards Picked:</p>
+                <div className="cardsPicked">
+                    {renderRaresPickedInput}
+                    {renderMythicsPickedInput}
+
+                </div>
+                <p>Packs Owned: {ownedBoosters}</p>
+            </div>
             {renderOutput}
         </div>
     );
