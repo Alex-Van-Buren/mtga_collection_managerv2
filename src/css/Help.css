@@ -33,4 +33,17 @@ li {
     color: black;
 }
 
+.errorMessage.helpErrorText {
+    color: var(--clr-txt);
+    font-weight: bold;
+    font-size: 1em;
+    margin-left: 50px;
+}
 
+.errorMessage.helpErrorText span.yourUserName {
+    color: blue;
+}
+
+.darkMode .errorMessage.helpErrorText span.yourUserName {
+    color: yellow;
+}

@@ -31,7 +31,7 @@ function renderPathButton(text, setText, ref, path) {
  * Value of true will return InvalidFile instead of NoInventoryFound (very similar errors).
  * @returns Error JSX
  */
-export default function NoInventoryFound({invalidFile=false}) {
+export default function NoInventoryFound({invalidFile=false, help=false}) {
     const [windowsButton, setWindowsButton] = useState("Copy Path");
     const [macButton, setMacButton] = useState("Copy Path");
 
@@ -41,30 +41,39 @@ export default function NoInventoryFound({invalidFile=false}) {
     const windowsPath = "%USERPROFILE%\\AppData\\LocalLow\\Wizards Of The Coast\\MTGA";
     const macPath = "~/Library/Logs/Wizards Of The Coast/MTGA";
 
-    // Choose whether to show NoInventoryFound or InvalidFile
-    const errorTop = !invalidFile ? 
-    <>
-        <h1 className="errorTitle">No inventory Data found!</h1>
-        <div className="errorSubtitle">File must be a Player Log with <strong>Detailed Logs</strong> enabled.</div>
-
-        <div className="errorSublist">
-            <div>
-                Detailed Logs can be found in MTG Arena under:
-                <div className="errorText">Options ➞ Account ➞ Detailed Logs</div>
-            </div>
-        </div>
-    </>
-    :
-    <h1 className="errorTitle">File not recognized!</h1>;
-
+    // Choose error header to show
+    let errorTop;
+    let helpClass = "";
     
+    if (help) {
+        errorTop = null;
+        helpClass = "helpErrorText";
+    
+    } else if (invalidFile) {
+        errorTop = (<>
+            <br/>
+            <h1 className="errorTitle">File not recognized!</h1>
+        </>);
+    } else {
+        errorTop = (<>
+            <br/>
+            <h1 className="errorTitle">No inventory Data found!</h1>
+            <div className="errorSubtitle">File must be a Player Log with <strong>Detailed Logs</strong> enabled.</div>
+    
+            <div className="errorSublist">
+                <div>
+                    Detailed Logs can be found in MTG Arena under:
+                    <div className="errorText">Options ➞ Account ➞ Detailed Logs</div>
+                </div>
+            </div>
+        </>);
+    }
 
     return (
-        <div className="errorMessage">
+        <div className={`errorMessage ${helpClass}`}>
 
             {errorTop}
             
-            <br />
             <div className="errorSublist">
                 <div>
                     Windows
@@ -86,6 +95,7 @@ export default function NoInventoryFound({invalidFile=false}) {
 
                 <div>{renderPathButton(macButton, setMacButton, mRef, macPath)}</div>
             </div>
+            <br />
         </div>
     );
 }
