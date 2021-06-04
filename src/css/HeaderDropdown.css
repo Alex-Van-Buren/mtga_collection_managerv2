@@ -23,8 +23,7 @@ a.dd-item {
     color: var(--clr-txt);
     border-bottom: 1px solid var(--border-clr);
     display: block;
-    padding: 3px;
-    padding-left: 10px;
+    padding: 8px;
 }
 
 .dd-item:hover {
