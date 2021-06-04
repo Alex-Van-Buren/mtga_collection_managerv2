@@ -16,6 +16,12 @@ function Help() {
     // Frequently asked questions array of {question: "", answer: ""}
     const FAQs = [
         {
+            question: 'What does uploading my "log file" do?',
+            answer: "Your log file contains the IDs of all the cards you own, as well as your vault progress, gold, gems, " +
+            "wildcards, etc. Collection Manager grabs this information and shows you what cards you own, how many drafts or" +
+            " packs you need to complete each set, your current vault progress, and more."
+        },
+        {
             question:'What does "Collection Manager" do with my log file/info?',
             answer: "When a user uploads their log file, they are allowing their own internet browser to analyze it. " + 
             "We do NOT keep your log file or information."
