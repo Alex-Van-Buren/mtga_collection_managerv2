@@ -1,4 +1,4 @@
-import allArenaCards from './arenaCards20210525185440.json';
+import allArenaCards from './arenaCards20210604164924.json';
 import { historicSets as sets } from '../data/setInfo';
 
 /**

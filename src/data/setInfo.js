@@ -165,6 +165,12 @@ export const setInfo = {
         collationId: null,
         logo: null
     },
+    ha5: {
+        name: "Historic Anthology 5",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: null
+    },
     jmp: {
         name: "Jumpstart",
         mythic_upgrade: null,
