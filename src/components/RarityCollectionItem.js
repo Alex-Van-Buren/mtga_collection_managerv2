@@ -38,12 +38,23 @@ function RarityCollectionItem({ setId, rarity }) {
     } else {
         rarityNumber = `${ownedTotal} / ${setTotal}`;
     }
+
+    // Replace some set symbols with another (e.g. give all Historic Anthologies the HA1 symbol)
+    const symbolTransforms = {
+        "ha2": "ha1",
+        "ha3": "ha1",
+        "ha4": "ha1",
+        "ha5": "ha1",
+    }
+
+    const symbol = symbolTransforms[setId] ? symbolTransforms[setId] : setId;
+
     return (
         <div className="item " id="collectionItem" >
             <div className="rarityContainer">
 
                 <div className="rarityText">
-                    <i className={`ss ss-${setId} ss-${rarity} ss-fw mtgIcon`}/>
+                    <i className={`ss ss-${symbol} ss-${rarity} ss-fw mtgIcon`}/>
                     &nbsp; {/* Force a non-CSS space between icon and text */}
                     {rarity}
                 </div>
