@@ -205,12 +205,12 @@ function DraftsCalculator() {
                 <div className="rares">
                     <h5>Rares: {rareDraftsNeeded} Drafts</h5>
                     <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/> {(rareCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(rareCost.gems).toLocaleString()}</p>
-                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} </p>
+                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} &#38; {Math.floor(rewardPacks * rareDraftsNeeded)} Packs</p>
                 </div>
                 <div className="mythics">
                     <h5>Mythics: {mythicDraftsNeeded} Drafts</h5>
                     <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/>{(mythicCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}</p>
-                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} </p>
+                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} &#38; {Math.floor(rewardPacks * mythicDraftsNeeded)} Packs </p>
                 </div>
             </div>
         </div>
