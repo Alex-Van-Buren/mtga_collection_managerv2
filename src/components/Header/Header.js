@@ -48,6 +48,10 @@ function Header() {
                     <HeaderDropdown title="Sets" titleClass="" itemsClass="sets">
                         {setLinks}
                     </HeaderDropdown>
+
+                    <Link to='/deckbuilder' className="heading">
+                        Deck Builder
+                    </Link>
                     
                 </div>
 
