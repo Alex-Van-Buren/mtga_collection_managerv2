@@ -53,8 +53,8 @@ function Help() {
         <div className='findLogFile'>
             <Accordion>
                 <h2>Finding Your Log file </h2>
-                <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It can be 
-                    found at one of the following locations inside the drive where Arena is installed:
+                <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It is typically 
+                    found at one of the following locations:
                 </p>
                 <NoInventoryFound help={true}/>
                 <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>

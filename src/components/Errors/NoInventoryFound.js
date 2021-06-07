@@ -14,10 +14,11 @@ function renderPathButton(text, setText, ref, path) {
         <button className="errorButton" tabIndex="0" ref={ref} onKeyDown={e => makeKeyboardClickable(e, ref)}
             onClick={() => {
                 // Write path to clipboard
-                navigator.clipboard.writeText(path);
+                navigator.clipboard.writeText(path).then(() => {
 
-                // Update button text without state
-                setText("Copied!");
+                    // Update button text without state
+                    setText("Copied!");
+                });
             }}
         >
             {text}
@@ -53,6 +54,7 @@ export default function NoInventoryFound({invalidFile=false, help=false}) {
         errorTop = (<>
             <br/>
             <h1 className="errorTitle">File not recognized!</h1>
+            <br/>
         </>);
     } else {
         errorTop = (<>
@@ -66,6 +68,7 @@ export default function NoInventoryFound({invalidFile=false, help=false}) {
                     <div className="errorText">Options ➞ Account ➞ Detailed Logs</div>
                 </div>
             </div>
+            <br/>
         </>);
     }
 
@@ -73,6 +76,13 @@ export default function NoInventoryFound({invalidFile=false, help=false}) {
         <div className={`errorMessage ${helpClass}`}>
 
             {errorTop}
+
+            <div>
+                Use your File Explorer (Windows) or Finder App (Mac) to navigate to your log files using these filepaths, 
+                or click "Copy Path" button and paste the link into your File Explorer or Finder App.
+            </div>
+
+            <br/>
             
             <div className="errorSublist">
                 <div>
