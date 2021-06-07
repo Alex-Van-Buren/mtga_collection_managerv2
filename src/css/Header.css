@@ -57,7 +57,7 @@
  Display hamburger menu at mobile sizes 
  - show x when menu expanded and hide menu when hamburger shown 
 */
-@media only screen and (max-width: 739px) {
+@media only screen and (max-width: 779px) {
     .hideMenu>*:not(#home) {
         display: none !important;
     }
