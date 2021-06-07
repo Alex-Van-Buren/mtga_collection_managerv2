@@ -6,7 +6,7 @@ import BoosterDropdown from './BoosterDropdown';
 import ColorCheckboxes from './ColorCheckboxes';
 import Reset from './Reset';
 import CustomButton from '../Templates/CustomButton';
-import SearchBar from './SearchBar';
+import SearchBar from '../Templates/SearchBar';
 import { selectRarity } from '../../actions';
 import '../../css/DisplayOptions.css';
 
