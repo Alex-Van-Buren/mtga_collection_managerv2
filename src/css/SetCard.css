@@ -2,11 +2,11 @@
     justify-content: center;
 }
 #setCardHeader {
+    color: var(--clr-txt);
     font-family: 'Kadwa', serif;
     font-size: 1.7rem;
     font-weight: 400;
-    margin-top: 5%;
-    color: var(--clr-txt);
+    margin: 3% 0;
 }
 #setCardHeader>img {
     width: 80%;
