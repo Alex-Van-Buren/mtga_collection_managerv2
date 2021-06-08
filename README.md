@@ -18,7 +18,6 @@
     * Compare different draft formats, see which one will get you ever card with the least gold or gems spent.
     * View your draft rewards. What win rate do you need to hit to go infinite? (Hint: It's about 68% if you're playing Premier. **And** you get 346 free packs to boot!)
 * See how many boosters you need to complete each set.
-* Want to see more cards at a time? Zoom out! You can always click the cards to get a bigger view.
 * Try out keyboard shortcuts! The site is fully keyboard accessible.
     * In the large card view - Use the arrow keys to quickly navigate between cards, hit escape to exit the large view, and flip double-sided cards with the space bar!
 
