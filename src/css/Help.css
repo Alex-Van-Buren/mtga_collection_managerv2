@@ -47,3 +47,8 @@ li {
 .darkMode .errorMessage.helpErrorText span.yourUserName {
     color: yellow;
 }
+
+li>ul>li {
+    margin: 12px auto;
+    font-size: 95%;
+}
