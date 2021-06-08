@@ -1,11 +1,11 @@
 # Collection Manager
 ## Use your browser to instantly analyze your MTG Arena collection. No downloads. No loading.
 
-## How to use the Collection Manager:
+### How to use the Collection Manager:
 1. Upload your Player Log file (see the help page for help finding it!)
 2. See your collection progress for every set.
 
-## Features:
+### Features:
 * It's like, *really, really* fast. Analyze over 250,000 cards as fast as you can click upload.
 * No downloads necessary.
 * Native dark mode, or optionally blind yourself with light mode.
@@ -22,7 +22,7 @@
 * Try out keyboard shortcuts! The site is fully keyboard accessible.
     * In the large card view - Use the arrow keys to quickly navigate between cards, hit escape to exit the large view, and flip double-sided cards with the space bar!
 
-## Coming Soon:
+### Coming Soon:
 * Deck Builder
 
 ## Stay tuned for the full release planned August 2nd, 2021!
