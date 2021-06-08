@@ -26,3 +26,5 @@
 * Deck Builder
 
 ## Stay tuned for the full release planned August 2nd, 2021!
+
+© 2021 Nate Sackett and Alex Van Buren. All rights reserved.
