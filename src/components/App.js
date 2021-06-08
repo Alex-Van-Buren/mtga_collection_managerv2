@@ -16,16 +16,16 @@ import '../css/App.css';
  */
 function App() {
     return (
-        <Router >
+        <Router basename="/mtga_collection_managerv2">
             <div id="contentContainer">
                 <div id="keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage">
                     <Header />
 
                     <Switch>
-                        <Route exact component={Home}   path='/mtga_collection_managerv2/' />
-                        <Route component={Help}         path='/mtga_collection_managerv2/help' />
-                        <Route component={SetDetails}   path='/mtga_collection_managerv2/set/:setId' />
-                        <Route component={DeckBuilder}  path='/mtga_collection_managerv2/deckbuilder' />
+                        <Route exact component={Home}   path='/' />
+                        <Route component={Help}         path='/help' />
+                        <Route component={SetDetails}   path='/set/:setId' />
+                        <Route component={DeckBuilder}  path='/deckbuilder' />
                         <Route component={PageNotFound} />
                     </Switch>
 

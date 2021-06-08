@@ -91,7 +91,7 @@ function Home() {
         
         // Create each card set Component based on 'sets' input
         const setCards = sets.map( (setId) => {
-            const path = `/mtga_collection_managerv2/set/${setId}`;
+            const path = `/set/${setId}`;
 
             return (
                 <div className="ui link card" key={setId}>
