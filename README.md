@@ -1,4 +1,5 @@
-# Use your browser to instantly analyze your MTG Arena collection. No downloads. No loading.
+# Collection Manager
+## Use your browser to instantly analyze your MTG Arena collection. No downloads. No loading.
 
 ## How to use the Collection Manager:
 1. Upload your Player Log file (see the help page for help finding it!)
