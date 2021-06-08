@@ -1,5 +1,5 @@
-// import allArenaCards from './arenaCards20210525185440.json';
-const allArenaCards = require('./arenaCards20210607171342');
+import allArenaCards from './arenaCards20210607171342.json';
+// const allArenaCards = require('./arenaCards20210607171342');
 
 /**
  * 
@@ -401,5 +401,5 @@ function getCardProperties(card, returnOptions) {
     return newCard;
 }
 
-// export default findCards;
-module.exports = findCards;
+export default findCards;
+// module.exports = findCards;
