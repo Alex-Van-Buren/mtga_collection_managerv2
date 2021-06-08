@@ -48,13 +48,13 @@ li>ul>li {
     font-size: 95%;
 }
 
-.contact_discord {
+#contact_discord {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     flex-shrink: 0;
 }
 
-.contact_discord > * {
-    flex-shrink: 0;
+#contact_discord > a {
+    margin-left: auto;
 }

@@ -127,8 +127,8 @@ function Help() {
 
         <div className="contact">
             <h2>Contact Us</h2>
-            <div className="contact_discord">
-                <p>If you have any questions or suggestions feel free contact us on Discord:</p>
+            <div id="contact_discord">
+                <p>Comments, questions, or suggestions? Contact us on Discord:</p>
                 
                 {/* Discord Link */}
                 <a href="https://discord.gg/H2cTG8nekF" target="_blank" rel="noreferrer">Join the Discord</a>
