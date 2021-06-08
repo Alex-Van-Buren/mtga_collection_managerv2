@@ -22,10 +22,10 @@ function App() {
                     <Header />
 
                     <Switch>
-                        <Route exact component={Home}   path='/' />
-                        <Route component={Help}         path='/help' />
-                        <Route component={SetDetails}   path='/set/:setId' />
-                        <Route component={DeckBuilder}  path ='/deckbuilder' />
+                        <Route exact component={Home}   path='/mtga_collection_managerv2/' />
+                        <Route component={Help}         path='/mtga_collection_managerv2/help' />
+                        <Route component={SetDetails}   path='/mtga_collection_managerv2/set/:setId' />
+                        <Route component={DeckBuilder}  path='/mtga_collection_managerv2/deckbuilder' />
                         <Route component={PageNotFound} />
                     </Switch>
 
