@@ -127,7 +127,12 @@ function Help() {
 
         <div className="contact">
             <h2>Contact Us</h2>
-            <p>If you have any questions/concerns feel free to message us at: <span className='contactInfo'>ADD ACTUAL CONTACT INFO</span></p>
+            <div className="contact_discord">
+                <p>If you have any questions or suggestions feel free contact us on Discord:</p>
+                
+                {/* Discord Link */}
+                <a href="https://discord.gg/H2cTG8nekF" target="_blank" rel="noreferrer">Join the Discord</a>
+            </div>
         </div>
 
     </ div>

@@ -28,11 +28,6 @@ li {
     margin: 30px auto;
 }
 
-.contactInfo {
-    background-color: yellow;
-    color: black;
-}
-
 .errorMessage.helpErrorText {
     color: var(--clr-txt);
     font-weight: bold;
@@ -51,4 +46,15 @@ li {
 li>ul>li {
     margin: 12px auto;
     font-size: 95%;
+}
+
+.contact_discord {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.contact_discord > * {
+    flex-shrink: 0;
 }
