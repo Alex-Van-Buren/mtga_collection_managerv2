@@ -27,7 +27,7 @@ function Header() {
     const setLinks = historicSets.map((setId) => {
         const title = setInfo[setId].name;   
         return (
-            <Link className="dd-item" key={setId} to={'/mtga_collection_managerv2/set/'+setId}>{title}</Link>
+            <Link className="dd-item" key={setId} to={'/set/'+setId}>{title}</Link>
         )
     });
     
@@ -40,7 +40,7 @@ function Header() {
 
                 {/* Options on Left Side */}
                 <div className={`${hideMenu} leftOptions`}>
-                    <Link to='/mtga_collection_managerv2/' className="heading" id="home">
+                    <Link to='/' className="heading" id="home">
                         <img src={logo} alt="logo" className="logo" />
                         Collection Manager
                     </Link>
@@ -49,7 +49,7 @@ function Header() {
                         {setLinks}
                     </HeaderDropdown>
 
-                    <Link to='/mtga_collection_managerv2/deckbuilder' className="heading">
+                    <Link to='/deckbuilder' className="heading">
                         Deck Builder
                     </Link>
                     
@@ -62,7 +62,7 @@ function Header() {
                     <GetFile />
 
                     {/* Help Menu */}
-                    <Link to='/mtga_collection_managerv2/help' className="heading" id="help">Help</Link>
+                    <Link to='/help' className="heading" id="help">Help</Link>
 
 
                     {/* Dark Mode Toggle */}
