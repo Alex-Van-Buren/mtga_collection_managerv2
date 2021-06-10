@@ -22,6 +22,11 @@ function Footer() {
                     <a href="https://discord.gg/H2cTG8nekF" target="_blank" rel="noreferrer">Join the Discord</a>
 
                     &emsp;
+
+                    {/* Reddit Link */}
+                    <a href="https://reddit.com/r/CollectionManager/" target="_blank" rel="noreferrer">Join the Subreddit</a>
+
+                    &emsp;
                 </div>
 
                 {/* Copyright */}
