@@ -14,9 +14,8 @@ function packsNeeded(setId, rarity, numCardsOwned, numCardsTotal) {
     let mythicUpgradeRate = setInfo[setId].mythic_upgrade;
     let rareRate = 1 - mythicUpgradeRate;
 
-    // This is the rate that the card does NOT upgrade into a wildcard of the same rarity
-    // This value is commonly used by other trackers/websites. Might need further verification.
-    const nonWildcardRate = 11/12;
+    // The wildcard rate for mythics and for rares is (1/30) each so the nonWildcard rate is 1-(1/30)-(1/30)  = (14/15)
+    const nonWildcardRate = 14/15;
 
     // For strixhaven mystical archive the rareRate is explicit since a rare/mythic is not in every pack
     if ( setId === 'sta' ) {
