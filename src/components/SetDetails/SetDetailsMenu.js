@@ -40,21 +40,21 @@ function SetDetailsMenu() {
             onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Card Filters'))}}}
             tabIndex="0" role="button" 
             >
-                Filter Displayed Cards
+                Card Filters
             </div>
             <div className={packsClass} 
             onClick={()=> dispatch(selectDetailsMenu('Packs'))}
             onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Packs'))}}}
             tabIndex="0" role="button" 
             >
-               Booster Pack Calculator
+               Booster Packs
             </div>
             <div className={draftsClass}
             onClick={()=> dispatch(selectDetailsMenu('Drafts'))}
             onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Drafts'))}}}
             tabIndex="0" role="button" 
             >
-                Draft Calculator
+                Drafts
             </div>
         </div>
     );
