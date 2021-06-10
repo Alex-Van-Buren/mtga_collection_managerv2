@@ -92,20 +92,23 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
         // Reset button
         case RESET: {
 
-            return {...state, colors: {
-                white: false,
-                blue: false,
-                black: false,
-                red: false,
-                green: false,
-                multi: false,
-                colorless: false
-            },
-            rarity: { mythic: false, rare: false, uncommon: false, common: false },
-            showCards: "Show All Cards",
-            booster: "All Cards",
-            searchTerm: ""
-            }
+            return (
+                {
+                    ...state, colors: {
+                    white: false,
+                    blue: false,
+                    black: false,
+                    red: false,
+                    green: false,
+                    multi: false,
+                    colorless: false
+                },
+                rarity: { mythic: false, rare: false, uncommon: false, common: false },
+                showCards: "Show All Cards",
+                booster: "Show All Cards",
+                cmc: {min: "Any", max: "Any"},
+                searchTerm: ""
+            });
         }
 
         case SET_CMC_MIN: {
