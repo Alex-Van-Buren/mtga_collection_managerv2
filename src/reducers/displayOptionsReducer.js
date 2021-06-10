@@ -104,7 +104,8 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             rarity: { mythic: false, rare: false, uncommon: false, common: false },
             showCards: "Show All Cards",
             booster: "All Cards",
-            searchTerm: ""
+            searchTerm: "",
+            cmc: {min: "Any", max: "Any"}
             }
         }
 
