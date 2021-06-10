@@ -15,7 +15,7 @@ import G from '../../images/color_imgs/G.svg';
 import C from '../../images/color_imgs/C.svg';
 import M from '../../images/color_imgs/M.svg';
 
-export default function ColorCheckboxes() {
+export default function ColorCheckboxes({ header }) {
 
     // Access the redux dispatcher
     const dispatch = useDispatch();
@@ -80,7 +80,7 @@ export default function ColorCheckboxes() {
         
         // Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless
         <div className="colorBox">
-            <label htmlFor="color" className="colorBoxLabel">Color(s):</label>
+            <label htmlFor="color" className="colorBoxLabel">{header}</label>
             <div className="colorList">
                 {renderColors}
             </div>

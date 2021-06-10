@@ -95,8 +95,6 @@ function SetDetails() {
 
             {/* Set Details */}
             <div className={`${setDetailsColumns} wide column`}>
-                {/* <div className="ui center aligned header">{setName}</div> */}
-                {/* <div className="ui center aligned header"><img src={setInfo[setId].logo} alt={setName} /></div> */}
                 {detailsHeader}
                 <div className="ui center aligned sub header">
                     Set Progress:

@@ -58,3 +58,14 @@ li>ul>li {
 #contact_discord > a {
     margin-left: auto;
 }
+
+#contactLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#contactLinks > * {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
