@@ -4,8 +4,8 @@ function draftsNeeded(setId, rarity, ownedTotal, setTotal, cardsPicked, rewardPa
     const mythicUpgradeRate = setInfo[setId].mythic_upgrade;
     const numMissing = setTotal - ownedTotal;
 
-    // The wildcard rate for mythics and for rares is (1/30) each so the nonWildcard rate is 1-(1/30)-(1/30)  = (14/15)
-    const nonWildcardRate = 14/15;
+    // This is the generally accepted value for non wildcards, but needs further verification
+    const nonWildcardRate = 11/12;
 
     // Most cards picked will be rare, but account for specific mythic upgrade rate
     // Default value is for when rarity === "rare"

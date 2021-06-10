@@ -34,18 +34,18 @@ function DisplayOptions() {
         <SearchBar/>
 
         {/* Buttons that select rarity: Mythic, Rare, Uncommon, Common */}
-        <label className="rarityLabel">Select Rarity/Rarities to Show:</label>
+        <label className="rarityLabel">Rarity:</label>
         <div className="showList">
             {renderRarityButtons}
         </div>
 
         {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
-        <ColorCheckboxes header="Select Color/Colors to Show:"/>
+        <ColorCheckboxes/>
 
         {/* DropDowns that select cards to show based on number in inventory and whether they are in boosters*/}
         <div className="display-options-dropdowns">            
-            <NumberOwnedDropdown header="Number You Own:" />
-            <BoosterDropdown header="In Booster Packs?" />
+            <NumberOwnedDropdown />
+            <BoosterDropdown/>
             <CMCDropdowns/>
             <Reset />
         </div>

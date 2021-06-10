@@ -23,7 +23,7 @@ a.dd-item {
     color: var(--clr-txt);
     border-bottom: 1px solid var(--border-clr);
     display: block;
-    padding: 12px;
+    padding: 8px;
 }
 
 .dd-item:hover {
@@ -41,12 +41,11 @@ a.dd-item {
     background-color: var(--background-clr);
     background-color: var(--clr-prm);
     color: var(--clr-txt);
-    width: 35ch;
+    width: 15em;
     padding: 0;
     top: 100%;
     left: 0;
     border: 1px solid var(--border-clr);
-    border-bottom-left-radius: 10px;
     z-index: 10;
     max-height: 400px;
     overflow-y: scroll;
@@ -67,7 +66,7 @@ a.dd-item {
     display: none;
 }
 
-@media only screen and (max-width:779px) {
+@media only screen and (max-width:739px) {
     .dd-title.active {
         border-bottom: none !important;
         box-shadow: none;
@@ -77,7 +76,12 @@ a.dd-item {
         display: flex;
         width: 100%;
         position: relative;
+        top: 0;
+        left: 0 !important; 
         flex-direction: column;
+        transform: none;
+        align-items: center;
+        justify-content: center;
         border: none;
     }
 

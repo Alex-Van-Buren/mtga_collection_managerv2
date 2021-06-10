@@ -128,15 +128,10 @@ function Help() {
         <div className="contact">
             <h2>Contact Us</h2>
             <div id="contact_discord">
-                <p>Comments, questions, or suggestions? Contact us on Discord or Reddit:</p>
+                <p>Comments, questions, or suggestions? Contact us on Discord:</p>
                 
-                <div id="contactLinks">
-                    {/* Discord Link */}
-                    <a href="https://discord.gg/H2cTG8nekF" target="_blank" rel="noreferrer">Join the Discord</a>
-
-                    {/* Reddit Link */}
-                    <a href="https://reddit.com/r/CollectionManager/" target="_blank" rel="noreferrer">Join the Subreddit</a>
-                </div>
+                {/* Discord Link */}
+                <a href="https://discord.gg/H2cTG8nekF" target="_blank" rel="noreferrer">Join the Discord</a>
             </div>
         </div>
 
