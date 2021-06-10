@@ -6,9 +6,6 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
-import './fonts/Kadwa-Bold.ttf';
-import './fonts/Kadwa-Regular.ttf';
-import './css/index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
