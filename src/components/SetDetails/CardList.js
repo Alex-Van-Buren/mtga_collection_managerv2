@@ -59,9 +59,11 @@ function CardList({ setId }) {
             default:
                 break;
         }
+        // Get the cmc's requested
+        const cmc = {min: undefined, max: undefined};
 
         // Put all search options into a single object for findCards function
-        const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm};
+        const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, cmc};
 
         // Need to get images as well as name and arenaId
         const returnOptions = ['image_uris'];

@@ -19,6 +19,8 @@ const INITIAL_STATE = {
 
     booster: "All Cards",
 
+    cmc: {min: undefined, max: undefined},
+
     searchTerm: "",
 
     imageList: [],
