@@ -44,7 +44,7 @@ function DisplayOptions() {
 
         {/* DropDowns that select cards to show based on number in inventory and whether they are in boosters*/}
         <div className="display-options-dropdowns">            
-            <NumberOwnedDropdown />
+            <NumberOwnedDropdown/>
             <BoosterDropdown/>
             <CMCDropdowns header="Filter by Mana Cost"/>
             <Reset />
