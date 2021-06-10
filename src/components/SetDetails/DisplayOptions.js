@@ -43,7 +43,7 @@ function DisplayOptions() {
         <ColorCheckboxes header="Select Color/Colors to Show:"/>
 
         {/* DropDowns that select cards to show based on number in inventory and whether they are in boosters*/}
-        <div className="display-options-dropdowns">            
+        <div className="display-options-dropdowns">
             <NumberOwnedDropdown header="Number You Own:" />
             <BoosterDropdown header="In Booster Packs?" />
             <CMCDropdowns header="Filter by Mana Cost"/>
