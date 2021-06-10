@@ -11,7 +11,7 @@ import allArenaCards from './arenaCards20210608185804.json';
 function findCards(searchOptions, returnOptions) {
 
     // Destructure search options
-    const { set, color, rarity, booster, term, excludeBasicLands=true } = searchOptions;
+    const { set, color, rarity, booster, term, excludeBasicLands=true, cmc } = searchOptions;
 
     /**
      * An array of ananymous functions to be called on each card
@@ -64,6 +64,11 @@ function findCards(searchOptions, returnOptions) {
     // Filter booster if needed
     if (booster !== undefined) {
         filterFunctions.push( (card) => filterBooster(card.booster, booster) );
+    }
+
+    // Filter cmc if needed
+    if ( cmc.min !== undefined || cmc.max !== undefined) {
+        filterFunctions.push( (card) => filterCMC(card.cmc, cmc.min, cmc.max) );
     }
 
 /* Call each chosen filter function on each card */
@@ -349,6 +354,22 @@ function filterByTerm(card, term, advancedSearchType=null) {
     function match(checkText) {
         return checkText.toUpperCase().includes(term.toUpperCase());
     }
+}
+
+/**
+ * Checks if a card should be kept in the finalCards array based on the cmc of the card and min/max values
+ * @param {Number} cardCMC The converted mana cost of card
+ * @param {*} min The minimum value to be accepted. Inclusive. If undefined will be 0
+ * @param {*} max The maximum value to be accepted. Inclusive. If undefined will be set to absurdly high number
+ * @returns Returns true if the card should be kept. False if not
+ */
+function filterCMC(cardCMC, min = 0, max = Number.MAX_SAFE_INTEGER) {
+
+    // Check if the card's cmc is between the min and max
+    if (cardCMC >= min && cardCMC <= max) {
+        return true;
+    }
+    return false;
 }
 
 /**

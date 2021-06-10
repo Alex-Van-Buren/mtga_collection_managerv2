@@ -16,3 +16,5 @@ export const SET_HEADER_MODAL_CONTENT = "SET_HEADER_MODAL_CONTENT";
 export const RESET = "RESET";
 export const UPDATE_IMAGE_LIST = "UPDATE_IMAGE_LIST";
 export const SELECT_DETAILS_MENU = "SELECT_DETAILS_MENU";
+export const SET_CMC_MIN = "SET_CMC_MIN";
+export const SET_CMC_MAX = "SET_CMC_MAX";

@@ -22,6 +22,7 @@ function CardList({ setId }) {
     const showCards      = useSelector(state => state.displayOptions.showCards);
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
     const boosterVal     = useSelector(state => state.displayOptions.booster);
+    const cmc            = useSelector(state => state.displayOptions.cmc);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -59,16 +60,27 @@ function CardList({ setId }) {
             default:
                 break;
         }
+        
+        // Check the cmc values for any string and change them to undefined
+        let searchcmc = {...cmc};
+
+        if (searchcmc.min === 'Any') {
+            searchcmc.min = undefined;
+        }
+        if (searchcmc.max === 'Any') {
+            searchcmc.max = undefined;
+        }
+        
 
         // Put all search options into a single object for findCards function
-        const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm};
+        const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, cmc: searchcmc};
 
         // Need to get images as well as name and arenaId
         const returnOptions = ['image_uris'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, setId, rarities, boosterVal]);
+    }, [colors, searchTerm, setId, rarities, boosterVal, cmc]);
 
     // Track currently shown pictures
     let currentPictures = [];
