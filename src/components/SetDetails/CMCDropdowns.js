@@ -20,7 +20,8 @@ function CMCDropdowns( {header} ) {
             <div className="CMCDropdowns-container">
                 <div className="minCMC">
                     <label>Min: </label>
-                    <CustomDropdown 
+                    <CustomDropdown
+                    ariaLabel="Filter CMC Minimum" 
                     items={items} 
                     key={`min${minSelected}`}
                     firstSelection={minSelected}
@@ -30,6 +31,7 @@ function CMCDropdowns( {header} ) {
                 <div className="maxCMC">
                     <label>Max: </label>
                     <CustomDropdown 
+                    ariaLabel="Filter CMC Maximum"
                     items={items} 
                     key={`max${maxSelected}`}
                     firstSelection={maxSelected}
