@@ -1,5 +1,5 @@
 import { 
-    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU
+    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,7 +19,7 @@ const INITIAL_STATE = {
 
     booster: "All Cards",
 
-    cmc: {min: undefined, max: undefined},
+    cmc: {min: "Any", max: "Any"},
 
     searchTerm: "",
 
@@ -106,6 +106,20 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             booster: "All Cards",
             searchTerm: ""
             }
+        }
+
+        case SET_CMC_MIN: {
+            let newcmc = {...state.cmc};
+            newcmc.min = action.payload;
+
+            return {...state, newcmc}
+        }
+
+        case SET_CMC_MAX: {
+            let newcmc = {...state.cmc};
+            newcmc.max = action.payload;
+            
+            return {...state, newcmc}
         }
 
         default:
