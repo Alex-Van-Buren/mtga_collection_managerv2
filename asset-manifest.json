@@ -1,21 +1,20 @@
 {
   "files": {
-    "main.css": "/mtga_collection_managerv2/static/css/main.63c282b7.chunk.css",
-    "main.js": "/mtga_collection_managerv2/static/js/main.d9250645.chunk.js",
-    "main.js.map": "/mtga_collection_managerv2/static/js/main.d9250645.chunk.js.map",
+    "main.css": "/mtga_collection_managerv2/static/css/main.0448a4c2.chunk.css",
+    "main.js": "/mtga_collection_managerv2/static/js/main.510a88f4.chunk.js",
+    "main.js.map": "/mtga_collection_managerv2/static/js/main.510a88f4.chunk.js.map",
     "runtime-main.js": "/mtga_collection_managerv2/static/js/runtime-main.c8751c22.js",
     "runtime-main.js.map": "/mtga_collection_managerv2/static/js/runtime-main.c8751c22.js.map",
-    "static/js/2.a27c437a.chunk.js": "/mtga_collection_managerv2/static/js/2.a27c437a.chunk.js",
-    "static/js/2.a27c437a.chunk.js.map": "/mtga_collection_managerv2/static/js/2.a27c437a.chunk.js.map",
+    "static/js/2.1612ad21.chunk.js": "/mtga_collection_managerv2/static/js/2.1612ad21.chunk.js",
+    "static/js/2.1612ad21.chunk.js.map": "/mtga_collection_managerv2/static/js/2.1612ad21.chunk.js.map",
     "index.html": "/mtga_collection_managerv2/index.html",
-    "static/css/main.63c282b7.chunk.css.map": "/mtga_collection_managerv2/static/css/main.63c282b7.chunk.css.map",
-    "static/js/2.a27c437a.chunk.js.LICENSE.txt": "/mtga_collection_managerv2/static/js/2.a27c437a.chunk.js.LICENSE.txt",
+    "static/css/main.0448a4c2.chunk.css.map": "/mtga_collection_managerv2/static/css/main.0448a4c2.chunk.css.map",
+    "static/js/2.1612ad21.chunk.js.LICENSE.txt": "/mtga_collection_managerv2/static/js/2.1612ad21.chunk.js.LICENSE.txt",
     "static/media/Account.44beb203.png": "/mtga_collection_managerv2/static/media/Account.44beb203.png",
     "static/media/B.7f78a23f.svg": "/mtga_collection_managerv2/static/media/B.7f78a23f.svg",
     "static/media/C.4af949b5.svg": "/mtga_collection_managerv2/static/media/C.4af949b5.svg",
     "static/media/G.1e9be629.svg": "/mtga_collection_managerv2/static/media/G.1e9be629.svg",
     "static/media/Gold.86d5d6d8.png": "/mtga_collection_managerv2/static/media/Gold.86d5d6d8.png",
-    "static/media/index.css": "/mtga_collection_managerv2/static/media/Kadwa-Regular.0ecf5510.ttf",
     "static/media/M.fb91d492.svg": "/mtga_collection_managerv2/static/media/M.fb91d492.svg",
     "static/media/R.b8e69eab.svg": "/mtga_collection_managerv2/static/media/R.b8e69eab.svg",
     "static/media/U.8fcc549b.svg": "/mtga_collection_managerv2/static/media/U.8fcc549b.svg",
@@ -48,8 +47,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c8751c22.js",
-    "static/js/2.a27c437a.chunk.js",
-    "static/css/main.63c282b7.chunk.css",
-    "static/js/main.d9250645.chunk.js"
+    "static/js/2.1612ad21.chunk.js",
+    "static/css/main.0448a4c2.chunk.css",
+    "static/js/main.510a88f4.chunk.js"
   ]
 }
