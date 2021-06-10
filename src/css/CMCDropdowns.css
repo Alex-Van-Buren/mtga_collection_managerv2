@@ -1,0 +1,7 @@
+.CMCDropdowns-container{
+    display: flex;
+}
+
+.minCMC, .maxCMC {
+    display: flex;
+}

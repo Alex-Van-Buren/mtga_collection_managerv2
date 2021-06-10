@@ -46,7 +46,7 @@ function DisplayOptions() {
         <div className="display-options-dropdowns">            
             <NumberOwnedDropdown />
             <BoosterDropdown/>
-            <CMCDropdowns/>
+            <CMCDropdowns header="Filter by Mana Cost"/>
             <Reset />
         </div>
     </div>);
