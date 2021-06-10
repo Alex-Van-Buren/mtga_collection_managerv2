@@ -46,7 +46,7 @@ function DisplayOptions() {
         <div className="display-options-dropdowns">
             <NumberOwnedDropdown header="Number You Own:" />
             <BoosterDropdown header="In Booster Packs?" />
-            <CMCDropdowns header="Filter by Mana Cost"/>
+            <CMCDropdowns header="Filter by Mana Cost:"/>
             <Reset />
         </div>
     </div>);

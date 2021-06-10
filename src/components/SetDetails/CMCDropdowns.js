@@ -19,7 +19,7 @@ function CMCDropdowns( {header} ) {
             <label>{header}</label> 
             <div className="CMCDropdowns-container">
                 <div className="minCMC">
-                    <label>Min:</label>
+                    <label>Min: </label>
                     <CustomDropdown 
                     items={items} 
                     key={`min${minSelected}`}
