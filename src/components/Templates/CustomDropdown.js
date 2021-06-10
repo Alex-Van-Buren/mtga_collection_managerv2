@@ -7,10 +7,9 @@ import '../../css/CustomDropdown.css';
  * @param {Array} props.items An array of strings that are the different options that can be selected
  * @param {String} props.firstSelection The string of the default selection. Should be one of the strings in the items array.
  * @param {Function} props.selectfn Optional. An additional callback function that uses the item selected as an argument.
- * @param {String} props.ariaLabel Optional. An aria-label.
  * 
  */
-function CustomDropdown({items, firstSelection, selectfn=undefined, ariaLabel=undefined}) {
+function CustomDropdown({items, firstSelection, selectfn=undefined}) {
     const [open, setOpen] = useState(false);
 
     // In some cases keeping track of selected might be redundant
@@ -79,7 +78,7 @@ function CustomDropdown({items, firstSelection, selectfn=undefined, ariaLabel=un
                 className={selectedClass} tabIndex='0' 
                 onKeyDown={(e) => { if (e.key === 'Enter') toggleDropdown(e) }} 
                 onClick={(e) => toggleDropdown(e)}
-                role='button' aria-expanded={open} aria-label={ariaLabel}
+                role='button' aria-expanded={open}
             >
                 {selected} <span><i className={iconClass}/></span>
 

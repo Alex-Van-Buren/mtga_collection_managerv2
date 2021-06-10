@@ -10,7 +10,7 @@ function NumberOwnedDropdown({ header }) {
     // Need to check redux for first Selection in cases where something else changes the state of the dropdown (eg reset button)
     const firstSelection = useSelector(state => state.displayOptions.showCards);
 
-    const items = ['None', 'Own at Least One', 'Missing at Least One', 'Full Playset', 'Show All Cards'];
+    const items = ['Own None', 'Own at Least One', 'Missing at Least One', 'Own Full Playset', 'Show All Cards'];
 
     function selectfnNumberOwned(item) {
         dispatch(setShowCards(item))
