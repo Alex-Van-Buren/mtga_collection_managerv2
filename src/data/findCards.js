@@ -67,7 +67,7 @@ function findCards(searchOptions, returnOptions) {
     }
 
     // Filter cmc if needed
-    if ( cmc.min !== undefined && cmc.max !== undefined) {
+    if ( cmc.min !== undefined || cmc.max !== undefined) {
         filterFunctions.push( (card) => filterCMC(card.cmc, cmc.min, cmc.max) );
     }
 

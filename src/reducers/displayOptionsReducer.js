@@ -109,17 +109,17 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
         }
 
         case SET_CMC_MIN: {
-            let newcmc = {...state.cmc};
-            newcmc.min = action.payload;
+            let cmc = {...state.cmc};
+            cmc.min = action.payload;
 
-            return {...state, newcmc}
+            return {...state, cmc}
         }
 
         case SET_CMC_MAX: {
-            let newcmc = {...state.cmc};
-            newcmc.max = action.payload;
-            
-            return {...state, newcmc}
+            let cmc = {...state.cmc};
+            cmc.max = action.payload;
+
+            return {...state, cmc}
         }
 
         default:
