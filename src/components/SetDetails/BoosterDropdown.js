@@ -13,7 +13,7 @@ function BoosterDropdown({ header }) {
         <div className="boosterDropdown">
             <label>{ header }</label>
             <CustomDropdown 
-                items={['Show All Cards', 'In Boosters', 'Not In Boosters']}
+                items={['All Cards', 'In Boosters', 'Not In Boosters']}
                 key={firstSelection} 
                 firstSelection={firstSelection}
                 selectfn={(item) => dispatch(selectBooster(item))}

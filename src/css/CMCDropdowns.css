@@ -1,0 +1,16 @@
+.CMCDropdowns-container{
+    display: flex;
+    margin-left: 18px;
+    margin-top: 7px;
+    gap: 5px;
+}
+
+.minCMC, .maxCMC {
+    display: flex;
+    align-items: center;
+}
+
+.minCMC>.dropdown, .maxCMC>.dropdown {
+    width: 4rem;
+    margin-left: 3px;
+}
