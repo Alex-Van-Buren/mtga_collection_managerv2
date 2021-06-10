@@ -1,16 +1,11 @@
 import React from 'react';
 
-import Accordion from './Templates/Accordion';
-import NoInventoryFound from '../components/Errors/NoInventoryFound';
 import '../css/Help.css';
-
 import optionsImg from '../images/arena/options.png';
 import accountImg from '../images/arena/Account.png';
 import detailedLogsImg from '../images/arena/detailedLogs.png';
-import upload1Img from '../images/upload_log_file/Upload_1_Arrows.png';
-import upload2Img from '../images/upload_log_file/Upload_2_Arrows.png';
-import upload3Img from '../images/upload_log_file/Upload_3_Arrows.png';
-import upload4Img from '../images/upload_log_file/Upload_4_Arrows.png';
+import Accordion from './Templates/Accordion';
+import NoInventoryFound from '../components/Errors/NoInventoryFound';
 
 /**
  * The help page.
@@ -63,36 +58,12 @@ function Help() {
        
         <div className='findLogFile'>
             <Accordion>
-                <h2>Finding Your Log File </h2>
+                <h2>Finding Your Log file </h2>
                 <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It is typically 
                     found at one of the following locations:
                 </p>
                 <NoInventoryFound help={true}/>
                 <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>
-            </Accordion>
-        </div>
-
-        <div className="uploadLogs">
-            <Accordion>
-                <h2>Uploading Your Log File</h2>
-                <ol>
-                    <li>
-                        <p>From the help tab, expand the "Finding Your Log File" section and click the button to "Copy Path".</p>
-                        Click the button for your specific system (Windows or Mac) to copy the File Path to your clipboard.
-                    </li>
-                    <li>Click the "Upload Log File" button in the Header.</li>
-                    <li>Click the Address Bar in your File Explorer or Finder App.</li>
-                    <li>Paste the File Path. (Ctrl/Cmd + v, OR Right click and select paste)</li>
-                    <li>Hit Enter in the Address Bar with the new File Path already specified.</li>
-                    <li>Click on your "Player.log" file.</li>
-                    <li>Click "Open"</li>
-                </ol>
-                <div className="uploadLogImages">
-                    <img src={upload1Img} alt="Upload Log Steps 1 and 2" title="Upload Log Steps 1 and 2" aria-label="Upload Log Steps 1 and 2" />
-                    <img src={upload2Img} alt="Upload Log Step 3" title="Upload Log Step 3" aria-label="Upload Log Step 3" />
-                    <img src={upload3Img} alt="Upload Log Step 4" title="Upload Log Step 4" aria-label="Upload Log Step 4" />
-                    <img src={upload4Img} alt="Upload Log Steps 5, 6, and 7" title="Upload Log Steps 5, 6, and 7" aria-label="Upload Log Steps 5, 6, and 7" />
-                </div>
             </Accordion>
         </div>
 
@@ -104,7 +75,7 @@ function Help() {
                 </p>
                 <p>Options ➞ Account ➞ Detailed Logs</p>
                 <div className="detailedLogImages">
-                <img src={optionsImg} alt="Find Options" title="Find Options" aria-label="Find Options" />
+                    <img src={optionsImg} alt="Find Options" title="Find Options" aria-label="Find Options" />
                     <img src={accountImg} alt="Find Account" title="Find Account" aria-label="Find Account" />
                     <img src={detailedLogsImg} alt="Enable Detailed Options" title="Enable Detailed Options" aria-label="Enable Detailed Options"/>
                 </div>
