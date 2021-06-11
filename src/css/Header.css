@@ -25,7 +25,12 @@
     align-items: center;
     justify-content: center;
     min-height: 3em;
-    min-width: 8em;
+}
+
+/* Don't wrap headings and add padding around most headings */
+.heading:not(#uploadLogFile):not(.darkmodeToggle) {
+    padding: 0 1rem;
+    white-space: nowrap;
 }
 
 .heading:hover {

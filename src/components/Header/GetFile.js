@@ -156,7 +156,7 @@ function GetFile() {
 
     return (
         <div
-            className="heading" tabIndex="0" aria-roledescription="Upload Player Log File Button"
+            className="heading" id="uploadLogFile" tabIndex="0" aria-roledescription="Upload Player Log File Button"
             // Send events to the input whenever the outer div is selected
             onClick={() => { if (ref.current) ref.current.click() }}
             onKeyDown={(e) => makeKeyboardClickable(e, ref)}

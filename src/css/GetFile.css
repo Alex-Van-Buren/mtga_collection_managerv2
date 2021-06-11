@@ -13,3 +13,11 @@ input[type="file"] {
 label:focus-within {
   outline: 5px black;
 }
+
+label.ui.positive.button {
+  display: flex;
+  align-items: center;
+  height: 80%;
+  margin: 0;
+  padding: 0 0.5rem;
+}

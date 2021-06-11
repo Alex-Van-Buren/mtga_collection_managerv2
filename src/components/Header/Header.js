@@ -42,7 +42,8 @@ function Header() {
                 <div className={`${hideMenu} leftOptions`}>
                     <Link to='/' className="heading" id="home">
                         <img src={logo} alt="logo" className="logo" />
-                        Collection Manager
+                        <div>Collection&nbsp;</div>
+                        <div>Manager</div>
                     </Link>
                     
                     <HeaderDropdown title="Sets" titleClass="" itemsClass="sets">
