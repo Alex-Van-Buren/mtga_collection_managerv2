@@ -25,18 +25,11 @@
 }
 
 .setDetailsTab.active {
+    background-image: var(--tab-gradient);
     opacity: 1;
 }
 
-body.darkMode .setDetailsTab.active {
-    background-color: var(--clr-prm);
-}
-
-body:not(.darkMode) .setDetailsTab.active {
-    background-color: rgb(210, 210, 210);
-}
-
 .setDetailsTab:hover {
-    background-color: var(--clr-prm);
-    font-size: 1.1rem;
+    background-image: var(--tab-gradient);
+    font-size: 1.05rem;
 }
