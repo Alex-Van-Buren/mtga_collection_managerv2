@@ -15,7 +15,11 @@ import '../../css/Accordion.css';
  * @returns Collapsible section
  */
 function Accordion(props) {
-    const [open, setOpen] = useState(false);
+    let startState = props.open;
+    if (props.open === undefined) {
+        startState = false;
+    }
+    const [open, setOpen] = useState(startState);
     const panelRef = useRef();
 
     // Copy All the children elements and put into an array

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import '../css/Help.css';
 import optionsImg from '../images/arena/options.png';
@@ -12,6 +13,19 @@ import NoInventoryFound from '../components/Errors/NoInventoryFound';
  * @returns 
  */
 function Help() {
+    // Gets the query string from the URL
+    const query = new URLSearchParams(useLocation().search);
+    const openSection = query.get("openSection");
+
+    // Object that has the open props for all of the Accordions
+    let openAccordion = {
+        findLogfile: false, detailedLogs: false, usingDraftCalculator: false, FAQ: false
+    }
+
+    // Set openSection of openAccordion to true
+    if (openAccordion.hasOwnProperty(openSection)){
+        openAccordion[openSection] = true;
+    }
 
     // Frequently asked questions array of {question: "", answer: ""}
     const FAQs = [
@@ -56,8 +70,8 @@ function Help() {
     <h1 className='helpTitle'>Help</h1>
     <div className=' ui container helpPage'>
        
-        <div className='findLogFile'>
-            <Accordion>
+        <div className='findLogFile' id='findLogFile'>
+            <Accordion open={openAccordion.findLogfile}>
                 <h2>Finding Your Log file </h2>
                 <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It is typically 
                     found at one of the following locations:
@@ -67,8 +81,8 @@ function Help() {
             </Accordion>
         </div>
 
-        <div className="detailedLogs">
-            <Accordion>
+        <div className="detailedLogs" id="detailedLogs">
+            <Accordion open={openAccordion.detailedLogs}>
                 <h2>Enabling Detailed Logs</h2>
                 <p>In order for this application to work properly, detailed logs need to enabled in MTG Arena. 
                 This can be found at:   
@@ -82,8 +96,8 @@ function Help() {
             </Accordion>
         </div>
 
-        <div className="usingDraftCalculator">
-            <Accordion>
+        <div className="usingDraftCalculator" id="usingDraftCalculator">
+            <Accordion open={openAccordion.usingDraftCalculator}>
                 <h2>How to Use the Draft Calculator</h2>
                 <p>The draft calculator (located under the drafts tab on each set's page) calculates how many drafts it will take to complete a 
                     user's rare or mythic collection for that particular set. It uses a method where the user takes advantage of the duplicate protection
@@ -115,8 +129,8 @@ function Help() {
             </Accordion>
         </div>
 
-        <div className="FAQ">
-            <Accordion>
+        <div className="FAQ" id="FAQ">
+            <Accordion open={openAccordion.FAQ}>
                 <h2>FAQ's</h2>
                 <ol className="FAQList">
                     {renderFAQs}
@@ -125,7 +139,7 @@ function Help() {
 
         </div>
 
-        <div className="contact">
+        <div className="contact" id="contact">
             <h2>Contact Us</h2>
             <div id="contact_discord">
                 <p>Comments, questions, or suggestions? Contact us on Discord or Reddit:</p>
