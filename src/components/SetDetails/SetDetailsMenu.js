@@ -12,7 +12,7 @@ function SetDetailsMenu() {
     const activeTab = useSelector(state => state.displayOptions.activeTab);
     
     // Fill each class with common class names
-    let [cardFiltersClass, packsClass, draftsClass] = Array(3).fill('link item');
+    let [cardFiltersClass, packsClass, draftsClass] = Array(3).fill('setDetailsTab');
 
     // Add additional class 'active' if tab is active
     switch (activeTab) {
@@ -34,7 +34,7 @@ function SetDetailsMenu() {
     
     // Return JSX for tab menu
     return (
-        <div className="ui pointing menu compact">
+        <div className="setDetailsTabs">
             <div className={cardFiltersClass} 
             onClick={()=> dispatch(selectDetailsMenu('Card Filters'))}
             onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Card Filters'))}}}
@@ -47,7 +47,7 @@ function SetDetailsMenu() {
             onKeyDown={(e)=> {if(e.key === "Enter"){dispatch(selectDetailsMenu('Packs'))}}}
             tabIndex="0" role="button" 
             >
-               Booster Pack Calculator
+               Booster Calculator
             </div>
             <div className={draftsClass}
             onClick={()=> dispatch(selectDetailsMenu('Drafts'))}
