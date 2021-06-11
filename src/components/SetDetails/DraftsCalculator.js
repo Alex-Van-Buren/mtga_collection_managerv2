@@ -229,7 +229,13 @@ function DraftsCalculator() {
 
     return (
         <div id="draftsCalculator">
-            <h3>Calculator Options</h3>
+            <h3>Calculator Options 
+                <a 
+                href="/mtga_collection_managerv2/help?openSection=usingDraftCalculator#usingDraftCalculator" 
+                target="_blank">
+                    <i className="info circle icon"></i>
+                </a>
+            </h3>
             <div className="top">
                 <div className="typeAndWinRate">
                     {renderDropDown}
