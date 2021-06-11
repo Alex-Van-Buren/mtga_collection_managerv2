@@ -140,7 +140,10 @@ function DraftsCalculator() {
         <div className="drafttype-dropdown">
             {/* Dropdown menu */}
             <label>Draft Type: </label>
-            <CustomDropdown items={['quick', 'premier', 'traditional']} key={draftType} firstSelection={draftType} selectfn={selectDraftType} />
+            <CustomDropdown 
+                items={['quick', 'premier', 'traditional']} key={draftType} ariaLabel="Select Draft Type"
+                firstSelection={draftType} selectfn={selectDraftType} 
+            />
         </div>
     );
     // Validation function for winRate that will keep the input between 0 and 100
