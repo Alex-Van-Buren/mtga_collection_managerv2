@@ -229,7 +229,7 @@ function DraftsCalculator() {
 
     return (
         <div id="draftsCalculator">
-            <h3>Draft Calculator</h3>
+            <h3>Calculator Options</h3>
             <div className="top">
                 <div className="typeAndWinRate">
                     {renderDropDown}
