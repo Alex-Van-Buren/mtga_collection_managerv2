@@ -8,12 +8,16 @@
     border-top: 1px solid var(--border-clr);
 }
 
-#draftsCalculator h4, h5 {
+#draftsCalculator h3, h4, h5 {
     margin: 0.5rem 0;
 }
 
 #draftsCalculator .ui.simple.dropdown.item {
     text-transform: capitalize;
+}
+
+#draftsCalculator label {
+    margin-right: 7px;
 }
 
 .draftsRequired {
@@ -38,14 +42,14 @@
 }
 
 img.gemImg, img.goldImg {
+    margin-left: 3px;
     width: 1.5rem;
-    transform: translateY(3px);
+    transform: translateY(5px);
 }
 
 .drafttype-dropdown {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .drafttype-dropdown .dropdown{
@@ -59,8 +63,9 @@ img.gemImg, img.goldImg {
     flex-wrap: wrap;
 }
 
-.cardsPicked {
+#draftsCalculator .cardsPicked {
     margin-left: 2rem;
+    gap: 20px 50px;
 }
 
 #draftsCalculator p {
@@ -71,6 +76,8 @@ img.gemImg, img.goldImg {
     font-size: large;
     border: 1px solid var(--clr-txt);
     border-radius: 5px;
+    text-align: end;
+    width: 90px;
 }
 
 #notAvailable {
@@ -79,4 +86,15 @@ img.gemImg, img.goldImg {
     flex-direction: column;
     justify-content: center;
     height: calc(100% - 42px);
+}
+
+.resultNumber {
+    font-size: 1.2em;
+    padding: 0 1ch;
+}
+
+.slash {
+    display: inline-block;
+    font-size: 1.75em;
+    transform: translateY(4px);
 }

@@ -203,16 +203,24 @@ function DraftsCalculator() {
     const renderOutput = (
         <div>
             <hr />
-            <h4>Drafts Needed To Complete:</h4>
+            <h3>Results:</h3>
             <div className="draftsRequired">
                 <div className="rares">
-                    <h5>Rares: {rareDraftsNeeded} Drafts</h5>
-                    <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/> {(rareCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(rareCost.gems).toLocaleString()}</p>
-                    <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} &#38; {Math.floor(rewardPacks * rareDraftsNeeded)} Packs</p>
+                    <h4>Collect All Rares: <span className="resultNumber">{rareDraftsNeeded} Drafts</span></h4>
+                    <p>Cost: 
+                        <img src={gold_img} alt="gold" className="goldImg"/> {(rareCost.gold).toLocaleString()} <span className="slash">/</span>  
+                        <img src={gem_img} alt="gem" className="gemImg"/> {(rareCost.gems).toLocaleString()}
+                    </p>
+                    <p>
+                        Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalRareGemReward} &#38; {Math.floor(rewardPacks * rareDraftsNeeded)} Packs
+                    </p>
                 </div>
                 <div className="mythics">
-                    <h5>Mythics: {mythicDraftsNeeded} Drafts</h5>
-                    <p>Cost: <img src={gold_img} alt="gold" className="goldImg"/>{(mythicCost.gold).toLocaleString()} or <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}</p>
+                    <h4>Collect All Mythics: <span className="resultNumber">{mythicDraftsNeeded} Drafts</span></h4>
+                    <p>Cost: 
+                        <img src={gold_img} alt="gold" className="goldImg"/> {(mythicCost.gold).toLocaleString()} <span className="slash">/</span> 
+                        <img src={gem_img} alt="gem" className="gemImg"/> {(mythicCost.gems).toLocaleString()}
+                    </p>
                     <p>Rewards: <img src={gem_img} alt="gem" className="gemImg"/> {totalMythicGemReward} &#38; {Math.floor(rewardPacks * mythicDraftsNeeded)} Packs </p>
                 </div>
             </div>
