@@ -13,6 +13,7 @@ function BoosterDropdown({ header }) {
         <div className="boosterDropdown">
             <label>{ header }</label>
             <CustomDropdown 
+                ariaLabel="Filter Cards by Booster Pack Availability"
                 items={['Show All Cards', 'In Boosters', 'Not In Boosters']}
                 key={firstSelection} 
                 firstSelection={firstSelection}

@@ -19,7 +19,10 @@ function NumberOwnedDropdown({ header }) {
     return (
         <div className="numberOwnedDropdown">
             <label>{ header }</label>
-            <CustomDropdown items={items} key={firstSelection} firstSelection={firstSelection} selectfn={selectfnNumberOwned} />
+            <CustomDropdown 
+                ariaLabel="Filter by Number Owned" items={items} key={firstSelection} 
+                firstSelection={firstSelection} selectfn={selectfnNumberOwned} 
+            />
         </div>
     )
 }
