@@ -5,12 +5,24 @@
     gap: 5px;
 }
 
+.CMCDropdowns-container .dropdown-item {
+    text-align: center;
+}
+
 .minCMC, .maxCMC {
     display: flex;
     align-items: center;
 }
 
+.minCMC {
+    margin-right: 1rem;
+}
+
 .minCMC>.dropdown, .maxCMC>.dropdown {
     width: 4rem;
     margin-left: 3px;
+}
+
+.minCMC > label, .maxCMC > label {
+    margin-right: 0.5rem;
 }
