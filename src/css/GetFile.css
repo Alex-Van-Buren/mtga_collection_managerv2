@@ -21,3 +21,9 @@ label.ui.positive.button {
   margin: 0;
   padding: 0 0.5rem;
 }
+
+@media only screen and (max-width: 779px) {
+  label.ui.positive.button {
+    padding: 1rem;
+  }
+}
