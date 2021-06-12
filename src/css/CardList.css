@@ -37,9 +37,14 @@ p#displayingNumberCards {
     width: 225px;
 }
 
-@media only screen and (max-width: 562px) {
+@media only screen and (max-width: 526px) {
     .bouncy.column:hover {
         cursor: default;
         transform: none;
+    }
+
+    .cardList-cards>.bouncy.column {
+        max-width: 300px;
+        width: 85%;
     }
 }

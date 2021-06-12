@@ -91,7 +91,7 @@ function CardModal() {
     const width = useResizeWidth();
     
     // Return nothing when modal not shown or if screensize too small
-    if (!show || width < 563) {
+    if (!show || width < 527) {
         return null;
     }
 
