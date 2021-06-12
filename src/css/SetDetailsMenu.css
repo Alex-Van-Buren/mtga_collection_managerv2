@@ -1,6 +1,6 @@
 .setDetailsTabs {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .setDetailsTab {
@@ -15,13 +15,11 @@
     font-size: 1rem;
     opacity: 0.9;
     margin: 0 0.1rem 0.5rem;
-    padding: 0.5em;
-    height: 35px;
-    width: 170px;
-    white-space: nowrap;
+    min-height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .setDetailsTab.active {
@@ -32,4 +30,16 @@
 .setDetailsTab:hover {
     background-image: var(--tab-gradient);
     font-size: 1.05rem;
+}
+
+#cardFiltersTab {
+    width: 157px;
+}
+
+#packCalcTab {
+    width: 135px;
+}
+
+#draftCalcTab {
+    width: 117px;
 }
