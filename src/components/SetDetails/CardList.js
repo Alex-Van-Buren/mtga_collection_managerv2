@@ -76,7 +76,7 @@ function CardList({ setId }) {
         const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, cmc: searchcmc};
 
         // Need to get images as well as name and arenaId
-        const returnOptions = ['image_uris'];
+        const returnOptions = ['image_uris', 'type_line', 'oracle_text'];
 
         return findCards(searchOptions, returnOptions);
         
@@ -93,7 +93,7 @@ function CardList({ setId }) {
             const imgs = { front: card.image_uris.border_crop };
 
             // Check if backside exists
-            if (card.backside) {
+            if (card.backside && card.backside.image_uris) {
                 imgs.back = card.backside.image_uris.border_crop;
             }
 
@@ -124,7 +124,10 @@ function CardList({ setId }) {
 
             // Build card JSX
             return (
-                <CardListImage name={card.name} backside={card.backside} numOwned={numOwned} index={currentPictures.indexOf(imgs)} key={card.arenaId}/>
+                <CardListImage 
+                    name={card.name} backside={card.backside} numOwned={numOwned} index={currentPictures.indexOf(imgs)} key={card.arenaId}
+                    type_line={card.type_line} oracle_text={card.oracle_text}
+                />
             );
             
         });

@@ -5,7 +5,7 @@ import { setCardModalContent, showCardModal } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/CardListImage.css';
 
-function CardListImage({ name, backside, numOwned, index }) {
+function CardListImage({ name, backside, numOwned, index, type_line, oracle_text }) {
 
     // Get redux dispatcher
     const dispatch = useDispatch();
@@ -21,8 +21,10 @@ function CardListImage({ name, backside, numOwned, index }) {
     // Track image side to be shown (front=true)
     const [imgSide, setImgSide] = useState(true);
 
+    let fullText = `${name}\n${type_line}\n${oracle_text}`;
+
     // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    let cardImages = imgs? <img src={imgs.front} alt={name} loading="lazy" title={name} aria-label={name} /> : null;
+    let cardImages = imgs? <img src={imgs.front} alt={name} loading="lazy" aria-label={name} title={fullText}/> : null;
     let flipButton = null; // Regular cards don't have a flip button
 
     // Refs
@@ -49,7 +51,9 @@ function CardListImage({ name, backside, numOwned, index }) {
     }
 
     // Decide whether to show the flip button
-    if (backside && imgs) {
+    if (backside && imgs && backside.image_uris) {
+
+        const backsideText = `${name}\n${type_line}\n${backside.oracle_text}`;
 
         flipButton = (
             <button
@@ -74,9 +78,12 @@ function CardListImage({ name, backside, numOwned, index }) {
 
         // One image will be hidden
         cardImages = <>
-            <img src={imgs.front} alt={name} className="cardImg" loading="lazy" title={name} aria-label={name}/>
-            <img src={imgs.back} alt={name} className="backside" loading="lazy" title={name} aria-label={name}/>
+            <img src={imgs.front} alt={name} className="cardImg" loading="lazy" aria-label={name} title={fullText}/>
+            <img src={imgs.back} alt={name} className="backside" loading="lazy" aria-label={name} title={backsideText}/>
         </>;
+    } else if (backside && imgs) { // Adventure cards fall in this category ("backside", but not flipable)
+        fullText += ` // ${backside.oracle_text}`;
+        cardImages = <img src={imgs.front} alt={name} loading="lazy" aria-label={name} title={fullText}/>;
     }
 
     return (
