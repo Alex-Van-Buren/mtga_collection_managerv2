@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/mtga_collection_managerv2/static/css/main.49b3b5b4.chunk.css",
-    "main.js": "/mtga_collection_managerv2/static/js/main.981594fe.chunk.js",
-    "main.js.map": "/mtga_collection_managerv2/static/js/main.981594fe.chunk.js.map",
+    "main.css": "/mtga_collection_managerv2/static/css/main.ce565817.chunk.css",
+    "main.js": "/mtga_collection_managerv2/static/js/main.99128dae.chunk.js",
+    "main.js.map": "/mtga_collection_managerv2/static/js/main.99128dae.chunk.js.map",
     "runtime-main.js": "/mtga_collection_managerv2/static/js/runtime-main.c8751c22.js",
     "runtime-main.js.map": "/mtga_collection_managerv2/static/js/runtime-main.c8751c22.js.map",
     "static/js/2.1d06d669.chunk.js": "/mtga_collection_managerv2/static/js/2.1d06d669.chunk.js",
     "static/js/2.1d06d669.chunk.js.map": "/mtga_collection_managerv2/static/js/2.1d06d669.chunk.js.map",
     "index.html": "/mtga_collection_managerv2/index.html",
-    "static/css/main.49b3b5b4.chunk.css.map": "/mtga_collection_managerv2/static/css/main.49b3b5b4.chunk.css.map",
+    "static/css/main.ce565817.chunk.css.map": "/mtga_collection_managerv2/static/css/main.ce565817.chunk.css.map",
     "static/js/2.1d06d669.chunk.js.LICENSE.txt": "/mtga_collection_managerv2/static/js/2.1d06d669.chunk.js.LICENSE.txt",
     "static/media/Account.44beb203.png": "/mtga_collection_managerv2/static/media/Account.44beb203.png",
     "static/media/B.7f78a23f.svg": "/mtga_collection_managerv2/static/media/B.7f78a23f.svg",
@@ -48,7 +48,7 @@
   "entrypoints": [
     "static/js/runtime-main.c8751c22.js",
     "static/js/2.1d06d669.chunk.js",
-    "static/css/main.49b3b5b4.chunk.css",
-    "static/js/main.981594fe.chunk.js"
+    "static/css/main.ce565817.chunk.css",
+    "static/js/main.99128dae.chunk.js"
   ]
 }
