@@ -18,7 +18,7 @@ label.ui.positive.button {
   display: flex;
   align-items: center;
   height: 80%;
-  margin: 0;
+  margin: 0 0.5rem;
   padding: 0 0.5rem;
 }
 
