@@ -122,11 +122,15 @@ function CardList({ setId }) {
             // Track images to be displayed
             currentPictures.push(imgs);
 
+            // Build card header
+            const cardHeader = <div className="right floated content" > {numOwned} / 4 </div>;
+
             // Build card JSX
             return (
                 <CardListImage 
-                    name={card.name} backside={card.backside} numOwned={numOwned} index={currentPictures.indexOf(imgs)} key={card.arenaId}
-                    type_line={card.type_line} oracle_text={card.oracle_text}
+                    name={card.name} backside={card.backside} index={currentPictures.indexOf(imgs)} key={card.arenaId}
+                    type_line={card.type_line} oracle_text={card.oracle_text} 
+                    cardHeader={cardHeader}
                 />
             );
             

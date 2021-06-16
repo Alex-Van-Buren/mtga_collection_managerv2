@@ -5,7 +5,10 @@ import { setCardModalContent, showCardModal } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/CardListImage.css';
 
-function CardListImage({ name, backside, numOwned, index, type_line, oracle_text }) {
+function CardListImage({ 
+    name, backside, index, type_line, oracle_text,
+    cardHeader, cardClass="bouncy column", additionalFlipClass=""
+}) {
 
     // Get redux dispatcher
     const dispatch = useDispatch();
@@ -57,7 +60,7 @@ function CardListImage({ name, backside, numOwned, index, type_line, oracle_text
 
         flipButton = (
             <button
-                className="circular ui icon button flipButton"
+                className={`circular ui icon button flipButton ${additionalFlipClass}`}
                 onClick={e => flip(e)}
                 onKeyDown={e => {
                     // If they hit enter
@@ -81,16 +84,21 @@ function CardListImage({ name, backside, numOwned, index, type_line, oracle_text
             <img src={imgs.front} alt={name} className="cardImg" loading="lazy" aria-label={name} title={fullText}/>
             <img src={imgs.back} alt={name} className="backside" loading="lazy" aria-label={name} title={backsideText}/>
         </>;
-    } else if (backside && imgs) { // Adventure cards fall in this category ("backside", but not flipable)
+    } 
+    // Adventure cards fall in this category ("backside", but not flipable)
+    else if (backside && imgs) {
+        // Add backside text
         fullText += ` // ${backside.oracle_text}`;
+
+        // Redeclare cardImages because fullText has changed
         cardImages = <img src={imgs.front} alt={name} loading="lazy" aria-label={name} title={fullText}/>;
     }
 
     return (
-        <div className="bouncy column" tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
+        <div className={cardClass} tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
             <div className="ui fluid card removeBoxShadow">
                 <div className="content">
-                    <div className="right floated content" >{numOwned} / 4 </div>
+                    {cardHeader}
                 </div>                    
                 <div
 
