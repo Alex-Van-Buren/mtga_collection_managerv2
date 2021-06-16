@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import CardList from './CardList';
+import CardList from '../CardList';
 import RarityCollectionItem from '../RarityCollectionItem';
 import SetDetailsMenu from './SetDetailsMenu';
 import DisplayOptions from './DisplayOptions';

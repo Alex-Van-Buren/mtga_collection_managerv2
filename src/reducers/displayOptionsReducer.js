@@ -1,5 +1,6 @@
 import { 
-    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX
+    SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, 
+    SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -18,6 +19,8 @@ const INITIAL_STATE = {
     showCards: "Show All Cards",
 
     booster: "Show All Cards",
+
+    set: null,
 
     cmc: {min: "Any", max: "Any"},
 
@@ -69,9 +72,14 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             return { ...state, showCards: action.payload };
         }
 
-        // 
+        // Specify card set to search in redux
+        case SELECT_SET: {
+            return { ...state, cardSet: action.payload };
+        }
+
+        // Determine whether to search cards in booster packs
         case SELECT_BOOSTER: {
-            return {...state, booster: action.payload }
+            return {...state, booster: action.payload };
         }
         
         // Set the search term from the search bar
