@@ -5,7 +5,7 @@ import { setCardModalContent, showCardModal } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/CardListImage.css';
 
-function CardListImage({ 
+function CardListImage({
     name, backside, index, type_line, oracle_text,
     cardHeader, cardClass="bouncy column", additionalFlipClass=""
 }) {

@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import findCards from '../../data/findCards';
-import CardListImage from './CardListImage';
-import { updateImageList } from '../../actions';
-import '../../css/CardList.css';
+import findCards from '../data/findCards';
+import CardListImage from './SetDetails/CardListImage';
+import { updateImageList } from '../actions';
+import '../css/CardList.css';
 
 /**
  * 
- * @param {String} setId the three letter set Id code  
+ * @param {string} [setId=null] (Optional) three letter set code. Can also specify using redux.
  * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays the number
  * of cards owned by the user above each card image. 
  */
-function CardList({ setId }) {
+function CardList({ setId=null }) {
     
     // Get values from redux state
     const cardCollection = useSelector(state => state.inventory.cardCollection);
@@ -23,6 +23,7 @@ function CardList({ setId }) {
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
     const boosterVal     = useSelector(state => state.displayOptions.booster);
     const cmc            = useSelector(state => state.displayOptions.cmc);
+    const cardSet        = useSelector(state => state.displayOptions.cardSet);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -60,8 +61,11 @@ function CardList({ setId }) {
             default:
                 break;
         }
+
+        // Determine if set passed in as prop or received from redux
+        const set = setId ? setId : cardSet;
         
-        // Check the cmc values for any string and change them to undefined
+        // Check the cmc values for "Any" string and change them to undefined
         let searchcmc = {...cmc};
 
         if (searchcmc.min === 'Any') {
@@ -71,16 +75,15 @@ function CardList({ setId }) {
             searchcmc.max = undefined;
         }
         
-
         // Put all search options into a single object for findCards function
-        const searchOptions = {set: setId, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, cmc: searchcmc};
+        const searchOptions = {set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, cmc: searchcmc};
 
         // Need to get images as well as name and arenaId
         const returnOptions = ['image_uris', 'type_line', 'oracle_text'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, setId, rarities, boosterVal, cmc]);
+    }, [colors, searchTerm, setId, cardSet, rarities, boosterVal, cmc]);
 
     // Track currently shown pictures
     let currentPictures = [];
@@ -127,7 +130,7 @@ function CardList({ setId }) {
 
             // Build card JSX
             return (
-                <CardListImage 
+                <CardListImage
                     name={card.name} backside={card.backside} index={currentPictures.indexOf(imgs)} key={card.arenaId}
                     type_line={card.type_line} oracle_text={card.oracle_text} 
                     cardHeader={cardHeader}

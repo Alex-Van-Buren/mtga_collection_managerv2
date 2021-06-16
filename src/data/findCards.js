@@ -11,7 +11,7 @@ import allArenaCards from './arenaCards20210608185804.json';
 function findCards(searchOptions, returnOptions) {
 
     // Destructure search options
-    const { set, color, rarity, booster, term, excludeBasicLands=true, cmc } = searchOptions;
+    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc } = searchOptions;
 
     /**
      * An array of ananymous functions to be called on each card
@@ -29,7 +29,7 @@ function findCards(searchOptions, returnOptions) {
 
     // Filter by name if needed
     if (term) {
-        filterFunctions.push( (card) => filterByTerm(card, term) );
+        filterFunctions.push( (card) => filterByTerm(card, term, advancedSearchType) );
     }
 
     // Filter by color if needed
