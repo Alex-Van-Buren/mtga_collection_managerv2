@@ -1,6 +1,6 @@
 import { 
     SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, 
-    SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET
+    SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -25,6 +25,8 @@ const INITIAL_STATE = {
     cmc: {min: "Any", max: "Any"},
 
     searchTerm: "",
+
+    searchType: null,
 
     imageList: [],
 
@@ -85,6 +87,11 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
         // Set the search term from the search bar
         case SET_SEARCH_TERM: {
             return { ...state, searchTerm: action.payload };
+        }
+
+        // Set advanced search type
+        case SET_SEARCH_TYPE: {
+            return { ...state, searchType: action.payload };
         }
 
         // Set the active card images
