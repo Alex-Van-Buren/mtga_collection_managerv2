@@ -43,7 +43,7 @@ function SearchBar() {
     // Track change in search type (not debounced)
     useEffect(() => dispatch(setSearchType(type)), [type, dispatch]);
 
-    const searchTypes = [null, "name", "type_line", "oracle_text"];
+    const searchTypes = [null, "name", "type_line", "oracle_text"]; //TODO: temporary = use dropdown instead
 
     return (
         <div className="search">
