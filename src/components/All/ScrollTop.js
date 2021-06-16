@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import '../css/ScrollTop.css';
+import '../../css/ScrollTop.css';
 
 function ScrollTop() {
     // Create a reference to the button

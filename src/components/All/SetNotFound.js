@@ -1,8 +1,8 @@
 import React from 'react';
 
-import U from '../images/color_imgs/U.svg';
-import G from '../images/color_imgs/G.svg';
-import '../css/PageNotFound.css';
+import U from '../../images/color_imgs/U.svg';
+import G from '../../images/color_imgs/G.svg';
+import '../../css/PageNotFound.css';
 
 function SetNotFound() {
     return (

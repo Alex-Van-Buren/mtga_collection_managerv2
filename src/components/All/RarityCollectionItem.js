@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import '../css/RarityCollectionItem.css';
 import ProgressBar from './ProgressBar';
+import '../../css/RarityCollectionItem.css';
 
 /**
  * Component that contains details about how many cards are owned from a specific set of a specific rarity

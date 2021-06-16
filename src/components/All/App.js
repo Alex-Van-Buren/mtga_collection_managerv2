@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Header from './Header/Header';
+import Header from '../Header/Header';
 import Footer from './Footer';
 import Home from './Home';
-import SetDetails from './SetDetails/SetDetails';
+import SetDetails from '../SetDetails/SetDetails';
 import Help from './Help';
-import DeckBuilder from '../components/DeckBuilder/DeckBuilder';
+import DeckBuilder from '../DeckBuilder/DeckBuilder';
 import PageNotFound from './PageNotFound';
 import ScrollTop from './ScrollTop';
-import '../css/App.css';
+import '../../css/App.css';
 
 /**
  * Main Component - displays header and routes

@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import findCards from '../data/findCards';
-import CardListImage from './SetDetails/CardListImage';
-import { updateImageList } from '../actions';
-import '../css/CardList.css';
+import findCards from '../../data/findCards';
+import CardListImage from '../SetDetails/CardListImage';
+import { updateImageList } from '../../actions';
+import '../../css/CardList.css';
 
 /**
  * 

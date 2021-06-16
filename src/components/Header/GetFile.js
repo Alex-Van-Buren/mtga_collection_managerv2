@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {
-    getCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent
-} from '../../actions';
+import { getCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
 

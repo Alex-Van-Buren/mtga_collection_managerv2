@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import SetCard from './SetCard';
-import { standardSets, historicSets } from '../data/setInfo';
-import useResizeWidth from '../hooks/useResizeWidth';
-import '../css/Home.css';
+import { standardSets, historicSets } from '../../data/setInfo';
+import useResizeWidth from '../../hooks/useResizeWidth';
+import '../../css/Home.css';
 
 /**
  * Home Page Component - Displays current card sets and other general info/options

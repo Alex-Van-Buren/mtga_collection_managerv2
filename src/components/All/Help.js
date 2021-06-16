@@ -1,12 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import '../css/Help.css';
-import optionsImg from '../images/arena/options.png';
-import accountImg from '../images/arena/Account.png';
-import detailedLogsImg from '../images/arena/detailedLogs.png';
-import Accordion from './Templates/Accordion';
-import NoInventoryFound from '../components/Errors/NoInventoryFound';
+import optionsImg from '../../images/arena/options.png';
+import accountImg from '../../images/arena/Account.png';
+import detailedLogsImg from '../../images/arena/detailedLogs.png';
+import Accordion from '../Templates/Accordion';
+import NoInventoryFound from '../Errors/NoInventoryFound';
+import '../../css/Help.css';
 
 /**
  * The help page.

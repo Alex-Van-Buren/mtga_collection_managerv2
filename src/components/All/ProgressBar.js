@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import '../css/ProgressBar.css'
+import '../../css/ProgressBar.css'
 
 function ProgressBar({percent, innerClass}) {
     // Make a reference to the inner portion of the progress bar

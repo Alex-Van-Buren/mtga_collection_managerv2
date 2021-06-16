@@ -2,15 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import CardList from '../CardList';
-import RarityCollectionItem from '../RarityCollectionItem';
+import CardList from '../All/CardList';
+import RarityCollectionItem from '../All/RarityCollectionItem';
 import SetDetailsMenu from './SetDetailsMenu';
 import DisplayOptions from './DisplayOptions';
 import PacksCalculator from './PacksCalculator';
 import DraftsCalculator from './DraftsCalculator';
 import { setInfo } from '../../data/setInfo';
 import CardModal from './CardModal';
-import SetNotFound from '../SetNotFound.js';
+import SetNotFound from '../All/SetNotFound.js';
 import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/SetDetails.css';
 

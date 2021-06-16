@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 
-import '../css/SetCard.css';
 import RarityCollectionItem from './RarityCollectionItem';
-import { setInfo } from '../data/setInfo'
+import { setInfo } from '../../data/setInfo'
+import '../../css/SetCard.css';
 
 function SetCard({ setId }) {   
     
