@@ -1,8 +1,10 @@
 import React from 'react';
 
+import '../../css/DBDeck.css';
+
 function DBDeck() {
     return (
-        <div>Deck</div>
+        <div id="DBDeck">Deck</div>
     )
 }
 

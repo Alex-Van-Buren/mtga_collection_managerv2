@@ -1,3 +1,17 @@
 #DeckBuilder {
 color: var(--clr-txt);
+display: flex;
+height: 100vh;
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.dbCardlist {
+    height: 50%;
+    overflow-y: scroll;
+    resize: vertical;
 }

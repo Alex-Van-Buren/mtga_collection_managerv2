@@ -1,8 +1,10 @@
 import React from 'react';
 
+import '../../css/DBSidebar.css';
+
 function DBSidebar() {
     return (
-        <div>Sidebar</div>
+        <div id="DBSidebar">Sidebar</div>
     )
 }
 

@@ -11,7 +11,9 @@ function DeckBuilder() {
             <DBSidebar />
 
             <div className="mainContent">
-                <div className="dbCardlist"></div>
+                <div className="dbCardlist">
+                    Cardlist 
+                </div>
                 <DBDeck />
             </div>       
 
