@@ -18,6 +18,7 @@ function CardList({ setId=null }) {
     const cardCollection = useSelector(state => state.inventory.cardCollection);
     const colors         = useSelector(state => state.displayOptions.colors);
     const searchTerm     = useSelector(state => state.displayOptions.searchTerm);
+    const searchType     = useSelector(state => state.displayOptions.searchType);
     const rarities       = useSelector(state => state.displayOptions.rarity);
     const showCards      = useSelector(state => state.displayOptions.showCards);
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
@@ -76,14 +77,17 @@ function CardList({ setId=null }) {
         }
         
         // Put all search options into a single object for findCards function
-        const searchOptions = {set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, cmc: searchcmc};
+        const searchOptions = {
+            set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, 
+            advancedSearchType: searchType, cmc: searchcmc
+        };
 
         // Need to get images as well as name and arenaId
         const returnOptions = ['image_uris', 'type_line', 'oracle_text'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, setId, cardSet, rarities, boosterVal, cmc]);
+    }, [colors, searchTerm, searchType, setId, cardSet, rarities, boosterVal, cmc]);
 
     // Track currently shown pictures
     let currentPictures = [];
