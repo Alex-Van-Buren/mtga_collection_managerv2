@@ -1,17 +1,21 @@
 import React from 'react';
 
-// import SearchBar from '../Templates/SearchBar';
+import DBSidebar from './DBSidebar';
+import DBDeck from './DBDeck';
 import '../../css/DeckBuilder.css';
 
 function DeckBuilder() {
 
     return (
         <div id="DeckBuilder">
+            <DBSidebar />
 
-            Coming Soon!
+            <div className="mainContent">
+                <div className="dbCardlist"></div>
+                <DBDeck />
+            </div>       
 
-            {/* <SearchBar />
-            <div>Deck Builder</div> */}
+
         </div>
     );
 }
