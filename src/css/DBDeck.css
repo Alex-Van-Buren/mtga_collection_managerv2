@@ -1,0 +1,5 @@
+#DBDeck {
+    border-top: 2px solid var(--clr-txt);
+    flex-grow: 1;
+    flex-shrink: 1;
+}
