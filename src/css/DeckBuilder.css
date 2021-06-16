@@ -1,10 +1,17 @@
 #DeckBuilder {
-    color: var(--clr-txt);
+color: var(--clr-txt);
+display: flex;
+height: 100vh;
+}
 
-    /* Temporary Values for "Coming Soon!" text */
-    font-size: 4rem;
-    height: 80vh;
+.mainContent {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+}
+
+.dbCardlist {
+    height: 50%;
+    overflow-y: scroll;
+    resize: vertical;
 }
