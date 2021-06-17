@@ -24,7 +24,7 @@ function SearchBar() {
     // Update initial Search Term and Type on first load
     useEffect(() => {
         setTerm(initialSearchTerm);
-    }, [initialSearchTerm, initialSearchType]);
+    }, [initialSearchTerm]);
 
     // Track change in search bar (debounced)
     useEffect(() => {
