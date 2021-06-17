@@ -38,6 +38,7 @@ function SearchBar() {
         return () => clearTimeout(timeoutid);
     }, [term, dispatch]);
 
+    // Search types object: keys are strings to be displayed to user, values are redux values to be used in findCards search
     const searchTypes = {Normal: null, Name: "name", "Type line": "type_line", Text: 'oracle_text'};
     
     // Function that is put into dropdown to select a search term and update redux
@@ -49,6 +50,7 @@ function SearchBar() {
     function getKeyByValue(object, val) {
         return Object.keys(object).find(key => object[key] === val);
     }
+
     return (
         <div className="search">
             <input
@@ -64,7 +66,7 @@ function SearchBar() {
             />
             <button className="clearSearchBar" onClick={() => setTerm("")}><i className="close icon"/></button>
             <CustomDropdown 
-                items={Object.keys(searchTypes)} key={`SearchType ${initialSearchType}`} 
+                items={Object.keys(searchTypes)} key={`SearchType ${initialSearchType}`} ariaLabel="Select Search Type"
                 firstSelection={getKeyByValue(searchTypes, initialSearchType)} 
                 selectfn={searchTypeSelect}
             />
