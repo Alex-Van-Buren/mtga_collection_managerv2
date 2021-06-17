@@ -9,7 +9,7 @@
     width: 100%;
 }
 
-.clearSearchBar, .advancedSearchBar {
+.clearSearchBar {
     position: absolute;
     top: 35%;
     border-radius: 50%;
@@ -22,15 +22,13 @@
     right: 40px;
 }
 
-.advancedSearchBar {
-    right: 10px
-}
-
-.clearSearchBar:hover, .advancedSearchBar:hover {
+.clearSearchBar:hover {
     cursor: pointer;
     filter: brightness(0.8);
 }
 
 div.search {
     position: relative;
+    display: flex;
+    align-items: center;
 }
