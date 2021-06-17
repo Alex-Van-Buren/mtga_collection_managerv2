@@ -19,7 +19,7 @@
 }
 
 .clearSearchBar {
-    right: 40px;
+    right: calc(7rem + 15px );
 }
 
 .clearSearchBar:hover {
@@ -31,4 +31,14 @@ div.search {
     position: relative;
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.search .dropdown-selected {
+    width: 7rem;
+}
+
+.search .dropdown-selected::before {
+    content: 'Search Type: ';
+    font-size: 110%;
 }
