@@ -122,7 +122,8 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
                 showCards: "Show All Cards",
                 booster: "Show All Cards",
                 cmc: {min: "Any", max: "Any"},
-                searchTerm: ""
+                searchTerm: "",
+                searchType: null
             });
         }
 

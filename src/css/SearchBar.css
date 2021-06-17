@@ -9,7 +9,7 @@
     width: 100%;
 }
 
-.clearSearchBar, .advancedSearchBar {
+.clearSearchBar {
     position: absolute;
     top: 35%;
     border-radius: 50%;
@@ -19,18 +19,26 @@
 }
 
 .clearSearchBar {
-    right: 40px;
+    right: calc(7rem + 15px );
 }
 
-.advancedSearchBar {
-    right: 10px
-}
-
-.clearSearchBar:hover, .advancedSearchBar:hover {
+.clearSearchBar:hover {
     cursor: pointer;
     filter: brightness(0.8);
 }
 
 div.search {
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search .dropdown-selected {
+    width: 7rem;
+}
+
+.search .dropdown-selected::before {
+    content: 'Search Type: ';
+    font-size: 110%;
 }

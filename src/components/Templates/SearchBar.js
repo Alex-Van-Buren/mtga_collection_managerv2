@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setSearchTerm, setSearchType } from '../../actions';
+import CustomDropdown from './CustomDropdown';
 import '../../css/SearchBar.css';
 
 /**
@@ -12,8 +13,6 @@ function SearchBar() {
     
     // Track current search term for controlled input
     const [term, setTerm] = useState("");
-    const [type, setType] = useState(null);
-    const [typeIndex, setTypeIndex] = useState(0); //TODO: temporary = use dropdown instead
 
     // Get access to dispatch
     const dispatch = useDispatch();
@@ -25,8 +24,7 @@ function SearchBar() {
     // Update initial Search Term and Type on first load
     useEffect(() => {
         setTerm(initialSearchTerm);
-        setType(initialSearchType);
-    }, [initialSearchTerm, initialSearchType]);
+    }, [initialSearchTerm]);
 
     // Track change in search bar (debounced)
     useEffect(() => {
@@ -40,10 +38,18 @@ function SearchBar() {
         return () => clearTimeout(timeoutid);
     }, [term, dispatch]);
 
-    // Track change in search type (not debounced)
-    useEffect(() => dispatch(setSearchType(type)), [type, dispatch]);
-
-    const searchTypes = [null, "name", "type_line", "oracle_text"]; //TODO: temporary = use dropdown instead
+    // Search types object: keys are strings to be displayed to user, values are redux values to be used in findCards search
+    const searchTypes = {Normal: null, Name: "name", "Type line": "type_line", Text: 'oracle_text'};
+    
+    // Function that is put into dropdown to select a search term and update redux
+    function searchTypeSelect(item) {
+        dispatch(setSearchType(searchTypes[item]));
+    }
+    
+    // Function that returns the key that the corresponding value is attributed to
+    function getKeyByValue(object, val) {
+        return Object.keys(object).find(key => object[key] === val);
+    }
 
     return (
         <div className="search">
@@ -59,16 +65,11 @@ function SearchBar() {
                 value={term} onChange={ (e) => setTerm(e.target.value) }
             />
             <button className="clearSearchBar" onClick={() => setTerm("")}><i className="close icon"/></button>
-            <button className="advancedSearchBar" onClick={() => {
-                //TODO: temporary = use dropdown instead
-                let index = typeIndex+1;
-                if (index >= searchTypes.length) {
-                    index = 0;
-                }
-
-                setTypeIndex(index);
-                setType(searchTypes[index]);
-            }}><i className="cog icon"/>{searchTypes[typeIndex]}</button>
+            <CustomDropdown 
+                items={Object.keys(searchTypes)} key={`SearchType ${initialSearchType}`} ariaLabel="Select Search Type"
+                firstSelection={getKeyByValue(searchTypes, initialSearchType)} 
+                selectfn={searchTypeSelect}
+            />
         </div>
     );
 }
