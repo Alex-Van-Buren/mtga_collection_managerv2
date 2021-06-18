@@ -51,6 +51,11 @@ function Help() {
             answer:"On each set's page, there is a tab to calculate how many additional packs you need to complete the rares or " +
             "mythics of a set as well as a tab to calculate how many drafts you will need to complete the rares or mythics of " +
             "a set."
+        },
+        {
+            question:"Why isn't a card that I know I own showing up in my inventory?",
+            answer:"If you just received the card, your player log doesn't necessarily update immediately. Try opening and " +
+            "closing MTG Arena. If your card still doesn't appear, please contact us on Discord or Reddit."
         }
     ]
 
