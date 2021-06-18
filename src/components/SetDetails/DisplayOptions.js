@@ -13,7 +13,7 @@ function DisplayOptions() {
     return (
     <div className="DisplayOptions">
         <SearchBar/>
-        <RarityButtons />
+        <RarityButtons header="Select Rarity/Rarities to Show:" />
 
         {/* Checkboxes for color: White, Blue, Black, Red, Green, All Multicolored, Colorless */}
         <ColorCheckboxes header="Select Color/Colors to Show:"/>

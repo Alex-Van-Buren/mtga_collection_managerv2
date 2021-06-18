@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectRarity } from '../../actions';
 import CustomButton from '../Templates/CustomButton';
 
-function RarityButtons() {
+function RarityButtons({header}) {
     const rarities  = useSelector(state => state.displayOptions.rarity);
     
     // Create array of rarity buttons
@@ -25,7 +25,7 @@ function RarityButtons() {
     return (
         <>
             {/* Buttons that select rarity: Mythic, Rare, Uncommon, Common */}
-            <label className="rarityLabel">Select Rarity/Rarities to Show:</label>
+            <label className="rarityLabel">{header}</label>
             <div className="showList">
                 {renderRarityButtons}
             </div>
