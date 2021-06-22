@@ -53,9 +53,10 @@ function Help() {
             "a set."
         },
         {
-            question:"Why isn't a card that I know I own showing up in my inventory?",
-            answer:"If you just received the card, your player log doesn't necessarily update immediately. Try opening and " +
-            "closing MTG Arena. If your card still doesn't appear, please contact us on Discord or Reddit."
+            question:"Why isn't a card that I own showing up in my inventory?",
+            answer:"Your player log doesn't update immediately when you receive new cards. Your inventory updates " +
+            "when you first open the game, or after playing a match. Try opening and closing MTG Arena, and then upload " + 
+            "the new log file. If your card still doesn't appear, please contact us on Discord or Reddit."
         }
     ]
 
