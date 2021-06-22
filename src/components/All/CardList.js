@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import findCards from '../../data/findCards';
 import CardListImage from './CardListImage';
+import LazyLoad from '../Templates/LazyLoad';
 import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
@@ -160,7 +161,9 @@ function CardList({ setId=null }) {
         {/* JSX for matching cards */}
 
         <div className="cardList-cards">
-            {renderCards}  
+            <LazyLoad childWidth={245} childHeight={351.75} viewWidth={window.innerWidth} >
+                {renderCards}
+            </LazyLoad>
         </div>
     </>);
 }
