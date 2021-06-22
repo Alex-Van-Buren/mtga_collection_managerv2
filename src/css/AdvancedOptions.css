@@ -1,3 +1,48 @@
 .advancedOptionsModal {
-    color: var(--clr-txt);
+    text-align: left;
+    background-color: rgb(90, 90, 90);
+    border-radius: 10px;
+    /* width: 85vw;
+    height: 90vh; */
+    padding: 20px;
+}
+
+.closeModalButton {
+    width: 100%;
+    height: 2.5em;
+}
+
+.closeModalButton button {
+    float: right;
+    border-radius: 3px;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2em;
+    border: 1px solid var(--clr-txt);
+}
+
+.closeModalButton button:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+.closeModalButton i {
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+
+.advancedOptionsSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.advancedOptionsSection .colorBox{
+    padding: 0;
+}
+
+.advancedOptionsSection .colorList {
+    padding-top: 0;;
 }

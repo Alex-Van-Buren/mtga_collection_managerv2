@@ -23,13 +23,13 @@ function RarityButtons({header}) {
     }
 
     return (
-        <>
+        <div>
             {/* Buttons that select rarity: Mythic, Rare, Uncommon, Common */}
             <label className="rarityLabel">{header}</label>
             <div className="showList">
                 {renderRarityButtons}
             </div>
-        </>
+        </div>
     )
 }
 
