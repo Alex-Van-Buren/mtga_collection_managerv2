@@ -22,7 +22,7 @@ function DBCardFilters() {
                 <Reset />
             </div>
         </div>
-    )
+    );
 }
 
 export default DBCardFilters;
