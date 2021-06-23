@@ -7,6 +7,10 @@ import AdvancedOptions from './AdvancedOptions';
 import Reset from '../SetDetails/Reset';
 import '../../css/DBCardFilters.css';
 
+/**
+ * The Card filters for DBSidebar
+ * @returns JSX for card filtering options
+ */
 function DBCardFilters() {
     return (
         <div className="DBCardFilters">

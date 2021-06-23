@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 import { selectRarity } from '../../actions';
 import CustomButton from '../Templates/CustomButton';
 
+/**
+ * The rarity buttons selecter for card filtering. 
+ * @param {String} props.header The string for the label of the Rarity buttons
+ * @returns JSX for rarity buttons
+ */
 function RarityButtons({header}) {
     const rarities  = useSelector(state => state.displayOptions.rarity);
     

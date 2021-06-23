@@ -23,8 +23,6 @@ import '../../css/Modal.css';
  */
 function Modal({ content, keyEvents, show, showModal }) {
 
-    // Access redux dispatcher
-
     const [tabbing, setTabbing] = useState(false);
 
     // Add listener to handle keyboard inputs
