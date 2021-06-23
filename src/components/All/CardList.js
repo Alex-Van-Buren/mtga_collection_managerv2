@@ -159,9 +159,8 @@ function CardList({ setId=null }) {
         </p>
 
         {/* JSX for matching cards */}
-
         <div className="cardList-cards">
-            <LazyLoad childWidth={245} childHeight={351.75} viewWidth={window.innerWidth} >
+            <LazyLoad childWidth={245} childHeight={351.75} viewWidth={window.innerWidth} emptyChildClass="bouncy column" >
                 {renderCards}
             </LazyLoad>
         </div>

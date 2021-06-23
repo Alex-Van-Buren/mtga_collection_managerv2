@@ -25,7 +25,7 @@ p#displayingNumberCards {
     transform: translateY(-3px);
 }
 
-.cardList-cards {
+.cardList-cards .lazyLoad {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -33,7 +33,7 @@ p#displayingNumberCards {
     margin: 0 20px;
 }
 
-.cardList-cards>.bouncy.column {
+.cardList-cards .bouncy.column {
     width: 225px;
 }
 
