@@ -1,6 +1,6 @@
 #DBSidebar {
     width: 20%;
-    min-width: 200px;
+    min-width: 225px;
     border-right: 2px solid var(--clr-txt);
     padding: 5px;
 }
