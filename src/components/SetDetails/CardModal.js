@@ -230,7 +230,7 @@ function CardModal() {
 
     // Render Modal
     return (
-        <Modal content={renderedContent} keyEvents={keyEvents} show={show} showModal={(val) => dispatch(showCardModal(val))}/>
+        <Modal content={renderedContent} keyEvents={keyEvents} show={show} showModal={showCardModal}/>
     );
 }
 

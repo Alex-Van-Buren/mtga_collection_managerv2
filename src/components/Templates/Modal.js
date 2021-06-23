@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useDispatch } from 'react-redux';
 import FocusTrap from 'focus-trap-react';
 
 import '../../css/Modal.css';
@@ -23,6 +24,9 @@ import '../../css/Modal.css';
  */
 function Modal({ content, keyEvents, show, showModal }) {
 
+    // Access redux dispatcher
+    const dispatch = useDispatch();
+
     const [tabbing, setTabbing] = useState(false);
 
     // Add listener to handle keyboard inputs
@@ -36,7 +40,7 @@ function Modal({ content, keyEvents, show, showModal }) {
 
                 // Escape key pressed --> close modal
                 if (event.keyCode === 27) {
-                    showModal(false);
+                    dispatch(showModal(false));
                 }
 
                 // Set tabbing when first tab entered
@@ -69,7 +73,7 @@ function Modal({ content, keyEvents, show, showModal }) {
                 window.removeEventListener('keydown', modalKeydowns);
             }
         }
-    }, [show, showModal, keyEvents, tabbing]);
+    }, [dispatch, show, showModal, keyEvents, tabbing]);
 
     
 
@@ -77,7 +81,7 @@ function Modal({ content, keyEvents, show, showModal }) {
     return createPortal(
         <FocusTrap active={tabbing}>
             <div
-                onClick={() => showModal(false)}
+                onClick={() => dispatch(showModal(false))}
                 className="ui dimmer modals visible active fixedModal"
                 aria-keyshortcuts="Esc (escape) closes pop-up"
             >

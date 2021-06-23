@@ -5,7 +5,7 @@
     border-radius: 2rem;
     margin: 1.5em 0;
     padding: 0.5em 2em;
-    height: 3.2em;
+    height: 3.2rem;
     width: 100%;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .clearSearchBar {
-    right: calc(7em + 15px );
+    right: calc(7rem + 15px );
 }
 
 .clearSearchBar:hover {
@@ -35,7 +35,7 @@ div.search {
 }
 
 .search .dropdown-selected {
-    width: 7em;
+    width: 7rem;
 }
 
 .search .dropdown-selected::before {

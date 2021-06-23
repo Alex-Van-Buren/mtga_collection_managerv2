@@ -62,7 +62,7 @@ function HeaderModal() {
     );
 
     return (
-        <Modal content={renderedContent} show={show} showModal={(val) => dispatch(showHeaderModal(val))}/>
+        <Modal content={renderedContent} show={show} showModal={showHeaderModal}/>
     );
 }
 
