@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Modal from '../Templates/Modal';
 import SearchBar from '../Templates/SearchBar';
@@ -12,12 +11,13 @@ import Reset from '../SetDetails/Reset';
 import '../../css/AdvancedOptions.css';
 
 /**
- * The button to open the advanced options modal and the modal if modal open is true
+ * The advanced options button and its modal
  * @returns JSX for the button and modal
  */
 function AdvancedOptions() {
-    // State of the modal
-    const [modalOpen, setModalOpen ]= useState(false)
+
+    // Advanced options modal is open/closed
+    const [modalOpen, setModalOpen] = useState(false);
 
     // JSX in the modal --> only viewable if modalOpen is true
     const modalContent = ( 
@@ -55,7 +55,7 @@ function AdvancedOptions() {
             </button>
             {renderedModal}            
         </>
-    )
+    );
 }
 
 export default AdvancedOptions;

@@ -12,7 +12,7 @@ function DBSidebar() {
         <div id="DBSidebar">
             <DBCardFilters />
         </div>
-    )
+    );
 }
 
 export default DBSidebar;
