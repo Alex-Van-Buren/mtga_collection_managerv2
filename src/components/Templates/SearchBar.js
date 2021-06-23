@@ -39,7 +39,7 @@ function SearchBar() {
     }, [term, dispatch]);
 
     // Search types object: keys are strings to be displayed to user, values are redux values to be used in findCards search
-    const searchTypes = {Normal: null, Name: "name", "Type line": "type_line", Text: 'oracle_text'};
+    const searchTypes = {"All Text": null, "Name": "name", "Type Line": "type_line", "Card Text": 'oracle_text'};
     
     // Function that is put into dropdown to select a search term and update redux
     function searchTypeSelect(item) {
