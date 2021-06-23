@@ -9,6 +9,7 @@ import RarityButtons from '../SetDetails/RarityButtons';
 import NumberOwnedDropdown from '../SetDetails/NumberOwnedDropdown';
 import BoosterDropdown from '../SetDetails/BoosterDropdown';
 import CMCDropdowns from '../SetDetails/CMCDropdowns';
+import Reset from '../SetDetails/Reset';
 import '../../css/AdvancedOptions.css';
 
 function AdvancedOptions() {
@@ -30,6 +31,7 @@ function AdvancedOptions() {
                     <NumberOwnedDropdown header="Number You Own:"/>
                     <BoosterDropdown header="In Booster Packs?"  />
                     <CMCDropdowns header="Select Mana Cost:"/>
+                    <Reset />
                 </div>
             </div>
 
@@ -39,7 +41,11 @@ function AdvancedOptions() {
     const renderedModal = modalOpen ? <Modal content={modalContent} show={modalOpen} showModal={setModalOpen} /> : null;
     return (
         <> 
-            <button onClick={() => setModalOpen(!modalOpen)}>AdvancedOptions</button>
+            <button className="advancedOptionsButton" onClick={() => setModalOpen(!modalOpen)}
+            title="Advanced Options"
+            >
+                <i className="icon cogs"></i>
+            </button>
             {renderedModal}            
         </>
     )
