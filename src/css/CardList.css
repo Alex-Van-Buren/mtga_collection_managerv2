@@ -28,6 +28,7 @@ p#displayingNumberCards {
 .cardList-cards .lazyLoad {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     justify-content: center;
     gap: 0px 20px;
     margin: 0 20px;

@@ -152,6 +152,9 @@ function CardList({ setId=null }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
     
+    // View width = inner width of window - scrollbar width - card list margin
+    const viewWidth = window.innerWidth - 17 - 2*20;
+
     return (<>
         {/* Counter for number of cards being displayed */}
         <p id="displayingNumberCards">
@@ -160,7 +163,7 @@ function CardList({ setId=null }) {
 
         {/* JSX for matching cards */}
         <div className="cardList-cards">
-            <LazyLoad childWidth={245} childHeight={351.75} viewWidth={window.innerWidth} emptyChildClass="bouncy column" >
+            <LazyLoad childWidth={225} childHeight={351.75} gap={20} viewWidth={viewWidth}>
                 {renderCards}
             </LazyLoad>
         </div>
