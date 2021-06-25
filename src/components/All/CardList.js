@@ -8,6 +8,7 @@ import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
 /**
+ * The list of MTG Arena cards.
  * 
  * @param {string} [setId=null] (Optional) three letter set code. Can also specify using redux.
  * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays the number
