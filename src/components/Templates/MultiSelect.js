@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import '../../css/MultiSelect.css';
 
-function MultiSelect({options}) {
+function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelected=false} ) {
 
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState([]);
@@ -19,9 +19,9 @@ function MultiSelect({options}) {
         return (
             <div className="multi-option"
             onClick={() => addToSelected(option)}
-            key={option}
+            key={option.val}
             >
-                {option}
+                {option.text}
             </div>
         )
     }) 
@@ -37,15 +37,15 @@ function MultiSelect({options}) {
 
     // If nothing is selected, render "Select..."
     if ( selected.length === 0 ) {
-        topLabelContents = "Select...";
+        topLabelContents = noneSelectedText;
     }
 
     // Else map all selected options and render them
     else {
         topLabelContents = selected.map((option) => {
             return (
-                <button key={option} onClick={(e) => removeFromSelected(e, option)}>
-                    {option}
+                <button key={option.val} onClick={(e) => removeFromSelected(e, option)}>
+                    {useValForSelected ? option.val : option.text}
                     <i className="delete icon"></i>
                 </button>
             );
