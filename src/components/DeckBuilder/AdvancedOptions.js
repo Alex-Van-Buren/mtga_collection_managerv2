@@ -7,6 +7,7 @@ import RarityButtons from '../SetDetails/RarityButtons';
 import NumberOwnedDropdown from '../SetDetails/NumberOwnedDropdown';
 import BoosterDropdown from '../SetDetails/BoosterDropdown';
 import CMCDropdowns from '../SetDetails/CMCDropdowns';
+import SelectSet from './SelectSet';
 import Reset from '../SetDetails/Reset';
 import '../../css/AdvancedOptions.css';
 
@@ -36,6 +37,7 @@ function AdvancedOptions() {
                     <NumberOwnedDropdown header="Number You Own:"/>
                     <BoosterDropdown header="In Booster Packs?"  />
                     <CMCDropdowns header="Select Mana Cost:"/>
+                    <SelectSet />
                     <Reset />
                 </div>
             </div>
