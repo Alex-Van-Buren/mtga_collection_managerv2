@@ -24,7 +24,7 @@ function LazyLoad(
 ) {
     
     // Track number of children currently shown
-    const [numChildrenShown, setNumChildrenShown] = useState(12);
+    const [numChildrenShown, setNumChildrenShown] = useState(numberInitiallyShown);
 
     // Get parent element
     const parent = forwardedParentRef ? forwardedParentRef.current : window;
