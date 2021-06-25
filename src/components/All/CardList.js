@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import findCards from '../../data/findCards';
 import CardListImage from './CardListImage';
+import LazyLoad from '../Templates/LazyLoad';
 import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
 /**
+ * The list of MTG Arena cards.
  * 
  * @param {string} [setId=null] (Optional) three letter set code. Can also specify using redux.
  * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays the number
@@ -151,6 +153,9 @@ function CardList({ setId=null }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
     
+    // View width = inner width of window - scrollbar width - card list margin
+    const viewWidth = window.innerWidth - 17 - 2*20;
+
     return (<>
         {/* Counter for number of cards being displayed */}
         <p id="displayingNumberCards">
@@ -158,9 +163,10 @@ function CardList({ setId=null }) {
         </p>
 
         {/* JSX for matching cards */}
-
         <div className="cardList-cards">
-            {renderCards}  
+            <LazyLoad childWidth={225} childHeight={351.75} gap={20} viewWidth={viewWidth}>
+                {renderCards}
+            </LazyLoad>
         </div>
     </>);
 }
