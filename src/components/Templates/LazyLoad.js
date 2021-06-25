@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { forwardRef, useState, useEffect, useRef, useMemo } from 'react';
 
 /**
  * Doesn't allow children to be rendered to the DOM until they are within about one 'view height' of the parent element.
@@ -7,20 +7,18 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
  * @prop {number} childHeight Height of child elements, including margin/padding.
  * @prop {number} childWidth Width of child elements, including margin/padding.
  * @prop {number} [gap=0] (Optional) Gap between child elements (in a flexbox).
+ * @prop {number} [numberInitiallyShown=12] Number of children to show before scrolling has occurred.
  * @prop {number} [viewWidth=window.innerWidth] (Optional) The width of the area in which the child elements are visible.
  * Assumes width of window if not specified.
  * @prop {number} [viewHeight=window.innerHeight] (Optional) The height in which child elements should be visible. Not equal
  * to the total height of the list of children, just the visible portion. Assumes height of window if not specified.
- * @prop {number} [numberInitiallyShown=12] Number of children to show before scrolling has occurred.
  * @returns React.Component that should be wrapped around the list that will be lazy loaded.
  * @example <LazyLoad childHeight={children[0].height} childWidth={children[0].width} gap={20}> {children} </LazyLoad>
  */
-function LazyLoad(
-    {
-        children, childHeight, childWidth, gap=0, viewWidth=window.innerWidth,
-        viewHeight=window.innerHeight, numberInitiallyShown=12
-    }
-) {
+function LazyLoad({
+    children, childHeight, childWidth, gap=0, numberInitiallyShown=12, 
+    viewWidth=window.innerWidth, viewHeight=window.innerHeight
+}) {
     
     // Track number of children currently shown
     const [numChildrenShown, setNumChildrenShown] = useState(numberInitiallyShown);
