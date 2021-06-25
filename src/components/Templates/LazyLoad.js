@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 /**
  * Doesn't allow children to be rendered to the DOM until they are within about one 'view height' of the parent element.
+ * Assumes that all child elements are the same size.
  * 
  * @prop {number} childHeight Height of child elements, including margin/padding.
  * @prop {number} childWidth Width of child elements, including margin/padding.
