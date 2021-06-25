@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import '../../css/MultiSelect.css';
 
 function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelected=false} ) {
+
+        // Close Dropdown on all clicks outside of dropdown
+        useEffect(() => {   
+            function closeOnOutsideClick() {
+                setOpen(false);
+            }
+            
+            document.body.addEventListener('click', closeOnOutsideClick);
+    
+            return () => {
+                document.body.removeEventListener('click', closeOnOutsideClick);
+            }
+        }, []);
 
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState([]);
@@ -18,7 +31,7 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
     const dropdownOptions = options.map((option) => {
         return (
             <div className="multi-option"
-            onClick={() => addToSelected(option)}
+            onClick={(e) =>{e.stopPropagation(); addToSelected(option)}}
             key={option.val}
             >
                 {option.text}
@@ -64,7 +77,7 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
 
     return (
         <div className="multi-dropdown">
-            <div className={selectedClass}onClick={() => setOpen(!open)}>
+            <div className={selectedClass}onClick={(e) =>{e.stopPropagation(); setOpen(!open)}}>
                 {topLabelContents}
                 <i className={chevronClass}></i>
             </div>
