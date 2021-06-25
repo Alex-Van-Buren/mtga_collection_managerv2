@@ -2,6 +2,7 @@ import React from 'react';
 
 import MultiSelect from '../Templates/MultiSelect';
 import { setInfo } from '../../data/setInfo';
+import '../../css/SelectSet.css';
 
 function SelectSet() {
     // Create the options for the multiSelect menu
@@ -15,10 +16,12 @@ function SelectSet() {
 
 
     return (
-        <MultiSelect 
-            options={options} 
-            useValForSelected noneSelectedText="Select a Set(s)"
-        />
+        <div className="selectSet">
+            <MultiSelect 
+                options={options} 
+                useValForSelected noneSelectedText="Select a Set(s)"
+            />
+        </div>
     )
 }
 

@@ -1,0 +1,8 @@
+.selectSet .options.active {
+    height: 20em;
+    overflow-y: scroll;
+}
+
+.selectSet {
+    width: 12em;
+}

@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 import '../../css/MultiSelect.css';
 
+/**
+ * A dropdown that allows for multiple selections
+ * 
+ * @param {Array} options An Array of the options that can be selected. Each option is an object that has text and val as keys
+ * @param {String} noneSelectedText String to show when nothing is currently selected. Defaults to "Select..."
+ * @param {Boolean} useValForSelected A boolean that determines whether to use the val to represent the rendered button when that option selected. False by default
+ * @param {Array} initialSelected Initially selected options. If using state management (eg redux), set this value to that state.
+ * @param {Function} selectedfn A function to run when the selected options change.
+ * @returns JSX for multiselectable dropdown
+ */
 function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelected=false, initialSelected= [], selectedfn = undefined} ) {
 
     // Close Dropdown on all clicks outside of dropdown
@@ -72,6 +82,7 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
         });
     }
 
+    // Class definitions that change if dropdown is open
     let chevronClass = "icon chevron down";
     let dropdownOptionsClass = "options ";
     let selectedClass = "selected";
