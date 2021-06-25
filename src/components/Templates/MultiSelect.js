@@ -7,12 +7,14 @@ function MultiSelect({options}) {
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState([]);
 
+    // Helper function to add an option to selected if is not there already
     function addToSelected(option) {
         if (!selected.includes(option)) {
             setSelected([...selected, option])
         }
     }
 
+    // Map all of the options with add function
     const dropdownOptions = options.map((option) => {
         return (
             <div className="multi-option"
@@ -24,31 +26,49 @@ function MultiSelect({options}) {
         )
     }) 
 
+    // Helper function to remove an option from selected
     function removeFromSelected(event,option) {
         event.stopPropagation();
         setSelected( selected.filter( current => current !== option) )
     } 
     
-    let topLabel;
+    // Initialize top element contents
+    let topLabelContents;
 
+    // If nothing is selected, render "Select..."
     if ( selected.length === 0 ) {
-        topLabel = <div className="selected" onClick={() => setOpen(!open)}>Select...</div>
+        topLabelContents = "Select...";
     }
+
+    // Else map all selected options and render them
     else {
-        const topLabelContents = selected.map((option) => {
+        topLabelContents = selected.map((option) => {
             return (
-                <button key={option} onClick={(e) => removeFromSelected(e, option)}>{option}</button>
+                <button key={option} onClick={(e) => removeFromSelected(e, option)}>
+                    {option}
+                    <i className="delete icon"></i>
+                </button>
             );
         });
-
-        topLabel = <div className="selected" onClick={() => setOpen(!open)}>{topLabelContents}</div>
     }
 
-    console.log(selected)
+    let chevronClass = "icon chevron down";
+    let dropdownOptionsClass = "options ";
+    let selectedClass = "selected";
+
+    if (open) {
+        chevronClass = "icon chevron up";
+        dropdownOptionsClass = "options active";
+        selectedClass = "selected active";
+    }
+
     return (
         <div className="multi-dropdown">
-            {topLabel}
-            <div className={open ? "options active" : "options"}>
+            <div className={selectedClass}onClick={() => setOpen(!open)}>
+                {topLabelContents}
+                <i className={chevronClass}></i>
+            </div>
+            <div className={dropdownOptionsClass}>
                 {dropdownOptions}
             </div>
         </div>

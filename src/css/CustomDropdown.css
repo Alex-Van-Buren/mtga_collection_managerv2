@@ -49,7 +49,7 @@
 
 .dropdown-item {
     border-bottom: 1px solid var(--clr-txt);
-    padding: 2%;
+    padding: 2.5px;
 }
 
 .dropdown-item:last-child {
