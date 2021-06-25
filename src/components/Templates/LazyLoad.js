@@ -19,8 +19,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
  */
 function LazyLoad(
     {
-        children, childHeight, childWidth, gap=0, viewWidth=window.innerWidth, viewHeight=window.innerHeight, 
-        forwardedParentRef=null, numberInitiallyShown=12
+        children, childHeight, childWidth, gap=0, viewWidth=window.innerWidth,
+        viewHeight=window.innerHeight, numberInitiallyShown=12
     }
 ) {
     
@@ -28,7 +28,7 @@ function LazyLoad(
     const [numChildrenShown, setNumChildrenShown] = useState(numberInitiallyShown);
 
     // Get parent element
-    const parent = forwardedParentRef ? forwardedParentRef.current : window;
+    const parent = window;
 
     // Calculate the number of children that can fit in a row
     const childrenPerRow = useMemo(() => {
@@ -52,7 +52,7 @@ function LazyLoad(
         // Watch for scrolling and compute number of children to show
         function onScrollY() { // Function to throttle
 
-            const scrollY = forwardedParentRef ? parent.scrollTop : parent.scrollY;
+            const scrollY = parent.scrollY;
 
             // Calculate number of children to show
             const numChildrenWeNeedToShow = Math.ceil((scrollY + viewHeight) / childHeight) * childrenPerRow;
@@ -99,7 +99,7 @@ function LazyLoad(
         // Cleanup
         return () => parent.removeEventListener("scroll", throttledOnScrollY);
 
-    }, [childHeight, childrenPerRow, forwardedParentRef, numChildrenShown, parent, viewHeight]);
+    }, [childHeight, childrenPerRow, numChildrenShown, parent, viewHeight]);
 
     // Set height of lazyload div so scroll bar shows true length
     return <div className="lazyLoad" style={{ "minHeight" : `${height}px` }} >
