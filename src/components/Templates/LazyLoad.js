@@ -11,8 +11,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
  * Assumes width of window if not specified.
  * @prop {number} [viewHeight=window.innerHeight] (Optional) The height in which child elements should be visible. Not equal
  * to the total height of the list of children, just the visible portion. Assumes height of window if not specified.
- * @prop {ref} [forwardedParentRef=null] (Optional) A forwarded ref (see React.forwardRef) of the parent element that
- * scrolls, if not the window. If the window is the scrolling element, then do not specify.
  * @prop {number} [numberInitiallyShown=12] Number of children to show before scrolling has occurred.
  * @returns React.Component that should be wrapped around the list that will be lazy loaded.
  * @example <LazyLoad childHeight={children[0].height} childWidth={children[0].width} gap={20}> {children} </LazyLoad>
