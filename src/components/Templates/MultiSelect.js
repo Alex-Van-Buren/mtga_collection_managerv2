@@ -2,23 +2,30 @@ import React, { useState, useEffect } from 'react';
 
 import '../../css/MultiSelect.css';
 
-function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelected=false} ) {
+function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelected=false, initialSelected= [], selectedfn = undefined} ) {
 
-        // Close Dropdown on all clicks outside of dropdown
-        useEffect(() => {   
-            function closeOnOutsideClick() {
-                setOpen(false);
-            }
-            
-            document.body.addEventListener('click', closeOnOutsideClick);
-    
-            return () => {
-                document.body.removeEventListener('click', closeOnOutsideClick);
-            }
-        }, []);
+    // Close Dropdown on all clicks outside of dropdown
+    useEffect(() => {   
+        function closeOnOutsideClick() {
+            setOpen(false);
+        }
+        
+        document.body.addEventListener('click', closeOnOutsideClick);
+
+        return () => {
+            document.body.removeEventListener('click', closeOnOutsideClick);
+        }
+    }, []);
 
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState(initialSelected);
+
+    // A function to fire every time "selected" changes. Needed for redux state
+    useEffect(() => {
+        if (selectedfn) {
+            selectedfn(selected)
+        }
+    },[selected, selectedfn])
 
     // Helper function to add an option to selected if is not there already
     function addToSelected(option) {
