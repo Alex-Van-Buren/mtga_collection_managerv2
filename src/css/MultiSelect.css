@@ -1,0 +1,7 @@
+.options.active {
+    display: block;
+}
+
+.multi-dropdown .options:not(.active) {
+    display: none;
+}
