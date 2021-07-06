@@ -11,10 +11,12 @@ import '../../css/CardList.css';
  * The list of MTG Arena cards.
  * 
  * @param {string} [setId=null] (Optional) three letter set code. Can also specify using redux.
- * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays the number
- * of cards owned by the user above each card image. 
+ * @param {string} [scrollingParent=null] (Optional) Specify this string if the element that scrolls is not the window.
+ * Input to document.querySelector() that selects the scrolling parent of CardList.
+ * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays 
+ * the number of cards owned by the user above each card image. 
  */
-function CardList({ setId=null }) {
+function CardList({ setId=null, scrollingParent=null }) {
     
     // Get values from redux state
     const cardCollection = useSelector(state => state.inventory.cardCollection);
@@ -154,7 +156,7 @@ function CardList({ setId=null }) {
     }, [renderCards] );
     
     // View width = inner width of window - scrollbar width - card list margin
-    const viewWidth = window.innerWidth - 17 - 2*20;
+    const viewWidthFn = viewWidth => viewWidth - 17 - 2*20;
 
     return (<>
         {/* Counter for number of cards being displayed */}
@@ -163,8 +165,11 @@ function CardList({ setId=null }) {
         </p>
 
         {/* JSX for matching cards */}
-        <div className="cardList-cards">
-            <LazyLoad childWidth={225} childHeight={351.75} gap={20} viewWidth={viewWidth}>
+        <div className="cardList-cards" >
+            <LazyLoad 
+                childWidth={225} childHeight={351.75} gap={20} scrollingParent={scrollingParent} 
+                viewWidthFn={viewWidthFn}
+            >
                 {renderCards}
             </LazyLoad>
         </div>
