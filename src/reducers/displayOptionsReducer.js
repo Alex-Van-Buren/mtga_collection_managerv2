@@ -20,7 +20,7 @@ const INITIAL_STATE = {
 
     booster: "Show All Cards",
 
-    set: null,
+    set: [],
 
     cmc: {min: "Any", max: "Any"},
 
@@ -76,7 +76,7 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
 
         // Specify card set to search in redux
         case SELECT_SET: {
-            return { ...state, cardSet: action.payload };
+            return { ...state, set: action.payload };
         }
 
         // Determine whether to search cards in booster packs

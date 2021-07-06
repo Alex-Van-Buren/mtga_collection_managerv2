@@ -39,8 +39,20 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
 
     // Helper function to add an option to selected if is not there already
     function addToSelected(option) {
-        if (!selected.includes(option)) {
-            setSelected([...selected, option])
+        // initialize add to selected to be true
+        let addOption = true;
+
+        // Check each option currently selected and see if the option to be added is already selected
+        for (const selectedOption of selected) {
+            if (selectedOption.text === option.text && selectedOption.val === option.val) {
+                addOption = false;
+                break;
+            }
+        }
+        
+        // If the option passed and wasn't already selected --> Add it 
+        if (addOption) {
+            setSelected ([...selected, option])
         }
     }
 
