@@ -25,20 +25,31 @@ function LazyLoad({
     const [numChildrenShown, setNumChildrenShown] = useState(buffer);
 
     // Get parent element
-    const element = scrollingParent ? document.querySelector(scrollingParent) : null;
-    const parent =  element ? element : window;
+    let parent = window;
+    let viewHeight = parent.innerHeight;
+    let viewWidth = parent.innerWidth;
 
-    // Calculate the height and width of the parent element
-    let viewHeight = scrollingParent ? parent.offsetHeight : window.innerHeight;
+    // Check if a parent element other than the window is specified
+    if (scrollingParent) {
+        const element = document.querySelector(scrollingParent);
+
+        // Make sure the query string returned something
+        if (element) {
+
+            // Then update parent and call specific height/width properties
+            parent = element;
+            viewHeight = parent.offsetHeight;
+            viewWidth = parent.offsetWidth;
+        }
+    }
+
+    // Apply transformations to height and width if applicable
     if (viewHeightFn) {
         viewHeight = viewHeightFn(viewHeight);
     }
-    let viewWidth = scrollingParent ? parent.offsetWidth : window.innerWidth;
     if (viewWidthFn) {
         viewWidth = viewWidthFn(viewWidth);
     }
-
-    console.log(viewHeight, viewWidth)
 
     // Calculate the number of children that can fit in a row
     const childrenPerRow = useMemo(() => {
