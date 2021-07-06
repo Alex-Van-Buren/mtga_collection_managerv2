@@ -28,11 +28,13 @@ function SelectSet() {
 
     return (
         <div className="selectSet">
+            <label >Select Set(s): </label>
             <MultiSelect 
                 options={options} 
-                useValForSelected noneSelectedText="Select a Set(s)"
+                useValForSelected noneSelectedText="All Sets"
                 selectedfn={(sets) => setsSelected(sets)}
                 initialSelected = {reduxSets}
+                key={reduxSets}
             />
         </div>
     )

@@ -6,3 +6,8 @@
 .selectSet {
     width: 12em;
 }
+
+.selectSet .multi-dropdown {
+    margin-top: 7px;
+    margin-left: 18px;
+}

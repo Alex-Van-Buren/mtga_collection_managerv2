@@ -11,6 +11,10 @@
     border: 1px solid var(--clr-txt);
 }
 
+.multi-dropdown .selected button {
+    margin: 0 1px;
+}
+
 .multi-dropdown .selected:not(.active) {
     border-radius: 5px;
 }

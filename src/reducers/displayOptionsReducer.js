@@ -123,7 +123,8 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
                 booster: "Show All Cards",
                 cmc: {min: "Any", max: "Any"},
                 searchTerm: "",
-                searchType: null
+                searchType: null,
+                set: []
             });
         }
 
