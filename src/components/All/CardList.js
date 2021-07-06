@@ -155,7 +155,8 @@ function CardList({ setId=null, scrollingParent=null }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
     
-    // View width = inner width of window - scrollbar width - card list margin
+    // View width = inner width of (window/parent element) - scrollbar width - card list margin
+    // Transformation to be applied to viewWidth once we know what element the view is (window or something else)
     const viewWidthFn = viewWidth => viewWidth - 17 - 2*20;
 
     return (<>
