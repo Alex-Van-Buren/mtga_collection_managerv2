@@ -32,7 +32,7 @@ function SelectSet() {
             <MultiSelect 
                 options={options} 
                 useValForSelected noneSelectedText="All Sets"
-                selectedfn={(sets) => dispatch(selectSet(sets))}
+                selectedFn={(sets) => dispatch(selectSet(sets))}
                 initialSelected = {reduxSets}
                 key={reduxSets}
             />
