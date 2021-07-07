@@ -27,7 +27,12 @@ function CardListImage({
     let fullText = `${name}\n${type_line}\n${oracle_text}`;
 
     // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    let cardImages = imgs? <img src={imgs.front} alt={name} loading="lazy" aria-label={name} title={fullText}/> : null;
+    // Initialize image as null
+    let cardImages = null;
+
+
+    if (imgs)
+        cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
     let flipButton = null; // Regular cards don't have a flip button
 
     // Refs
@@ -79,10 +84,10 @@ function CardListImage({
             </button>
         );
 
-        // One image will be hidden
+        // Creating a front and backside
         cardImages = <>
-            <img src={imgs.front} alt={name} className="cardImg" loading="lazy" aria-label={name} title={fullText}/>
-            <img src={imgs.back} alt={name} className="backside" loading="lazy" aria-label={name} title={backsideText}/>
+            <CardSide src={imgs.front} name={name} title={fullText}     className="cardImg"/>
+            <CardSide src={imgs.back}  name={name} title={backsideText} className="backside"/>
         </>;
     } 
     // Adventure cards fall in this category ("backside", but not flipable)
@@ -91,7 +96,7 @@ function CardListImage({
         fullText += ` // ${backside.oracle_text}`;
 
         // Redeclare cardImages because fullText has changed
-        cardImages = <img src={imgs.front} alt={name} loading="lazy" aria-label={name} title={fullText}/>;
+        cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
     }
 
     return (
@@ -123,6 +128,13 @@ function CardListImage({
             </div>
             {flipButton}
         </div>
+    );
+}
+
+// Helper Component - single spot to make changes cascade to all card images
+function CardSide({ src, name, title, className='' }) {
+    return (
+        <img src={src} alt={name} aria-label={name} title={title} className={className} draggable='true' />
     );
 }
 

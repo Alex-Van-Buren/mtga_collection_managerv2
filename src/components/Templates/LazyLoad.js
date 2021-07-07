@@ -1,30 +1,55 @@
-import React, { forwardRef, useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 /**
- * Doesn't allow children to be rendered to the DOM until they are within about one 'view height' of the parent element.
- * Assumes that all child elements are the same size.
+ * Wrap around children to stop them from being rendered to the DOM until they are within about one 'view height' + buffer
+ * of the parent element. Assumes that all child elements are the same size for calculating when to show them.
  * 
  * @prop {number} childHeight Height of child elements, including margin/padding.
  * @prop {number} childWidth Width of child elements, including margin/padding.
  * @prop {number} [gap=0] (Optional) Gap between child elements (in a flexbox).
- * @prop {number} [numberInitiallyShown=12] Number of children to show before scrolling has occurred.
- * @prop {number} [viewWidth=window.innerWidth] (Optional) The width of the area in which the child elements are visible.
- * Assumes width of window if not specified.
- * @prop {number} [viewHeight=window.innerHeight] (Optional) The height in which child elements should be visible. Not equal
- * to the total height of the list of children, just the visible portion. Assumes height of window if not specified.
- * @returns React.Component that should be wrapped around the list that will be lazy loaded.
- * @example <LazyLoad childHeight={children[0].height} childWidth={children[0].width} gap={20}> {children} </LazyLoad>
+ * @prop {number} [buffer=12] Number of children to load beyond current view.
+ * @prop {string} [scrollingParent=null] (Optional) Specify this string if the element that scrolls is not the window.
+ * Input to document.querySelector() that selects the scrolling parent of LazyLoad.
+ * @prop {function} [viewWidthFn=null] (Optional) A transformation to apply to the calculation of the view width. View width
+ * is initially the offsetWidth of the parent or window.innerWidth if scrollingParent is unspecified.
+ * @prop {function} [viewHeightFn=null] (Optional) A transformation to apply to the calculation of the view height. View height
+ * is initially the offsetHeight of the parent or window.innerHeight if scrollingParent is unspecified.
+ * @returns React.Component that should be wrapped around children that will be lazily loaded.
  */
-function LazyLoad({
-    children, childHeight, childWidth, gap=0, numberInitiallyShown=12, 
-    viewWidth=window.innerWidth, viewHeight=window.innerHeight
+function LazyLoad({ 
+    children, childHeight, childWidth, gap=0, buffer=12, 
+    scrollingParent=null, viewWidthFn=null, viewHeightFn=null
 }) {
     
     // Track number of children currently shown
-    const [numChildrenShown, setNumChildrenShown] = useState(numberInitiallyShown);
+    const [numChildrenShown, setNumChildrenShown] = useState(buffer);
 
     // Get parent element
-    const parent = window;
+    let parent = window;
+    let viewHeight = parent.innerHeight;
+    let viewWidth = parent.innerWidth;
+
+    // Check if a parent element other than the window is specified
+    if (scrollingParent) {
+        const element = document.querySelector(scrollingParent);
+
+        // Make sure the query string returned something
+        if (element) {
+
+            // Then update parent and call specific height/width properties
+            parent = element;
+            viewHeight = parent.offsetHeight;
+            viewWidth = parent.offsetWidth;
+        }
+    }
+
+    // Apply transformations to height and width if applicable
+    if (viewHeightFn) {
+        viewHeight = viewHeightFn(viewHeight);
+    }
+    if (viewWidthFn) {
+        viewWidth = viewWidthFn(viewWidth);
+    }
 
     // Calculate the number of children that can fit in a row
     const childrenPerRow = useMemo(() => {
@@ -34,10 +59,7 @@ function LazyLoad({
     }, [viewWidth, childWidth, gap]);
 
     // Calculate container height to set so scrollbar is about the right size
-    const height = useMemo(() => {
-
-        return Math.ceil(children.length/childrenPerRow) * childHeight;
-    }, [children, childrenPerRow, childHeight]);
+    const height =  Math.ceil(children.length/childrenPerRow) * childHeight;
 
     // Track whether the throttle function is currently active
     const throttleActive = useRef(false); // throttleActive.current = false;
@@ -48,14 +70,14 @@ function LazyLoad({
         // Watch for scrolling and compute number of children to show
         function onScrollY() { // Function to throttle
 
-            const scrollY = parent.scrollY;
+            const scrollY = scrollingParent ? parent.scrollTop : parent.scrollY;
 
             // Calculate number of children to show
             const numChildrenWeNeedToShow = Math.ceil((scrollY + viewHeight) / childHeight) * childrenPerRow;
 
             // Increment number of children to show if user scrolls down
             if (numChildrenWeNeedToShow > numChildrenShown) {
-                setNumChildrenShown(numChildrenWeNeedToShow);
+                setNumChildrenShown(numChildrenWeNeedToShow + buffer);
             }
         }
 
@@ -95,14 +117,16 @@ function LazyLoad({
         // Cleanup
         return () => parent.removeEventListener("scroll", throttledOnScrollY);
 
-    }, [childHeight, childrenPerRow, numChildrenShown, parent, viewHeight]);
+    }, [buffer, childHeight, childrenPerRow, numChildrenShown, parent, scrollingParent, viewHeight]);
 
     // Set height of lazyload div so scroll bar shows true length
-    return <div className="lazyLoad" style={{ "minHeight" : `${height}px` }} >
+    return (
+        <div className="lazyLoad" style={{ "minHeight" : `${height}px` }} >
 
-        {/* Only show children if they've been scrolled to */ }
-        {children.slice(0, numChildrenShown)}
-    </div>
+            {/* Only show children if they've been scrolled to */ }
+            {children.slice(0, numChildrenShown)}
+        </div>
+    );
 }
 
 export default LazyLoad;
