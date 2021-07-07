@@ -6,6 +6,10 @@ import { setInfo } from '../../data/setInfo';
 import { selectSet } from '../../actions';
 import '../../css/SelectSet.css';
 
+/**
+ * Uses MultiSelect to create a multiSelectible dropdown for selecting sets to search
+ * @returns JSX 
+ */
 function SelectSet() {
     const dispatch = useDispatch();
     
@@ -13,6 +17,7 @@ function SelectSet() {
     const reduxSets = useSelector(state => state.displayOptions.set);   
 
     // Create the options for the multiSelect menu
+    // Each option is an object with text and val properties
     let options = [];
     for (const setId in setInfo) {
         let newObj = {};
@@ -21,18 +26,13 @@ function SelectSet() {
         options.push(newObj);
     }
 
-
-    function setsSelected(sets) {
-        dispatch(selectSet(sets));
-    }
-
     return (
         <div className="selectSet">
             <label >Select Set(s): </label>
             <MultiSelect 
                 options={options} 
                 useValForSelected noneSelectedText="All Sets"
-                selectedfn={(sets) => setsSelected(sets)}
+                selectedfn={(sets) => dispatch(selectSet(sets))}
                 initialSelected = {reduxSets}
                 key={reduxSets}
             />

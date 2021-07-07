@@ -46,6 +46,8 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
         // If the option passed and wasn't already selected --> Add it 
         if (addOption) {
             const newState = [...selected, option];
+
+            // Update local state and use extra function if provided
             setSelected(newState);
             if (selectedfn) {
                 selectedfn(newState);
@@ -68,19 +70,19 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
     // Helper function to remove an option from selected
     function removeFromSelected(event,option) {
         event.stopPropagation();
-        const removedOption = selected.filter( current => current !== option);
+        const newState = selected.filter( current => current !== option);
 
-        setSelected( removedOption )
+        // Update local state and use extra function if provided
+        setSelected( newState );
         if (selectedfn) {
-            selectedfn(removedOption)
+            selectedfn( newState );
         }
-
     } 
     
     // Initialize top element contents
     let topLabelContents;
 
-    // If nothing is selected, render "Select..."
+    // If nothing is selected, render "Select..." or provided text
     if ( selected.length === 0 ) {
         topLabelContents = noneSelectedText;
     }
