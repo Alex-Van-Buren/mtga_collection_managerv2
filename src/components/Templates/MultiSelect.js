@@ -30,13 +30,6 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(initialSelected);
 
-    // A function to fire every time "selected" changes. Needed for redux state
-    useEffect(() => {
-        if (selectedfn) {
-            selectedfn(selected)
-        }
-    },[selected, selectedfn])
-
     // Helper function to add an option to selected if is not there already
     function addToSelected(option) {
         // initialize add to selected to be true
@@ -52,7 +45,11 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
         
         // If the option passed and wasn't already selected --> Add it 
         if (addOption) {
-            setSelected ([...selected, option])
+            const newState = [...selected, option];
+            setSelected(newState);
+            if (selectedfn) {
+                selectedfn(newState);
+            }
         }
     }
 
@@ -71,7 +68,13 @@ function MultiSelect({ options, noneSelectedText = 'Select...', useValForSelecte
     // Helper function to remove an option from selected
     function removeFromSelected(event,option) {
         event.stopPropagation();
-        setSelected( selected.filter( current => current !== option) )
+        const removedOption = selected.filter( current => current !== option);
+
+        setSelected( removedOption )
+        if (selectedfn) {
+            selectedfn(removedOption)
+        }
+
     } 
     
     // Initialize top element contents
