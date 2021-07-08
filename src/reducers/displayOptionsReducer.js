@@ -33,7 +33,7 @@ const INITIAL_STATE = {
     cardCount: 0,
 
     activeTab: "Card Filters"
-}
+};
 
 export default function displayOptionsReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
