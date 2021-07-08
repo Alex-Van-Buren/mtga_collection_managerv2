@@ -16,7 +16,7 @@ import '../../css/CardList.css';
  * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays 
  * the number of cards owned by the user above each card image. 
  */
-function CardList({ setId=null, scrollingParent=null }) {
+function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     
     // Get values from redux state
     const cardCollection = useSelector(state => state.inventory.cardCollection);
@@ -87,7 +87,7 @@ function CardList({ setId=null, scrollingParent=null }) {
         };
 
         // Need to get images as well as name and arenaId
-        const returnOptions = ['image_uris', 'type_line', 'oracle_text'];
+        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set'];
 
         return findCards(searchOptions, returnOptions);
         
@@ -139,9 +139,8 @@ function CardList({ setId=null, scrollingParent=null }) {
             // Build card JSX
             return (
                 <CardListImage
-                    name={card.name} backside={card.backside} index={currentPictures.indexOf(imgs)} key={card.arenaId}
-                    type_line={card.type_line} oracle_text={card.oracle_text} 
-                    cardHeader={cardHeader}
+                    card={card} index={currentPictures.indexOf(imgs)} key={card.arenaId}
+                    cardHeader={cardHeader} deckBuilder={deckBuilder}
                 />
             );
             

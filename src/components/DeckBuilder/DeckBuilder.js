@@ -13,12 +13,10 @@ function DeckBuilder() {
 
             <div className="mainContent">
                 <div className="dbCardList">
-                    <CardList scrollingParent={".dbCardList"}/>
+                    <CardList scrollingParent={".dbCardList"} deckBuilder />
                 </div>
                 <DBDeck />
-            </div>       
-
-
+            </div>
         </div>
     );
 }
