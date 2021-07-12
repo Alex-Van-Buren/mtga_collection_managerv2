@@ -148,10 +148,3 @@ export function addCardToDeck(card) {
         payload: card
     };
 }
-
-export function removeCardFromDeck(card) {
-    return {
-        type: REMOVE_CARD_FROM_DECK,
-        payload: card
-    };
-}
