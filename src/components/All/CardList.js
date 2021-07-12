@@ -188,7 +188,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         {/* JSX for matching cards */}
         <div className="cardList-cards" >
             <LazyLoad 
-                childWidth={225} childHeight={351.75} gap={20} scrollingParent={scrollingParent} 
+                childWidth={deckBuilder ? 160 : 225} childHeight={deckBuilder ? 259.862 : 351.75} gap={20} scrollingParent={scrollingParent} 
                 viewWidthFn={viewWidthFn}
             >
                 {renderCards}
