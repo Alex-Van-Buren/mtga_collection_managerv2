@@ -5,4 +5,18 @@
     flex-basis: 0;
     min-height: 15%;
     overflow: scroll;
+    display: flex;
+}
+
+.DBDeckColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.DBDeckCard {
+    height: 50px;
+}
+
+.DBDeckCard > img {
+    height: 227px;
 }

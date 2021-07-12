@@ -1,4 +1,4 @@
-import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK } from '../actions/types';
+import { ADD_CARD_TO_DECK } from '../actions/types';
 
 const INITIAL_STATE = {
     add: null
