@@ -28,7 +28,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
     const boosterVal     = useSelector(state => state.displayOptions.booster);
     const cmc            = useSelector(state => state.displayOptions.cmc);
-    const cardSet        = useSelector(state => state.displayOptions.cardSet);
+    const reduxSets        = useSelector(state => state.displayOptions.set);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -68,7 +68,28 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         }
 
         // Determine if set passed in as prop or received from redux
-        const set = setId ? setId : cardSet;
+        // Initialize set variable for use in searchOptions
+        let set;
+        // If a single SetId is provided --> use it
+        if (setId) {
+            set = setId;
+
+            // Otherwise get value(s) from redux 
+        } else {
+
+            // If the redux value is empty, set = undefined so that findcards will disregard filtering by set
+            if (reduxSets.length === 0 ){
+                set = undefined;
+
+            // If reduxSets has info, they need be altered so that set is an array of 3 letter set codes
+            } else {
+                set = [];
+                for ( const setObj of reduxSets) {
+                    set.push(setObj.val)
+                }
+            }
+        }
+        
         
         // Check the cmc values for "Any" string and change them to undefined
         let searchcmc = {...cmc};
@@ -91,7 +112,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, searchType, setId, cardSet, rarities, boosterVal, cmc]);
+    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc]);
 
     // Track currently shown pictures
     let currentPictures = [];
