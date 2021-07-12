@@ -1,4 +1,4 @@
-import { ADD_CARD_TO_DECK } from '../actions/types';
+import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK } from '../actions/types';
 
 const INITIAL_STATE = {
     deck: [ [], [], [], [], [], [], [], [] ]
@@ -20,6 +20,22 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             // Add card to state
             newDeck[i].push(cardToAdd);
+
+            // Update state
+            return { ...state, deck: newDeck };
+        }
+        case REMOVE_CARD_FROM_DECK: {
+
+            const cardToRemove = action.payload;
+
+            // Find which column to add card to
+            const i = colNumber(cardToRemove.cmc);
+
+            // Copy current state
+            const newDeck = [ ...state.deck ];
+
+            // Remove card from state
+            newDeck[i].splice(newDeck[i].indexOf(cardToRemove), 1);
 
             // Update state
             return { ...state, deck: newDeck };
