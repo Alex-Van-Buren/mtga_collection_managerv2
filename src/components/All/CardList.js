@@ -28,7 +28,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
     const boosterVal     = useSelector(state => state.displayOptions.booster);
     const cmc            = useSelector(state => state.displayOptions.cmc);
-    const reduxSets        = useSelector(state => state.displayOptions.set);
+    const reduxSets      = useSelector(state => state.displayOptions.set);
 
     // Access redux dispatch
     const dispatch = useDispatch();

@@ -1,7 +1,8 @@
-import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK } from '../actions/types';
+import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SELECT_DECK_TYPE } from '../actions/types';
 
 const INITIAL_STATE = {
-    deck: [ [], [], [], [], [], [], [], [] ]
+    deck: [ [], [], [], [], [], [], [], [] ],
+    deckType: "standard"
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {
@@ -39,6 +40,10 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             // Update state
             return { ...state, deck: newDeck };
+        }
+        case SELECT_DECK_TYPE: {
+            
+            return { ...state, deckType: action.payload };
         }
         default:
             return state;

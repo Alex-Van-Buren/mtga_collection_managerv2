@@ -2,7 +2,7 @@ import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
     SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST, 
     SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
-    REMOVE_CARD_FROM_DECK
+    REMOVE_CARD_FROM_DECK, SELECT_DECK_TYPE
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -153,5 +153,12 @@ export function removeCardFromDeck(card) {
     return {
         type: REMOVE_CARD_FROM_DECK,
         payload: card
+    };
+}
+
+export function selectDeckType(type) {
+    return {
+        type: SELECT_DECK_TYPE,
+        payload: type
     };
 }

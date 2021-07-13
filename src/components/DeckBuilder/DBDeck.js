@@ -13,14 +13,15 @@ function DBDeck() {
     const deck = useSelector(state => state.deckBuilder.deck);
 
     // Make an array of JSX for each of the 8 deck columns
-    const renderCards = deck.map(column => {
+    // TODO: useMemo
+    const renderCards = deck.map((column, i) => {
         return (
-            <div className="DBDeckColumn">
+            <div className="DBDeckColumn" key={'column'+i}>
 
                 {/* Create JSX for each individual card */}
-                { column.map( (card) => {
+                { column.map( (card, j) => {
                     return (
-                        <div className="DBDeckCard">
+                        <div className="DBDeckCard" key={'card'+i+j}>
                             <img
                                 src={card.imgs.front} alt={card.name}
                                 onClick={(e) => {
