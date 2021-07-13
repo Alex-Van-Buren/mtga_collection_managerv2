@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setCardModalContent, showCardModal } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
+import { addCardToDeck } from '../../actions';
 import '../../css/CardListImage.css';
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 function CardListImage({
-    name, backside, index, type_line, oracle_text,
-    cardHeader, cardClass="bouncy column", additionalFlipClass=""
+    card, index, cardHeader, cardClass="bouncy column", additionalFlipClass="", deckBuilder=false
 }) {
+
+    const { name, backside, type_line, oracle_text } = card;
 
     // Get redux dispatcher
     const dispatch = useDispatch();
@@ -99,6 +106,28 @@ function CardListImage({
         cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
     }
 
+    const onClick = () => {
+        if (!deckBuilder) {
+            return (() => {
+
+                // Get the index of the image on click
+                dispatch( setCardModalContent({ index, imgSide }) );
+
+                // Then show the modal
+                dispatch( showCardModal(true) );
+            })();
+        } else { // deckBuilder === true
+            return (() => {
+
+                // Provide information about clicked card to deck via redux
+                dispatch( addCardToDeck({ 
+                    name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
+                    collector_number: card.collector_number
+                }) );
+            })();
+        }
+    }
+
     return (
         <div className={cardClass} tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
             <div className="ui fluid card removeBoxShadow">
@@ -113,14 +142,7 @@ function CardListImage({
                     className={imgSide ? "image" : "flipped image"}
 
                     // Display larger card image (modal) on click
-                    onClick={ () => {
-
-                        // Get the index of the image on click
-                        dispatch( setCardModalContent({ index, imgSide }) );
-
-                        // Then show the modal
-                        dispatch( showCardModal(true) );
-                    } }
+                    onClick={onClick}
                 >
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}

@@ -16,7 +16,7 @@ import '../../css/CardList.css';
  * @returns Returns a grid of images of card in the set using filter options that are retrieved from redux store. Also displays 
  * the number of cards owned by the user above each card image. 
  */
-function CardList({ setId=null, scrollingParent=null }) {
+function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     
     // Get values from redux state
     const cardCollection = useSelector(state => state.inventory.cardCollection);
@@ -28,7 +28,7 @@ function CardList({ setId=null, scrollingParent=null }) {
     const cardCount      = useSelector(state => state.displayOptions.cardCount);
     const boosterVal     = useSelector(state => state.displayOptions.booster);
     const cmc            = useSelector(state => state.displayOptions.cmc);
-    const cardSet        = useSelector(state => state.displayOptions.cardSet);
+    const reduxSets      = useSelector(state => state.displayOptions.set);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -68,7 +68,28 @@ function CardList({ setId=null, scrollingParent=null }) {
         }
 
         // Determine if set passed in as prop or received from redux
-        const set = setId ? setId : cardSet;
+        // Initialize set variable for use in searchOptions
+        let set;
+        // If a single SetId is provided --> use it
+        if (setId) {
+            set = setId;
+
+            // Otherwise get value(s) from redux 
+        } else {
+
+            // If the redux value is empty, set = undefined so that findcards will disregard filtering by set
+            if (reduxSets.length === 0 ){
+                set = undefined;
+
+            // If reduxSets has info, they need be altered so that set is an array of 3 letter set codes
+            } else {
+                set = [];
+                for ( const setObj of reduxSets) {
+                    set.push(setObj.val)
+                }
+            }
+        }
+        
         
         // Check the cmc values for "Any" string and change them to undefined
         let searchcmc = {...cmc};
@@ -87,11 +108,11 @@ function CardList({ setId=null, scrollingParent=null }) {
         };
 
         // Need to get images as well as name and arenaId
-        const returnOptions = ['image_uris', 'type_line', 'oracle_text'];
+        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, searchType, setId, cardSet, rarities, boosterVal, cmc]);
+    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc]);
 
     // Track currently shown pictures
     let currentPictures = [];
@@ -139,9 +160,8 @@ function CardList({ setId=null, scrollingParent=null }) {
             // Build card JSX
             return (
                 <CardListImage
-                    name={card.name} backside={card.backside} index={currentPictures.indexOf(imgs)} key={card.arenaId}
-                    type_line={card.type_line} oracle_text={card.oracle_text} 
-                    cardHeader={cardHeader}
+                    card={card} index={currentPictures.indexOf(imgs)} key={card.arenaId}
+                    cardHeader={cardHeader} deckBuilder={deckBuilder}
                 />
             );
             
@@ -168,7 +188,7 @@ function CardList({ setId=null, scrollingParent=null }) {
         {/* JSX for matching cards */}
         <div className="cardList-cards" >
             <LazyLoad 
-                childWidth={225} childHeight={351.75} gap={20} scrollingParent={scrollingParent} 
+                childWidth={deckBuilder ? 160 : 225} childHeight={deckBuilder ? 259.862 : 351.75} gap={20} scrollingParent={scrollingParent} 
                 viewWidthFn={viewWidthFn}
             >
                 {renderCards}

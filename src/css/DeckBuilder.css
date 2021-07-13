@@ -2,6 +2,7 @@
     color: var(--clr-txt);
     display: flex;
     height: 100vh;
+    overflow: hidden;
 }
 
 .mainContent {
@@ -14,4 +15,19 @@
     height: 50%;
     overflow-y: scroll;
     resize: vertical;
+}
+
+.slider {
+    height: 10px;
+    background-color: red;
+    cursor: row-resize;    
+}
+
+.buffer {
+    height: 5px;
+}
+
+.dbCardList .bouncy.column {
+    width: 160px;
+    min-height: 250px;
 }

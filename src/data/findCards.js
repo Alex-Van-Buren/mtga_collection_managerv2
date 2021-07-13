@@ -105,13 +105,13 @@ function findCards(searchOptions, returnOptions) {
 /**
  * Filter cards not in specified set.
  * @param {String} cardSet Set code of the card
- * @param {String} set The set that the card needs to match to return true
- * @returns True if cardSet and set match, false otherwise.
+ * @param {any} set Either a string that is the desired Set or an array of the desired 3 letter set codes
+ * @returns True if cardSet and set match or if cardSet is included in array, false otherwise.
  */
  function filterSet(cardSet, set) {
 
     // Filter cards not in the set
-    if (cardSet === set) {
+    if (set === cardSet || set.includes(cardSet)) {
         return true;
     }
 

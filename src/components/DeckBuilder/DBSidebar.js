@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DBCardFilters from './DBCardFilters';
+import DBDeckOptions from './DBDeckOptions';
 import '../../css/DBSidebar.css';
 
 /**
@@ -11,6 +12,7 @@ function DBSidebar() {
     return (
         <div id="DBSidebar">
             <DBCardFilters />
+            <DBDeckOptions />
         </div>
     );
 }

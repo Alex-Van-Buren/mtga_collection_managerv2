@@ -4,10 +4,10 @@ import '../../css/CustomDropdown.css';
 
 /**
  * Creates a dropdown menu where the selected item is displayed
- * @param {Array} props.items An array of strings that are the different options that can be selected
- * @param {String} props.firstSelection The string of the default selection. Should be one of the strings in the items array.
- * @param {Function} props.selectfn Optional. An additional callback function that uses the item selected as an argument.
- * @param {String} props.ariaLabel Optional. An aria-label.
+ * @prop {Array} items An array of strings that are the different options that can be selected
+ * @prop {String} firstSelection The string of the default selection. Should be one of the strings in the items array.
+ * @prop {Function} [selectfn=undefined] An additional callback function that uses the item selected as an argument.
+ * @prop {String} [ariaLabel=undefined] An aria-label.
  * @returns Custom dropdown JSX.
  */
 function CustomDropdown({ items, firstSelection, selectfn=undefined, ariaLabel=undefined }) {
