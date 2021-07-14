@@ -144,11 +144,11 @@ function CardListImage({
     );
 }
 
+export default CardListImage;
+
 // Helper Component - single spot to make changes cascade to all card images
 function CardSide({ src, name, title=null, className=null }) {
     return (
         <img src={src} alt={name} aria-label={name} title={title} className={className} draggable='true' />
     );
 }
-
-export default CardListImage;
