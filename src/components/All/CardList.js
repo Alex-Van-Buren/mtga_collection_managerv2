@@ -117,9 +117,10 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     // Track currently shown pictures
     let currentPictures = [];
 
-    // render the cards based on how many the user owns and the showCards option
+    // Render cards based on how many the user owns using logic in 'showCards'
     const renderCards = useMemo(() => {
-        return cards.map( (card) => {
+        let returnCards = [];
+        for (const card of cards) {
 
             // Get image from card
             const imgs = { front: card.image_uris.border_crop };
@@ -148,7 +149,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
 
             // Don't make card if showCards logic says not to
             if ( !makeCard ) {
-                return null;
+                continue;
             }
 
             // Track images to be displayed
@@ -158,14 +159,16 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             const cardHeader = <div className="right floated content" > {numOwned} / 4 </div>;
 
             // Build card JSX
-            return (
+            returnCards.push(
                 <CardListImage
                     card={card} index={currentPictures.indexOf(imgs)} key={card.arenaId}
                     cardHeader={cardHeader} deckBuilder={deckBuilder}
                 />
             );
             
-        });
+        }
+        return returnCards;
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cardCollection, cards, showCards]);
 
@@ -188,7 +191,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         {/* JSX for matching cards */}
         <div className="cardList-cards" >
             <LazyLoad 
-                childWidth={deckBuilder ? 160 : 225} childHeight={deckBuilder ? 259.862 : 351.75} gap={20} scrollingParent={scrollingParent} 
+                childWidth={deckBuilder ? 160 : 225} childHeight={deckBuilder ? 260 : 351.75} gap={20} scrollingParent={scrollingParent} 
                 viewWidthFn={viewWidthFn}
             >
                 {renderCards}

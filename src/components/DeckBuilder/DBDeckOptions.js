@@ -16,9 +16,11 @@ function DBDeckOptions() {
         selectfn={(item) => dispatch(selectDeckType(item))}
         ariaLabel="Select deck type"
     />
-    
+
     // Import/export from file/clipboard
 
+
+    // Reset deck
 
 
     return (

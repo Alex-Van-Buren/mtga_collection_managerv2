@@ -20,26 +20,17 @@ function CardListImage({
     // Get redux dispatcher
     const dispatch = useDispatch();
 
-    // Get image from redux
-    const imgs = useSelector(state => {
-
-        // Return the image only when initialized
-        return (state.displayOptions.imageList)?
-            state.displayOptions.imageList[index] : null;
-    });
+    // Get image from redux if initialized
+    const imgs = useSelector( ({displayOptions}) => displayOptions ? displayOptions.imageList[index] : null );
 
     // Track image side to be shown (front=true)
     const [imgSide, setImgSide] = useState(true);
 
-    let fullText = `${name}\n${type_line}\n${oracle_text}`;
+    // Hover text to display when card is in the set view
+    let fullText = !deckBuilder ? `${name}\n${type_line}\n${oracle_text}` : null;
 
     // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    // Initialize image as null
-    let cardImages = null;
-
-
-    if (imgs)
-        cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
+    let cardImages = imgs ? <CardSide src={imgs.front} name={name} title={fullText} /> : null;
     let flipButton = null; // Regular cards don't have a flip button
 
     // Refs
@@ -66,9 +57,9 @@ function CardListImage({
     }
 
     // Decide whether to show the flip button
-    if (backside && imgs && backside.image_uris) {
+    if (imgs && backside && backside.image_uris) {
 
-        const backsideText = `${name}\n${type_line}\n${backside.oracle_text}`;
+        const backsideText = !deckBuilder ? `${name}\n${type_line}\n${backside.oracle_text}` : null;
 
         flipButton = (
             <button
@@ -97,10 +88,10 @@ function CardListImage({
             <CardSide src={imgs.back}  name={name} title={backsideText} className="backside"/>
         </>;
     } 
-    // Adventure cards fall in this category ("backside", but not flipable)
+    // Otherwise check if there is a "backside", but not flipable (Adventure cards fall in this category)
     else if (backside && imgs) {
         // Add backside text
-        fullText += ` // ${backside.oracle_text}`;
+        fullText = !deckBuilder ? `${fullText} // ${backside.oracle_text}` : null;
 
         // Redeclare cardImages because fullText has changed
         cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
@@ -154,7 +145,7 @@ function CardListImage({
 }
 
 // Helper Component - single spot to make changes cascade to all card images
-function CardSide({ src, name, title, className='' }) {
+function CardSide({ src, name, title=null, className=null }) {
     return (
         <img src={src} alt={name} aria-label={name} title={title} className={className} draggable='true' />
     );
