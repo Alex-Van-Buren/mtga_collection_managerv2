@@ -108,7 +108,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         };
 
         // Need to get images as well as name and arenaId
-        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set'];
+        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set', 'legalities'];
 
         return findCards(searchOptions, returnOptions);
         
