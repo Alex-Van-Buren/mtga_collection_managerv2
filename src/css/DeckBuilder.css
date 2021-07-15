@@ -36,7 +36,6 @@
 
 .deckBuilder_circles {
     display: flex;
-    flex-direction: row-reverse;
     font-size: 1.2rem;
     justify-content: space-around;
     padding: 0 10%;
