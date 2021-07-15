@@ -230,9 +230,9 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
 
     return (<>
         {/* Counter for number of cards being displayed */}
-        <p id="displayingNumberCards">
+        {!deckBuilder ? <p id="displayingNumberCards">
             Displaying <span className="numCardsShown">{cardCount}</span> card(s):
-        </p>
+        </p> : null}
 
         {/* JSX for matching cards */}
         <div className="cardList-cards" >
