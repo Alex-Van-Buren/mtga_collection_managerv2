@@ -9,7 +9,7 @@ import '../../css/SearchBar.css';
  * Updates redux state with searchTerm from search bar input
  * @returns Search bar JSX
  */
-function SearchBar() {
+function SearchBar({advanced=true}) {
     
     // Track current search term for controlled input
     const [term, setTerm] = useState("");
@@ -64,12 +64,16 @@ function SearchBar() {
                 // Controlled input
                 value={term} onChange={ (e) => setTerm(e.target.value) }
             />
-            <button className="clearSearchBar" onClick={() => setTerm("")}><i className="close icon"/></button>
-            <CustomDropdown 
-                items={Object.keys(searchTypes)} key={`SearchType ${initialSearchType}`} ariaLabel="Select Search Type"
-                firstSelection={getKeyByValue(searchTypes, initialSearchType)} 
-                selectfn={searchTypeSelect}
-            />
+            <button className={advanced ? "clearSearchBar" : "clearSearchBarSimple"} onClick={() => setTerm("")}><i className="close icon"/></button>
+            
+            { // Determine whether to show advanced search
+                advanced ? 
+                <CustomDropdown 
+                    items={Object.keys(searchTypes)} key={`SearchType ${initialSearchType}`} ariaLabel="Select Search Type"
+                    firstSelection={getKeyByValue(searchTypes, initialSearchType)} 
+                    selectfn={searchTypeSelect}
+                /> : null
+            }
         </div>
     );
 }

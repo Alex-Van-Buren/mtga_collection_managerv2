@@ -9,20 +9,25 @@
     width: 100%;
 }
 
-.clearSearchBar {
-    position: absolute;
-    top: 35%;
+.clearSearchBar, .clearSearchBarSimple {
     border-radius: 50%;
     border: none;
-    width: 2em;
+    display: flex;
     height: 2em;
+    position: absolute;
+    top: 35%;
+    width: 2em;
 }
 
 .clearSearchBar {
     right: calc(7em + 15px );
 }
 
-.clearSearchBar:hover {
+.clearSearchBarSimple {
+    right: 10px;
+}
+
+.clearSearchBar:hover, .clearSearchBarSimple:hover {
     cursor: pointer;
     filter: brightness(0.8);
 }
@@ -32,6 +37,11 @@ div.search {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.search > button > i.close.icon {
+    margin: auto;
+    width: 1em;
 }
 
 .search .dropdown-selected {

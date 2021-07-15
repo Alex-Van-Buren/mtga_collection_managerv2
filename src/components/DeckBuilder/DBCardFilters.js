@@ -14,7 +14,7 @@ import '../../css/DBCardFilters.css';
 function DBCardFilters() {
     return (
         <div className="DBCardFilters">
-            <SearchBar />
+            <SearchBar advanced={false}/>
             <RarityButtons header="Select Rarity/Rarities to Show: "/>
             <ColorCheckboxes header="Select Color/Colors to Show:" />
             <div className="advancedAndReset">
