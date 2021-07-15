@@ -1,11 +1,13 @@
 #DBDeck {
     border-top: 2px solid var(--clr-txt);
+    display: flex;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
+    gap: 2px;
     min-height: 15%;
     overflow: scroll;
-    display: flex;
+    justify-content: center;
 }
 
 .DBDeckColumn {
@@ -14,9 +16,11 @@
 }
 
 .DBDeckCard {
-    height: 50px;
+    /* Stacked cards will be this height */
+    height: 25px;
 }
 
 .DBDeckCard > img {
-    height: 227px;
+    /* Only top card will be this height */
+    height: 225px;
 }

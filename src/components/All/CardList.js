@@ -224,9 +224,21 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderCards] );
     
-    // View width = inner width of (window/parent element) - scrollbar width - card list margin
-    // Transformation to be applied to viewWidth once we know what element the view is (window or something else)
-    const viewWidthFn = viewWidth => viewWidth - 17 - 2*20;
+    // Declare card dimensions for lazy loading
+    let width, height, gap, buffer, viewWidthFn;
+    if (deckBuilder) {
+        width = 160;
+        height = 257.5;
+        gap = 10;
+        buffer = 30;
+        viewWidthFn = viewWidth => viewWidth - 10;
+    } else {
+        width = 225;
+        height = 351.75;
+        gap = 20;
+        buffer = 20;
+        viewWidthFn = viewWidth => viewWidth - 17;
+    }
 
     return (<>
         {/* Counter for number of cards being displayed */}
@@ -237,8 +249,8 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         {/* JSX for matching cards */}
         <div className="cardList-cards" >
             <LazyLoad 
-                childWidth={deckBuilder ? 160 : 225} childHeight={deckBuilder ? 260 : 351.75} gap={20} scrollingParent={scrollingParent} 
-                viewWidthFn={viewWidthFn} buffer={25}
+                childWidth={width} childHeight={height} gap={gap} buffer={buffer}
+                scrollingParent={scrollingParent} viewWidthFn={viewWidthFn}
             >
                 {renderCards}
             </LazyLoad>

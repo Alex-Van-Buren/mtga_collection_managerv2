@@ -8,7 +8,7 @@
 .mainContent {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: auto;
 }
 
 .dbCardList {
@@ -28,8 +28,9 @@
 }
 
 .dbCardList .bouncy.column {
+    height: 257.5px;
+    min-height: 257.5px;
     width: 160px;
-    min-height: 250px;
 }
 
 .deckBuilder_circles {
