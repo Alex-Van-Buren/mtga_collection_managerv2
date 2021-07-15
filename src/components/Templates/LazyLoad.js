@@ -76,7 +76,7 @@ function LazyLoad({
             const numChildrenWeNeedToShow = Math.ceil((scrollY + viewHeight) / childHeight) * childrenPerRow;
 
             // Increment number of children to show if user scrolls down
-            if (numChildrenWeNeedToShow > numChildrenShown) {
+            if (numChildrenWeNeedToShow + buffer > numChildrenShown) {
                 setNumChildrenShown(numChildrenWeNeedToShow + buffer);
             }
         }
