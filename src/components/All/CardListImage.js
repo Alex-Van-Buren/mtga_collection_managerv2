@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCardModalContent, showCardModal } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import { addCardToDeck } from '../../actions';
+import isCardAddible from '../../hooks/isCardAddible';
 import '../../css/CardListImage.css';
 
 /**
@@ -22,6 +23,10 @@ function CardListImage({
 
     // Get image from redux if initialized
     const imgs = useSelector( ({displayOptions}) => displayOptions ? displayOptions.imageList[index] : null );
+    
+    // Get deckList and deckType for use in deckbuilder
+    const deckObj = useSelector((state) => state.deckBuilder.deckMap);
+    const deckType = useSelector((state) => state.deckBuilder.deckType);
 
     // Track image side to be shown (front=true)
     const [imgSide, setImgSide] = useState(true);
@@ -100,7 +105,6 @@ function CardListImage({
     const onClick = () => {
         if (!deckBuilder) {
             return (() => {
-
                 // Get the index of the image on click
                 dispatch( setCardModalContent({ index, imgSide }) );
 
@@ -110,11 +114,14 @@ function CardListImage({
         } else { // deckBuilder === true
             return (() => {
 
-                // Provide information about clicked card to deck via redux
-                dispatch( addCardToDeck({ 
-                    name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
-                    collector_number: card.collector_number
-                }) );
+                if (isCardAddible(card, deckObj, deckType)) {
+
+                    // Provide information about clicked card to deck via redux
+                    dispatch( addCardToDeck({ 
+                        name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
+                        collector_number: card.collector_number
+                    }) );
+                }
             })();
         }
     }
