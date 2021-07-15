@@ -239,13 +239,13 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         width = 160;
         height = 257.5;
         gap = 10;
-        buffer = 30;
+        buffer = 4;
         viewWidthFn = viewWidth => viewWidth - 10;
     } else {
         width = 225;
         height = 351.75;
         gap = 20;
-        buffer = 20;
+        buffer = 3;
         viewWidthFn = viewWidth => viewWidth - 17;
     }
 

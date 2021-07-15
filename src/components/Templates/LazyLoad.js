@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
  * @prop {number} childHeight Height of child elements, including margin/padding.
  * @prop {number} childWidth Width of child elements, including margin/padding.
  * @prop {number} [gap=0] (Optional) Gap between child elements (in a flexbox).
- * @prop {number} [buffer=12] Number of children to load beyond current view.
+ * @prop {number} [buffer=2] Number of rows of cards to load beyond the current screen.
  * @prop {string} [scrollingParent=null] (Optional) Specify this string if the element that scrolls is not the window.
  * Input to document.querySelector() that selects the scrolling parent of LazyLoad.
  * @prop {function} [viewWidthFn=null] (Optional) A transformation to apply to the calculation of the view width. View width
@@ -17,12 +17,9 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
  * @returns React.Component that should be wrapped around children that will be lazily loaded.
  */
 function LazyLoad({ 
-    children, childHeight, childWidth, gap=0, buffer=12, 
+    children, childHeight, childWidth, gap=0, buffer=2, 
     scrollingParent=null, viewWidthFn=null, viewHeightFn=null
 }) {
-    
-    // Track number of children currently shown
-    const [numChildrenShown, setNumChildrenShown] = useState(buffer);
 
     // Get parent element
     let parent = window;
@@ -58,6 +55,9 @@ function LazyLoad({
         return Math.floor( (viewWidth + gap) / (childWidth + gap) );
     }, [viewWidth, childWidth, gap]);
 
+    // Track number of children currently shown
+    const [numChildrenShown, setNumChildrenShown] = useState(buffer*childrenPerRow);
+
     // Calculate container height to set so scrollbar is about the right size
     const height =  Math.ceil(children.length/childrenPerRow) * childHeight;
 
@@ -76,8 +76,8 @@ function LazyLoad({
             const numChildrenWeNeedToShow = Math.ceil((scrollY + viewHeight) / childHeight) * childrenPerRow;
 
             // Increment number of children to show if user scrolls down
-            if (numChildrenWeNeedToShow + buffer > numChildrenShown) {
-                setNumChildrenShown(numChildrenWeNeedToShow + buffer);
+            if (numChildrenWeNeedToShow + buffer*childrenPerRow > numChildrenShown) {
+                setNumChildrenShown(numChildrenWeNeedToShow + buffer*childrenPerRow);
             }
         }
 
