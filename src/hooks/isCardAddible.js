@@ -1,7 +1,7 @@
 /**
  * A function that checks if a card is able to be added to a deck.
  * Checks if there are max copies of a card already in the decklist as well as if the card is legal in the desired deckType.
- * @param {object} card The card Object attempting to be added. Should contain at least name, and legalities.
+ * @param {object} card The card Object attempting to be added. Should contain at least name, type_line, and  legalities.
  * @param {Object} deckObj The decklist object of cards currently in the deck.
  * @param {string} deckType String of deck type being created. e.g. "standard", "historic"
  * @returns {boolean} True if card can be added. False if it cannot be added
@@ -18,6 +18,8 @@ export default function isCardAddible(card, deckObj, deckType) {
     }
 
     // Count the number of copies of the card already in deck
+
+    // TODO: Make sure to count copies in the sideboard when that is made
     let copiesInDeck = 0; // Initialize
     
     // Check if the deck has any copies of the card
@@ -59,6 +61,12 @@ export default function isCardAddible(card, deckObj, deckType) {
         default:
             break;
     }
+
+    // Decks can have any number of basic lands
+    if (card.type_line.includes('Basic') && card.type_line.includes('Land')) {
+        maxCopies = 250;
+    }
+
     // If number of copies currently in deck < max copies allowed --> return true, Otherwise false
     if (copiesInDeck < maxCopies) {
         return true;
