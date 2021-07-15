@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { setInfo , historicSets } from '../../data/setInfo';
 import DarkModeToggle from './DarkModeToggle';
@@ -16,6 +16,10 @@ import '../../css/Header.css';
  */
 function Header() {
 
+    // Get current path (route)
+    const { pathname } = useLocation();
+
+    // State for compact menu
     const [hamburgerClicked, setHamburgerClicked] = useState(false);
 
     // Icon is an x when hamburger expanded, and 3 bars when collapsed
@@ -79,8 +83,8 @@ function Header() {
                 <i className={`hamburger icon ${hamburgerClass}`} />
             </div>
 
-            {/* Player Inventory */}
-            <PlayerInventory />
+            {/* Player Inventory - Only shown on home and set routes */}
+            { pathname === "/" || pathname.includes("/set/") ? <PlayerInventory /> : null }
         </div>
     </>);
 }
