@@ -31,3 +31,15 @@
     width: 160px;
     min-height: 250px;
 }
+
+.deckBuilder_circles {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 1.2rem;
+    justify-content: space-around;
+    padding: 0 10%;
+}
+
+.deckBuilder_circles .inDeck {
+    color: goldenrod;
+}

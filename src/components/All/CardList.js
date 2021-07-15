@@ -29,6 +29,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const boosterVal     = useSelector(state => state.displayOptions.booster);
     const cmc            = useSelector(state => state.displayOptions.cmc);
     const reduxSets      = useSelector(state => state.displayOptions.set);
+    const deckMap        = useSelector(state => state.deckBuilder.deckMap);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -156,7 +157,52 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             currentPictures.push(imgs);
 
             // Build card header
-            const cardHeader = <div className="right floated content" > {numOwned} / 4 </div>;
+            let cardHeader;
+
+            // Normally cardHeader is just the number of cards owned out of a max of 4
+            if (!deckBuilder) {
+                
+                cardHeader = <div className="right floated content" > {numOwned} / 4 </div>;
+            }
+            
+            // In the deck builder, the card header indicates how many are owned as well as how many copies are in the deck
+            else {
+                // <i className="circle icon"/>
+
+                // Circles are filled if owned and colored if added to deck
+                const circles = (() => {
+                    let temp = [];
+
+                    // Circles are declared left to right, but, if owned, filled right to left
+                    for (let i=0; i<4; i++) {
+
+                        // Initially assume circle is filled (owned copy of card)
+                        let circleClass = 'icon circle';
+
+                        // Check if circle should be an outline (not owned copy of card)
+                        if (i >= numOwned) {
+                            circleClass += ' outline';
+                        }
+
+                        // Get number of copies in deck
+                        const copiesInDeck = deckMap[card.name] ? deckMap[card.name][card.arenaId] : undefined;
+
+                        // Color circles for number of cards in deck
+                        if (copiesInDeck && i < copiesInDeck) {
+                            circleClass += ' inDeck';
+                        }
+
+                        // Add circle to temp array
+                        temp.push(<i className={circleClass} />)
+                    }
+                    return temp;
+                })();
+
+
+                cardHeader = <div className="deckBuilder_circles">
+                    {circles}
+                </div>;
+            }
 
             // Build card JSX
             returnCards.push(
@@ -170,7 +216,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         return returnCards;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardCollection, cards, showCards]);
+    }, [cardCollection, cards, showCards, deckBuilder,deckMap]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
     useEffect( () => {
@@ -192,7 +238,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         <div className="cardList-cards" >
             <LazyLoad 
                 childWidth={deckBuilder ? 160 : 225} childHeight={deckBuilder ? 260 : 351.75} gap={20} scrollingParent={scrollingParent} 
-                viewWidthFn={viewWidthFn}
+                viewWidthFn={viewWidthFn} buffer={25}
             >
                 {renderCards}
             </LazyLoad>
