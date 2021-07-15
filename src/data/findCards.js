@@ -11,7 +11,7 @@ import allArenaCards from './arenaCards20210707162010.json';
 function findCards(searchOptions, returnOptions) {
 
     // Destructure search options
-    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc } = searchOptions;
+    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType } = searchOptions;
 
     /**
      * An array of ananymous functions to be called on each card
@@ -69,6 +69,11 @@ function findCards(searchOptions, returnOptions) {
     // Filter cmc if needed
     if ( cmc.min !== undefined || cmc.max !== undefined) {
         filterFunctions.push( (card) => filterCMC(card.cmc, cmc.min, cmc.max) );
+    }
+
+    // Filter Card legality if needed
+    if ( deckType ) {
+        filterFunctions.push( (card) => filterLegality( deckType, card.legalities))
     }
 
 /* Call each chosen filter function on each card */
@@ -367,6 +372,20 @@ function filterCMC(cardCMC, min = 0, max = Number.MAX_SAFE_INTEGER) {
 
     // Check if the card's cmc is between the min and max
     if (cardCMC >= min && cardCMC <= max) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Checks if a card is legal in the format given
+ * @param {string} deckType The desired decktype format to check.
+ * @param {object} cardLegalities The legalities object of the card to check
+ * @returns {boolean} Returns true if the card should be kept. False if not
+ */
+function filterLegality(deckType, cardLegalities) {
+    // Check the card legality of the given decktype
+    if ( cardLegalities[deckType] === 'legal'){
         return true;
     }
     return false;

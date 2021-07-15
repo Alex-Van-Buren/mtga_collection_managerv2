@@ -30,6 +30,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const cmc            = useSelector(state => state.displayOptions.cmc);
     const reduxSets      = useSelector(state => state.displayOptions.set);
     const deckMap        = useSelector(state => state.deckBuilder.deckMap);
+    const reduxdeckType  = useSelector(state => state.deckBuilder.deckType);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -101,11 +102,19 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         if (searchcmc.max === 'Any') {
             searchcmc.max = undefined;
         }
+
+        // Set the decktype for searchOptions
+        let deckType = reduxdeckType;
+        // Ignore decktype when not in deckbuilder --> set to undefined
+        // Also if the redux value for deckType is limited or custom --> set to undefined because those modes have no specific legalities
+        if (!deckBuilder || reduxdeckType === 'limited' || reduxdeckType === 'custom') {
+            deckType = undefined;
+        }
         
         // Put all search options into a single object for findCards function
         const searchOptions = {
             set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, 
-            advancedSearchType: searchType, cmc: searchcmc
+            advancedSearchType: searchType, cmc: searchcmc, deckType: deckType
         };
 
         // Need to get images as well as name and arenaId
@@ -113,7 +122,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc]);
+    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc, deckBuilder, reduxdeckType]);
 
     // Track currently shown pictures
     let currentPictures = [];
