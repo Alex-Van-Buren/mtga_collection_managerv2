@@ -30,8 +30,12 @@ p#displayingNumberCards {
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
-    gap: 0px 10px;
+    gap: 0px 20px;
     margin: 0;
+}
+
+#DeckBuilder .cardList-cards .lazyLoad {
+    gap: 0px 10px;
 }
 
 .cardList-cards .bouncy.column {
