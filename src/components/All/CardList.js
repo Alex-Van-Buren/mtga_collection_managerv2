@@ -202,7 +202,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
                         }
 
                         // Add circle to temp array
-                        temp.push(<i className={circleClass} />)
+                        temp.push(<i className={circleClass} key={`cir${i}_${card.arenaId}`}/>)
                     }
                     return temp;
                 })();
@@ -225,7 +225,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         return returnCards;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardCollection, cards, showCards, deckBuilder,deckMap]);
+    }, [cardCollection, cards, showCards, deckBuilder, deckMap]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
     useEffect( () => {
