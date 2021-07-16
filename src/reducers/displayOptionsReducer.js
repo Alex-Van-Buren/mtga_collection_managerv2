@@ -32,7 +32,9 @@ const INITIAL_STATE = {
 
     cardCount: 0,
 
-    activeTab: "Card Filters"
+    activeTab: "Card Filters",
+
+    resetCount: 0
 };
 
 export default function displayOptionsReducer(state = INITIAL_STATE, action) {
@@ -106,7 +108,8 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
 
         // Reset button
         case RESET: {
-
+            let currentCount = state.resetCount;
+            currentCount++;
             return (
                 {
                     ...state, colors: {
@@ -124,7 +127,8 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
                 cmc: {min: "Any", max: "Any"},
                 searchTerm: "",
                 searchType: null,
-                set: []
+                set: [],
+                resetCount: currentCount
             });
         }
 

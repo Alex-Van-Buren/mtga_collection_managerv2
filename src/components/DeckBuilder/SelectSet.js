@@ -14,7 +14,9 @@ function SelectSet() {
     const dispatch = useDispatch();
     
     // Get current state of sets selected from Redux
-    const reduxSets = useSelector(state => state.displayOptions.set);   
+    const reduxSets = useSelector(state => state.displayOptions.set);
+    // Use Reset count as a key to rerender component when the reset button is hit
+    const key = useSelector(state => state.displayOptions.resetCount);   
 
     // Create the options for the multiSelect menu
     // Each option is an object with text and val properties
@@ -34,7 +36,7 @@ function SelectSet() {
                 useValForSelected noneSelectedText="All Sets"
                 selectedFn={(sets) => dispatch(selectSet(sets))}
                 initialSelected = {reduxSets}
-                key={reduxSets}
+                key={key}
             />
         </div>
     )
