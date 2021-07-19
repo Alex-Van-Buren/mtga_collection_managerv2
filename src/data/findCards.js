@@ -1,4 +1,4 @@
-import allArenaCards from './arenaCards20210719150707.json';
+import allArenaCards from './arenaCards20210719155815.json';
 
 /**
  * 
