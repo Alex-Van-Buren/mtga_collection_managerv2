@@ -15,17 +15,15 @@
 .dbCardList {
     height: 50%;
     overflow-y: scroll;
-    resize: vertical;
 }
 
 .slider {
+    margin: 1px 0;
     height: 10px;
-    background-color: red;
+    border-top: 2px solid var(--clr-txt);
+    border-bottom: 2px solid var(--clr-txt);
+    background-color:dimgrey;
     cursor: row-resize;    
-}
-
-.buffer {
-    height: 5px;
 }
 
 .dbCardList .bouncy.column {

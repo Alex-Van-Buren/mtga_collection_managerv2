@@ -13,6 +13,11 @@ function DeckBuilder() {
         // Get the current Y position of mouse
         let mouseHeight = e.clientY;
 
+        // Change overflow-Y from scroll to hidden so it can't randomly scroll
+        // Also Add a margin right equal to the size of the scrollbar so elements don't jump
+        cardListRef.current.style.overflowY = "hidden"
+        cardListRef.current.style.marginRight = "10px"
+        
         // Add event listener for mouse movement
         document.onmousemove = function onMouseMove(e) {
             // Re-Calculate size of cardList
@@ -24,6 +29,10 @@ function DeckBuilder() {
         // Remove event listener for mousemove when you let go of click. Also remove this event
         document.onmouseup = () => {
             document.onmousemove = document.onmouseup = null
+
+            // Reset scrolling behavior and margin
+            cardListRef.current.style.overflowY = "scroll"
+            cardListRef.current.style.marginRight = "0"
         }
     }
     return (
@@ -34,7 +43,6 @@ function DeckBuilder() {
                 <div className="dbCardList" ref={cardListRef}>
                     <CardList scrollingParent={".dbCardList"} deckBuilder />
                 </div>
-                <div className="buffer"></div>
                 <div className="slider" onMouseDown={(e)=>MoveSlider(e)}></div>
                 <DBDeck />
             </div>
