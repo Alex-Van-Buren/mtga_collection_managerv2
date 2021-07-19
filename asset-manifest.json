@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/mtga_collection_managerv2/static/css/main.ce565817.chunk.css",
-    "main.js": "/mtga_collection_managerv2/static/js/main.99128dae.chunk.js",
-    "main.js.map": "/mtga_collection_managerv2/static/js/main.99128dae.chunk.js.map",
+    "main.js": "/mtga_collection_managerv2/static/js/main.8131cb87.chunk.js",
+    "main.js.map": "/mtga_collection_managerv2/static/js/main.8131cb87.chunk.js.map",
     "runtime-main.js": "/mtga_collection_managerv2/static/js/runtime-main.c8751c22.js",
     "runtime-main.js.map": "/mtga_collection_managerv2/static/js/runtime-main.c8751c22.js.map",
     "static/js/2.1d06d669.chunk.js": "/mtga_collection_managerv2/static/js/2.1d06d669.chunk.js",
@@ -23,6 +23,7 @@
     "static/media/Wildcard_mythic.5af311f7.png": "/mtga_collection_managerv2/static/media/Wildcard_mythic.5af311f7.png",
     "static/media/Wildcard_rare.cf3d1706.png": "/mtga_collection_managerv2/static/media/Wildcard_rare.cf3d1706.png",
     "static/media/Wildcard_uncommon.dd66a064.png": "/mtga_collection_managerv2/static/media/Wildcard_uncommon.dd66a064.png",
+    "static/media/afr_logo.d4931f84.png": "/mtga_collection_managerv2/static/media/afr_logo.d4931f84.png",
     "static/media/akr_logo.6e38fabb.png": "/mtga_collection_managerv2/static/media/akr_logo.6e38fabb.png",
     "static/media/detailedLogs.bc69eedb.png": "/mtga_collection_managerv2/static/media/detailedLogs.bc69eedb.png",
     "static/media/dom_logo.2379f2a0.png": "/mtga_collection_managerv2/static/media/dom_logo.2379f2a0.png",
@@ -49,6 +50,6 @@
     "static/js/runtime-main.c8751c22.js",
     "static/js/2.1d06d669.chunk.js",
     "static/css/main.ce565817.chunk.css",
-    "static/js/main.99128dae.chunk.js"
+    "static/js/main.8131cb87.chunk.js"
   ]
 }
