@@ -16,6 +16,7 @@ import dom_logo from '../images/setLogos/dom_logo.png';
 import rix_logo from '../images/setLogos/rix_logo.png';
 import xln_logo from '../images/setLogos/xln_logo.png';
 import jmp_logo from '../images/setLogos/jmp_logo.png';
+import afr_logo from '../images/setLogos/afr_logo.png';
 
 
 /**
@@ -31,6 +32,12 @@ export const standardSets = ["stx", "khm", "znr", "m21", "iko", "thb", "eld"];
  * Most recent sets at the top
  */
 export const setInfo = {
+    afr: {
+        name: "Adventures in the Forgotton Realms",
+        mythic_upgrade: (1/7),
+        collationId: 100024,
+        logo: afr_logo
+    },
     stx: {
         name: "Strixhaven: School of Mages",
         mythic_upgrade: (1/8),
