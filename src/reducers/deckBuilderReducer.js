@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     // Array of card columns, each corresponds to cmc value 0-7, >7 mapped to 7
     deck: [ [], [], [], [], [], [], [], [] ],
     // Contains card names, ids, and number of copies
-    deckMap: {}, // key: card.name, value: { key: card.arendId, value: number in deck }
+    deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
     deckType: "standard"
 };
 
@@ -35,11 +35,11 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
                 // Increment count if specific arenaId declared under card name
                 if (newDeckMap[card.name][card.arenaId]) {
-                    newDeckMap[card.name][card.arenaId]++;
+                    newDeckMap[card.name][card.arenaId].copies++;
                 }
                 // Else initialize arenaId for card name
                 else {
-                    newDeckMap[card.name][card.arenaId] = 1;
+                    newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
                 }
 
             /* End adding to deckMap */
@@ -64,10 +64,10 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             /* Remove card from deckMap */
 
                 // Decrement card count
-                newDeckMap[card.name][card.arenaId]--;
+                newDeckMap[card.name][card.arenaId].copies--;
 
                 // Check if arenaId needs to be removed
-                if (newDeckMap[card.name][card.arenaId] <= 0) {
+                if (newDeckMap[card.name][card.arenaId].copies <= 0) {
                     delete newDeckMap[card.name][card.arenaId];
                 }
 

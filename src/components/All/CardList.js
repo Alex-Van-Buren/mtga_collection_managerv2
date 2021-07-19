@@ -194,7 +194,8 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
                         }
 
                         // Get number of copies in deck
-                        const copiesInDeck = deckMap[card.name] ? deckMap[card.name][card.arenaId] : undefined;
+                        const copiesInDeck = deckMap[card.name] && deckMap[card.name][card.arenaId] ? 
+                            deckMap[card.name][card.arenaId].copies : 0;
 
                         // Color circles for number of cards in deck
                         if (copiesInDeck && i < copiesInDeck) {

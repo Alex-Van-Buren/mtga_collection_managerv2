@@ -27,7 +27,7 @@ export default function isCardAddible(card, deckObj, deckType) {
 
         // Add up all versions of the card with the same name 
         for (const arenaId in deckObj[card.name]) {
-            copiesInDeck += deckObj[card.name][arenaId];
+            copiesInDeck += deckObj[card.name][arenaId].copies;
         }
     }
 
