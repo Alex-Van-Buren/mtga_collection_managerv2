@@ -22,7 +22,7 @@ import afr_logo from '../images/setLogos/afr_logo.png';
 /**
  * The set codes of the current standard sets
  */
-export const standardSets = ["stx", "khm", "znr", "m21", "iko", "thb", "eld"];
+export const standardSets = ["afr", "stx", "khm", "znr", "m21", "iko", "thb", "eld"];
 
 /**
  * setInfo contains keys of the set ids which contain objects with:
