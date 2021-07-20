@@ -1,5 +1,5 @@
 import allArenaCards from './arenaCards20210719155815.json';
-
+//  const allArenaCards = require('./arenaCards20210719155815.json')
 /**
  * 
  * @param {*} searchOptions Object of options to filter the cards on Arena. Define as an object eg{set:'setId', name:'cardName', color: ['W', 'G'] 
@@ -55,10 +55,8 @@ function findCards(searchOptions, returnOptions) {
         filterFunctions.push( (card) => filterRarity(card.rarity, rarity) );
     }
 
-    // Filter Out Basic Lands
-    if (excludeBasicLands) {
-        filterFunctions.push( (card) => filterBasicLands(card.type_line) );
-    }
+    // Filter Out Basic Lands OR only show basic lands
+    filterFunctions.push( (card) => filterBasicLands(card.type_line, excludeBasicLands) );
 
     // Filter booster if needed
     if (booster !== undefined) {
@@ -66,8 +64,10 @@ function findCards(searchOptions, returnOptions) {
     }
 
     // Filter cmc if needed
-    if ( cmc.min !== undefined || cmc.max !== undefined) {
-        filterFunctions.push( (card) => filterCMC(card.cmc, cmc.min, cmc.max) );
+    if (cmc) {
+        if ( cmc.min !== undefined || cmc.max !== undefined) {
+            filterFunctions.push( (card) => filterCMC(card.cmc, cmc.min, cmc.max) );
+        }
     }
 
     // Filter Card legality if needed
@@ -123,18 +123,30 @@ function findCards(searchOptions, returnOptions) {
 }
 
 /**
- * Filter out Basic Lands.
+ * We either wnat to filter out basic lands from our search or only show basic lands
+ * Filters out Basic Lands if excludeBasicLands is true.
+ * If excludeBasicLands is false. Will filter out anything that is NOT a basic land.
  * @param {String} cardTypeLine The type line of the card to check
- * @returns True if the card is not a basic land, false if it is.
+ * @param {boolean} excludeBasicLands True to filter out basic lands, false to filter out cards that are NOT basic lands
+ * @returns Returns true if the card should be included in findCards array, false if it shouldn't
  */
-function filterBasicLands(cardTypeLine) {
+function filterBasicLands(cardTypeLine, excludeBasicLands) {
 
-    // Skip basic lands
+    if ( excludeBasicLands ) {
+        // Skip basic lands
+        if ( cardTypeLine.includes('Basic') && cardTypeLine.includes('Land') ){
+            return false;
+        }
+        
+        return true;
+    }
+    // excludeBasicLands === false
+    // The same code as above but the return boolean is flipped
     if ( cardTypeLine.includes('Basic') && cardTypeLine.includes('Land') ){
-        return false;
+        return true;
     }
     
-    return true;
+    return false;
 }
 
 /**
