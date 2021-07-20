@@ -1,5 +1,5 @@
 .DBCardFilters {
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
 }
 
 .DBCardFilters .reset-button {
@@ -8,5 +8,4 @@
 
 .DBCardFilters .advancedAndReset {
     display: flex;
-    
 }

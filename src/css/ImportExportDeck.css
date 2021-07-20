@@ -1,0 +1,51 @@
+.importExportButton {
+    margin: 1rem 0.7rem;
+    cursor: pointer;
+}
+
+.importExportModal {
+    background-color: rgb(70, 70, 70);
+    border-radius: 10px;
+    color: var(--clr-txt);
+    padding: 2rem;
+    height: 80vh;
+    width: 60vw;
+}
+
+#saveDeck {
+    display: flex;
+    flex-direction: column;
+}
+
+#saveDeck h3 {
+    align-self: flex-start;
+}
+
+.fileOrClipboardButtons {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+
+.fileOrClipboardButtons button {
+    border-radius: 5px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 10rem;
+}
+
+.fileOrClipboardButtons button:hover {
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.deckPreview {
+    background-color: white;
+    color: black;
+    height: 50vh;
+    padding: 2rem;
+    overflow-y: auto;
+    text-align: left;
+    white-space: pre-wrap;
+}
