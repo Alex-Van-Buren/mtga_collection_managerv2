@@ -115,11 +115,10 @@ function CardListImage({
             return (() => {
 
                 if (isCardAddible(card, deckObj, deckType)) {
-
                     // Provide information about clicked card to deck via redux
                     dispatch( addCardToDeck({ 
                         name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
-                        collector_number: card.collector_number
+                        collector_number: card.collector_number, type_line: type_line
                     }) );
                 }
             })();

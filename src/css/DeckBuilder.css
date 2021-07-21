@@ -19,10 +19,8 @@
 
 .slider {
     margin: 1px 0;
-    height: 10px;
-    border-top: 2px solid var(--clr-txt);
-    border-bottom: 2px solid var(--clr-txt);
-    background-color:dimgrey;
+    border-top: 2px solid rgba(0,0,0,0.87);
+    border-bottom: 2px solid rgba(0,0,0,0.87);
     cursor: row-resize;    
 }
 
