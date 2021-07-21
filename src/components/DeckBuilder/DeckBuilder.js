@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DBSidebar from './DBSidebar';
+import DeckHeader from './DeckHeader';
 import DBDeck from './DBDeck';
 import CardList from '../All/CardList';
 import '../../css/DeckBuilder.css';
@@ -43,7 +44,9 @@ function DeckBuilder() {
                 <div className="dbCardList" ref={cardListRef}>
                     <CardList scrollingParent={".dbCardList"} deckBuilder />
                 </div>
-                <div className="slider" onMouseDown={(e)=>MoveSlider(e)}></div>
+                <div className="slider" onMouseDown={(e)=>MoveSlider(e)}>
+                    <DeckHeader />
+                </div>
                 <DBDeck />
             </div>
         </div>

@@ -1,0 +1,6 @@
+.deckHeader {
+    display: flex;
+    gap: 5px;
+    background-color: lightgray;
+    color: rgba(0,0,0,0.87);
+}

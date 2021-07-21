@@ -1,11 +1,12 @@
-import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SELECT_DECK_TYPE } from '../actions/types';
+import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS } from '../actions/types';
 
 const INITIAL_STATE = {
     // Array of card columns, each corresponds to cmc value 0-7, >7 mapped to 7
     deck: [ [], [], [], [], [], [], [], [] ],
     // Contains card names, ids, and number of copies
     deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
-    deckType: "standard"
+    deckType: "standard", 
+    addBasics: false
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {
@@ -84,6 +85,10 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         case SELECT_DECK_TYPE: {
             
             return { ...state, deckType: action.payload };
+        }
+        case TOGGLE_ADD_BASICS: {
+
+            return {...state, addBasics: !state.addBasics}
         }
         default:
             return state;
