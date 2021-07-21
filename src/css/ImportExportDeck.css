@@ -12,35 +12,34 @@
     width: 60vw;
 }
 
-#saveDeck {
+#importExportContent {
     display: flex;
     flex-direction: column;
 }
 
-#saveDeck h3 {
+#importExportContent h3 {
     align-self: flex-start;
 }
 
-.fileOrClipboardButtons {
+#fileOrClipboardButtons {
     display: flex;
     flex-direction: row;
     align-self: center;
 }
 
-.fileOrClipboardButtons button {
+#fileOrClipboardButtons button {
     border-radius: 5px;
     margin: 0.5rem;
     padding: 0.5rem;
-    width: 10rem;
+    width: 11rem;
 }
 
-.fileOrClipboardButtons button:hover {
+#fileOrClipboardButtons button:hover {
     cursor: pointer;
-
-    font-weight: bold;
+    opacity: 0.8;
 }
 
-.deckPreview {
+#deckPreview {
     background-color: white;
     color: black;
     height: 50vh;

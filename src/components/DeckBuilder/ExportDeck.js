@@ -1,12 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+/**
+ * The content in the export modal. Contains a preview of the exported deck, save to file button,
+ * and copy to clipboard button.
+ */
 function ExportDeck() {
 
     const deckMap = useSelector(state => state.deckBuilder.deckMap);
 
-    const [ saveClipboard, setSaveClipboard ] = useState("Copy to Clipboard");
-    const [ saveFile, setSaveFile ] = useState("Save to File");
+    const [saveClipboard, setSaveClipboard] = useState("Copy to Clipboard");
+    const [saveFile,      setSaveFile]      = useState("Save to File");
 
     /**
      * Iteratively build deck string output
@@ -27,7 +31,9 @@ function ExportDeck() {
         return deckOutput;
     }, [deckMap]);
 
-    // Save deck to clipboard
+    /**
+     * Copies deck to clipboard
+     */
     function toClipboard() {
         const deckString = toString;
 
@@ -36,12 +42,12 @@ function ExportDeck() {
 
             // Update button text
             setSaveClipboard("Copied!");
-
-            // Set timer to reset button text
-            setTimeout(() => setSaveClipboard("Copy to Clipboard"), 1000);
         });
     }
 
+    /**
+     * Saves deck to txt file
+     */
     async function toFile() {
 
         try {
@@ -66,28 +72,22 @@ function ExportDeck() {
     
             // Update button text
             setSaveFile("Saved!");
-    
-            // Set timer to reset button text
-            setTimeout(() => setSaveFile("Save to File"), 1000);
             
         } catch (error) {
 
             // Update button text
             setSaveFile("Did not Save");
-
-            // Set timer to reset button text
-            setTimeout(() => setSaveFile("Save to File"), 1500);
         }
     }
     
     return (
-        <div id="saveDeck">
+        <div id="importExportContent">
             <h1>Export Deck</h1>
 
             <h3>Preview:</h3>
-            <p className="deckPreview">{toString}</p>
+            <p id="deckPreview">{toString}</p>
 
-            <div className="fileOrClipboardButtons">
+            <div id="fileOrClipboardButtons">
 
                 <button onClick={toFile}>
                     {saveFile}
