@@ -1,8 +1,9 @@
 import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
-    SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST, 
+    SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST,
     SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
-    REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS
+    REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS,ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD,
+    CHANGE_COMMANDER, CHANGE_COMPANION
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -165,6 +166,34 @@ export function setDeck(cards) {
     return {
         type: SET_DECK,
         payload: cards
+    };
+}
+
+export function addCardToSideboard(card) {
+    return {
+        type: ADD_CARD_TO_SIDEBOARD,
+        payload: card
+    };
+}
+
+export function removeCardFromSideboard(card) {
+    return {
+        type: REMOVE_CARD_FROM_SIDEBOARD,
+        payload: card
+    };
+}
+
+export function changeCommander(card) {
+    return {
+        type: CHANGE_COMMANDER,
+        payload: card
+    };
+}
+
+export function changeCompanion(card) {
+    return {
+        type: CHANGE_COMPANION,
+        payload: card
     };
 }
 

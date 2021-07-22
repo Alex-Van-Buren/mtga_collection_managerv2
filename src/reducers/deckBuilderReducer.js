@@ -1,10 +1,16 @@
-import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS } from '../actions/types';
+import {
+    ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, 
+    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION
+} from '../actions/types';
 
 const INITIAL_STATE = {
     // Array of card columns, each corresponds to cmc value 0-7, >7 mapped to 7
     deck: [ [], [], [], [], [], [], [], [] ],
     // Contains card names, ids, and number of copies
     deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
+    sideboard: [],
+    commander: null,
+    companion: null,
     deckType: "standard", 
     addBasics: false
 };
@@ -120,6 +126,35 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             // Return updated state
             return { ...state, deck: newDeck, deckMap: newDeckMap };
+        }
+
+        case ADD_CARD_TO_SIDEBOARD: {
+
+            // Copy sideboard and add card
+            const newSideboard = [ ...state.sideboard, action.payload ];
+
+            // Update state
+            return { ...state, sideboard: newSideboard };
+        }
+
+        case REMOVE_CARD_FROM_SIDEBOARD: {
+
+            // Copy sideboard
+            let newSideboard = [ ...state.sideboard ];
+            
+            // Remove card
+            newSideboard.splice(newSideboard.indexOf(action.payload), 1);
+
+            // Update state
+            return { ...state, sideboard: newSideboard };
+        }
+
+        case CHANGE_COMMANDER: {
+            return { ...state, commander: action.payload };
+        }
+        
+        case CHANGE_COMPANION: {
+            return { ...state, companion: action.payload };
         }
 
         case SELECT_DECK_TYPE: {
