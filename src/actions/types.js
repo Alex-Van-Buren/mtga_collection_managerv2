@@ -22,5 +22,6 @@ export const SET_CMC_MIN = "SET_CMC_MIN";
 export const SET_CMC_MAX = "SET_CMC_MAX";
 export const ADD_CARD_TO_DECK = "ADD_CARD_TO_DECK";
 export const REMOVE_CARD_FROM_DECK = "REMOVE_CARD_FROM_DECK";
+export const SET_DECK = "SET_DECK";
 export const SELECT_DECK_TYPE = "SELECT_DECK_TYPE";
 export const TOGGLE_ADD_BASICS = "TOGGLE_ADD_BASICS";
