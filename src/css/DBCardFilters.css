@@ -9,3 +9,30 @@
 .DBCardFilters .advancedAndReset {
     display: flex;
 }
+
+.DBCardFilters .colorBox {
+    padding-bottom: 0;
+}
+
+.addBasics {
+    margin-left: 22.4px;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    border: 1px solid var(--clr-txt);
+    border-radius: 3px;
+    color: var(--clr-txt);
+}
+
+.addBasics:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.addBasics:not(.active){
+    background-color: transparent;
+}
+
+.addBasics:not(.active):hover, .addBasics.active {
+    background-color: #21ba45;
+    color: #FFF
+}

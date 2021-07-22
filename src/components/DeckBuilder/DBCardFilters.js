@@ -5,6 +5,7 @@ import ColorCheckboxes from '../SetDetails/ColorCheckboxes';
 import RarityButtons from '../SetDetails/RarityButtons';
 import AdvancedOptions from './AdvancedOptions';
 import Reset from '../SetDetails/Reset';
+import AddBasicsButton from './AddBasicsButton';
 import '../../css/DBCardFilters.css';
 
 /**
@@ -17,6 +18,7 @@ function DBCardFilters() {
             <SearchBar advanced={false}/>
             <RarityButtons header="Select Rarity/Rarities to Show: "/>
             <ColorCheckboxes header="Select Color/Colors to Show:" />
+            <AddBasicsButton />
             <div className="advancedAndReset">
                 <AdvancedOptions />
                 <Reset />

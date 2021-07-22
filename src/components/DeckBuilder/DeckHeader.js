@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import '../../css/DeckHeader.css';
-import AddBasicsButton from './AddBasicsButton';
 
 /**
  * Creates the header that separates the available cards to add to a deck and the deckList/sideboard. 
@@ -82,7 +81,6 @@ function DeckHeader() {
             <div className="landCount">Land: {landCount}{partialLandSpan}</div>
             <div className="creatureCount">Creatures: {creatureCount}</div>
             <div className="nonCreatureCount">Noncreatures: {nonCreatureCount}</div>
-            <AddBasicsButton />
         </div>
     )
 }

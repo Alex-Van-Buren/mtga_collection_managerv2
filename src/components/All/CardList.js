@@ -31,6 +31,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const reduxSets      = useSelector(state => state.displayOptions.set);
     const deckMap        = useSelector(state => state.deckBuilder.deckMap);
     const reduxdeckType  = useSelector(state => state.deckBuilder.deckType);
+    const addBasics      = useSelector(state => state.deckBuilder.addBasics);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -112,17 +113,22 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         }
         
         // Put all search options into a single object for findCards function
-        const searchOptions = {
+        let searchOptions = {
             set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, 
             advancedSearchType: searchType, cmc: searchcmc, deckType: deckType
         };
+
+        // if we are in the deckbuilder and addBasics is true want different searchOptions
+        if (deckBuilder && addBasics) {
+            searchOptions = { ...searchOptions, excludeBasicLands: false, cmc: undefined, rarity: undefined}
+        }
 
         // Need to get images as well as name and arenaId
         const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set', 'legalities'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc, deckBuilder, reduxdeckType]);
+    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc, deckBuilder, reduxdeckType, addBasics]);
 
     // Track currently shown pictures
     let currentPictures = [];
