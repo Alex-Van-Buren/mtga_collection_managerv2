@@ -1,6 +1,6 @@
 import { 
     SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, 
-    SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE
+    SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, SELECT_CARD_TYPES
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -33,6 +33,8 @@ const INITIAL_STATE = {
     cardCount: 0,
 
     activeTab: "Card Filters",
+
+    cardTypes: [],
 
     resetCount: 0
 };
@@ -128,6 +130,7 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
                 searchTerm: "",
                 searchType: null,
                 set: [],
+                cardTypes: [],
                 resetCount: currentCount
             });
         }
@@ -144,6 +147,10 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             cmc.max = action.payload;
 
             return {...state, cmc}
+        }
+
+        case SELECT_CARD_TYPES: {
+            return {...state, cardTypes: action.payload};
         }
 
         default:

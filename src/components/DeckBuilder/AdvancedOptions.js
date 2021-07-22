@@ -8,6 +8,7 @@ import NumberOwnedDropdown from '../SetDetails/NumberOwnedDropdown';
 import BoosterDropdown from '../SetDetails/BoosterDropdown';
 import CMCDropdowns from '../SetDetails/CMCDropdowns';
 import SelectSet from './SelectSet';
+import CardTypeDropdown from '../SetDetails/CardTypeDropdown';
 import Reset from '../SetDetails/Reset';
 import '../../css/AdvancedOptions.css';
 
@@ -38,6 +39,7 @@ function AdvancedOptions() {
                     <BoosterDropdown header="In Booster Packs?"  />
                     <CMCDropdowns header="Select Mana Cost:"/>
                     <SelectSet />
+                    <CardTypeDropdown />
                     <Reset />
                 </div>
             </div>
