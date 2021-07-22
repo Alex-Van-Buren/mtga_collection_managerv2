@@ -1,10 +1,16 @@
-import { ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS } from '../actions/types';
+import {
+    ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, 
+    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION
+} from '../actions/types';
 
 const INITIAL_STATE = {
     // Array of card columns, each corresponds to cmc value 0-7, >7 mapped to 7
     deck: [ [], [], [], [], [], [], [], [] ],
     // Contains card names, ids, and number of copies
     deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
+    sideboard: [],
+    commander: null,
+    companion: null,
     deckType: "standard", 
     addBasics: false
 };
@@ -29,25 +35,26 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             /* Add card to deckMap */
 
-                // Initialize specific card name in deckMap if necessary
-                if (!newDeckMap[card.name]) {
-                    newDeckMap[card.name] = {};
-                }
+            // Initialize specific card name in deckMap if necessary
+            if (!newDeckMap[card.name]) {
+                newDeckMap[card.name] = {};
+            }
 
-                // Increment count if specific arenaId declared under card name
-                if (newDeckMap[card.name][card.arenaId]) {
-                    newDeckMap[card.name][card.arenaId].copies++;
-                }
-                // Else initialize arenaId for card name
-                else {
-                    newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
-                }
+            // Increment count if specific arenaId declared under card name
+            if (newDeckMap[card.name][card.arenaId]) {
+                newDeckMap[card.name][card.arenaId].copies++;
+            }
+            // Else initialize arenaId for card name
+            else {
+                newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
+            }
 
             /* End adding to deckMap */
 
             // Update state
             return { ...state, deck: newDeck, deckMap: newDeckMap };
         }
+
         case REMOVE_CARD_FROM_DECK: {
 
             const card = action.payload;
@@ -82,14 +89,84 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Update state
             return { ...state, deck: newDeck, deckMap: newDeckMap };
         }
+
+        // Take an array of cards and build deck and deckMap
+        case SET_DECK: {
+            
+            // Clear old deck and create new state
+            const newDeck = [ [], [], [], [], [], [], [], [] ];
+            const newDeckMap = {};
+
+            for (const card of action.payload) {
+
+                // Find which column to add card to
+                const i = colNumber(card.cmc);
+    
+                // Add card to deck
+                newDeck[i].push(card);
+    
+                /* Add card to deckMap */
+    
+                // Initialize specific card name in deckMap if necessary
+                if (!newDeckMap[card.name]) {
+                    newDeckMap[card.name] = {};
+                }
+
+                // Increment count if specific arenaId declared under card name
+                if (newDeckMap[card.name][card.arenaId]) {
+                    newDeckMap[card.name][card.arenaId].copies++;
+                }
+                // Else initialize arenaId for card name
+                else {
+                    newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
+                }
+    
+                /* End adding to deckMap */
+            }
+
+            // Return updated state
+            return { ...state, deck: newDeck, deckMap: newDeckMap };
+        }
+
+        case ADD_CARD_TO_SIDEBOARD: {
+
+            // Copy sideboard and add card
+            const newSideboard = [ ...state.sideboard, action.payload ];
+
+            // Update state
+            return { ...state, sideboard: newSideboard };
+        }
+
+        case REMOVE_CARD_FROM_SIDEBOARD: {
+
+            // Copy sideboard
+            let newSideboard = [ ...state.sideboard ];
+            
+            // Remove card
+            newSideboard.splice(newSideboard.indexOf(action.payload), 1);
+
+            // Update state
+            return { ...state, sideboard: newSideboard };
+        }
+
+        case CHANGE_COMMANDER: {
+            return { ...state, commander: action.payload };
+        }
+        
+        case CHANGE_COMPANION: {
+            return { ...state, companion: action.payload };
+        }
+
         case SELECT_DECK_TYPE: {
             
             return { ...state, deckType: action.payload };
         }
+
         case TOGGLE_ADD_BASICS: {
 
-            return {...state, addBasics: !state.addBasics}
+            return { ...state, addBasics: !state.addBasics }
         }
+
         default:
             return state;
     }
