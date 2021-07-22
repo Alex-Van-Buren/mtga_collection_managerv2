@@ -10,7 +10,7 @@ import allArenaCards from './arenaCards20210719155815.json';
 function findCards(searchOptions, returnOptions) {
 
     // Destructure search options
-    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType } = searchOptions;
+    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes } = searchOptions;
 
     /**
      * An array of ananymous functions to be called on each card
@@ -72,7 +72,12 @@ function findCards(searchOptions, returnOptions) {
 
     // Filter Card legality if needed
     if ( deckType ) {
-        filterFunctions.push( (card) => filterLegality( deckType, card.legalities))
+        filterFunctions.push( (card) => filterLegality( deckType, card.legalities));
+    }
+
+    // Filter Card Types if needed
+    if ( cardTypes ) {
+        filterFunctions.push( (card) => filterCardTypes(card.type_line, cardTypes));
     }
 
 /* Call each chosen filter function on each card */
@@ -400,6 +405,24 @@ function filterLegality(deckType, cardLegalities) {
         return true;
     }
     return false;
+}
+
+/**
+ * Checks if the card is a wanted type. 
+ * @param {string} cardTypeLine The type_line of the individual card to be checked.
+ * @param {*} cardTypes Array of card types to keep
+ * @returns Returns true if the card should be kept. False if not
+ */
+function filterCardTypes(cardTypeLine, cardTypes) {
+    let keepCard = false // Initialize return boolean to false;
+
+    for (const cardType of cardTypes) {
+        if ( cardTypeLine.includes(cardType)) {
+            keepCard = true;
+            break;
+        }
+    }
+    return keepCard
 }
 
 /**
