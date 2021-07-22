@@ -1,0 +1,8 @@
+.cardTypes {
+    width: 19em;
+}
+
+.cardTypes .multi-dropdown{
+    margin-top: 7px;
+    margin-left: 18px;
+}
