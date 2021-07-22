@@ -169,6 +169,11 @@ export function setDeck(cards) {
     };
 }
 
+/**
+ * Add this card to the sideboard.
+ * @param {object} card 
+ * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
+ */
 export function addCardToSideboard(card) {
     return {
         type: ADD_CARD_TO_SIDEBOARD,
@@ -176,6 +181,11 @@ export function addCardToSideboard(card) {
     };
 }
 
+/**
+ * Remove this card from the sideboard
+ * @param {object} card 
+ * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
+ */
 export function removeCardFromSideboard(card) {
     return {
         type: REMOVE_CARD_FROM_SIDEBOARD,
@@ -183,14 +193,24 @@ export function removeCardFromSideboard(card) {
     };
 }
 
-export function changeCommander(card) {
+/**
+ * Make this card (or null) your commander. Default value is null (removes commander).
+ * @param {object} [card=null]
+ * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
+ */
+export function changeCommander(card=null) {
     return {
         type: CHANGE_COMMANDER,
         payload: card
     };
 }
 
-export function changeCompanion(card) {
+/**
+ * Make this card (or null) your companion. Default value is null (removes companion).
+ * @param {object} [card=null]
+ * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
+ */
+export function changeCompanion(card=null) {
     return {
         type: CHANGE_COMPANION,
         payload: card
