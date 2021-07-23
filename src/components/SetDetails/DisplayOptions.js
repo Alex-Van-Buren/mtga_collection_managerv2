@@ -7,6 +7,7 @@ import ColorCheckboxes from './ColorCheckboxes';
 import Reset from './Reset';
 import SearchBar from '../Templates/SearchBar';
 import RarityButtons from './RarityButtons';
+import CardTypeDropdown from './CardTypeDropdown'
 import '../../css/DisplayOptions.css';
 
 function DisplayOptions() {
@@ -23,6 +24,7 @@ function DisplayOptions() {
             <NumberOwnedDropdown header="Number You Own:" />
             <BoosterDropdown header="In Booster Packs?" />
             <CMCDropdowns header="Select Mana Cost:"/>
+            <CardTypeDropdown />
             <Reset />
         </div>
     </div>);

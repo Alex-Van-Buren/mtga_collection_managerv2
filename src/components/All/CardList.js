@@ -32,6 +32,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const deckMap        = useSelector(state => state.deckBuilder.deckMap);
     const reduxdeckType  = useSelector(state => state.deckBuilder.deckType);
     const addBasics      = useSelector(state => state.deckBuilder.addBasics);
+    const reduxCardTypes = useSelector(state => state.displayOptions.cardTypes);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -93,7 +94,19 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             }
         }
         
-        
+        // Make cardTypes retrieved from redux into a usable form for findCards
+        // Currently is an array of objects --> Need just simple array
+
+        let cardTypes = undefined; // Initialize as undefined for case where reduxcardTypes is empty
+
+        if ( reduxCardTypes.length >= 1 ) {
+            cardTypes = []; // Change to empty array to add push method 
+
+            for (const cardType of reduxCardTypes) {
+                // Only push the value property from reduxCardTypes into array
+                cardTypes.push(cardType.val);
+            }
+        }
         // Check the cmc values for "Any" string and change them to undefined
         let searchcmc = {...cmc};
 
@@ -115,12 +128,12 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         // Put all search options into a single object for findCards function
         let searchOptions = {
             set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, 
-            advancedSearchType: searchType, cmc: searchcmc, deckType: deckType
+            advancedSearchType: searchType, cmc: searchcmc, deckType: deckType, cardTypes: cardTypes
         };
 
         // if we are in the deckbuilder and addBasics is true want different searchOptions
         if (deckBuilder && addBasics) {
-            searchOptions = { ...searchOptions, excludeBasicLands: false, cmc: undefined, rarity: undefined}
+            searchOptions = { ...searchOptions, excludeBasicLands: false, cmc: undefined, rarity: undefined, cardTypes: undefined}
         }
 
         // Need to get images as well as name and arenaId
@@ -128,7 +141,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc, deckBuilder, reduxdeckType, addBasics]);
+    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc, deckBuilder, reduxdeckType, addBasics, reduxCardTypes]);
 
     // Track currently shown pictures
     let currentPictures = [];
