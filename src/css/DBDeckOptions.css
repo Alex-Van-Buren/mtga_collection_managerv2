@@ -13,3 +13,21 @@
 #gameTypeDropDown .dropdown-item, #gameTypeDropDown .dropdown-selected {
     padding-left: 7px;
 }
+
+.clearDeck {
+    background-color: #21ba45;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5em;
+    margin-left: 1em;
+}
+
+.clearDeck:hover {
+    cursor: pointer;
+    filter:brightness(0.9);
+}
+
+.clearDeck:active {
+    filter:brightness(0.8);
+}

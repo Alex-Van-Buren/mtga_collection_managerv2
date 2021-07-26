@@ -2,7 +2,6 @@ import React from 'react';
 
 import DBCardFilters from './DBCardFilters';
 import DBDeckOptions from './DBDeckOptions';
-import ImportExportModal from './ImportExportModal';
 import '../../css/DBSidebar.css';
 
 /**
@@ -14,7 +13,6 @@ function DBSidebar() {
         <div id="DBSidebar">
             <DBCardFilters />
             <DBDeckOptions />
-            <ImportExportModal />
         </div>
     );
 }
