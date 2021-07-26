@@ -77,13 +77,13 @@ function Modal({ content, keyEvents, show, showModal }) {
     return createPortal(
         <FocusTrap active={tabbing}>
             <div
-                onClick={() => showModal(false)}
+                onMouseDown={() => showModal(false)}
                 className="ui dimmer modals visible active fixedModal"
                 aria-keyshortcuts="Esc (escape) closes pop-up"
             >
                 <div
                     // Don't allow clicks to propagate to lower elements
-                    onClick={e => e.stopPropagation()}
+                    onMouseDown={e => e.stopPropagation()}
                 >
                     {/* Get modal content from props */}
                     {content}
