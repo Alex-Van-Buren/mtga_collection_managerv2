@@ -1,6 +1,6 @@
 import {
     ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, 
-    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION
+    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -147,6 +147,10 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             // Update state
             return { ...state, sideboard: newSideboard };
+        }
+
+        case SET_SIDEBOARD: {
+            return {...state, sideboard: action.payload}
         }
 
         case CHANGE_COMMANDER: {
