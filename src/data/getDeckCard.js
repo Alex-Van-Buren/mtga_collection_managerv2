@@ -1,8 +1,5 @@
 import allArenaCards from './arenaCards20210719155815.json';
 
-// Matches to return. Global so getDeckCard and addCard have access
-const matches = [];
-
 /**
  * Returns an array of cards matching the specified parameters. If name only is specified, the array contains all matching
  * cards (if multiple versions exist). If set and collector number are specified, then the array will contain one matching
@@ -14,6 +11,9 @@ const matches = [];
  * @returns {array} cards: [{ name, cmc, arenaId, set, imgs, collector_number, type_line }, ...]
  */
 function getDeckCard(name, set=null, collector_number=null) {
+
+    // Matches to return. Global so getDeckCard and addCard have access
+    let matches = [];
 
     // Convert name and set code to lowercase for searching
     name = name.toLowerCase();
@@ -33,7 +33,7 @@ function getDeckCard(name, set=null, collector_number=null) {
             if (card.set === set && card.collector_number === collector_number) {
                 
                 // Add card to matches
-                addCard(card);
+                matches = addCard(card, matches);
 
                 // Don't look for additional matches
                 break;
@@ -50,7 +50,7 @@ function getDeckCard(name, set=null, collector_number=null) {
             if ( card.name.toLowerCase() === name || (card.card_faces && card.card_faces[0].name.toLowerCase() === name) ) {
                 
                 // Add card to matches
-                addCard(card);
+                matches = addCard(card, matches);
             }
         }
     }
@@ -59,7 +59,7 @@ function getDeckCard(name, set=null, collector_number=null) {
     return matches;
 }
 
-function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_number, type_line }) {
+function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_number, type_line }, matches) {
 
     // Images can be deeply nested, so extract ahead of time
     let imgs = { front: null };
@@ -76,6 +76,8 @@ function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_n
 
     // Add card to matches
     matches.push({ name, cmc, arenaId: arena_id, set, imgs, collector_number, type_line });
+
+    return matches;
 }
 
 export default getDeckCard;
