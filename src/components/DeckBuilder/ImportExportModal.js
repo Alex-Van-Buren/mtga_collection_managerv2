@@ -24,7 +24,7 @@ function ImportExportModal() {
                 <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"></i></button>
 
             </div>
-            {isImport ? <ImportDeck /> : <ExportDeck />}
+            {isImport ? <ImportDeck setModalOpen={setModalOpen}/> : <ExportDeck />}
         </div>
     );
 

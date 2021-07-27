@@ -40,6 +40,26 @@ function getDeckCard(name, set=null, collector_number=null) {
             }
         }
     }
+
+    // Looking for specific set, but no collector number known
+    else if (set) {
+
+        // Search allArenaCards array for a single match
+        for (const card of allArenaCards) {
+            
+            // Find single matching card
+            if ( (card.name.toLowerCase() === name || (card.card_faces && card.card_faces[0].name.toLowerCase() === name))
+                && (card.set === set) )
+            {
+                // Add card to matches
+                matches = addCard(card, matches);
+
+                // Don't look for additional matches
+                break;
+            }
+        }
+    }
+
     // Fallback search for all name matches (either set and collector number unspecified, or yielded no results)
     if (matches.length === 0) {
 
