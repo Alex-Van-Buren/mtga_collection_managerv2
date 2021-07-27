@@ -15,10 +15,6 @@
     color: var(--clr-txt);
 }
 
-#headerMarginBottom {
-    margin-bottom: 1rem;
-}
-
 .heading {
     border-right: 1px solid var(--border-clr) !important;
     display: flex;

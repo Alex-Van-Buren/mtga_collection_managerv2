@@ -25,6 +25,10 @@ p#displayingNumberCards {
     transform: translateY(-3px);
 }
 
+.cardList-cards {
+    padding-bottom: 2.5rem;
+}
+
 .cardList-cards .lazyLoad {
     display: flex;
     flex-wrap: wrap;

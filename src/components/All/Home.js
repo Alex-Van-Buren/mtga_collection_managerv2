@@ -109,7 +109,7 @@ function Home() {
         <>
             {renderToggle}
 
-            <div className="ui container">
+            <div className="ui container home">
                 <div className="ui huge center aligned header">{collectionTitle}</div>
 
                 <div className={`ui ${numCards} cards`}>

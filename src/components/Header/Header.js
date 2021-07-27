@@ -37,55 +37,50 @@ function Header() {
     
     return (<>
         <HeaderModal />
+        <div id="header">
 
-        <div id="headerMarginBottom">
+            {/* Options on Left Side */}
+            <div className={`${hideMenu} leftOptions`}>
+                <Link to='/' className="heading" id="home">
+                    <img src={logo} alt="logo" className="logo" />
+                    <div>Collection&nbsp;</div>
+                    <div>Manager</div>
+                </Link>
+                
+                <HeaderDropdown searchable title="Sets" titleClass="" itemsClass="sets">
+                    {setLinks}
+                </HeaderDropdown>
 
-            <div id="header">
-
-                {/* Options on Left Side */}
-                <div className={`${hideMenu} leftOptions`}>
-                    <Link to='/' className="heading" id="home">
-                        <img src={logo} alt="logo" className="logo" />
-                        <div>Collection&nbsp;</div>
-                        <div>Manager</div>
-                    </Link>
-                    
-                    <HeaderDropdown searchable title="Sets" titleClass="" itemsClass="sets">
-                        {setLinks}
-                    </HeaderDropdown>
-
-                    <Link to='/deckbuilder' className="heading">
-                        Deck Builder
-                    </Link>
-                    
-                </div>
-
-                {/* Options on Right Side */}
-                <div className={`${hideMenu} rightOptions`}>
-
-                    {/* File Selector */}
-                    <GetFile />
-
-                    {/* Help Menu */}
-                    <Link to='/help' className="heading" id="help">Help</Link>
-
-
-                    {/* Dark Mode Toggle */}
-                    <DarkModeToggle />
-                </div>
-
+                <Link to='/deckbuilder' className="heading">
+                    Deck Builder
+                </Link>
+                
             </div>
 
-            {/* Hamburger menu */}
-            <div id="hamburger"
-                onClick={(e) => setHamburgerClicked(!hamburgerClicked)}
-            >
-                <i className={`hamburger icon ${hamburgerClass}`} />
+            {/* Options on Right Side */}
+            <div className={`${hideMenu} rightOptions`}>
+
+                {/* File Selector */}
+                <GetFile />
+
+                {/* Help Menu */}
+                <Link to='/help' className="heading" id="help">Help</Link>
+                
+                {/* Dark Mode Toggle */}
+                <DarkModeToggle />
             </div>
 
-            {/* Player Inventory - Only shown on home and set routes */}
-            { pathname === "/" || pathname.includes("/set/") ? <PlayerInventory /> : null }
         </div>
+
+        {/* Hamburger menu */}
+        <div id="hamburger"
+            onClick={(e) => setHamburgerClicked(!hamburgerClicked)}
+        >
+            <i className={`hamburger icon ${hamburgerClass}`} />
+        </div>
+
+        {/* Player Inventory - Only shown on home and set routes */}
+        { pathname === "/" || pathname.includes("/set/") ? <PlayerInventory /> : null }
     </>);
 }
 

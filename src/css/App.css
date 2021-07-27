@@ -70,10 +70,6 @@ body.darkMode {
   min-height: 100vh;
 }
 
-#keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage {
-  padding-bottom: 2.5rem;
-}
-
 #thisIsTheDivThatKeepsTheFooterAtTheBottomOfThePage {
   position: absolute;
   bottom: 0;

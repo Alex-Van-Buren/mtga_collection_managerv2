@@ -6,6 +6,7 @@
     gap: 2px;
     min-height: 15%;
     overflow: scroll;
+    padding: 3px;
 }
 
 .DBDeckColumn {

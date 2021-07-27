@@ -5,6 +5,10 @@
     margin: 1rem 2rem;
 }
 
+.home.ui.container {
+    padding-bottom: 2.5rem;
+}
+
 #standardLabel, #historicLabel {
     color: var(--clr-txt);
     font-family: 'Kadwa', serif;
