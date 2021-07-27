@@ -31,7 +31,7 @@ function Header() {
     const setLinks = historicSets.map((setId) => {
         const title = setInfo[setId].name;   
         return (
-            <Link className="dd-item" key={setId} to={'/set/'+setId}>{title}</Link>
+            <Link className="dd-item" setid={setId} key={setId} to={'/set/'+setId}>{title}</Link>
         )
     });
     
@@ -50,7 +50,7 @@ function Header() {
                         <div>Manager</div>
                     </Link>
                     
-                    <HeaderDropdown title="Sets" titleClass="" itemsClass="sets">
+                    <HeaderDropdown searchable title="Sets" titleClass="" itemsClass="sets">
                         {setLinks}
                     </HeaderDropdown>
 

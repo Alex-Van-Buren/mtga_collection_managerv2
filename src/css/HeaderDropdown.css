@@ -19,11 +19,18 @@
     background-color: var(--clr-prm-focus);
 }
 
-a.dd-item {
+.dd-item {
     color: var(--clr-txt);
     border-bottom: 1px solid var(--border-clr);
     display: block;
     padding: 12px;
+}
+
+.dd-item-search {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--border-clr);
+    padding: 5px;
 }
 
 .dd-item:hover {
