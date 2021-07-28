@@ -24,8 +24,18 @@ function ExportDeck() {
             // Iterate through each arenaId of that card name and add it to deckOutput string
             for (const card of Object.values(ids)) {
 
-                // Ex output: 4 Clearwater Pathway (ZNR) 260
-                deckOutput += `${card.copies} ${name} (${card.set.toUpperCase()}) ${card.col_num}\n`;
+                // Only list number and name for "pana" set cards, because of the game not liking them
+                if (card.set.toLowerCase() === "pana") {
+
+                    // Ex output: 4 Llanowar Elves
+                    deckOutput += `${card.copies} ${name}\n`;
+                }
+
+                else {
+                    
+                    // Ex output: 4 Clearwater Pathway (ZNR) 260
+                    deckOutput += `${card.copies} ${name} (${card.set.toUpperCase()}) ${card.col_num}\n`;
+                }
             }
         }
         return deckOutput;

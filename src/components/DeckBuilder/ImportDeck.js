@@ -182,33 +182,37 @@ function ImportDeck({ setModalOpen }) {
         }
     }
 
-    // take number of cards requested and possible matches
-    // return array of cards
+    /**
+     * Attempt to choose only owned cards from possible matches. If not enough copies are owned, chooses duplicates
+     * of most-owned version to make up the deficit.
+     * 
+     * @param {number} number The number of requested copies of this card.
+     * @param {array} matches The possible cards to pick from. An array of card objects.
+     * @returns {array} An array of cards chosen from {matches} of length {number}. Preferentially picks cards that
+     * the user owns more copies of; will return only owned cards if possible.
+     */
     function pickCardsFromMatches(number, matches) {
+
+        const temp = []; // Return array
 
         // Return empty array when no matches found
         if (number < 1 || matches.length === 0) {
-            return [];
+            // Do nothing here; return empty array
         }
 
         // If there's only one match, return array with {number} of requested cards
         else if (matches.length === 1) {
 
-            const temp = []; // Return array
-
             // Push {number} of matches into return array
             for (let i=0; i<number; i++) {
                 temp.push({ ...matches[0] });
             }
-            return temp;
         }
 
         // If a basic land is requested, but no specific land, use most recent set
         else if (matches[0].type_line.toLowerCase().includes("basic") && 
                  matches[0].type_line.toLowerCase().includes("land"))
         {
-            const temp = [];
-
             // Use first entry from standard sets to find the correct land to add
             const [ card ] = getDeckCard(matches[0].name, standardSets[0]);
 
@@ -216,14 +220,11 @@ function ImportDeck({ setModalOpen }) {
             for (let i=0; i<number; i++) {
                 temp.push(card);
             }
-            return temp;
         }
 
         // If there are multiple matches, determine how many copied the user has of each, sort list in descending
         // order, and try to return cards the user already owns
         else {
-            
-            const temp = []; // Return array
 
             // Get the number of copies the user owns and add that property to each match
             for (const match of matches) {
@@ -244,7 +245,7 @@ function ImportDeck({ setModalOpen }) {
 
                 // Check if done
                 if (numNeeded <= 0) {
-                    return temp;
+                    break;
                 }
 
                 // Else see if more copies available
@@ -260,7 +261,7 @@ function ImportDeck({ setModalOpen }) {
                     }
 
                     // Done
-                    return temp;
+                    break;
                 }
 
                 // Case where we have DON'T have enough copies of this match to finish
@@ -275,9 +276,17 @@ function ImportDeck({ setModalOpen }) {
             for(let i=0; i<numNeeded; i++) {
                 temp.push(matches[0]);
             }
-
-            return temp;
         }
+
+        // Change some properties while importing
+        for (const card of temp) {
+            if (card.set.toLowerCase() === "dar") {
+                card.set = "dom";
+            }
+        }
+
+        // Return matching cards
+        return temp;
     }
 
     /**
