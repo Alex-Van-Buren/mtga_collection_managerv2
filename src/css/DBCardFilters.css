@@ -15,21 +15,19 @@
 }
 
 .addBasics {
-    margin-left: 22.4px;
+    background-color: #5151a5;
+    border: none;
+    border-radius: 3px;
+    color: white;
     font-size: 1.2em;
     margin-bottom: 0.5em;
-    border: 1px solid var(--clr-txt);
-    border-radius: 3px;
-    color: var(--clr-txt);
+    margin-left: 38px;
+    padding: 0.5em 1em;
 }
 
 .addBasics:hover {
     cursor: pointer;
     filter: brightness(0.9);
-}
-
-.addBasics:not(.active){
-    background-color: transparent;
 }
 
 .addBasics:not(.active):hover, .addBasics.active {

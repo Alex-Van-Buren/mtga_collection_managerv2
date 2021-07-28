@@ -34,20 +34,22 @@ function ImportExportModal() {
     return (
         <>
             <button className="importExportButton" title="Import Deck Button"
-            onClick={() => {
-                // Select import and open modal
-                setIsImport(true);
-                setModalOpen(!modalOpen);
-            }}>
+                onClick={() => {
+                    // Select import and open modal
+                    setIsImport(true);
+                    setModalOpen(!modalOpen);
+                }}
+            >
                 Import Deck
             </button>
             
             <button className="importExportButton" title="Export Deck Button"
-            onClick={() => {
-                // Select export and open modal
-                setIsImport(false);
-                setModalOpen(!modalOpen);
-            }}>
+                onClick={() => {
+                    // Select export and open modal
+                    setIsImport(false);
+                    setModalOpen(!modalOpen);
+                }}
+            >
                 Export Deck
             </button>
 
