@@ -372,6 +372,16 @@ function ImportDeck({ setModalOpen }) {
         }
     }
 
+    /**
+     * Copies deck from clipboard
+     */
+     function fromClipboard() {
+        const deckString = toString;
+
+        // Write deck to clipboard
+        navigator.clipboard.readText().then( text => setImportedText(text) );
+    }
+
     return (
         <div id="importExportContent">
             <h1>Import Deck</h1>
@@ -385,6 +395,10 @@ function ImportDeck({ setModalOpen }) {
 
                 <button onClick={fromFile}>
                     Import from File
+                </button>
+
+                <button onClick={fromClipboard}>
+                    Copy from Clipboard
                 </button>
 
                 <button onClick={onSubmit}>
