@@ -26,7 +26,7 @@ function ExportDeck() {
 
                 // Only list number and name for "pana" and other 4+ letter set codes, 
                 // because the games doesn't handle them well
-                if (card.set.length > 3) {
+                if (card.set.length > 3 || /[a-zA-Z]/.test(card.collector_number)) {
 
                     // Ex output: 4 Llanowar Elves
                     deckOutput += `${card.copies} ${name}\n`;
