@@ -133,8 +133,15 @@ label {
 
 /*Rarity button div */
 .showList {
-    padding-left: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
+}
+
+.DisplayOptions .showList {
+    display: block;
+    margin-left: 1.5rem;
 }
 
 /* dropdowns and reset button */
@@ -159,7 +166,9 @@ label {
 }
 
 .ui.button.positive.reset-button {
+    font-size: 1.4em;
     margin-left: 18px;
+    padding: 0.5em;
 }
 /* Color checkboxes */
 .colorIcon {
@@ -175,9 +184,14 @@ label {
 }
 
 .colorList {
-    padding-left: 1em;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+.DisplayOptions .colorList {
+    justify-content: flex-start;
+    margin-left: 1rem;
 }
 
 .colorCheckbox {

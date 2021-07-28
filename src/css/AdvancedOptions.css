@@ -1,6 +1,5 @@
 .advancedOptionsButton {
     font-size: 2em;
-    margin-left:1em;
     border: 1px solid var(--clr-txt);
     border-radius: 5px
 }

@@ -1,6 +1,11 @@
 .importExportButton {
-    margin: 1rem 0.7rem;
+    background-color: #5151a5;
+    border: none;
+    border-radius: 3px;
+    color: white;
     cursor: pointer;
+    margin: 1rem 0.7rem;
+    padding: 0.5em;
 }
 
 .importExportModal {
