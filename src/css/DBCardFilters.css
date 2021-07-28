@@ -8,6 +8,7 @@
 
 .DBCardFilters .advancedAndReset {
     display: flex;
+    justify-content: center;
 }
 
 .DBCardFilters .colorBox {
@@ -21,7 +22,7 @@
     color: white;
     font-size: 1.2em;
     margin-bottom: 0.5em;
-    margin-left: 38px;
+    margin-left: 36px;
     padding: 0.5em 1em;
 }
 

@@ -166,7 +166,9 @@ label {
 }
 
 .ui.button.positive.reset-button {
+    font-size: 1.4em;
     margin-left: 18px;
+    padding: 0.5em;
 }
 /* Color checkboxes */
 .colorIcon {

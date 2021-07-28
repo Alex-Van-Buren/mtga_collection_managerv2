@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectDeckType } from '../../actions';
 import CustomDropdown from '../Templates/CustomDropdown';
 import ImportExportModal from './ImportExportModal';
-import { setDeck, setSideboard, changeCommander, changeCompanion } from '../../actions'
+import { selectDeckType, setDeck, setSideboard, changeCommander, changeCompanion } from '../../actions'
 import '../../css/DBDeckOptions.css';
 
 function DBDeckOptions() {
