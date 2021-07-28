@@ -1,4 +1,4 @@
-import allArenaCards from './arenaCards20210719155815.json';
+import arenaCards from './arenaCards';
 import { historicSets as sets } from '../data/setInfo';
 
 /**
@@ -37,7 +37,7 @@ function totalOwned(cardCollection) {
     }
 
     // Check each card on arena
-    for (const card of allArenaCards) {
+    for (const card of arenaCards) {
 
         // Filter Out basic lands
         if ( card.type_line.includes('Basic') && card.type_line.includes('Land') ) {

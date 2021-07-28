@@ -1,4 +1,5 @@
-import allArenaCards from './arenaCards20210719155815.json';
+import arenaCards from "./arenaCards";
+
 //  const allArenaCards = require('./arenaCards20210719155815.json')
 /**
  * 
@@ -85,7 +86,7 @@ function findCards(searchOptions, returnOptions) {
     // Card list will hold chosen cards
     let cardList = [];
 
-    for (const card of allArenaCards) { // Loop over cards
+    for (const card of arenaCards) { // Loop over cards
         let addCard = true;
 
         for (let i=0; i<filterFunctions.length; i++) { // Loop over filter functions
