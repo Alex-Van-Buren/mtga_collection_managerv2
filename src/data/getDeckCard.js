@@ -1,4 +1,4 @@
-import allArenaCards from './arenaCards20210719155815.json';
+import arenaCards from "./arenaCards";
 
 /**
  * Returns an array of cards matching the specified parameters. If name only is specified, the array contains all matching
@@ -27,7 +27,7 @@ function getDeckCard(name, set=null, collector_number=null) {
     if (set && collector_number) {
 
         // Search allArenaCards array for a single match
-        for (const card of allArenaCards) {
+        for (const card of arenaCards) {
             
             // Find single matching card
             if (card.set === set && card.collector_number === collector_number) {
@@ -45,7 +45,7 @@ function getDeckCard(name, set=null, collector_number=null) {
     else if (set) {
 
         // Search allArenaCards array for a single match
-        for (const card of allArenaCards) {
+        for (const card of arenaCards) {
             
             // Find single matching card
             if ( (card.name.toLowerCase() === name || (card.card_faces && card.card_faces[0].name.toLowerCase() === name))
@@ -64,7 +64,7 @@ function getDeckCard(name, set=null, collector_number=null) {
     if (matches.length === 0) {
 
         // Search allArenaCards array for all name matches
-        for (const card of allArenaCards) {
+        for (const card of arenaCards) {
             
             // Check card name and check front side name if double-faced card
             if ( card.name.toLowerCase() === name || (card.card_faces && card.card_faces[0].name.toLowerCase() === name) ) {
