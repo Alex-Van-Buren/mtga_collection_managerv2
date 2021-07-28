@@ -18,7 +18,7 @@ function ImportDeck({ setModalOpen }) {
     function onSubmit() {
         const { deck, sideboard, commander: [commander], companion: [companion] } = createSections();
         
-        let deckCardsToAdd = [], sideboardCardsToAdd = [], commanderToAdd, companionToAdd;
+        let deckCardsToAdd = [], sideboardCardsToAdd = [];
 
         // Get array of deck cards to add
         for (const { number, matches } of deck) {
