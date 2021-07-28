@@ -22,7 +22,7 @@ function DBDeck() {
 
                     let style = null;
                     if (card.legalities && card.legalities[deckType] && card.legalities[deckType] !== "legal" ) {
-                        style = { 'box-shadow': '0 0 0 3px red', borderRadius: '5px' };
+                        style = { boxShadow: '0 0 0 3px red', borderRadius: '5px' };
                     }
 
                     return <div className="DBDeckCard" key={'card'+i+j}>
