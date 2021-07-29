@@ -4,6 +4,7 @@ import DBSidebar from './DBSidebar';
 import DeckHeader from './DeckHeader';
 import DBDeck from './DBDeck';
 import CardList from '../All/CardList';
+import DBSideboard from './DBSideboard';
 import '../../css/DeckBuilder.css';
 import { useRef } from 'react';
 
@@ -47,7 +48,10 @@ function DeckBuilder() {
                 <div className="slider" onMouseDown={(e)=>MoveSlider(e)}>
                     <DeckHeader />
                 </div>
-                <DBDeck />
+                <div className="deckSection">
+                    <DBDeck />  
+                    <DBSideboard />
+                </div>
             </div>
         </div>
     );

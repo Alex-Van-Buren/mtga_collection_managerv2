@@ -1,5 +1,6 @@
 #DBDeck {
     display: flex;
+    height: 100%;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
@@ -7,6 +8,7 @@
     min-height: 15%;
     overflow: scroll;
     padding: 3px;
+    z-index: 1;
 }
 
 .DBDeckColumn {
