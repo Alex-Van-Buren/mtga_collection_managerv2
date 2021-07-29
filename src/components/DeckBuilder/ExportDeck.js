@@ -24,9 +24,9 @@ function ExportDeck() {
             // Iterate through each arenaId of that card name and add it to deckOutput string
             for (const card of Object.values(ids)) {
 
-                // Only list number and name for "pana" and other 4+ letter set codes, 
-                // because the games doesn't handle them well
-                if (card.set.length > 3 || /[a-zA-Z]/.test(card.collector_number)) {
+                // Only list number and name for "pana" and other 4+ letter set codes, or collector numbers
+                // with letters, because the game doesn't import them correctly
+                if (card.set.length > 3 || /.*[A-Za-z].*/.test(card.col_num)) {
 
                     // Ex output: 4 Llanowar Elves
                     deckOutput += `${card.copies} ${name}\n`;
