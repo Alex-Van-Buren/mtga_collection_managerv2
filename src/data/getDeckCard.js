@@ -85,7 +85,7 @@ function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_n
     let imgs = { front: null };
 
     // Double-faced cards
-    if (card_faces) {
+    if (card_faces && card_faces[1] && card_faces[1].image_uris) {
         imgs.front = card_faces[0].image_uris.border_crop;
         imgs.back  = card_faces[1].image_uris.border_crop;
     }

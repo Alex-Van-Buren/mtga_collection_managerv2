@@ -174,7 +174,7 @@ function ImportDeck({ setModalOpen }) {
                 }
             }
 
-            return {deck, sideboard, commander, companion};
+            return { deck, sideboard, commander, companion };
 
         } catch (error) {
 
