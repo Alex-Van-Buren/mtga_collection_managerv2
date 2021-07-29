@@ -9,23 +9,45 @@ function DBDeck() {
     // Access redux dispatcher
     const dispatch = useDispatch();
 
-    // Get deck from redux
+    // Get Redux
+    const { cardCollection } = useSelector(state => state.inventory);
     const { deck, deckType } = useSelector(state => state.deckBuilder);
 
     // Make an array of JSX for each of the 8 deck columns
     const renderCards = useMemo(() => {
+
+        // Track cards added
+        const addedToDeck = {};
+
         return deck.map((column, i) => {
             return <div className="DBDeckColumn" key={'column'+i}>
 
                 {/* Create JSX for each individual card */}
                 { column.map( (card, j) => {
 
-                    let style = null;
+                    // Track that a copy of this card was added to the deck
+                    addedToDeck[card.arenaId] = addedToDeck[card.arenaId] ? addedToDeck[card.arenaId]+1 : 1;
+
+                    let style = {};
+
+                    // Add red boarder around cards not legal in current format
                     if (card.legalities && card.legalities[deckType] && card.legalities[deckType] !== "legal" ) {
-                        style = { boxShadow: '0 0 0 3px red', borderRadius: '5px' };
+                        style.boxShadow = '0 0 0 3px red';
+                        style.borderRadius = '5px';
                     }
 
-                    return <div className="DBDeckCard" key={'card'+i+j}>
+                    // Don't mark unowned cards if inventory isn't initialized
+                    if (cardCollection) {
+
+                        // Check if user ownes enough copies of this card
+                        if ( !cardCollection[card.arenaId] || (addedToDeck[card.arenaId] > cardCollection[card.arenaId]) ) {
+
+                            // Darken unowned cards
+                            style.filter = "brightness(50%)";
+                        }
+                    }
+
+                    return <div className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}>
                         <img
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
@@ -37,7 +59,7 @@ function DBDeck() {
                 } ) }
             </div>;
         });
-    }, [deck, dispatch, deckType]);
+    }, [deck, deckType, cardCollection, dispatch]);
 
     return (
         <div id="DBDeck">
