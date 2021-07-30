@@ -32,7 +32,7 @@ function ImportExportModal() {
     const renderedModal = modalOpen ? <Modal content={modalContent} show={modalOpen} showModal={setModalOpen} /> : null;
 
     return (
-        <>
+        <div id='importExportButtons'>
             <button className="importExportButton" title="Import Deck Button"
                 onClick={() => {
                     // Select import and open modal
@@ -55,7 +55,7 @@ function ImportExportModal() {
 
             {/* Open Modal only when buttons clicked */}
             {renderedModal}            
-        </>
+        </div>
     );
 }
 

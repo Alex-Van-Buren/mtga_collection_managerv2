@@ -5,7 +5,7 @@ import optionsImg from '../../images/arena/options.png';
 import accountImg from '../../images/arena/Account.png';
 import detailedLogsImg from '../../images/arena/detailedLogs.png';
 import Accordion from '../Templates/Accordion';
-import NoInventoryFound from '../Errors/NoInventoryFound';
+import NoInventoryFoundHelp from '../Errors/NoInventoryFoundHelp';
 import '../../css/Help.css';
 
 /**
@@ -19,7 +19,7 @@ function Help() {
 
     // Object that has the open props for all of the Accordions
     let openAccordion = {
-        findLogfile: false, detailedLogs: false, usingDraftCalculator: false, FAQ: false
+        findLogfile: false, detailedLogs: false, usingDraftCalculator: false, FAQ: false, bugs: false
     }
 
     // Set openSection of openAccordion to true
@@ -52,8 +52,21 @@ function Help() {
             "mythics of a set as well as a tab to calculate how many drafts you will need to complete the rares or mythics of " +
             "a set."
         }
-    ]
+    ];
 
+    // Known Bugs
+    const bugs = [
+        {
+            text: 'Resizing the window can prevent lists of images from loading. Scrolling through the list of images '+
+            'may fix the problem. If this doesn\'t work, reloading will fix the issue.'
+        }
+    ];
+
+    // Map the Bugs to JSX
+    const renderBugs = bugs.map((bug, index) => {
+        return <li key={`bug${index}`}>{bug.text}</li>;
+    });
+    
     // Map the FAQs to JSX
     const renderFAQs = FAQs.map((FAQ, index) => {
         return (
@@ -62,7 +75,7 @@ function Help() {
                     <li>{FAQ.answer}</li>
                 </ul>
             </li>            
-        )
+        );
     });
 
     return (
@@ -76,7 +89,7 @@ function Help() {
                 <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It is typically 
                     found at one of the following locations:
                 </p>
-                <NoInventoryFound help={true}/>
+                <NoInventoryFoundHelp help={true}/>
                 <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>
             </Accordion>
         </div>
@@ -136,7 +149,15 @@ function Help() {
                     {renderFAQs}
                 </ol>
             </Accordion>
+        </div>
 
+        <div className="FAQ">
+            <Accordion open={openAccordion.bugs}>
+                <h2>Known Bugs</h2>
+                <ol className="FAQList">
+                    {renderBugs}
+                </ol>
+            </Accordion>
         </div>
 
         <div className="contact" id="contact">

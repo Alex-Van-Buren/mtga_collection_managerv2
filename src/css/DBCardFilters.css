@@ -16,13 +16,11 @@
 }
 
 .addBasics {
-    background-color: #5151a5;
-    border: none;
-    border-radius: 3px;
-    color: white;
+    border-radius: 5px;
+    color: var(--clr-txt-inverse);
     font-size: 1.2em;
     margin-bottom: 0.5em;
-    margin-left: 36px;
+    margin-left: 35px;
     padding: 0.5em 1em;
 }
 
