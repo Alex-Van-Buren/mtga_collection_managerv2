@@ -5,7 +5,7 @@ import optionsImg from '../../images/arena/options.png';
 import accountImg from '../../images/arena/Account.png';
 import detailedLogsImg from '../../images/arena/detailedLogs.png';
 import Accordion from '../Templates/Accordion';
-import NoInventoryFound from '../Errors/NoInventoryFound';
+import NoInventoryFoundHelp from '../Errors/NoInventoryFoundHelp';
 import '../../css/Help.css';
 
 /**
@@ -76,7 +76,7 @@ function Help() {
                 <p>Your log file is an automatically generated file created by MTG Arena named "Player.log". It is typically 
                     found at one of the following locations:
                 </p>
-                <NoInventoryFound help={true}/>
+                <NoInventoryFoundHelp help={true}/>
                 <p>Some folders may be hidden and you will need to unhide them in order to access them.</p>
             </Accordion>
         </div>
