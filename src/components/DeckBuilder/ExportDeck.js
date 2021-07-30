@@ -16,10 +16,14 @@ function ExportDeck() {
      * Iteratively build deck string output
      */
     const toString = useMemo(() => {
-        let deckOutput = "Deck\n";
+        let deckOutput = '';
         
-        // Add deck
-        deckOutput += deck_sideboardOutput(deckMap);
+        // Add deck\
+        if (Object.keys(deckMap).length) {
+            deckOutput += 'Deck\n';
+
+            deckOutput += deck_sideboardOutput(deckMap);
+        }
 
         // Add sideboard
         if (Object.keys(sideboardMap).length) {
