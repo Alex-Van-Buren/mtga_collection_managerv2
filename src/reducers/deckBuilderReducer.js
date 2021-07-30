@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     // Contains card names, ids, and number of copies
     deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
     sideboard: [],
+    sideboardMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
     commander: null,
     companion: null,
     deckType: "standard", 
@@ -150,7 +151,28 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         }
 
         case SET_SIDEBOARD: {
-            return {...state, sideboard: action.payload}
+
+            const newSideboard = action.payload;
+            const newSideboardMap = {};
+
+            for (const card of newSideboard) {
+    
+                // Initialize specific card name in newSideboardMap if necessary
+                if (!newSideboardMap[card.name]) {
+                    newSideboardMap[card.name] = {};
+                }
+
+                // Increment count if specific arenaId declared under card name
+                if (newSideboardMap[card.name][card.arenaId]) {
+                    newSideboardMap[card.name][card.arenaId].copies++;
+                }
+                // Else initialize arenaId for card name
+                else {
+                    newSideboardMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
+                }
+            }
+
+            return { ...state, sideboard: newSideboard, sideboardMap: newSideboardMap }
         }
 
         case CHANGE_COMMANDER: {

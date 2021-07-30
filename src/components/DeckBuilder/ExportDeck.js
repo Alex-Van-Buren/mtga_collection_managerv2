@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
  */
 function ExportDeck() {
 
-    const deckMap = useSelector(state => state.deckBuilder.deckMap);
+    const { deckMap, sideboardMap, commander, companion } = useSelector(state => state.deckBuilder);
 
     const [saveClipboard, setSaveClipboard] = useState("Copy to Clipboard");
     const [saveFile,      setSaveFile]      = useState("Save to File");
@@ -18,8 +18,40 @@ function ExportDeck() {
     const toString = useMemo(() => {
         let deckOutput = "Deck\n";
         
-        // Iterate through each card name in deckMap
-        for (let [name, ids] of Object.entries(deckMap)) {
+        // Add deck
+        deckOutput += deck_sideboardOutput(deckMap);
+
+        // Add sideboard
+        if (Object.keys(sideboardMap).length) {
+            deckOutput += '\nSideboard\n';
+
+            deckOutput += deck_sideboardOutput(sideboardMap);
+        }
+
+        // Add commander
+        if (commander) {
+            deckOutput += '\nCommander\n';
+            deckOutput += commander_companionOutput(commander);
+        }
+
+        // Add companion
+        if (companion) {
+            deckOutput += '\nCompanion\n';
+            deckOutput += commander_companionOutput(companion);
+        }
+
+        return deckOutput;
+    }, [commander, companion, deckMap, sideboardMap]);
+
+    /**
+     * Gets string for deckMap and sideboardMap
+     */
+    function deck_sideboardOutput(inputMap) {
+
+        let deckOutput = '';
+
+        // Iterate through each card name in imputMap
+        for (let [name, ids] of Object.entries(inputMap)) {
             
             // Iterate through each arenaId of that card name and add it to deckOutput string
             for (const card of Object.values(ids)) {
@@ -39,8 +71,27 @@ function ExportDeck() {
                 }
             }
         }
+
         return deckOutput;
-    }, [deckMap]);
+    }
+
+    /**
+     * Get string for commander and/or companion
+     */
+    function commander_companionOutput(card) {
+
+        let deckOutput = '';
+
+        if (card.set.length > 3 || /.*[A-Za-z].*/.test(card.collector_number)) {
+            deckOutput += `1 ${card.name}\n`;
+        }
+
+        else {
+            deckOutput += `1 ${card.name} (${card.set.toUpperCase()}) ${card.collector_number}\n`;
+        }
+
+        return deckOutput;
+    }
 
     /**
      * Copies deck to clipboard
