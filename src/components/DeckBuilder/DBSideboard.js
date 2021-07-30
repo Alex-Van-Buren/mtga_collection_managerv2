@@ -1,12 +1,12 @@
 import React from 'react';
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { removeCardFromSideboard } from './../../actions';
 import '../../css/DBSideboard.css';
 
 function DBSideboard() {
-
+    const [open, setOpen] = useState(true);
     const dispatch = useDispatch();
 
     const SBCards = useSelector(state => state.deckBuilder.sideboard);
@@ -29,11 +29,24 @@ function DBSideboard() {
             />
         </div>
     })
+    
+    let iconClass = 'SBshowButton icon caret right';
+    let sideboardClass = 'sideboard';
+    if (!open) {
+        iconClass = 'SBshowButton icon caret left';
+        sideboardClass = 'sideboard closed';
+    }
+    const showButton = <div className="sideboardseparator">
+        <i className={iconClass} onClick={() => setOpen(!open)}/>
 
+    </div>
 
     return (
-        <div className="sideboard DBDeckColumn">
-            {renderSBCards}
+        <div className={sideboardClass}>
+            {showButton}
+            <div className="DBDeckColumn">
+                {renderSBCards}
+            </div>
         </div>
     )
 }

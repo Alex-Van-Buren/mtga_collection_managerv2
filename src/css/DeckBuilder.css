@@ -2,6 +2,7 @@
     color: var(--clr-txt);
     display: flex;
     height: 100vh;
+    width: calc(100vw - 17px);
     overflow: hidden;
 }
 
@@ -9,12 +10,23 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    width: calc(100vw - 215px);
+    max-width: calc(100% - 215px);
 }
 
 .dbCardList {
     height: 50%;
     overflow-y: scroll;
+    scrollbar-color: var(--scroll-bar) var(--scroll-area)
+}
+
+.dbCardList::-webkit-scrollbar-track {
+    background: var(--scroll-area);
+}
+
+.dbCardList::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar);
+    border-radius: 8px;
+    border: 2px solid var(--scroll-area);
 }
 
 .slider {
