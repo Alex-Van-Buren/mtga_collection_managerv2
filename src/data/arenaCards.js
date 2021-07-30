@@ -1,3 +1,3 @@
-import arenaCards from './arenaCards20210728183238.json';
+import arenaCards from './arenaCards20210730151402.json';
 
 export default arenaCards;
