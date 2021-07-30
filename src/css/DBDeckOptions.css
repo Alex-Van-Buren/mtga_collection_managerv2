@@ -16,11 +16,13 @@
 
 .clearDeck {
     background-color: #21ba45;
-    color: #fff;
     border: none;
     border-radius: 3px;
-    padding: 0.5em;
+    color: #fff;
+    height: 30px;
     margin-left: 1em;
+    padding: 0.5em;
+    width: 180px;
 }
 
 .clearDeck:hover {
