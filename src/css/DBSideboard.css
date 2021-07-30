@@ -1,4 +1,63 @@
 .sideboard {
-    overflow: scroll;
-    padding: 3px;
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    width: 185px;
+    transition: width .3s;
+}
+
+.sideboard.closed {
+    width: 20px;
+    overflow: hidden;
+}
+
+.sideboard .DBDeckColumn {
+    overflow: auto;
+    opacity: 1;
+    transition: all .3s;
+    scrollbar-color: var(--scroll-bar) var(--scroll-area);
+}
+
+.sideboard .DBDeckColumn::-webkit-scrollbar-track{
+    background: var(--scroll-area);
+}
+
+.sideboard .DBDeckColumn::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar);
+    border-radius: 8px;
+    border: 2px solid var(--scroll-area);
+}
+
+.sideboard.closed .DBDeckColumn {
+    overflow: hidden;
+    opacity: 0;
+}
+
+.sideboardseparator {
+    position: relative;
+    flex-shrink: 0;
+    width: 10px;
+    background-color: lightgray;
+}
+
+.SBshowButton.icon.caret {
+    font-size: 3rem !important;
+    filter: drop-shadow(1px 0px 0px black)
+            drop-shadow(0px 1px 0px black)
+            drop-shadow(0px -1px 0px black)
+            drop-shadow(-1px 0px 0px black);
+    color: goldenrod;
+    position: absolute;
+    top: calc(50% - 29px);
+    /* left: calc(50% - 5px); */
+    left: 0;
+    z-index: 1000;
+    margin: 0;
+    width: 20px;
+    height: 58px;
+}
+
+
+.SBshowButton.icon.caret:hover {
+    cursor: pointer;
 }
