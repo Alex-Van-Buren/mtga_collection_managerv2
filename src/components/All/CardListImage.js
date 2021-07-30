@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setCardModalContent, showCardModal } from '../../actions';
+import {
+    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType
+} from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
-import { addCardToDeck } from '../../actions';
 import isCardAddible from '../../hooks/isCardAddible';
 import '../../css/CardListImage.css';
 
@@ -27,6 +28,9 @@ function CardListImage({
     // Get deckList and deckType for use in deckbuilder
     const deckObj = useSelector((state) => state.deckBuilder.deckMap);
     const deckType = useSelector((state) => state.deckBuilder.deckType);
+
+    // Choose which action to dispatch for deckbuilder
+    const { addType } = useSelector(state => state.deckBuilder);
 
     // Track image side to be shown (front=true)
     const [imgSide, setImgSide] = useState(true);
@@ -111,15 +115,34 @@ function CardListImage({
                 // Then show the modal
                 dispatch( showCardModal(true) );
             })();
-        } else { // deckBuilder === true
+        }
+        else { // deckBuilder === true
             return (() => {
 
                 if (isCardAddible(card, deckObj, deckType)) {
-                    // Provide information about clicked card to deck via redux
-                    dispatch( addCardToDeck({ 
+
+                    // Get card info to dispatch
+                    const cardInfo = { 
                         name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
                         collector_number: card.collector_number, type_line: type_line, legalities: card.legalities
-                    }) );
+                    };
+
+                    // Choose action to dispatch to
+                    switch (addType) {
+                        case "deck": {
+                            dispatch(addCardToDeck(cardInfo));
+                            break;
+                        } case "sideboard": {
+                            dispatch(addCardToSideboard(cardInfo));
+                            break;
+                        } case "commander": {
+                            dispatch(changeCommander(cardInfo));
+                            break;
+                        } case "companion": {
+                            dispatch(changeCompanion(cardInfo));
+                            break;
+                        } default: break;
+                    }
                 }
             })();
         }

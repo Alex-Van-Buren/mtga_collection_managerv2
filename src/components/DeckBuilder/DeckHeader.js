@@ -1,6 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { setAddType } from '../../actions';
 import '../../css/DeckHeader.css';
 
 /**
@@ -9,8 +10,15 @@ import '../../css/DeckHeader.css';
  * @returns JSX
  */
 function DeckHeader() {
+
+    const dispatch = useDispatch();
+
+    // Toggle for adding cards to deck or sideboard
+    const { addType } = useSelector(state => state.deckBuilder);
+    const [ deckOrSideboard, setDeckOrSideboard ] = useState(addType === "sideboard" ? false : true);
+
     // Get the deck array and flatten it;
-    let deck = useSelector(state => state.deckBuilder.deck); 
+    let deck = useSelector(state => state.deckBuilder.deck);
     deck = deck.flat();
 
     // Initialize deck counts
@@ -74,13 +82,61 @@ function DeckHeader() {
         partialLandSpan = <span>{`(+${partialLandCount})`}</span>
     }
 
+    function toggle(event) {
+
+        event.stopPropagation();
+
+        // If currently on deck, swap to sideboard
+        if(deckOrSideboard) {
+            dispatch(setAddType("sideboard"));
+        }
+        // If currently on sideboard, swap to deck
+        else {
+            dispatch(setAddType("deck"));
+        }
+
+        // Then switch toggle
+        setDeckOrSideboard(!deckOrSideboard)
+    }
+
+    const addToggle = (
+        <div
+            // Accessibility
+            className="addToggle" tabIndex="0"
+            onKeyDown={ e => {if (e.key === "Enter") toggle(e) } }
+            onMouseDown={ e => toggle(e) }
+            role="checkbox" aria-checked={!deckOrSideboard} aria-label="Toggle add to deck or sideboard"
+        >
+            {/* Deck */}
+            <span className="deck_sideboardToggleLabel">Add to Deck</span>
+
+            {/* Deck or sideboard toggle */}
+            <div className="ui fitted toggle checkbox">
+                <input 
+                    type="checkbox" name="deckOrSideboard" id="deckOrSideboard" tabIndex="-1"
+                    checked={!deckOrSideboard} readOnly
+                />
+                <label tabIndex="-1"></label>
+            </div>
+
+            {/* Sideboard */}
+            <span className="deck_sideboardToggleLabel">Add to Sideboard</span>
+        </div>
+    );
+
     return (
         <div className="deckHeader">
-            {/* {`Total: ${totalCount} Land: ${landCount}`}{partialLandSpan} {`Creature: ${creatureCount} NonCreature: ${nonCreatureCount}`} */}
-            <div className="total">Total: {totalCount}</div>
-            <div className="landCount">Land: {landCount}{partialLandSpan}</div>
-            <div className="creatureCount">Creatures: {creatureCount}</div>
-            <div className="nonCreatureCount">Noncreatures: {nonCreatureCount}</div>
+
+            <div className="left">
+                <div className="total">Total: {totalCount}</div>
+                <div className="landCount">Land: {landCount}{partialLandSpan}</div>
+                <div className="creatureCount">Creatures: {creatureCount}</div>
+                <div className="nonCreatureCount">Noncreatures: {nonCreatureCount}</div>
+            </div>
+
+            <div className="right">
+                {addToggle}
+            </div>
         </div>
     )
 }

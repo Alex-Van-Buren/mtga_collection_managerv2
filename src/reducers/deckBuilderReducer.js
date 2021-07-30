@@ -1,5 +1,5 @@
 import {
-    ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, 
+    ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, SET_ADD_TYPE,
     ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD
 } from '../actions/types';
 
@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     commander: null,
     companion: null,
     deckType: "standard", 
-    addBasics: false
+    addBasics: false,
+    addType: "deck" // Valid types: "deck", "sideboard", "commander", "companion"
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {
@@ -191,6 +192,19 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         case TOGGLE_ADD_BASICS: {
 
             return { ...state, addBasics: !state.addBasics }
+        }
+
+        case SET_ADD_TYPE: {
+
+            // Input validation
+            if (
+                !["deck", "sideboard", "commander", "companion"].includes(action.payload) || // Check if invalid
+                action.payload === state.addType // Check if current value
+            ) {
+                return state;
+            }
+
+            return { ...state, addType: action.payload };
         }
 
         default:

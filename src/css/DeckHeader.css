@@ -1,6 +1,41 @@
 .deckHeader {
-    display: flex;
-    gap: 5px;
+    align-items: center;
     background-color: lightgray;
     color: rgba(0,0,0,0.87);
+    display: flex;
+    justify-content: space-between;
+}
+
+.deckHeader .left {
+    display: flex;
+}
+
+.deckHeader .total {
+    width: 64px;
+}
+
+.deckHeader .landCount {
+    width: 62px;
+}
+
+.deckHeader .creatureCount {
+    width: 95px;
+}
+
+.deckHeader .nonCreatureCount {
+    width: 115px;
+}
+
+.deck_sideboardToggleLabel {
+    padding: 0.2rem 1rem;
+}
+
+.addToggle {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+}
+
+.addToggle .ui.toggle.checkbox label:before {
+    background: #5151a5 !important;
 }
