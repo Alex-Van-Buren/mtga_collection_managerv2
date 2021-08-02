@@ -165,15 +165,34 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         }
 
         case REMOVE_CARD_FROM_SIDEBOARD: {
+            const card = action.payload;
 
             // Copy sideboard
             let newSideboard = [ ...state.sideboard ];
+            let newSideboardMap = { ...state.sideboardMap };
             
             // Remove card
-            newSideboard.splice(newSideboard.indexOf(action.payload), 1);
+            newSideboard.splice(newSideboard.indexOf(card), 1);
+
+            /* Remove card from sideboardMap */
+
+                // Decrement card count
+                newSideboardMap[card.name][card.arenaId].copies--;
+
+                // Check if arenaId needs to be removed
+                if (newSideboardMap[card.name][card.arenaId].copies <= 0) {
+                    delete newSideboardMap[card.name][card.arenaId];
+                }
+
+                // Check if card name needs to be removed
+                if (Object.keys(newSideboardMap[card.name]).length <= 0) {
+                    delete newSideboardMap[card.name];
+                }
+
+            /* End removing from deckMap */
 
             // Update state
-            return { ...state, sideboard: newSideboard };
+            return { ...state, sideboard: newSideboard, sideboardMap: newSideboardMap };
         }
 
         case SET_SIDEBOARD: {
