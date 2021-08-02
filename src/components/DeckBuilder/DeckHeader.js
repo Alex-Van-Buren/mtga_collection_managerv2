@@ -13,7 +13,7 @@ function DeckHeader() {
 
     const dispatch = useDispatch();
 
-    const { addType } = useSelector(state => state.deckBuilder);
+    const { addType, deckType } = useSelector(state => state.deckBuilder);
     const deckOrSideboard = addType === "sideboard" ? false : true;
 
     // Get the deck array and flatten it;
@@ -82,6 +82,7 @@ function DeckHeader() {
         partialLandSpan = <span>{`(+${partialLandCount})`}</span>
     }
 
+    // Function sets the redux that makes the toggle switch sides
     function toggle(event) {
 
         event.stopPropagation();
@@ -96,9 +97,10 @@ function DeckHeader() {
         }
     }
 
+    // Toggle for deck and sideboard
     const addToggle = (
         <div
-            // Accessibility
+            // Accessibility and events
             className="addToggle" tabIndex="0"
             onKeyDown={ e => {if (e.key === "Enter") toggle(e) } }
             onMouseDown={ e => toggle(e) }
@@ -121,6 +123,45 @@ function DeckHeader() {
         </div>
     );
 
+    // Set add mode to either commander or companion
+    function setComType(event, type) {
+
+        // Don't propagate events to deck header
+        event.stopPropagation();
+
+        // Toggle current type
+        if (type !== addType) {
+            dispatch(setAddType(type));
+        } else {
+            dispatch(setAddType("deck"));
+        }
+    }
+
+    function setComButton(type) {
+
+        let buttonText;
+        let style = {};
+
+        if (type === addType) {
+            style.filter = "brightness(70%)"
+        }
+
+        switch (type) {
+            case "commander": buttonText = "Set Commander"; break;
+            case "companion": buttonText = "Set Companion"; break;
+            default: buttonText = ""; break;
+        }
+
+        return <button
+            // Accessibility and events
+            className="setComButton" tabIndex="0" aria-label={`Set ${type} button`}
+            onKeyDown={ e => {if (e.key === "Enter") setComType(e, type) } }
+            onMouseDown={ e => setComType(e, type) } style={style}
+        >
+            {buttonText}
+        </button>;
+    }
+
     return (
         <div className="deckHeader">
 
@@ -132,11 +173,13 @@ function DeckHeader() {
             </div>
 
             <div className="right">
+                {deckType === "brawl" || deckType === "custom" ? setComButton("commander") : null}
+                {setComButton("companion")}
                 <div className="sideboard">Sideboard: {sideboardCount}</div>
                 {addToggle}
             </div>
         </div>
-    )
+    );
 }
 
 export default DeckHeader;

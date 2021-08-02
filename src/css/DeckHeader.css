@@ -45,3 +45,8 @@
 .addToggle .ui.toggle.checkbox label:before {
     background: #5151a5 !important;
 }
+
+.setComButton {
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
