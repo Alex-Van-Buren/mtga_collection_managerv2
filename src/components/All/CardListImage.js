@@ -9,9 +9,7 @@ import isCardAddible from '../../hooks/isCardAddible';
 import '../../css/CardListImage.css';
 
 /**
- * 
- * @param {*} param0 
- * @returns 
+ * Describes a single image from the CardList, including its backside if applicable.
  */
 function CardListImage({
     card, index, cardHeader, cardClass="bouncy column", additionalFlipClass="", deckBuilder=false

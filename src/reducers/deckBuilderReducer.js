@@ -132,11 +132,36 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
         case ADD_CARD_TO_SIDEBOARD: {
 
-            // Copy sideboard and add card
-            const newSideboard = [ ...state.sideboard, action.payload ];
+            // Alias the card to an easier name
+            const card = action.payload;
+
+            // Copy current state
+            const newSideboard = [ ...state.sideboard ];
+            const newSideboardMap = { ...state.sideboardMap };
+
+            // Add card to sideboard
+            newSideboard.push(card);
+
+            /* Add card to sideboardMap */
+
+            // Initialize specific card name in sideboardMap if necessary
+            if (!newSideboardMap[card.name]) {
+                newSideboardMap[card.name] = {};
+            }
+
+            // Increment count if specific arenaId declared under card name
+            if (newSideboardMap[card.name][card.arenaId]) {
+                newSideboardMap[card.name][card.arenaId].copies++;
+            }
+            // Else initialize arenaId for card name
+            else {
+                newSideboardMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
+            }
+
+            /* End adding to sideboardMap */
 
             // Update state
-            return { ...state, sideboard: newSideboard };
+            return { ...state, sideboard: newSideboard, sideboardMap: newSideboardMap };
         }
 
         case REMOVE_CARD_FROM_SIDEBOARD: {
