@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion
+    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType
 } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import isCardAddible from '../../hooks/isCardAddible';
@@ -10,8 +10,6 @@ import '../../css/CardListImage.css';
 
 /**
  * Describes a single image from the CardList, including its backside if applicable.
- * @param {*} param0 
- * @returns 
  */
 function CardListImage({
     card, index, cardHeader, cardClass="bouncy column", additionalFlipClass="", deckBuilder=false
@@ -131,19 +129,21 @@ function CardListImage({
 
                     // Choose action to dispatch to
                     switch (addType) {
-                        case "deck": {
+                        case "deck":
                             dispatch(addCardToDeck(cardInfo));
                             break;
-                        } case "sideboard": {
+                        case "sideboard":
                             dispatch(addCardToSideboard(cardInfo));
                             break;
-                        } case "commander": {
+                        case "commander":
                             dispatch(changeCommander(cardInfo));
+                            dispatch(setAddType("deck"));
                             break;
-                        } case "companion": {
+                        case "companion":
                             dispatch(changeCompanion(cardInfo));
+                            dispatch(setAddType("deck"));
                             break;
-                        } default: break;
+                        default: break;
                     }
                 }
             })();

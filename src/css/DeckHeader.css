@@ -7,16 +7,21 @@
     padding-left: 1rem;
 }
 
-.deckHeader .left {
+.deckHeader .left, .deckHeader .right {
+    align-items: center;
     display: flex;
 }
 
-.deckHeader .total {
-    width: 64px;
+.deckHeader .deck {
+    width: 68px;
+}
+
+.deckHeader .sideboard {
+    width: 96px;
 }
 
 .deckHeader .landCount {
-    width: 85px;
+    width: 88px;
 }
 
 .deckHeader .creatureCount {

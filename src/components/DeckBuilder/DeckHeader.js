@@ -13,16 +13,16 @@ function DeckHeader() {
 
     const dispatch = useDispatch();
 
-    // Toggle for adding cards to deck or sideboard
     const { addType } = useSelector(state => state.deckBuilder);
-    const [ deckOrSideboard, setDeckOrSideboard ] = useState(addType === "sideboard" ? false : true);
+    const deckOrSideboard = addType === "sideboard" ? false : true;
 
     // Get the deck array and flatten it;
-    let deck = useSelector(state => state.deckBuilder.deck);
+    let { deck, sideboard } = useSelector(state => state.deckBuilder);
     deck = deck.flat();
 
     // Initialize deck counts
-    let totalCount       = 0;
+    const sideboardCount = sideboard.length;
+    let deckCount        = 0;
     let landCount        = 0;
     let partialLandCount = 0;
     let creatureCount    = 0; 
@@ -30,7 +30,7 @@ function DeckHeader() {
 
     // Count up totals
     for (const card of deck) {
-        totalCount++;
+        deckCount++;
         
         // If Creature appears anywhere in the type line update creature count (Do not care if card is double sided)
         if (card.type_line.includes('Creature')) {
@@ -94,9 +94,6 @@ function DeckHeader() {
         else {
             dispatch(setAddType("deck"));
         }
-
-        // Then switch toggle
-        setDeckOrSideboard(!deckOrSideboard)
     }
 
     const addToggle = (
@@ -128,13 +125,14 @@ function DeckHeader() {
         <div className="deckHeader">
 
             <div className="left">
-                <div className="total">Total: {totalCount}</div>
+                <div className="deck">Deck: {deckCount}</div>
                 <div className="landCount">Land: {landCount}{partialLandSpan}</div>
                 <div className="creatureCount">Creatures: {creatureCount}</div>
                 <div className="nonCreatureCount">Noncreatures: {nonCreatureCount}</div>
             </div>
 
             <div className="right">
+                <div className="sideboard">Sideboard: {sideboardCount}</div>
                 {addToggle}
             </div>
         </div>
