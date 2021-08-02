@@ -4,6 +4,7 @@
     color: rgba(0,0,0,0.87);
     display: flex;
     justify-content: space-between;
+    padding-left: 1rem;
 }
 
 .deckHeader .left {
@@ -15,7 +16,7 @@
 }
 
 .deckHeader .landCount {
-    width: 62px;
+    width: 85px;
 }
 
 .deckHeader .creatureCount {
