@@ -30,6 +30,8 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const cmc            = useSelector(state => state.displayOptions.cmc);
     const reduxSets      = useSelector(state => state.displayOptions.set);
     const deckMap        = useSelector(state => state.deckBuilder.deckMap);
+    const sideboardMap   = useSelector(state => state.deckBuilder.sideboardMap);
+    const commander      = useSelector(state => state.deckBuilder.commander);
     const reduxdeckType  = useSelector(state => state.deckBuilder.deckType);
     const addBasics      = useSelector(state => state.deckBuilder.addBasics);
     const reduxCardTypes = useSelector(state => state.displayOptions.cardTypes);
@@ -212,9 +214,22 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
                             circleClass += ' outline';
                         }
 
-                        // Get number of copies in deck
-                        const copiesInDeck = deckMap[card.name] && deckMap[card.name][card.arenaId] ? 
-                            deckMap[card.name][card.arenaId].copies : 0;
+                        // Get number of copies in deck and sideboard
+                        let copiesInDeck = 0;
+
+                        // Count the commander
+                        if (commander && commander.arenaId === card.arenaId) {
+                            copiesInDeck = 1;
+                        }
+
+                        // Count the copies in the main deck
+                        if (deckMap[card.name] && deckMap[card.name][card.arenaId]) {
+                            copiesInDeck += deckMap[card.name][card.arenaId].copies;
+                        }
+                        // Count the copies in the sideboard
+                        if (sideboardMap[card.name] && sideboardMap[card.name][card.arenaId]) {
+                            copiesInDeck += sideboardMap[card.name][card.arenaId].copies;
+                        }
 
                         // Color circles for number of cards in deck
                         if (copiesInDeck && i < copiesInDeck) {
@@ -245,7 +260,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         return returnCards;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardCollection, cards, showCards, deckBuilder, deckMap]);
+    }, [cardCollection, cards, showCards, deckBuilder, deckMap, sideboardMap, commander]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
     useEffect( () => {
