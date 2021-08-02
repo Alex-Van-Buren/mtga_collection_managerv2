@@ -10,6 +10,8 @@ import '../../css/CardListImage.css';
 
 /**
  * Describes a single image from the CardList, including its backside if applicable.
+ * @param {*} param0 
+ * @returns 
  */
 function CardListImage({
     card, index, cardHeader, cardClass="bouncy column", additionalFlipClass="", deckBuilder=false
@@ -26,6 +28,8 @@ function CardListImage({
     // Get deckList and deckType for use in deckbuilder
     const deckObj = useSelector((state) => state.deckBuilder.deckMap);
     const deckType = useSelector((state) => state.deckBuilder.deckType);
+    const sideObj = useSelector((state) => state.deckBuilder.sideboardMap);
+    const commander = useSelector((state) => state.deckBuilder.commander);
 
     // Choose which action to dispatch for deckbuilder
     const { addType } = useSelector(state => state.deckBuilder);
@@ -117,7 +121,7 @@ function CardListImage({
         else { // deckBuilder === true
             return (() => {
 
-                if (isCardAddible(card, deckObj, deckType)) {
+                if (isCardAddible(card, deckObj, sideObj, commander, deckType)) {
 
                     // Get card info to dispatch
                     const cardInfo = { 

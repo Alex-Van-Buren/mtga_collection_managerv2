@@ -3,10 +3,12 @@
  * Checks if there are max copies of a card already in the decklist as well as if the card is legal in the desired deckType.
  * @param {object} card The card Object attempting to be added. Should contain at least name, type_line, and  legalities.
  * @param {Object} deckObj The decklist object of cards currently in the deck.
+ * @param {Object} sideObj The sideboard object of cards currently in the deck.
+ * @param {Object} commander The currently selected commander.
  * @param {string} deckType String of deck type being created. e.g. "standard", "historic"
  * @returns {boolean} True if card can be added. False if it cannot be added
  */
-export default function isCardAddible(card, deckObj, deckType) {
+export default function isCardAddible(card, deckObj, sideObj, commander, deckType) {
     // First check if the card is legal in the desired deckType
     // For Custom and Limited, all cards are legal so skip this step
     if (!(deckType === 'custom' || deckType === 'limited')) {
@@ -18,10 +20,13 @@ export default function isCardAddible(card, deckObj, deckType) {
     }
 
     // Count the number of copies of the card already in deck
-
-    // TODO: Make sure to count copies in the sideboard when that is made
     let copiesInDeck = 0; // Initialize
-    
+
+    // Check the commander slot
+    if (commander && commander.name === card.name) {
+        copiesInDeck++;
+    }
+
     // Check if the deck has any copies of the card
     if ( deckObj[card.name] ) {
 
@@ -31,6 +36,12 @@ export default function isCardAddible(card, deckObj, deckType) {
         }
     }
 
+    // Check the sideboard
+    if ( sideObj[card.name] ) {
+        for (const arenaId in sideObj[card.name]) {
+            copiesInDeck += sideObj[card.name][arenaId].copies;
+        }
+    }
     // Get the max number of copies allowed in a deck for this decktype
     let maxCopies; 
     switch (deckType) {
