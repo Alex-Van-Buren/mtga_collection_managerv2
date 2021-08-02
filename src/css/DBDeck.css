@@ -32,9 +32,22 @@
 .DBDeckCard {
     /* Stacked cards will be this height */
     height: 25px;
+    width: 159px;
 }
 
 .DBDeckCard > img {
     /* Only top card will be this height */
     height: 225px;
+}
+
+#commander_companion {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 159px;
+}
+
+#commander_companion img {
+    height: 225px;
+    width: 159px;
 }

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeCardFromDeck } from '../../actions';
+import { changeCommander, changeCompanion, removeCardFromDeck } from '../../actions';
 import '../../css/DBDeck.css';
 
 function DBDeck() {
@@ -11,7 +11,7 @@ function DBDeck() {
 
     // Get Redux
     const { cardCollection } = useSelector(state => state.inventory);
-    const { deck, deckType } = useSelector(state => state.deckBuilder);
+    const { deck, commander, companion, deckType } = useSelector(state => state.deckBuilder);
 
     // Make an array of JSX for each of the 8 deck columns
     const renderCards = useMemo(() => {
@@ -71,8 +71,33 @@ function DBDeck() {
         });
     }, [deck, deckType, cardCollection, dispatch]);
 
+    // Show commander and companion only when they exist
+    const commander_companion = (commander && ["brawl", "custom"].includes(deckType)) || companion ? (
+        <div id="commander_companion">
+
+            {/* Show commander if it exists */}
+            {commander && ["brawl", "custom"].includes(deckType) ? (<>
+                <label htmlFor="commanderCard">Commander</label>
+                <img
+                    src={commander.imgs.front} alt={commander.name} id="commanderCard"
+                    onClick={() => dispatch(changeCommander())}
+                />
+            </>) : null}
+
+            {/* Show companion if it exists */}
+            {companion ? (<>
+                <label htmlFor="companionCard">Companion</label>
+                <img
+                    src={companion.imgs.front} alt={companion.name} id="companionCard"
+                    onClick={() => dispatch(changeCompanion())}
+                />
+            </>) : null}
+        </div>
+    ) : null;
+
     return (
         <div id="DBDeck">
+            {commander_companion}
             {renderCards}
         </div>
     );
