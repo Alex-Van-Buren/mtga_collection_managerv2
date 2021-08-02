@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType
+    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion
 } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import isCardAddible from '../../hooks/isCardAddible';
