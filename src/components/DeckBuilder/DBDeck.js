@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeCommander, changeCompanion, removeCardFromDeck } from '../../actions';
+import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard } from '../../actions';
 import '../../css/DBDeck.css';
 
 function DBDeck() {
@@ -63,6 +63,10 @@ function DBDeck() {
                             onClick={(e) => {
                                 e.stopPropagation();
                                 dispatch(removeCardFromDeck(card));
+                                // If the deckType is limited, move the card to the sideboard
+                                if ( deckType === 'limited' ) {
+                                    dispatch(addCardToSideboard(card));
+                                }
                             }}
                         />
                     </div>;

@@ -40,7 +40,7 @@ function DeckBuilder() {
         }
     }
     const { deckType, addBasics } = useSelector(state => state.deckBuilder);
-
+    // Change the shown cards to add to deck to the limited sideboard if deckType is limited and not adding basic lands
     const dbCardList = (deckType === 'limited' && !addBasics) ? <LimitedSideboard /> : <CardList scrollingParent={".dbCardList"} deckBuilder />;
 
     return (
@@ -49,8 +49,6 @@ function DeckBuilder() {
 
             <div className="mainContent">
                 <div className="dbCardList" ref={cardListRef}>
-                    {/* <CardList scrollingParent={".dbCardList"} deckBuilder /> */}
-                    {/* <LimitedSideboard /> */}
                     {dbCardList}
                 </div>
                 <div className="slider" onMouseDown={(e)=>MoveSlider(e)}>

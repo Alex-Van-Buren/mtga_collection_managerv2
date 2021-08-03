@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { removeCardFromSideboard, addCardToDeck } from '../../actions'
 import '../../css/LimitedSideboard.css';
 
 /**
@@ -59,11 +60,21 @@ function LimitedSideboard() {
  * @returns JSX
  */
 function SideboardColumn({cardArray}) {
+    const dispatch = useDispatch();
+
+    function moveToDeck(event, card) {
+        event.stopPropagation();
+        dispatch(removeCardFromSideboard(card));
+        dispatch(addCardToDeck(card));
+    }
+
     let renderColumn = null;
     if (cardArray.length >= 1) {
         renderColumn = cardArray.map( (card, i )=> {
             return (
-                <div className="DBDeckCard" key={card.name + i} >
+                <div className="DBDeckCard" key={card.name + i} 
+                    onClick={(e) => moveToDeck(e, card)}
+                >
                     <img
                         src={card.imgs.front} alt={card.name} 
                     />
