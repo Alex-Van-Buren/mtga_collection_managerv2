@@ -1,10 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import DBSidebar from './DBSidebar';
 import DeckHeader from './DeckHeader';
 import DBDeck from './DBDeck';
 import CardList from '../All/CardList';
 import DBSideboard from './DBSideboard';
+import LimitedSideboard from './LimitedSideboard';
 import '../../css/DeckBuilder.css';
 import { useRef } from 'react';
 
@@ -37,13 +39,19 @@ function DeckBuilder() {
             cardListRef.current.style.marginRight = "0"
         }
     }
+    const { deckType, addBasics } = useSelector(state => state.deckBuilder);
+
+    const dbCardList = (deckType === 'limited' && !addBasics) ? <LimitedSideboard /> : <CardList scrollingParent={".dbCardList"} deckBuilder />;
+
     return (
         <div id="DeckBuilder">
             <DBSidebar />
 
             <div className="mainContent">
                 <div className="dbCardList" ref={cardListRef}>
-                    <CardList scrollingParent={".dbCardList"} deckBuilder />
+                    {/* <CardList scrollingParent={".dbCardList"} deckBuilder /> */}
+                    {/* <LimitedSideboard /> */}
+                    {dbCardList}
                 </div>
                 <div className="slider" onMouseDown={(e)=>MoveSlider(e)}>
                     <DeckHeader />
