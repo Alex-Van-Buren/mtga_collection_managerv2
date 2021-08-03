@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setAddType } from '../../actions';
@@ -15,6 +16,13 @@ function DeckHeader() {
 
     const { addType, deckType } = useSelector(state => state.deckBuilder);
     const deckOrSideboard = addType === "sideboard" ? false : true;
+
+    // Changes add type to 'deck' when you switch to limited mode
+    useEffect(() => {
+        if (deckType === 'limited') {
+            dispatch(setAddType('deck'))
+        }
+    },[deckType, dispatch])
 
     // Get the deck array and flatten it;
     let { deck, sideboard } = useSelector(state => state.deckBuilder);
@@ -98,7 +106,8 @@ function DeckHeader() {
     }
 
     // Toggle for deck and sideboard
-    const addToggle = (
+    // Turnary operator removes this element in limited mode
+    const addToggle = deckType === 'limited' ? null : (
         <div
             // Accessibility and events
             className="addToggle" tabIndex="0"
