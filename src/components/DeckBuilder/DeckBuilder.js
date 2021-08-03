@@ -56,7 +56,7 @@ function DeckBuilder() {
                 </div>
                 <div className="deckSection">
                     <DBDeck />  
-                    <DBSideboard />
+                    {deckType ==='limited'? null : <DBSideboard />}
                 </div>
             </div>
         </div>
