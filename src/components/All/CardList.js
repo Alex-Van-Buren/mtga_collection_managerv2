@@ -43,13 +43,12 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const cards = useMemo(() => {
 
         // If all/none of the rarities selected, set rarityOption to undefined so findCards will not filter by rarity
-        let rarityOption = []; let index = 0;
+        let rarityOption = []; 
         for (const rarity in rarities) {
 
             // Add rarity to rarityOption if it's selected
             if (rarities[rarity]) {
-                rarityOption[index] = rarity;
-                index++;
+                rarityOption.push(rarity);
             }
         }
 

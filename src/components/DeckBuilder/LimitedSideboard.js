@@ -2,7 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeCardFromSideboard, addCardToDeck } from '../../actions'
+import { removeCardFromSideboard, addCardToDeck } from '../../actions';
+import findCards from '../../data/findCards';
 import '../../css/LimitedSideboard.css';
 
 /**
@@ -11,7 +12,52 @@ import '../../css/LimitedSideboard.css';
  */
 function LimitedSideboard() {
     const sideboardCards = useSelector(state => state.deckBuilder.sideboard);
-    const [sorting, setSorting] = useState('CMC')
+    const { colors, rarity, cardTypes, searchTerm, searchType, cmc } = useSelector(state => state.displayOptions);
+    const [sorting, setSorting] = useState('Color');
+
+    // Create rarity search option from rarity object
+    let rarityOptions = [];
+    for (const option in rarity) {
+
+        // Add rarity to rarityOption if it's selected
+        if (rarity[option]) {
+            rarityOptions.push(option);
+        }
+    }
+
+    // Make cardTypes retrieved from redux into a usable form for findCards
+    // Currently is an array of objects --> Need just simple array
+
+    let searchCardTypes = undefined; // Initialize as undefined for case where reduxcardTypes is empty
+
+    if ( cardTypes.length >= 1 ) {
+        searchCardTypes = []; // Change to empty array to add push method 
+
+        for (const cardType of cardTypes) {
+            // Only push the value property from reduxCardTypes into array
+            searchCardTypes.push(cardType.val);
+        }
+    }
+
+    // Check the cmc values for "Any" string and change them to undefined
+    let searchcmc = {...cmc};
+
+    if (searchcmc.min === 'Any') {
+        searchcmc.min = undefined;
+    }
+    if (searchcmc.max === 'Any') {
+        searchcmc.max = undefined;
+    }
+
+    // Set rarityOption to undefined if all or none of the rarities are added to it
+    if (rarityOptions.length < 1 || rarityOptions.length > 3) {
+        rarityOptions = undefined;
+    }
+
+    // Make searchOptions object
+    const searchOptions = {color: colors, rarity: rarityOptions, cardTypes: searchCardTypes, term: searchTerm, advancedSearchType: searchType, cmc: searchcmc};
+    // Use findCards to filter the sideboard cards
+    const cardList = findCards(searchOptions, 'all', sideboardCards);
 
     // Sort the sideboard cards into arrays
     let col0 = [];
@@ -26,7 +72,7 @@ function LimitedSideboard() {
     // Sort into CMC columns if sorting by cmc
     if ( sorting === 'CMC') {
 
-        for (const card of sideboardCards) {
+        for (const card of cardList) {
             switch (card.cmc) {
                 case 0:
                     col0.push(card); break;
@@ -50,10 +96,10 @@ function LimitedSideboard() {
 
     // Sort into Color columns if sorting by color
     if (sorting === 'Color') {
-        for (const card of sideboardCards) {
+        for (const card of cardList) {
             // Check how many colors the card has
-            if ( card.color.length === 1 ){
-                switch ( card.color[0]) {
+            if ( card.color_identity.length === 1 ){
+                switch ( card.color_identity[0]) {
                     case 'W':
                         col0.push(card); break;
                     case 'U':
@@ -68,10 +114,10 @@ function LimitedSideboard() {
                         break;
                 }
             }
-            else if ( card.color.length > 1) {
+            else if ( card.color_identity.length > 1) {
                 col5.push(card);
             }
-            else if (card.color.length === 0 ) {
+            else if (card.color_identity.length === 0 ) {
                 col6.push(card);
             }            
         }
@@ -117,10 +163,11 @@ function SideboardColumn({cardArray}) {
         dispatch(addCardToDeck(card));
     }
 
-    let renderColumn = null;
+    let renderColumn;
     if (cardArray.length >= 1) {
         renderColumn = cardArray.map( (card, i )=> {
             return (
+                // Using DBDeckCard class from dbdeck
                 <div className="DBDeckCard" key={card.name + i} 
                     onClick={(e) => moveToDeck(e, card)}
                 >
@@ -132,6 +179,11 @@ function SideboardColumn({cardArray}) {
         });
 
     }
+    // Return nothing if there are no cards
+    else {
+        return null;
+    }
+
     return (
         <div className="limitedSideboard-column">
             {renderColumn}
