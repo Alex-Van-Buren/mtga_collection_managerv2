@@ -1,0 +1,28 @@
+.limitedSideboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.limitedSideboard-header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: lightgray;
+    padding: 2px 5px;
+}
+
+.limitedSideboard-header label {
+    color: black;
+}
+
+.limitedSideboard-cards {
+    display: flex;
+    gap: 8px;
+    padding: 5px;
+}
+
+.sortButtons {
+    display: flex;
+    gap: 5px;
+    padding-left: 5px;
+}

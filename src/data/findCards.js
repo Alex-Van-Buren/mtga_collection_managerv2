@@ -6,9 +6,10 @@ import arenaCards from "./arenaCards";
  * @param {*} searchOptions Object of options to filter the cards on Arena. Define as an object eg{set:'setId', name:'cardName', color: ['W', 'G'] 
  * (color also accepts 'colorless' or 'multi'), rarity: ['rarity1','rarity2'], booster: boolean}
  * @param {*} returnOptions An Array of addtional properties to retrieve eg ['image_uris', 'set', 'cmc', etc]
+ * @param {} searchCards Optional. A List of card objects to search. Defaults to all cards on arena. 
  * @returns An array of the cards founds with each card as an object with properties: name, arenaId, and the additional properties defined (if found)
  */
-function findCards(searchOptions, returnOptions) {
+function findCards(searchOptions, returnOptions, searchCards = arenaCards) {
 
     // Destructure search options
     const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes } = searchOptions;
@@ -86,7 +87,7 @@ function findCards(searchOptions, returnOptions) {
     // Card list will hold chosen cards
     let cardList = [];
 
-    for (const card of arenaCards) { // Loop over cards
+    for (const card of searchCards) { // Loop over cards
         let addCard = true;
 
         for (let i=0; i<filterFunctions.length; i++) { // Loop over filter functions
@@ -427,13 +428,18 @@ function filterCardTypes(cardTypeLine, cardTypes) {
 }
 
 /**
- * Helper function that takes the input cardlist and returns the desired properties of that card to make it easier to use
+ * Helper function that takes the input card and returns the desired properties of that card to make it easier to use
  * @param {Array} card The card to remove properties from.
- * @param {Array} returnOptions Properties to keep from the card list.
+ * @param {Array} returnOptions Properties to keep from the card list. If returnOptions is set to 'all', will return entire card object.
  * @returns New card list with only the properties specified in returnOptions
  */
 function getCardProperties(card, returnOptions) {
-
+    // Check if returnOptions is set to 'all' --> just return the entire card objectf
+    if ( returnOptions === 'all' ) {
+        return card;
+    }
+    
+    // Otherwise
     // Initialize card object to add
     let newCard = {};
     newCard.name = card.name;    

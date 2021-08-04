@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Modal from '../Templates/Modal';
 import SearchBar from '../Templates/SearchBar';
@@ -20,6 +21,16 @@ function AdvancedOptions() {
 
     // Advanced options modal is open/closed
     const [modalOpen, setModalOpen] = useState(false);
+    const { rarity, showCards, booster, set, cmc, searchType, cardTypes} = useSelector(state => state.displayOptions);
+
+    // Boolean for if advanced Options are being used
+    let inUse = false;
+    // Check if any of the advanced Options are not their defaults
+    if (showCards !== 'Show All Cards' || booster !=='Show All Cards' || set.length > 0 || cardTypes.length > 0 || searchType !== null ||
+        Object.values(rarity).includes(true) || cmc.min !== 'Any' || cmc.max !== 'Any'
+    ) {
+        inUse = true;
+    }
 
     // JSX in the modal --> only viewable if modalOpen is true
     const modalContent = ( 
@@ -54,7 +65,8 @@ function AdvancedOptions() {
 
     return (
         <> 
-            <button className="advancedOptionsButton" onClick={() => setModalOpen(!modalOpen)}
+        {/* Add inUse flag to class if some option ONLY in advanced options is being used */}
+            <button className={inUse ? 'advancedOptionsButton inUse': 'advancedOptionsButton'} onClick={() => setModalOpen(!modalOpen)}
             title="Advanced Options"
             >
                 <i className="icon cogs"></i>
