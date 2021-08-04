@@ -49,9 +49,8 @@
     color: goldenrod;
     position: absolute;
     top: calc(50% - 29px);
-    /* left: calc(50% - 5px); */
     left: 0;
-    z-index: 1000;
+    z-index: 50;
     margin: 0;
     width: 20px;
     height: 58px;

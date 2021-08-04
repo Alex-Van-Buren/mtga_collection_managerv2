@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import HoverPreview from '../Templates/HoverPreview';
 import {
     setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType
 } from '../../actions';
@@ -15,6 +16,7 @@ function CardListImage({
     card, index, cardHeader, cardClass="bouncy column", additionalFlipClass="", deckBuilder=false
 }) {
 
+    // Destructure the card properties needed for 
     const { name, backside, type_line, oracle_text } = card;
 
     // Get redux dispatcher
@@ -106,7 +108,7 @@ function CardListImage({
         cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
     }
 
-    const onClick = () => {
+    const onClick = (e) => {
         if (!deckBuilder) {
             return (() => {
                 // Get the index of the image on click
@@ -117,6 +119,10 @@ function CardListImage({
             })();
         }
         else { // deckBuilder === true
+
+            // Forcefully reset timer
+            setTimer(e);
+
             return (() => {
 
                 if (isCardAddible(card, deckObj, sideObj, commander, deckType)) {
@@ -150,6 +156,56 @@ function CardListImage({
         }
     }
 
+    /**
+     * Forcefully sets timer
+     */
+    function setTimer(e) {
+
+        clearTimeout(timerID.current);
+        setHoverPreview(null);
+
+        // Set timers
+        timerID.current = setTimeout(() => {
+            
+            // Check if timer is still valid
+            if (timerID.current) {
+
+                // Clear timers
+                timerID.current = null;
+
+                // Get target location
+                const { top, bottom, left, right } = e.target.getBoundingClientRect();
+
+                // Get screen height and width
+                const {innerHeight, innerWidth} = window;
+
+                // Hover preview dimensions
+                const height = 350;
+                const width = imgs.back ? 494.14 : 247.07;
+                
+                // TODO: Height calculations
+
+                // Default position at upper left corner of card
+                let x = left, y = top;
+
+                // Shift image left if off screen to the right
+                if (left + width > innerWidth) {
+                    x = right - width;
+                }
+
+                // Make the hover preview
+                setHoverPreview(<HoverPreview imgs={imgs} x={x} y={y} />);
+            }
+
+        }, 500);
+    }
+
+    // Track local timer
+    const timerID = useRef(null);
+
+    // State to render hover preview
+    const [hoverPreview, setHoverPreview] = useState(null);
+
     return (
         <div className={cardClass} tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
             <div className="ui fluid card removeBoxShadow">
@@ -157,17 +213,38 @@ function CardListImage({
                     {cardHeader}
                 </div>                    
                 <div
-
                     ref={cardRef}
                 
                     // Add flipped class when back image shown
                     className={imgSide ? "image" : "flipped image"}
 
-                    // Display larger card image (modal) on click
                     onClick={onClick}
+
+                    onMouseOver={(e) => {
+
+                        // Set timeout only if in deck builder and there isn't another timer waiting
+                        if (deckBuilder && !timerID.current) {
+                            setTimer(e);
+                        }
+                    }}
+                    
+                    onMouseLeave={() => {
+
+                        if (deckBuilder) {
+
+                            // Clear any local timer when mouse leaves
+                            timerID.current = null;
+                            clearTimeout(timerID.current);
+
+                            // Clear the hover preview
+                            setHoverPreview(null);
+                        }
+                    }}
                 >
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}
+
+                    {hoverPreview}
                 </div>
             </div>
             {flipButton}

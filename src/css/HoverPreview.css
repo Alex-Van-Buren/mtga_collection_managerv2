@@ -1,0 +1,11 @@
+.hoverPreviewImg {
+    height: 350px;
+    position: relative;
+    width: 247.07px;
+    z-index: 100;
+}
+
+.hoverPreviewDiv {
+    position: absolute;
+    pointer-events: none
+}
