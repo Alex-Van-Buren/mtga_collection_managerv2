@@ -17,17 +17,22 @@
 
 .addBasics {
     border-radius: 5px;
-    color: var(--clr-txt-inverse);
+    color: black;
     font-size: 1.2em;
     margin-bottom: 0.5em;
     margin-left: 35px;
     padding: 0.5em 1em;
+    border: 1px solid black;
 }
 
 .addBasics:hover {
     cursor: pointer;
     filter: brightness(0.9);
 }
+/* note that this is the psuedo-selector "active" not the class */
+.addBasics:active{
+    filter: brightness(0.8);
+}   
 
 .addBasics:not(.active):hover, .addBasics.active {
     background-color: #21ba45;

@@ -13,6 +13,14 @@
     padding: 0.5em;
 }
 
+.importExportButton:hover {
+    filter: brightness(0.9);
+}
+
+.importExportButton:active {
+    filter: brightness(0.8);
+}
+
 .importExportModal {
     background-color: rgb(70, 70, 70);
     border-radius: 10px;
