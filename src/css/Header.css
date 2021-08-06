@@ -1,8 +1,8 @@
 #header, .rightOptions, .leftOptions {
-    background-color: var(--clr-prm);
-    font-size: 1.1rem;
-    display: flex;
     align-items: stretch;
+    background-color: var(--clr-prm);
+    display: flex;
+    font-size: 1.1rem;
 }
 
 #header {

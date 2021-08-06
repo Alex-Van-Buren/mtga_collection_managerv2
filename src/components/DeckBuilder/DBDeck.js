@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard } from '../../actions';
+import HoverPreview from '../Templates/HoverPreview';
 import '../../css/DBDeck.css';
 
 function DBDeck() {
@@ -58,6 +59,7 @@ function DBDeck() {
                     }
 
                     return <div className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}>
+                        <HoverPreview imgs={card.imgs}>
                         <img
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
@@ -69,6 +71,7 @@ function DBDeck() {
                                 }
                             }}
                         />
+                        </HoverPreview>
                     </div>;
                 } ) }
             </div>;
@@ -82,19 +85,23 @@ function DBDeck() {
             {/* Show commander if it exists */}
             {commander && ["brawl", "custom"].includes(deckType) ? (<>
                 <label htmlFor="commanderCard">Commander</label>
+                <HoverPreview imgs={commander.imgs}>
                 <img
                     src={commander.imgs.front} alt={commander.name} id="commanderCard"
                     onClick={() => dispatch(changeCommander())}
                 />
+                </HoverPreview>
             </>) : null}
 
             {/* Show companion if it exists */}
             {companion ? (<>
                 <label htmlFor="companionCard">Companion</label>
+                <HoverPreview imgs={companion.imgs}>
                 <img
                     src={companion.imgs.front} alt={companion.name} id="companionCard"
                     onClick={() => dispatch(changeCompanion())}
                 />
+                </HoverPreview>
             </>) : null}
         </div>
     ) : null;

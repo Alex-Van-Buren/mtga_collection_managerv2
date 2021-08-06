@@ -35,7 +35,7 @@
     width: 159px;
 }
 
-.DBDeckCard > img {
+.DBDeckCard img {
     /* Only top card will be this height */
     height: 225px;
 }
