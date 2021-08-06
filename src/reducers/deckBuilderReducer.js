@@ -1,6 +1,6 @@
 import {
     ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, SET_ADD_TYPE,
-    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD
+    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, MOVE_CARD
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -14,7 +14,8 @@ const INITIAL_STATE = {
     companion: null,
     deckType: "standard", 
     addBasics: false,
-    addType: "deck" // Valid types: "deck", "sideboard", "commander", "companion"
+    addType: "deck", // Valid types: "deck", "sideboard", "commander", "companion"
+    dragCard: null
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {
@@ -249,6 +250,23 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             }
 
             return { ...state, addType: action.payload };
+        }
+
+        case SET_DRAG_CARD: {
+            return {...state, dragCard: action.payload}
+        }
+
+        // Case for moving a card within the deckList
+        case MOVE_CARD: {
+            // Copy Deck 
+            let newDeck = [...state.deck]
+            const indexToRemove = {...state.dragCard.loc.index};
+            
+            newDeck[indexToRemove.col].splice(indexToRemove.row,1);
+
+            const indexToAdd = action.payload;
+            newDeck[indexToAdd.col].splice(indexToAdd.row,0, state.dragCard.card)
+            return {...state, deck: newDeck};
         }
 
         default:
