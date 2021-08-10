@@ -6,7 +6,7 @@
 2. See your collection progress for every set.
 
 ### Features:
-* It's like, *really, really* fast. Analyze over 250,000 cards as fast as you can click upload.
+* It's like, *really, really* fast. Analyze every single MTG Arena card as fast as you can click upload.
 * No downloads necessary.
 * Native dark mode, or optionally blind yourself with light mode.
 * View every card that you own, see which ones you're missing, or check out whole sets at a time.
@@ -24,6 +24,6 @@
 ### Coming Soon:
 * Deck Builder
 
-## Stay tuned for the full release planned August 2nd, 2021!
+## Stay tuned for the full release coming soon!
 
 © 2021 Nate Sackett and Alex Van Buren. All rights reserved.
