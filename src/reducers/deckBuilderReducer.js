@@ -60,17 +60,18 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
         case REMOVE_CARD_FROM_DECK: {
 
-            const card = action.payload;
+            const card = action.payload.card;
 
-            // Find which column to add card to
-            const i = colNumber(card.cmc);
+            // Find which column/row to remove card from
+            const col = action.payload.loc.col;
+            const row = action.payload.loc.row
 
             // Copy current state
             const newDeck = [ ...state.deck ];
             const newDeckMap = { ...state.deckMap };
 
             // Remove card from deck
-            newDeck[i].splice(newDeck[i].indexOf(card), 1);
+            newDeck[col].splice(row, 1);
 
             /* Remove card from deckMap */
 
@@ -265,7 +266,14 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             newDeck[indexToRemove.col].splice(indexToRemove.row,1);
 
             const indexToAdd = action.payload;
-            newDeck[indexToAdd.col].splice(indexToAdd.row,0, state.dragCard.card)
+            // If the card is being moved around in the same column, just put the card at the index to add
+            if (indexToAdd.col === indexToRemove.col) {
+                newDeck[indexToAdd.col].splice(indexToAdd.row, 0, state.dragCard.card);
+            } else {
+                // If it is changing columns then the index to Add needs +1
+                newDeck[indexToAdd.col].splice(indexToAdd.row + 1 , 0, state.dragCard.card);
+
+            }
             return {...state, deck: newDeck};
         }
 

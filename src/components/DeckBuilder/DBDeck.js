@@ -69,7 +69,7 @@ function DBDeck() {
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                dispatch(removeCardFromDeck(card));
+                                dispatch(removeCardFromDeck(card, {col: i, row: j}));
                                 // If the deckType is limited, move the card to the sideboard
                                 if ( deckType === 'limited' ) {
                                     dispatch(addCardToSideboard(card));
