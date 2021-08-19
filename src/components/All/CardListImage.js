@@ -68,9 +68,9 @@ function CardListImage({
     }
 
     // Decide whether to show the flip button
-    if (imgs && backside && backside.image_uris) {
+    if (imgs && backside && backside.image_uris && !deckBuilder) {
 
-        const backsideText = !deckBuilder ? `${name}\n${type_line}\n${backside.oracle_text}` : null;
+        const backsideText = `${name}\n${type_line}\n${backside.oracle_text}`;
 
         flipButton = (
             <button
@@ -100,10 +100,10 @@ function CardListImage({
         </>;
     } 
     // Otherwise check if there is a "backside", but not flipable (Adventure cards fall in this category)
-    else if (backside && imgs) {
+    else if (backside && imgs && !deckBuilder) {
 
         // Add backside text
-        fullText = !deckBuilder ? `${fullText} // ${backside.oracle_text}` : null;
+        fullText = `${fullText} // ${backside.oracle_text}`;
 
         // Redeclare cardImages because fullText has changed
         cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;

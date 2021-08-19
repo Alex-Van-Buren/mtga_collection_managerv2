@@ -59,7 +59,6 @@ function DBSideboard() {
             <img
                 src={card.imgs.front} alt={card.name} style={style}
                 onClick={(e) => {
-                    e.stopPropagation();
                     dispatch(removeCardFromSideboard(card));
                 }}
             />

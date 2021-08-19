@@ -62,8 +62,7 @@ function DBDeck() {
                         <HoverPreview imgs={card.imgs}>
                         <img
                             src={card.imgs.front} alt={card.name} style={style}
-                            onClick={(e) => {
-                                e.stopPropagation();
+                            onClick={() => {
                                 dispatch(removeCardFromDeck(card));
                                 // If the deckType is limited, move the card to the sideboard
                                 if ( deckType === 'limited' ) {

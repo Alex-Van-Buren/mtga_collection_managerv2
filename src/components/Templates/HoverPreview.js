@@ -43,17 +43,18 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
         );
     }
     
-    return (
-        <div onMouseOver={setTimer} onMouseLeave={onMouseLeave} onClick={setTimer} ref={locationRef}>
-            {createPortal( show ? images : null, document.getElementById("hoverPreview") )}
+    // Wrap children in a div to easily reference location
+    return (<>
+        <div onMouseOver={setTimer} onMouseOut={onMouseOut} onClick={setTimer} ref={locationRef}>
             {children}
         </div>
-    );
+        {show ? createPortal( images, document.getElementById("hoverPreview") ) : null}
+    </>);
 
     /**
      * Cancels any active or pending hover preview when the mouse leaves this target.
      */
-    function onMouseLeave() {
+    function onMouseOut() {
 
         // Clear the timer when the mouse leaves the target
         clearTimeout(timerID);
@@ -66,7 +67,7 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
     /**
      * Forcefully sets timer
      */
-    function setTimer(event) {
+    function setTimer() {
 
         // Clear any active timer
         clearTimeout(timerID.current);
