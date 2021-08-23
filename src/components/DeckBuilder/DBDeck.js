@@ -64,6 +64,7 @@ function DBDeck() {
                     return <div className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}
                     onDragOver={(e) => e.preventDefault()}
                     >
+                        <HoverPreview >
                         <img draggable
                             onDragStart={() => dispatch(setDragCard(card, 'deck', {col: i, row: j}))}
                             onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
