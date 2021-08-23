@@ -68,9 +68,9 @@ function CardListImage({
     }
 
     // Decide whether to show the flip button
-    if (imgs && backside && backside.image_uris) {
+    if (imgs && backside && backside.image_uris && !deckBuilder) {
 
-        const backsideText = !deckBuilder ? `${name}\n${type_line}\n${backside.oracle_text}` : null;
+        const backsideText = `${name}\n${type_line}\n${backside.oracle_text}`;
 
         flipButton = (
             <button
@@ -100,9 +100,10 @@ function CardListImage({
         </>;
     } 
     // Otherwise check if there is a "backside", but not flipable (Adventure cards fall in this category)
-    else if (backside && imgs) {
+    else if (backside && imgs && !deckBuilder) {
+
         // Add backside text
-        fullText = !deckBuilder ? `${fullText} // ${backside.oracle_text}` : null;
+        fullText = `${fullText} // ${backside.oracle_text}`;
 
         // Redeclare cardImages because fullText has changed
         cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
@@ -119,10 +120,6 @@ function CardListImage({
             })();
         }
         else { // deckBuilder === true
-
-            // Forcefully reset timer
-            setTimer(e);
-
             return (() => {
 
                 if (isCardAddible(card, deckObj, sideObj, commander, deckType)) {
@@ -156,100 +153,39 @@ function CardListImage({
         }
     }
 
-    /**
-     * Forcefully sets timer
-     */
-    function setTimer(e) {
+    const compose = (
 
-        clearTimeout(timerID.current);
-        setHoverPreview(null);
+        <div className={cardClass} tabIndex="-1" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
 
-        // Set timers
-        timerID.current = setTimeout(() => {
-            
-            // Check if timer is still valid
-            if (timerID.current) {
-
-                // Clear timers
-                timerID.current = null;
-
-                // Get target location
-                const { top, bottom, left, right } = e.target.getBoundingClientRect();
-
-                // Get screen height and width
-                const {innerHeight, innerWidth} = window;
-
-                // Hover preview dimensions
-                const height = 350;
-                const width = imgs.back ? 494.14 : 247.07;
-                
-                // TODO: Height calculations
-
-                // Default position at upper left corner of card
-                let x = left, y = top;
-
-                // Shift image left if off screen to the right
-                if (left + width > innerWidth) {
-                    x = right - width;
-                }
-
-                // Make the hover preview
-                setHoverPreview(<HoverPreview imgs={imgs} x={x} y={y} />);
-            }
-
-        }, 500);
-    }
-
-    // Track local timer
-    const timerID = useRef(null);
-
-    // State to render hover preview
-    const [hoverPreview, setHoverPreview] = useState(null);
-
-    return (
-        <div className={cardClass} tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
             <div className="ui fluid card removeBoxShadow">
                 <div className="content">
+                    {/* Header differs between set and deck builder implementations */}
                     {cardHeader}
-                </div>                    
-                <div
-                    ref={cardRef}
-                
-                    // Add flipped class when back image shown
-                    className={imgSide ? "image" : "flipped image"}
+                </div>
+                <div ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0">
 
-                    onClick={onClick}
-
-                    onMouseOver={(e) => {
-
-                        // Set timeout only if in deck builder and there isn't another timer waiting
-                        if (deckBuilder && !timerID.current) {
-                            setTimer(e);
-                        }
-                    }}
-                    
-                    onMouseLeave={() => {
-
-                        if (deckBuilder) {
-
-                            // Clear any local timer when mouse leaves
-                            timerID.current = null;
-                            clearTimeout(timerID.current);
-
-                            // Clear the hover preview
-                            setHoverPreview(null);
-                        }
-                    }}
-                >
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}
 
-                    {hoverPreview}
                 </div>
             </div>
+            {/* Flip button is null when not a double-sided card */}
             {flipButton}
+
         </div>
     );
+
+    // Return the composed card wrapped in the hover preview if in deckbuilder
+    if (deckBuilder) {
+        return (
+            // Show preview when hovering
+            <HoverPreview imgs={imgs}>
+                {compose}
+            </HoverPreview>
+        );
+    }
+    // Other wise just return composed card
+    return compose;
 }
 
 export default CardListImage;

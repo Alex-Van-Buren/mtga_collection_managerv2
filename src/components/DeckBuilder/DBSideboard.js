@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { removeCardFromSideboard } from './../../actions';
+import HoverPreview from '../Templates/HoverPreview';
 import '../../css/DBSideboard.css';
 
 function DBSideboard() {
@@ -53,14 +54,15 @@ function DBSideboard() {
             }
         }
 
-        return <div className="DBDeckCard" key={card + i} style={{ zIndex: i }}> 
+        return <div className="DBDeckCard" key={card + i} style={{ zIndex: i }}>
+            <HoverPreview imgs={card.imgs}>
             <img
                 src={card.imgs.front} alt={card.name} style={style}
                 onClick={(e) => {
-                    e.stopPropagation();
                     dispatch(removeCardFromSideboard(card));
                 }}
             />
+            </HoverPreview>
         </div>
     });
     
