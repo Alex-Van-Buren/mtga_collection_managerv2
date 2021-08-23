@@ -12,7 +12,7 @@ import arenaCards from "./arenaCards";
 function findCards(searchOptions, returnOptions, searchCards = arenaCards) {
 
     // Destructure search options
-    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes } = searchOptions;
+    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes, addType } = searchOptions;
 
     /**
      * An array of ananymous functions to be called on each card
@@ -23,7 +23,17 @@ function findCards(searchOptions, returnOptions, searchCards = arenaCards) {
 
 /* DETERMINE WHICH FUNCTIONS NEED TO BE CALLED ON EACH CARD */
 
-    // First filter by set if needed
+    // Only show Companions if requested
+    if (addType === "companion") {
+        filterFunctions.push( (card) => filterCompanions(card.keywords));
+    }
+
+    // Only show Commanders if requested
+    if (addType === "commander") {
+        filterFunctions.push( (card) => filterCommanders(card.type_line));
+    }
+
+    // Filter by set if needed
     if (set) {
         filterFunctions.push( (card) => filterSet(card.set, set) );
     }
@@ -428,6 +438,31 @@ function filterCardTypes(cardTypeLine, cardTypes) {
 }
 
 /**
+ * Determines whether this card is a companion.
+ * @param {array} keywords The key words for the card. Will contain "Companion" if this card is a companion.
+ * @returns True if the card is a Companion.
+ */
+function filterCompanions(keywords) {
+    if (keywords.includes("Companion")) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Determines whether this card is a commander.
+ * @param {string} typeline The type line for the card. Will contain "Legendary" + ("Creature" OR "Planeswalker") if valid.
+ * @returns True if the card is a Commander.
+ */
+function filterCommanders(typeline) {
+    typeline = typeline.toLowerCase();
+    if (typeline.includes("legendary") && ( typeline.includes("creature") || typeline.includes("planeswalker") )) {
+        return true;
+    }
+    return false;
+}
+
+/**
  * Helper function that takes the input card and returns the desired properties of that card to make it easier to use
  * @param {Array} card The card to remove properties from.
  * @param {Array} returnOptions Properties to keep from the card list. If returnOptions is set to 'all', will return entire card object.
@@ -483,4 +518,3 @@ function getCardProperties(card, returnOptions) {
 }
 
 export default findCards;
-// module.exports = findCards;

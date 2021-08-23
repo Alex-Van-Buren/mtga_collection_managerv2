@@ -20,21 +20,15 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     
     // Get values from redux state
     const cardCollection = useSelector(state => state.inventory.cardCollection);
-    const colors         = useSelector(state => state.displayOptions.colors);
-    const searchTerm     = useSelector(state => state.displayOptions.searchTerm);
-    const searchType     = useSelector(state => state.displayOptions.searchType);
-    const rarities       = useSelector(state => state.displayOptions.rarity);
-    const showCards      = useSelector(state => state.displayOptions.showCards);
-    const cardCount      = useSelector(state => state.displayOptions.cardCount);
-    const boosterVal     = useSelector(state => state.displayOptions.booster);
-    const cmc            = useSelector(state => state.displayOptions.cmc);
-    const reduxSets      = useSelector(state => state.displayOptions.set);
-    const deckMap        = useSelector(state => state.deckBuilder.deckMap);
-    const sideboardMap   = useSelector(state => state.deckBuilder.sideboardMap);
-    const commander      = useSelector(state => state.deckBuilder.commander);
-    const reduxdeckType  = useSelector(state => state.deckBuilder.deckType);
-    const addBasics      = useSelector(state => state.deckBuilder.addBasics);
-    const reduxCardTypes = useSelector(state => state.displayOptions.cardTypes);
+
+    const {
+        colors, searchTerm, searchType, showCards, cardCount, cmc,
+        booster: boosterVal, set: reduxSets, cardTypes: reduxCardTypes, rarity: rarities,
+    } = useSelector(state => state.displayOptions);
+
+    const {
+        deckMap, sideboardMap, commander, addBasics, deckType: reduxDeckType, addType,
+    } = useSelector(state => state.deckBuilder);
 
     // Access redux dispatch
     const dispatch = useDispatch();
@@ -119,30 +113,36 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         }
 
         // Set the decktype for searchOptions
-        let deckType = reduxdeckType;
+        let deckType = reduxDeckType;
         // Ignore decktype when not in deckbuilder --> set to undefined
         // Also if the redux value for deckType is limited or custom --> set to undefined because those modes have no specific legalities
-        if (!deckBuilder || reduxdeckType === 'limited' || reduxdeckType === 'custom') {
+        if (!deckBuilder || reduxDeckType === 'limited' || reduxDeckType === 'custom') {
             deckType = undefined;
         }
         
         // Put all search options into a single object for findCards function
         let searchOptions = {
-            set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm, 
+            set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm,
             advancedSearchType: searchType, cmc: searchcmc, deckType: deckType, cardTypes: cardTypes
         };
 
-        // if we are in the deckbuilder and addBasics is true want different searchOptions
-        if (deckBuilder && addBasics) {
-            searchOptions = { ...searchOptions, excludeBasicLands: false, cmc: undefined, rarity: undefined, cardTypes: undefined}
+        if (deckBuilder) {
+            
+            // If we are in the deckbuilder and are adding basic lands, we need different searchOptions
+            if (addBasics) {
+                searchOptions = { ...searchOptions, excludeBasicLands: false, cmc: undefined, rarity: undefined, cardTypes: undefined}
+            }
+            // addType is used to show only commanders or companions. Not used when searching basic lands
+            else {
+                searchOptions.addType = addType;
+            }
         }
-
-        // Need to get images as well as name and arenaId
+        
         const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set', 'legalities'];
 
         return findCards(searchOptions, returnOptions);
         
-    }, [colors, searchTerm, searchType, setId, reduxSets, rarities, boosterVal, cmc, deckBuilder, reduxdeckType, addBasics, reduxCardTypes]);
+    }, [boosterVal, setId, reduxCardTypes, cmc, reduxDeckType, deckBuilder, colors, searchTerm, searchType, rarities, reduxSets, addBasics, addType]);
 
     // Track currently shown pictures
     let currentPictures = [];
