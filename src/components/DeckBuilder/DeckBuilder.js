@@ -1,6 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRef } from 'react';
 
+import { dropCard } from '../../actions';
 import DBSidebar from './DBSidebar';
 import DeckHeader from './DeckHeader';
 import DBDeck from './DBDeck';
@@ -8,7 +10,6 @@ import CardList from '../All/CardList';
 import DBSideboard from './DBSideboard';
 import LimitedSideboard from './LimitedSideboard';
 import '../../css/DeckBuilder.css';
-import { useRef } from 'react';
 
 function DeckBuilder() {
     const cardListRef = useRef();
@@ -43,12 +44,20 @@ function DeckBuilder() {
     // Change the shown cards to add to deck to the limited sideboard if deckType is limited and not adding basic lands
     const dbCardList = (deckType === 'limited' && !addBasics) ? <LimitedSideboard /> : <CardList scrollingParent={".dbCardList"} deckBuilder />;
 
+    const dispatch = useDispatch();
     return (
         <div id="DeckBuilder">
             <DBSidebar />
 
             <div className="mainContent">
-                <div className="dbCardList" ref={cardListRef}>
+                <div className="dbCardList" ref={cardListRef}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={() => {
+                    if ( deckType !=='limited' ) {
+                        dispatch(dropCard('collection', null));
+                    }
+                }}
+                >
                     {dbCardList}
                 </div>
                 <div className="slider" onMouseDown={(e)=>MoveSlider(e)}>

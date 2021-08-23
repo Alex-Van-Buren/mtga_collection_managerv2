@@ -66,7 +66,10 @@ function DBDeck() {
                     >
                         <HoverPreview imgs={card.imgs}>
                         <img draggable
-                            onDragStart={() => dispatch(setDragCard(card, 'deck', {col: i, row: j}))}
+                            onDragStart={(e) => {
+                                e.dataTransfer.effectAllowed = 'move';
+                                dispatch(setDragCard(card, 'deck', {col: i, row: j}));
+                            }}
                             onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
