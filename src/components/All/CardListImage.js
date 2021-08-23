@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import HoverPreview from '../Templates/HoverPreview';
 import {
-    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType
+    setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType, setDragCard
 } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import isCardAddible from '../../hooks/isCardAddible';
@@ -47,6 +47,12 @@ function CardListImage({
     // Refs
     const flipRef = useRef();
     const cardRef = useRef();
+
+    // CardInfo for dispatching
+    const cardInfo = { 
+        name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
+        collector_number: card.collector_number, type_line: type_line, legalities: card.legalities
+    };
 
     /**
      * Flips card and turns flip button
@@ -124,12 +130,6 @@ function CardListImage({
 
                 if (isCardAddible(card, deckObj, sideObj, commander, deckType)) {
 
-                    // Get card info to dispatch
-                    const cardInfo = { 
-                        name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
-                        collector_number: card.collector_number, type_line: type_line, legalities: card.legalities
-                    };
-
                     // Choose action to dispatch to
                     switch (addType) {
                         case "deck":
@@ -152,6 +152,7 @@ function CardListImage({
             })();
         }
     }
+    
 
     const compose = (
 
@@ -162,7 +163,18 @@ function CardListImage({
                     {/* Header differs between set and deck builder implementations */}
                     {cardHeader}
                 </div>
-                <div ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0">
+                <div ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0"
+                    onDragStart={() =>{
+                        if (deckBuilder && isCardAddible(card, deckObj, sideObj, commander, deckType)) {
+                            dispatch(setDragCard(cardInfo, 'collection', null))
+                        }
+                    }}
+                    onDragEnd={() => {
+                        if (deckBuilder) {
+                            dispatch(setDragCard(null))
+                        }
+                    }}
+                >
 
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}

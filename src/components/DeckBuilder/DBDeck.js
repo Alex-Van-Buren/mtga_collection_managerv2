@@ -70,6 +70,9 @@ function DBDeck() {
                                 e.dataTransfer.effectAllowed = 'move';
                                 dispatch(setDragCard(card, 'deck', {col: i, row: j}));
                             }}
+                            onDragEnd={() => {
+                                dispatch(setDragCard(null));
+                            }}
                             onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {

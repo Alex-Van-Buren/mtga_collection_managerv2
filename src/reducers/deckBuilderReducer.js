@@ -266,8 +266,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             if (!state.dragCard) {
                 return {...state};
             }
-            
-            // Case for moving a card within the deckList
+
+            // Case Deck --> Deck
             if ( state.dragCard.section === 'deck' && action.payload.section === 'deck') {
                 const indexToRemove = {...state.dragCard.loc};
                 
@@ -282,8 +282,9 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                     newDeck[indexToAdd.col].splice(indexToAdd.row + 1 , 0, state.dragCard.card);
     
                 }
-            }
-            // Case for moving a card from deck to collection to remove the card
+            } /* End Deck --> Deck */
+
+            // Case for Deck --> Collection
             if ( state.dragCard.section === 'deck' && action.payload.section === 'collection' ){
                 // Remove the card from deck array
                 newDeck[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1)
@@ -303,7 +304,31 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                 if (Object.keys(newDeckMap[card.name]).length <= 0) {
                     delete newDeckMap[card.name];
                 }
-            }
+            } /* End case for Deck --> Collection */
+
+            // Case for Collection --> Deck
+            if ( state.dragCard.section ==='collection' && action.payload.section === 'deck' ) {
+
+                const {card} = state.dragCard;
+
+                // Add the card to the deck in desired location
+                newDeck[action.payload.endloc.col].splice(action.payload.endloc.row, 0, card)
+
+                // Update newDeckMap
+                // Initialize specific card name in deckMap if necessary
+                if (!newDeckMap[card.name]) {
+                    newDeckMap[card.name] = {};
+                }
+
+                // Increment count if specific arenaId declared under card name
+                if (newDeckMap[card.name][card.arenaId]) {
+                    newDeckMap[card.name][card.arenaId].copies++;
+                }
+                // Else initialize arenaId for card name
+                else {
+                    newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
+                }
+            } /*End case Collection --> Deck */
             return {...state, deck: newDeck, deckMap: newDeckMap, dragCard: null};
         }
 

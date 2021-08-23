@@ -262,6 +262,13 @@ export function setAddType(addType) {
  * @returns 
  */
 export function setDragCard(card, section, loc) {
+    // Set payload to null if card is not provided
+    if (!card) {
+        return {
+            type: SET_DRAG_CARD,
+            payload: null
+        }
+    }
     return {
         type: SET_DRAG_CARD,
         payload:{card: card, section, loc}
