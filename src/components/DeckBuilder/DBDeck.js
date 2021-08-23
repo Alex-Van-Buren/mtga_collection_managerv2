@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard, setDragCard, moveCard } from '../../actions';
+import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard, setDragCard, dropCard } from '../../actions';
 import '../../css/DBDeck.css';
 
 function DBDeck() {
@@ -22,7 +22,7 @@ function DBDeck() {
         return deck.map((column, i) => {
             return <div className="DBDeckColumn" key={'column'+i}
             onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => {e.stopPropagation(); dispatch(moveCard({col:i, row: 0}))}}
+            onDrop={(e) => {e.stopPropagation(); dispatch(dropCard( 'deck', {col:i, row: 0}))}}
             >
 
                 {/* Create JSX for each individual card */}
@@ -64,8 +64,8 @@ function DBDeck() {
                     onDragOver={(e) => e.preventDefault()}
                     >
                         <img draggable
-                            onDragStart={() => dispatch(setDragCard(card, {section: 'deck', index:{col: i, row: j}}))}
-                            onDrop={(e) =>{ e.stopPropagation(); dispatch(moveCard({col: i, row: j}))}}
+                            onDragStart={() => dispatch(setDragCard(card, 'deck', {col: i, row: j}))}
+                            onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
                                 e.stopPropagation();

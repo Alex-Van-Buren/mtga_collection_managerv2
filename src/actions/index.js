@@ -3,7 +3,7 @@ import {
     SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST,
     SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
     REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS,ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD,
-    CHANGE_COMMANDER, CHANGE_COMPANION, SELECT_CARD_TYPES, SET_SIDEBOARD, SET_ADD_TYPE, SET_DRAG_CARD, MOVE_CARD
+    CHANGE_COMMANDER, CHANGE_COMPANION, SELECT_CARD_TYPES, SET_SIDEBOARD, SET_ADD_TYPE, SET_DRAG_CARD, DROP_CARD
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -254,17 +254,29 @@ export function setAddType(addType) {
         payload: addType
     }
 }
-
-export function setDragCard(card, loc) {
+/**
+ * Action that sets which card is being dragged
+ * @param {*} card The card object that is being dragged
+ * @param {String} section A string that describes the section the card is being dragged from. eg 'deck', 'sideboard', 'collection'
+ * @param {*} loc The index/indecies that describe the location within the section where the card is being dragged from.
+ * @returns 
+ */
+export function setDragCard(card, section, loc) {
     return {
         type: SET_DRAG_CARD,
-        payload:{card: card, loc: {section: loc.section, index: loc.index}}
+        payload:{card: card, section, loc}
     };
 }
 
-export function moveCard(endloc) {
+/**
+ * Action that drops the card being dragged
+ * @param {String} section A string tat describes the section the card is being dropped into. eg 'deck', 'sideboard', 'collection'
+ * @param {*} endloc the index/indecies that describe the location within the section where the card is being dragged from.
+ * @returns 
+ */
+export function dropCard(section, endloc) {
     return {
-        type: MOVE_CARD, 
-        payload: endloc
+        type: DROP_CARD, 
+        payload: {section, endloc}
     }
 }

@@ -1,6 +1,6 @@
 import {
     ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, SET_ADD_TYPE,
-    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, MOVE_CARD
+    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, DROP_CARD
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -257,22 +257,24 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             return {...state, dragCard: action.payload}
         }
 
-        // Case for moving a card within the deckList
-        case MOVE_CARD: {
+        case DROP_CARD: {
             // Copy Deck 
             let newDeck = [...state.deck]
-            const indexToRemove = {...state.dragCard.loc.index};
-            
-            newDeck[indexToRemove.col].splice(indexToRemove.row,1);
-
-            const indexToAdd = action.payload;
-            // If the card is being moved around in the same column, just put the card at the index to add
-            if (indexToAdd.col === indexToRemove.col) {
-                newDeck[indexToAdd.col].splice(indexToAdd.row, 0, state.dragCard.card);
-            } else {
-                // If it is changing columns then the index to Add needs +1
-                newDeck[indexToAdd.col].splice(indexToAdd.row + 1 , 0, state.dragCard.card);
-
+            // Case for moving a card within the deckList
+            if ( state.dragCard.section === 'deck' && action.payload.section === 'deck') {
+                const indexToRemove = {...state.dragCard.loc};
+                
+                newDeck[indexToRemove.col].splice(indexToRemove.row,1);
+    
+                const indexToAdd = action.payload.endloc;
+                // If the card is being moved around in the same column, just put the card at the index to add
+                if (indexToAdd.col === indexToRemove.col) {
+                    newDeck[indexToAdd.col].splice(indexToAdd.row, 0, state.dragCard.card);
+                } else {
+                    // If it is changing columns then the index to Add needs +1
+                    newDeck[indexToAdd.col].splice(indexToAdd.row + 1 , 0, state.dragCard.card);
+    
+                }
             }
             return {...state, deck: newDeck};
         }

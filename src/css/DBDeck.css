@@ -28,7 +28,7 @@
     flex-direction: column;
     flex-shrink: 0;
     position: relative;
-    min-width: 10px
+    min-width: 159px;
 }
 
 .DBDeckCard {
