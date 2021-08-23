@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import findCards from '../../data/findCards';
 import CardListImage from './CardListImage';
 import LazyLoad from '../Templates/LazyLoad';
-import { updateImageList, setAddType } from '../../actions';
+import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
 /**
