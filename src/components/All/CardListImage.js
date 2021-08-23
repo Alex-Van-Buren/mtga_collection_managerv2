@@ -155,14 +155,14 @@ function CardListImage({
 
     const compose = (
 
-        <div className={cardClass} tabIndex="0" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
+        <div className={cardClass} tabIndex="-1" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
 
             <div className="ui fluid card removeBoxShadow">
                 <div className="content">
                     {/* Header differs between set and deck builder implementations */}
                     {cardHeader}
                 </div>
-                <div ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"}>
+                <div ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0">
 
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}
