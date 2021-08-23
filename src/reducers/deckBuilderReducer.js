@@ -258,8 +258,15 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         }
 
         case DROP_CARD: {
-            // Copy Deck 
+            // Copy Deck
             let newDeck = [...state.deck]
+            let newDeckMap = { ...state.deckMap };
+
+            // Check if dragCard has no data and return if true
+            if (!state.dragCard) {
+                return {...state};
+            }
+            
             // Case for moving a card within the deckList
             if ( state.dragCard.section === 'deck' && action.payload.section === 'deck') {
                 const indexToRemove = {...state.dragCard.loc};
@@ -276,7 +283,28 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
     
                 }
             }
-            return {...state, deck: newDeck};
+            // Case for moving a card from deck to collection to remove the card
+            if ( state.dragCard.section === 'deck' && action.payload.section === 'collection' ){
+                // Remove the card from deck array
+                newDeck[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1)
+
+                // Remove the card from the deckMap
+                const {card} = state.dragCard;
+
+                // Decrement card count
+                newDeckMap[card.name][card.arenaId].copies--;
+
+                // Check if arenaId needs to be removed
+                if (newDeckMap[card.name][card.arenaId].copies <= 0) {
+                    delete newDeckMap[card.name][card.arenaId];
+                }
+
+                // Check if card name needs to be removed
+                if (Object.keys(newDeckMap[card.name]).length <= 0) {
+                    delete newDeckMap[card.name];
+                }
+            }
+            return {...state, deck: newDeck, deckMap: newDeckMap, dragCard: null};
         }
 
         default:
