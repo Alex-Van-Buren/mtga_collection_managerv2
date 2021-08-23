@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-import { toggleAddBasics } from '../../actions';
+import { toggleAddBasics, setAddType } from '../../actions';
 
 // CSS for this component will be in DBCardFilters.css
 /**
@@ -11,14 +11,20 @@ import { toggleAddBasics } from '../../actions';
  */
 function AddBasicsButton() {
     const dispatch = useDispatch();
-    const addBasicsFlag = useSelector(state => state.deckBuilder.addBasics);
+    const { addBasics, addType } = useSelector(state => state.deckBuilder);
 
     let addBasicsClass = "addBasics";
-    if (addBasicsFlag) addBasicsClass += " active";
+    if (addBasics) addBasicsClass += " active";
 
     return (
         <button className={addBasicsClass}
         onClick={(e)=> {
+
+            // Check if addType is either commander or companion
+            if (addType === "commander" || addType === "companion") {
+                dispatch(setAddType("deck"));
+            }
+
             dispatch(toggleAddBasics())
         }}
         >

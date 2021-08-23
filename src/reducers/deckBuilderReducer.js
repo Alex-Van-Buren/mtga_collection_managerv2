@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     deckType: "standard", 
     addBasics: false,
     addType: "deck", // Valid types: "deck", "sideboard", "commander", "companion"
-    dragCard: null
+    dragCard: null,
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {

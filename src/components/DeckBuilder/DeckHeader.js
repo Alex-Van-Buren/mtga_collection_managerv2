@@ -14,7 +14,7 @@ function DeckHeader() {
 
     const dispatch = useDispatch();
 
-    const { addType, deckType } = useSelector(state => state.deckBuilder);
+    const { addType, deckType, addBasics } = useSelector(state => state.deckBuilder);
     const deckOrSideboard = addType === "sideboard" ? false : true;
 
     // Changes add type to 'deck' when you switch to limited mode
@@ -25,12 +25,12 @@ function DeckHeader() {
     },[deckType, dispatch])
 
     // Get the deck array and flatten it;
-    let { deck, sideboard } = useSelector(state => state.deckBuilder);
+    let { deck, sideboard, commander, companion } = useSelector(state => state.deckBuilder);
     deck = deck.flat();
 
     // Initialize deck counts
-    const sideboardCount = sideboard.length;
-    let deckCount        = 0;
+    const sideboardCount = companion ? sideboard.length + 1 : sideboard.length;
+    let deckCount        = commander ? 1 : 0;
     let landCount        = 0;
     let partialLandCount = 0;
     let creatureCount    = 0; 
@@ -171,6 +171,17 @@ function DeckHeader() {
         </button>;
     }
 
+    let comButtons = [];
+
+    // Don't show add Commander/Companion buttons when adding basic lands. Don't show Commander button unless needed.
+    if (addBasics) {}
+    else {
+        if (deckType === "brawl" || deckType === "custom") {
+            comButtons.push(setComButton("commander"));
+        }
+        comButtons.push(setComButton("companion"));
+    }
+
     return (
         <div className="deckHeader">
 
@@ -182,8 +193,7 @@ function DeckHeader() {
             </div>
 
             <div className="right">
-                {deckType === "brawl" || deckType === "custom" ? setComButton("commander") : null}
-                {setComButton("companion")}
+                {comButtons}
                 <div className="sideboard">Sideboard: {sideboardCount}</div>
                 {addToggle}
             </div>
