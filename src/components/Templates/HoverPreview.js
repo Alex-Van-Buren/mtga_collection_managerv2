@@ -45,7 +45,10 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
     
     // Wrap children in a div to easily reference location
     return (<>
-        <div onMouseOver={setTimer} onMouseOut={onMouseOut} onClick={setTimer} ref={locationRef}>
+        <div
+            onMouseOver={setTimer} onMouseOut={onMouseOut} onClick={setTimer} ref={locationRef}
+            onFocus={setTimer} onBlur={onMouseOut}
+        >
             {children}
         </div>
         {show ? createPortal( images, document.getElementById("hoverPreview") ) : null}
@@ -103,14 +106,14 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
 
         // Shift image left if off screen to the right
         if (left + width > clientWidth) {
-            x = clientWidth - width;
+            x = clientWidth - width - 1;
         }
 
         // Shift image up or down if off screen vertically
         if (top < 0) {
             y = 0;
         } else if (top + height > clientHeight) {
-            y = clientHeight - height;
+            y = clientHeight - height - 1;
         }
 
         // Set coordinates for the hover preview after ensuring the preview will be on-screen
