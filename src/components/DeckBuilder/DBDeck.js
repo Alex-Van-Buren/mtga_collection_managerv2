@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard } from '../../actions';
+import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard, setDragCard, dropCard } from '../../actions';
 import HoverPreview from '../Templates/HoverPreview';
 import '../../css/DBDeck.css';
 
@@ -21,7 +21,10 @@ function DBDeck() {
         const addedToDeck = {};
 
         return deck.map((column, i) => {
-            return <div className="DBDeckColumn" key={'column'+i}>
+            return <div className="DBDeckColumn" key={'column'+i}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {e.stopPropagation(); dispatch(dropCard( 'deck', {col:i, row: 0}))}}
+            >
 
                 {/* Create JSX for each individual card */}
                 { column.map( (card, j) => {
@@ -58,12 +61,17 @@ function DBDeck() {
                         }
                     }
 
-                    return <div className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}>
-                        <HoverPreview imgs={card.imgs}>
-                        <img
+                    return <div className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}
+                    onDragOver={(e) => e.preventDefault()}
+                    >
+                        <HoverPreview >
+                        <img draggable
+                            onDragStart={() => dispatch(setDragCard(card, 'deck', {col: i, row: j}))}
+                            onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
                             src={card.imgs.front} alt={card.name} style={style}
-                            onClick={() => {
-                                dispatch(removeCardFromDeck(card));
+                            onClick={(e) => {
+                                dispatch(removeCardFromDeck(card, {col: i, row: j}));
+
                                 // If the deckType is limited, move the card to the sideboard
                                 if ( deckType === 'limited' ) {
                                     dispatch(addCardToSideboard(card));
