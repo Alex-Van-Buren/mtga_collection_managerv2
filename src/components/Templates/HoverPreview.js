@@ -47,7 +47,7 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
     return (<>
         <div
             onMouseOver={setTimer} onMouseOut={onMouseOut} onClick={setTimer} ref={locationRef}
-            onFocus={setTimer} onBlur={onMouseOut}
+            onFocus={setTimer} onBlur={onMouseOut} onDragStart={onMouseOut}
         >
             {children}
         </div>
