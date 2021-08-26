@@ -163,6 +163,7 @@ function DeckHeader() {
 
         return <button
             // Accessibility and events
+            key={`${type}`}
             className="setComButton" tabIndex="0" aria-label={`Set ${type} button`}
             onKeyDown={ e => {if (e.key === "Enter") setComType(e, type) } }
             onMouseDown={ e => setComType(e, type) } style={style}
