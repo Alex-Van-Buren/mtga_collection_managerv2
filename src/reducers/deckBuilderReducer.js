@@ -36,23 +36,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Add card to deck
             newDeck[i].push(card);
 
-            /* Add card to deckMap */
-
-            // Initialize specific card name in deckMap if necessary
-            if (!newDeckMap[card.name]) {
-                newDeckMap[card.name] = {};
-            }
-
-            // Increment count if specific arenaId declared under card name
-            if (newDeckMap[card.name][card.arenaId]) {
-                newDeckMap[card.name][card.arenaId].copies++;
-            }
-            // Else initialize arenaId for card name
-            else {
-                newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
-            }
-
-            /* End adding to deckMap */
+            // Add card to deckMap 
+            addCardToCardMap(newDeckMap, card);
 
             // Update state
             return { ...state, deck: newDeck, deckMap: newDeckMap };
@@ -68,27 +53,13 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             // Copy current state
             const newDeck = [ ...state.deck ];
-            const newDeckMap = { ...state.deckMap };
+            let newDeckMap = { ...state.deckMap };
 
             // Remove card from deck
             newDeck[col].splice(row, 1);
 
-            /* Remove card from deckMap */
-
-                // Decrement card count
-                newDeckMap[card.name][card.arenaId].copies--;
-
-                // Check if arenaId needs to be removed
-                if (newDeckMap[card.name][card.arenaId].copies <= 0) {
-                    delete newDeckMap[card.name][card.arenaId];
-                }
-
-                // Check if card name needs to be removed
-                if (Object.keys(newDeckMap[card.name]).length <= 0) {
-                    delete newDeckMap[card.name];
-                }
-
-            /* End removing from deckMap */
+            // Remove card from deckMap
+            removeCardFromCardMap(newDeckMap, card);
 
             // Update state
             return { ...state, deck: newDeck, deckMap: newDeckMap };
@@ -109,23 +80,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                 // Add card to deck
                 newDeck[i].push(card);
     
-                /* Add card to deckMap */
-    
-                // Initialize specific card name in deckMap if necessary
-                if (!newDeckMap[card.name]) {
-                    newDeckMap[card.name] = {};
-                }
-
-                // Increment count if specific arenaId declared under card name
-                if (newDeckMap[card.name][card.arenaId]) {
-                    newDeckMap[card.name][card.arenaId].copies++;
-                }
-                // Else initialize arenaId for card name
-                else {
-                    newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
-                }
-    
-                /* End adding to deckMap */
+                // Add card to deckMap 
+                addCardToCardMap(newDeckMap, card);
             }
 
             // Return updated state
@@ -144,23 +100,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Add card to sideboard
             newSideboard.push(card);
 
-            /* Add card to sideboardMap */
-
-            // Initialize specific card name in sideboardMap if necessary
-            if (!newSideboardMap[card.name]) {
-                newSideboardMap[card.name] = {};
-            }
-
-            // Increment count if specific arenaId declared under card name
-            if (newSideboardMap[card.name][card.arenaId]) {
-                newSideboardMap[card.name][card.arenaId].copies++;
-            }
-            // Else initialize arenaId for card name
-            else {
-                newSideboardMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
-            }
-
-            /* End adding to sideboardMap */
+            // Add card to sideboardMap 
+            addCardToCardMap(newSideboardMap, card);
 
             // Update state
             return { ...state, sideboard: newSideboard, sideboardMap: newSideboardMap };
@@ -176,22 +117,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Remove card
             newSideboard.splice(newSideboard.indexOf(card), 1);
 
-            /* Remove card from sideboardMap */
-
-                // Decrement card count
-                newSideboardMap[card.name][card.arenaId].copies--;
-
-                // Check if arenaId needs to be removed
-                if (newSideboardMap[card.name][card.arenaId].copies <= 0) {
-                    delete newSideboardMap[card.name][card.arenaId];
-                }
-
-                // Check if card name needs to be removed
-                if (Object.keys(newSideboardMap[card.name]).length <= 0) {
-                    delete newSideboardMap[card.name];
-                }
-
-            /* End removing from deckMap */
+            // Remove card from sideboardMap 
+            removeCardFromCardMap(newSideboardMap, card);
 
             // Update state
             return { ...state, sideboard: newSideboard, sideboardMap: newSideboardMap };
@@ -202,21 +129,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             const newSideboard = action.payload;
             const newSideboardMap = {};
 
-            for (const card of newSideboard) {
-    
-                // Initialize specific card name in newSideboardMap if necessary
-                if (!newSideboardMap[card.name]) {
-                    newSideboardMap[card.name] = {};
-                }
-
-                // Increment count if specific arenaId declared under card name
-                if (newSideboardMap[card.name][card.arenaId]) {
-                    newSideboardMap[card.name][card.arenaId].copies++;
-                }
-                // Else initialize arenaId for card name
-                else {
-                    newSideboardMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
-                }
+            for (const card of newSideboard) {            
+                addCardToCardMap(newSideboardMap, card);
             }
 
             return { ...state, sideboard: newSideboard, sideboardMap: newSideboardMap }
@@ -258,78 +172,81 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         }
 
         case DROP_CARD: {
-            // Copy Deck
-            let newDeck = [...state.deck]
-            let newDeckMap = { ...state.deckMap };
-
             // Check if dragCard has no data and return if true
             if (!state.dragCard) {
-                return {...state};
+                return state;
             }
 
-            // Case Deck --> Deck
+            // Copy Deck + Sideboard
+            let newDeck = [...state.deck]
+            let newDeckMap = { ...state.deckMap };
+            let newSideboard = [...state.sideboard];
+            let newSideboardMap = {...state.sideboardMap};
+
+            // Destructure the card info from state.dragCard
+            const {card} = state.dragCard;
+
+            // Case Deck --> Deck (ie Moving a card around in deck)
             if ( state.dragCard.section === 'deck' && action.payload.section === 'deck') {
-                const indexToRemove = {...state.dragCard.loc};
                 
+                // Get index to Remove from dragCard location
+                const indexToRemove = state.dragCard.loc;
+                
+                // Remove the card from the newDeck array (Since the card is not being removed from the deck no need to change newDeckMap)
                 newDeck[indexToRemove.col].splice(indexToRemove.row,1);
     
+                // Get index to Add from payload endlocation
                 const indexToAdd = action.payload.endloc;
+
                 // If the card is being moved around in the same column, just put the card at the index to add
                 if (indexToAdd.col === indexToRemove.col) {
                     newDeck[indexToAdd.col].splice(indexToAdd.row, 0, state.dragCard.card);
                 } else {
                     // If it is changing columns then the index to Add needs +1
                     newDeck[indexToAdd.col].splice(indexToAdd.row + 1 , 0, state.dragCard.card);
-    
                 }
-            } /* End Deck --> Deck */
+            }
 
             // Case for Deck --> Collection
             if ( state.dragCard.section === 'deck' && action.payload.section === 'collection' ){
                 // Remove the card from deck array
-                newDeck[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1)
+                newDeck[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
 
                 // Remove the card from the deckMap
-                const {card} = state.dragCard;
-
-                // Decrement card count
-                newDeckMap[card.name][card.arenaId].copies--;
-
-                // Check if arenaId needs to be removed
-                if (newDeckMap[card.name][card.arenaId].copies <= 0) {
-                    delete newDeckMap[card.name][card.arenaId];
-                }
-
-                // Check if card name needs to be removed
-                if (Object.keys(newDeckMap[card.name]).length <= 0) {
-                    delete newDeckMap[card.name];
-                }
-            } /* End case for Deck --> Collection */
+                removeCardFromCardMap(newDeckMap, card);
+            } 
 
             // Case for Collection --> Deck
             if ( state.dragCard.section ==='collection' && action.payload.section === 'deck' ) {
 
-                const {card} = state.dragCard;
-
                 // Add the card to the deck in desired location
-                newDeck[action.payload.endloc.col].splice(action.payload.endloc.row, 0, card)
+                newDeck[action.payload.endloc.col].splice(action.payload.endloc.row, 0, card);
 
-                // Update newDeckMap
-                // Initialize specific card name in deckMap if necessary
-                if (!newDeckMap[card.name]) {
-                    newDeckMap[card.name] = {};
-                }
+                // Add the card to the deckMap
+                addCardToCardMap(newDeckMap, card);
+            }
+            
+            // Case Collection --> Sideboard
+            if( state.dragCard.section === 'collection' && action.payload.section ==='sideboard' ) {
 
-                // Increment count if specific arenaId declared under card name
-                if (newDeckMap[card.name][card.arenaId]) {
-                    newDeckMap[card.name][card.arenaId].copies++;
-                }
-                // Else initialize arenaId for card name
-                else {
-                    newDeckMap[card.name][card.arenaId] = { copies: 1, set: card.set, col_num: card.collector_number };
-                }
-            } /*End case Collection --> Deck */
-            return {...state, deck: newDeck, deckMap: newDeckMap, dragCard: null};
+                // Add card to the sideboard in desired location
+                newSideboard.splice(action.payload.endloc, 0, card);
+
+                // Add card to the sideboard Map
+                addCardToCardMap(newSideboardMap, card);
+            }
+
+            // Case Sideboard --> Collection
+            if (state.dragCard.section === 'sideboard' && action.payload.section === 'collection' ) {
+                // Remove the card from newSideboard and newSideboardMap
+                newSideboard.splice(state.dragCard.loc, 1);
+                removeCardFromCardMap(newSideboardMap, card);
+            }
+
+            // Case Deck --> Sideboard
+            // Case Sideboard --> Deck
+            // Case Sideboard --> Sideboard (Moving within column)
+            return {...state, deck: newDeck, deckMap: newDeckMap, sideboard: newSideboard, sideboardMap: newSideboardMap, dragCard: null};
         }
 
         default:
@@ -353,4 +270,45 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         cmc = 7;
     }
     return cmc;
+}
+
+/**
+ * Helper function for adding a card to either deckMap or sideboardMap
+ * @param {*} cardMap The cardMap that a card needs to be added to. eg a copy of deckMap or sideboardMap
+ * @param {*} card The card object that is being added
+ */
+function addCardToCardMap(cardMap, card) {
+    // Initialize specific card name in newSideboardMap if necessary
+    if (!cardMap[card.name]) {
+        cardMap[card.name] = {};
+    }
+
+    // Increment count if specific arenaId declared under card name
+    if (cardMap[card.name][card.arenaId]) {
+        cardMap[card.name][card.arenaId].copies++;
+    }
+    // Else initialize arenaId for card name
+    else {
+        cardMap[card.name][card.arenaId] = {copies: 1, set: card.set, col_num: card.collector_number };
+    }
+}
+
+/**
+ * Helper function for removing a card to either deckMap or sideboardMap
+ * @param {*} cardMap The cardMap that a card needs to be removed to. eg a copy of deckMap or sideboardMap
+ * @param {*} card The card object that is being removed
+ */
+function removeCardFromCardMap(cardMap, card) {
+    // Decrement card count
+    cardMap[card.name][card.arenaId].copies--;
+
+    // Check if arenaId needs to be removed
+    if (cardMap[card.name][card.arenaId].copies <= 0) {
+        delete cardMap[card.name][card.arenaId];
+    }
+
+    // Check if card name needs to be removed
+    if (Object.keys(cardMap[card.name]).length <= 0) {
+        delete cardMap[card.name];
+    }
 }
