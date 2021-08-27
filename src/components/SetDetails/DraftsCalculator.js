@@ -46,7 +46,7 @@ function DraftsCalculator() {
             setDraftType(preferredDraftType);
         }
 
-    },[])
+    },[]);
     
     // Grab set id from url
     const { setId } = useParams();
@@ -54,10 +54,8 @@ function DraftsCalculator() {
     const ownedBoosters = useBooster(setId);
 
     // Get mythic/rare totals from redux
-    const mythicOwnedTotal = useSelector(state => state.inventory.set[setId].mythic.ownedTotal);
-    const mythicSetTotal = useSelector(state => state.inventory.set[setId].mythic.setTotal);
-    const rareOwnedTotal = useSelector(state => state.inventory.set[setId].rare.ownedTotal);
-    const rareSetTotal = useSelector(state => state.inventory.set[setId].rare.setTotal);
+    const { ownedTotal: mythicsOwned, setTotal: mythicsTotal } = useSelector( ({inventory}) => inventory.set[setId].mythic);
+    const { ownedTotal: raresOwned,   setTotal: raresTotal   } = useSelector( ({inventory}) => inventory.set[setId].rare);
 
     // Track change in win rate input
     useEffect(() => {
@@ -78,7 +76,7 @@ function DraftsCalculator() {
          // Wait for user to stop typing
          const timeoutid = setTimeout( () => {
             setRaresPicked(debouncedRaresPicked);
-            window.localStorage.setItem('draftRaresPicked',debouncedRaresPicked);
+            window.localStorage.setItem('draftRaresPicked', debouncedRaresPicked);
         }, 500);
 
         // Cleanup function to stop timer
@@ -108,11 +106,11 @@ function DraftsCalculator() {
             <div id="notAvailable">
                 <h2>{message}</h2>
             </div>
-        )
+        );
     }
     // Calculate number of drafts required to complete rare/mythic collection for this set
-    const rareDraftsNeeded = draftsNeeded(setId, "rare", rareOwnedTotal, rareSetTotal, raresPicked, rewardPacks, ownedBoosters);
-    const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicOwnedTotal, mythicSetTotal, mythicsPicked, rewardPacks, ownedBoosters);
+    const rareDraftsNeeded = draftsNeeded(setId, "rare", raresOwned, raresTotal, raresPicked, rewardPacks, ownedBoosters);
+    const mythicDraftsNeeded = draftsNeeded(setId, "mythic", mythicsOwned, mythicsTotal, mythicsPicked, rewardPacks, ownedBoosters);
 
     // Calculate cost of drafts (include gems returned)
 
