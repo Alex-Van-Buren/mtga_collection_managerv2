@@ -37,7 +37,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const cards = useMemo(() => {
 
         // If all/none of the rarities selected, set rarityOption to undefined so findCards will not filter by rarity
-        let rarityOption = []; 
+        let rarityOption = [];
         for (const rarity in rarities) {
 
             // Add rarity to rarityOption if it's selected
@@ -47,9 +47,9 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         }
 
         // Set rarityOption to undefined if all or none of the rarities are added to it
-        if (rarityOption.length < 1 || rarityOption.length > 3)
+        if (rarityOption.length < 1 || rarityOption.length > 3) {
             rarityOption = undefined;
-
+        }
         // Set booster to true, false, or undefined based on the value in redux
         let booster;
         switch (boosterVal) {
