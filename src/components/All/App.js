@@ -9,6 +9,7 @@ import Help from './Help';
 import DeckBuilder from '../DeckBuilder/DeckBuilder';
 import PageNotFound from './PageNotFound';
 import ScrollTop from './ScrollTop';
+import Announcements from './Announcements';
 import '../../css/App.css';
 
 /**
@@ -20,6 +21,7 @@ function App() {
             <div id="contentContainer">
                 <div id="keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage">
                     <Header />
+                    <Announcements/>
 
                     <Switch>
                         <Route exact component={Home}   path='/' />

@@ -11,18 +11,17 @@ import '../../css/ImportExportDeck.css';
  */
 function ImportExportModal() {
 
-    // Advanced options modal is open/closed
+    // Import/export modal is open/closed
     const [modalOpen, setModalOpen] = useState(false);
 
     // Determine whether to show the import or export functions (defaults to export)
     const [isImport, setIsImport] = useState(false);
 
     // JSX in the modal --> only viewable if modalOpen is true
-    const modalContent = ( 
+    const modalContent = (
         <div className="importExportModal darkMode">
             <div className="closeModalButton">
                 <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"></i></button>
-
             </div>
             {isImport ? <ImportDeck setModalOpen={setModalOpen}/> : <ExportDeck />}
         </div>

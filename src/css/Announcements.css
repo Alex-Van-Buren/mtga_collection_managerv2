@@ -1,0 +1,50 @@
+#announce {
+    background-color: rgb(70, 70, 70);
+    border-radius: 10px;
+    color: white;
+    padding: 2rem;
+    width: 80vw;
+}
+
+#announceList::-webkit-scrollbar {
+    width: 10px;
+}
+
+#announceList::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+}
+
+#announceList {
+    border-top: 1px solid white;
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+#announce h1 {
+    font-size: 2.5rem;
+}
+
+#announce li {
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+#announce li > p {
+    font-weight: normal;
+}
+
+#announce li > strong {
+    font-size: 2rem;
+}
+
+.announceHeader {
+    display: flex;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+#announceList {
+    overflow-y: auto;
+}
