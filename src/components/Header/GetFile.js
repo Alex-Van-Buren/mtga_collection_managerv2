@@ -120,8 +120,9 @@ function GetFile() {
                 // Show error if no inventory found
                 if (!inventoryFound) {
                     
-                    dispatch(setHeaderModalContent("NO_INVENTORY_FOUND"));
-                    dispatch(showHeaderModal(true));
+                    // TODO: Temporarily disable NO_INVENTORY_FOUND error until log files patched
+                    // dispatch(setHeaderModalContent("NO_INVENTORY_FOUND"));
+                    // dispatch(showHeaderModal(true));
                 }
             }
         }
