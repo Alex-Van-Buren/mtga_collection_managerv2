@@ -16,6 +16,10 @@ function GetFile() {
         // Get and process initially empty card set
         dispatch( getCollection(null) );
         dispatch( processSetCollection(null) );
+
+        // Make empty player inventory for initial load
+        const emptyPlayerInventory = {wcCommon: 0, wcUncommon: 0, wcRare: 0, wcMythic: 0, gold: 0, gems: 0, vaultProgress: 0, boosters: []};
+        dispatch( getPlayerInventory(emptyPlayerInventory));
     },
     [dispatch]); // Only updates if dispatch changes value. Just here to make ESLint happy
 
@@ -65,19 +69,30 @@ function GetFile() {
     function extractPlayerInventory(file) {
 
         // Define Regex to get the player inventory
-        const inventoryRegex = /"InventoryInfo".*("Gems":.*),"Vouchers"/g;
+        const inventoryRegex = /GetPlayerInventory.+payload.+("wcCommon":\d*).*("wcUncommon":\d*).*("wcRare":\d*).*("wcMythic":\d*).*("gold":\d*).*("gems":\d*).*("vaultProgress":[\d.]*).*("boosters":\[[\w{}:",]*\])/g;
 
         // Use regex on the file - finds all matches
         const matches = [...file.matchAll(inventoryRegex)];
         
         // Check if regex returned valid data
         if  (matches.length > 0) {
+
+            // Only use the last match in the file
+            const match = matches[matches.length-1];
             
-            /* Only use last match in the file. This ensures that the inventory is as up-to-date as possible.
-             * Then take the capturing group from that match and slap it into some curly braces to make a json string.
-             * Then parse that json.
-             */
-            const playerInventory = JSON.parse( `{${matches[matches.length-1][1]}}` );
+            // Make the JSON by composing strings
+            let playerInventoryString = "{";
+
+            for (let i=1; i<=8; i++) {
+                playerInventoryString += match[i];
+                if (i !== 8) {
+                    playerInventoryString += ",";
+                }
+            }
+            playerInventoryString += "}";
+
+            // Parse the JSON (String)
+            const playerInventory = JSON.parse(playerInventoryString);
             
             // Dispatch playerInventory to Redux
             dispatch(getPlayerInventory(playerInventory));
@@ -120,9 +135,8 @@ function GetFile() {
                 // Show error if no inventory found
                 if (!inventoryFound) {
                     
-                    // TODO: Temporarily disable NO_INVENTORY_FOUND error until log files patched
-                    // dispatch(setHeaderModalContent("NO_INVENTORY_FOUND"));
-                    // dispatch(showHeaderModal(true));
+                    dispatch(setHeaderModalContent("NO_INVENTORY_FOUND"));
+                    dispatch(showHeaderModal(true));
                 }
             }
         }

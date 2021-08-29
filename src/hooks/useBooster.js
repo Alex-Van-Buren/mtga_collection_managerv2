@@ -1,23 +1,19 @@
 import { useSelector } from 'react-redux';
-import { setInfo } from '../data/setInfo';
 
 function useBooster(setId) {
 
     // Get the boosters owned by the player
-    const boosters = useSelector(state => state.inventory.player.boosters);
-    const setCollationId = setInfo[setId].collationId;
+    const boosters = useSelector(state => state.inventory.player.Boosters);
 
-    let numOwned = 0;
     for (const booster of boosters) {
-        if ( booster.collationId === setCollationId ) {
+        if ( booster.SetCode.toLowerCase() === setId ) {
 
             // Get the number and stop checking 
-            numOwned = booster.count;
-            break;
+            return booster.Count;
         }
     }
 
-    return numOwned;   
+    return 0;   
 }
 
 export default useBooster;

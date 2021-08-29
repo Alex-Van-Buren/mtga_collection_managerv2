@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import gem_img        from '../../images/arena/Gem.png';
@@ -16,63 +16,46 @@ import '../../css/PlayerInventory.css';
  */
 function PlayerInventory() {
 
-    const inventory = useSelector(({inventory}) => {
-        
-        // Return player inventory if it exists
-        if ( inventory && inventory.player ) return inventory.player;
+    // Destructure values from player inventory in redux
+    const { Gems, Gold, TotalVaultProgress, WildCardCommons, WildCardUnCommons, WildCardRares, WildCardMythics
+    } = useSelector(state => state.inventory.player);
 
-        // Else return null
-        return null;
-    });
+    /**
+     * Helper Component to set inventory items. Only initialized once.
+     * @param {string} name 
+     * @param {number|*} value Commas are added to value if a number
+     * @param {HTMLImageElement} image Image source
+     * @returns div with nested img and label
+     */
+     const inventoryItem = useCallback((name, value, image) => {
+        if (typeof value === "number") {
+            value = value.toLocaleString();
+        }
+        return (
+            <div aria-label={name} title={name}>
+                <img src={image} alt={name} id={name}/>
+                <label htmlFor={name}> {value} </label>
+            </div>
+        );
+    }, []);
 
-    // Don't display Player Inventory if inventory isn't initialized
-    if (!inventory) {
+    // Don't display inventory if uninitialized or 0 (assuming this means log file not uploaded)
+    if ( !WildCardMythics && !WildCardRares && !WildCardUnCommons && !WildCardCommons && !Gems && !Gold && !TotalVaultProgress ) {
         return null;
     }
 
-    // Destructure values from inventory
-    const { wcMythic, wcRare, wcUncommon, wcCommon, gems, gold, vaultProgress } = inventory;
+    return (<div id="playerInventory">
 
-    // Don't display inventory if all inventory values are 0 (assuming this means log file not uploaded)
-    if (wcMythic===0 && wcRare===0 && wcUncommon===0 && wcCommon===0 && gems===0 && gold===0 && vaultProgress===0) {
-        return null;
-    }
+        {inventoryItem("Vault Progress", `${(TotalVaultProgress/10).toLocaleString()}%`, vault_img)}
 
-    return (
-        <div id="playerInventory">
+        {inventoryItem("Mythic Wildcards", WildCardMythics, wcMythic_img)}
+        {inventoryItem("Rare Wildcards", WildCardRares, wcRare_img)}
+        {inventoryItem("Uncommon Wildcards", WildCardUnCommons, wcUncommon_img)}
+        {inventoryItem("Common Wildcards", WildCardCommons, wcCommon_img)}
 
-            <div aria-label="Vault Progress" title="Vault Progress">
-                <img src={vault_img} alt="Vault Progress" />
-                <p>{`${vaultProgress}%`}</p>
-            </div>
-
-            <div aria-label="Mythic Wildcards" title="Mythic Wildcards">
-                <img src={wcMythic_img} alt="Mythic Wildcards" />
-                <p>{wcMythic.toLocaleString()}</p>
-            </div>
-            <div aria-label="Rare Wildcards" title="Rare Wildcards">
-                <img src={wcRare_img} alt="Rare Wildcards" />
-                <p>{wcRare.toLocaleString()}</p>
-            </div>
-            <div aria-label="Uncommon Wildcards" title="Uncommon Wildcards">
-                <img src={wcUncommon_img} alt="Uncommon Wildcards" />
-                <p>{wcUncommon.toLocaleString()}</p>
-            </div>
-            <div aria-label="Common Wildcards" title="Common Wildcards">
-                <img src={wcCommon_img} alt="Common Wildcards" />
-                <p>{wcCommon.toLocaleString()}</p>
-            </div>
-
-            <div aria-label="Player Gold" title="Player Gold">
-                <img src={gold_img} alt="Player Gold"/>
-                <p>{gold.toLocaleString()}</p>
-            </div>
-            <div aria-label="Player Gems" title="Player Gems">
-                <img src={gem_img} alt="Player Gems" />
-                <p>{gems.toLocaleString()}</p>
-            </div>
-        </div>
-    );
+        {inventoryItem("Player Gold", Gold, gold_img)}
+        {inventoryItem("Player Gems", Gems, gem_img)}
+    </div>);
 }
 
 export default PlayerInventory;
