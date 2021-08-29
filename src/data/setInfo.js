@@ -17,7 +17,7 @@ import rix_logo from '../images/setLogos/rix_logo.png';
 import xln_logo from '../images/setLogos/xln_logo.png';
 import jmp_logo from '../images/setLogos/jmp_logo.png';
 import afr_logo from '../images/setLogos/afr_logo.png';
-
+import j21_logo from '../images/setLogos/j21_logo.png';
 
 /**
  * The set codes of the current standard sets
@@ -183,7 +183,13 @@ export const setInfo = {
         mythic_upgrade: null,
         collationId: null,
         logo: jmp_logo
-    }
+    },
+    j21: {
+        name: "Jumpstart: Historic Horizons",
+        mythic_upgrade: null,
+        collationId: null,
+        logo: j21_logo
+    },
 }
 
 /**
