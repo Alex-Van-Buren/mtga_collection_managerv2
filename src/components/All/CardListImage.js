@@ -48,9 +48,9 @@ function CardListImage({
     const flipRef = useRef();
     const cardRef = useRef();
 
-    // CardInfo for dispatching
+    // CardInfo for dispatching to deck/sideboard/commander/companion
     const cardInfo = { 
-        name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, 
+        name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, color_identity: card.color_identity,
         collector_number: card.collector_number, type_line: type_line, legalities: card.legalities
     };
 

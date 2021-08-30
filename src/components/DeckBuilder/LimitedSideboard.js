@@ -1,8 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeCardFromSideboard, addCardToDeck } from '../../actions';
+import HoverPreview from '../Templates/HoverPreview';
+import { removeCardFromSideboard, addCardToDeck, limitedSort } from '../../actions';
 import findCards from '../../data/findCards';
 import '../../css/LimitedSideboard.css';
 
@@ -11,10 +11,44 @@ import '../../css/LimitedSideboard.css';
  * @returns JSX
  */
 function LimitedSideboard() {
-    const sideboardCards = useSelector(state => state.deckBuilder.sideboard);
-    const { colors, rarity, cardTypes, searchTerm, searchType, cmc } = useSelector(state => state.displayOptions);
-    const [sorting, setSorting] = useState('Color');
+    const dispatch = useDispatch();
+    const { sideboard } = useSelector(state => state.deckBuilder);
+    
+    return ( 
+        <div className="limitedSideboard">
+            <div className="limitedSideboard-header">
+                <label htmlFor="sortButtons">Sort By:</label>
+                <div className="sortButtons">
+                    <button className='sortCmc' 
+                        onClick={() => dispatch(limitedSort('cmc'))}>Mana Value
+                    </button>
+                    <button className='sortColor'
+                        onClick={() => dispatch(limitedSort('color'))}>Color
+                    </button>
+                </div>
+            </div>
+            <div className="limitedSideboard-cards">
+                <SideboardColumn cardArray={sideboard[0]} col={0}/>
+                <SideboardColumn cardArray={sideboard[1]} col={1}/>
+                <SideboardColumn cardArray={sideboard[2]} col={2}/>
+                <SideboardColumn cardArray={sideboard[3]} col={3}/>
+                <SideboardColumn cardArray={sideboard[4]} col={4}/>
+                <SideboardColumn cardArray={sideboard[5]} col={5}/>
+                <SideboardColumn cardArray={sideboard[6]} col={6}/>
+                <SideboardColumn cardArray={sideboard[7]} col={7}/>
+            </div>
+        </div>
+    )
+}
 
+/**
+ * A helper react component to create a column of cards 
+ * @returns JSX
+ */
+function SideboardColumn({cardArray, col}) {
+    const dispatch = useDispatch();
+    const { colors, rarity, cardTypes, searchTerm, searchType, cmc } = useSelector(state => state.displayOptions);
+   
     // Create rarity search option from rarity object
     let rarityOptions = [];
     for (const option in rarity) {
@@ -57,123 +91,25 @@ function LimitedSideboard() {
     // Make searchOptions object
     const searchOptions = {color: colors, rarity: rarityOptions, cardTypes: searchCardTypes, term: searchTerm, advancedSearchType: searchType, cmc: searchcmc};
     // Use findCards to filter the sideboard cards
-    const cardList = findCards(searchOptions, 'all', sideboardCards);
-
-    // Sort the sideboard cards into arrays
-    let col0 = [];
-    let col1 = [];
-    let col2 = [];
-    let col3 = [];
-    let col4 = [];
-    let col5 = [];
-    let col6 = [];
-    let col7 = [];
-
-    // Sort into CMC columns if sorting by cmc
-    if ( sorting === 'CMC') {
-
-        for (const card of cardList) {
-            switch (card.cmc) {
-                case 0:
-                    col0.push(card); break;
-                case 1:
-                    col1.push(card); break;
-                case 2:
-                    col2.push(card); break;
-                case 3:
-                    col3.push(card); break;
-                case 4:
-                    col4.push(card); break;
-                case 5:
-                    col5.push(card); break;
-                case 6:
-                    col6.push(card); break;
-                default:
-                    col7.push(card); break;
-            }
-        }
-    }
-
-    // Sort into Color columns if sorting by color
-    if (sorting === 'Color') {
-        for (const card of cardList) {
-            // Check how many colors the card has
-            if ( card.color_identity.length === 1 ){
-                switch ( card.color_identity[0]) {
-                    case 'W':
-                        col0.push(card); break;
-                    case 'U':
-                        col1.push(card); break;
-                    case 'B':
-                        col2.push(card); break;
-                    case 'R':
-                        col3.push(card); break;
-                    case 'G':
-                        col4.push(card); break;
-                    default: 
-                        break;
-                }
-            }
-            else if ( card.color_identity.length > 1) {
-                col5.push(card);
-            }
-            else if (card.color_identity.length === 0 ) {
-                col6.push(card);
-            }            
-        }
-    }
-    
-    return ( 
-        <div className="limitedSideboard">
-            <div className="limitedSideboard-header">
-                <label htmlFor="sortButtons">Sort By:</label>
-                <div className="sortButtons">
-                    <button className={sorting === 'CMC' ? "sortCmc active": 'sortCmc'} 
-                        onClick={() => setSorting('CMC')}>Mana Value
-                    </button>
-                    <button className={sorting === 'Color' ? "sortColor active": 'sortColor'} 
-                        onClick={() => setSorting('Color')}>Color
-                    </button>
-                </div>
-            </div>
-            <div className="limitedSideboard-cards">
-                <SideboardColumn cardArray={col0}/>
-                <SideboardColumn cardArray={col1}/>
-                <SideboardColumn cardArray={col2}/>
-                <SideboardColumn cardArray={col3}/>
-                <SideboardColumn cardArray={col4}/>
-                <SideboardColumn cardArray={col5}/>
-                <SideboardColumn cardArray={col6}/>
-                <SideboardColumn cardArray={col7}/>
-            </div>
-        </div>
-    )
-}
-
-/**
- * A helper react component to create a column of cards 
- * @returns JSX
- */
-function SideboardColumn({cardArray}) {
-    const dispatch = useDispatch();
+    const cardList = findCards(searchOptions, 'all', cardArray);
 
     function moveToDeck(event, card) {
         event.stopPropagation();
-        dispatch(removeCardFromSideboard(card));
+        dispatch(removeCardFromSideboard(card, col, cardArray.indexOf(card)));
         dispatch(addCardToDeck(card));
     }
 
     let renderColumn;
-    if (cardArray.length >= 1) {
-        renderColumn = cardArray.map( (card, i )=> {
+    if (cardList.length >= 1) {
+        renderColumn = cardList.map( (card, i )=> {
             return (
                 // Using DBDeckCard class from dbdeck
                 <div className="DBDeckCard" key={card.name + i} 
                     onClick={(e) => moveToDeck(e, card)}
                 >
-                    <img
-                        src={card.imgs.front} alt={card.name} 
-                    />
+                    <HoverPreview imgs={card.imgs}>
+                        <img src={card.imgs.front} alt={card.name}/>
+                    </HoverPreview>
                 </div>
             )
         });

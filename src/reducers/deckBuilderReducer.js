@@ -1,6 +1,6 @@
 import {
-    ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, SET_ADD_TYPE,
-    ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, DROP_CARD
+    ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, SET_ADD_TYPE, ADD_CARD_TO_SIDEBOARD, 
+    REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, DROP_CARD, LIMITED_SORT
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,6 +16,7 @@ const INITIAL_STATE = {
     addBasics: false,
     addType: "deck", // Valid types: "deck", "sideboard", "commander", "companion"
     dragCard: null,
+    limitedSort: 'cmc'
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {
@@ -27,7 +28,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             const card = action.payload;
 
             // Find which column to add card to
-            const i = colNumber(card.cmc);
+            const i = colNumberCMC(card.cmc);
 
             // Copy current state
             const newDeck = [ ...state.deck ];
@@ -75,7 +76,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             for (const card of action.payload) {
 
                 // Find which column to add card to
-                const i = colNumber(card.cmc);
+                const i = colNumberCMC(card.cmc);
     
                 // Add card to deck
                 newDeck[i].push(card);
@@ -94,7 +95,13 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             const card = action.payload;
 
             // Find which column to add card to
-            const i = colNumber(card.cmc);
+            let i = 0;
+            if ( state.limitedSort === 'cmc') {
+                i = colNumberCMC(card.cmc);
+            }
+            else if ( state.limitedSort === 'color') {
+                i = colNumberColor(card.color_identity);
+            }
 
             // Copy current state
             const newSideboard = [ ...state.sideboard ];
@@ -134,11 +141,17 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             const newSideboard = [ [], [], [], [], [], [], [], [] ];
             const newSideboardMap = {};
 
-            for (const card of action.payload) {      
-                
+            for (const card of action.payload) {  
+
                 // Find which column to add card to
-                const i = colNumber(card.cmc);
-    
+                let i = 0;  
+                if ( state.limitedSort === 'cmc') {
+                    i = colNumberCMC(card.cmc);
+                }
+                else if ( state.limitedSort === 'color' ) {
+                    i = colNumberColor(card.color_identity)
+                }
+
                 // Place card in specific sideboard column
                 newSideboard[i].push(card);
 
@@ -288,6 +301,28 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             return {...state, deck: newDeck, deckMap: newDeckMap, sideboard: newSideboard, sideboardMap: newSideboardMap, dragCard: null};
         }
 
+        case LIMITED_SORT: {
+            const sideboardCards = [...state.sideboard].flat();
+            const newSideboard = [ [], [], [], [], [], [], [], [] ];
+
+            for (const card of sideboardCards) {  
+
+                // Find which column to add card to
+                let i = 0;  
+                if ( action.payload === 'cmc') {
+                    i = colNumberCMC(card.cmc);
+                }
+                else if ( action.payload === 'color' ) {
+                    i = colNumberColor(card.color_identity)
+                }
+
+                // Place card in specific sideboard column
+                newSideboard[i].push(card);
+
+            }
+            return {...state, limitedSort: action.payload, sideboard: newSideboard };
+        }
+
         default:
             return state;
     }
@@ -296,7 +331,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 /**
      * Converts cmc into column number 0-7
      */
- function colNumber(cmc) {
+ function colNumberCMC(cmc) {
     if (typeof cmc === 'string') {
         cmc = parseInt(cmc);
     }
@@ -309,6 +344,22 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         cmc = 7;
     }
     return cmc;
+}
+
+function colNumberColor(color) {
+
+    const colorMap = ['W', 'U', 'B', 'R', 'G'];
+    
+    // Multicolored are stored in column 5
+    if (color.length > 1 ){
+        return 5;
+    }
+    // Colorless are stored in column 5
+    if (color.length === 0){
+        return 6;
+    }
+    // Match the color to the colorMap to determine the column
+    return colorMap.indexOf(color[0]);
 }
 
 /**

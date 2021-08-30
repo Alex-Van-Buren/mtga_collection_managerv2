@@ -26,7 +26,7 @@ function DBDeckOptions() {
         // Check the deckType
         if (selectedDeckType === 'limited' ){
             // If creating limited deck --> move all cards from deck to sideboard, then clear deck, companion and commander
-            const newSideboard = currentDeck.flat().concat(currentSideboard);
+            const newSideboard = currentDeck.concat(currentSideboard).flat();
             dispatch(setDeck([]));
             dispatch(setSideboard(newSideboard));
             dispatch(changeCommander(null));

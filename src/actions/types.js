@@ -34,3 +34,4 @@ export const SET_SIDEBOARD = "SET_SIDEBOARD";
 export const SET_ADD_TYPE = "SET_ADD_TYPE";
 export const SET_DRAG_CARD = 'SET_DRAG_CARD';
 export const DROP_CARD = 'DROP_CARD';
+export const LIMITED_SORT = 'LIMITED_SORT';
