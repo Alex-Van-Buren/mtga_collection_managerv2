@@ -19,59 +19,77 @@ function DBSideboard() {
     // Track cards added
     const addedToDeck = {};
 
-    // Map the cards to a single column
-    const renderSBCards = sideboard.map( (card, i) => {
+    // Holds card JSX for sideboard
+    const renderSBCards = [];
 
-        // Track that a copy of this card was added to the deck
-        addedToDeck[card.arenaId] = addedToDeck[card.arenaId] ? addedToDeck[card.arenaId]+1 : 1;
+    // Counter for renderSBCards
+    let sbCounter = 0;
 
-        let style = {};
+    // Loop through rows in 2d array sideboard
+    for (let i=0; i<sideboard.length; i++) {
 
-        // Add red boarder around cards not legal in current format
-        if (card.legalities && card.legalities[deckType] && card.legalities[deckType] !== "legal" ) {
-            style.boxShadow = '0 0 0 3px red';
-            style.borderRadius = '5px';
-        }
+        // Alias column in 2d array sideboard
+        for (let j=0; j<sideboard[i].length; j++) {
 
-        // Don't mark unowned cards if inventory isn't initialized
-        if (cardCollection) {
+            // Alias specific card within 2d sideboard
+            const card = sideboard[i][j];
 
-            // Don't color if single copy of basic land owned
-            if (card.type_line.toLowerCase().includes("basic") && card.type_line.toLowerCase().includes("land") 
-                && cardCollection[card.arenaId]
-            ) {}
+            // Track that a copy of this card was added to the deck
+            addedToDeck[card.arenaId] = addedToDeck[card.arenaId] ? addedToDeck[card.arenaId]+1 : 1;
 
-            // Special case cards
-            else if (cardCollection[card.arenaId] && cardCollection[card.arenaId] >= 4 &&
-                    [70288, 69172, 67306, 76490].includes(card.arenaId)
-            ) {}
+            let style = {};
 
-            // Color unowned copies of this card
-            else if ( !cardCollection[card.arenaId] || (addedToDeck[card.arenaId] > cardCollection[card.arenaId]) ) {
-
-                // Darken unowned cards
-                style.filter = "brightness(50%)";
+            // Add red boarder around cards not legal in current format
+            if (card.legalities && card.legalities[deckType] && card.legalities[deckType] !== "legal" ) {
+                style.boxShadow = '0 0 0 3px red';
+                style.borderRadius = '5px';
             }
-        }
 
-        return <div className="DBDeckCard" key={card + i} style={{ zIndex: i }}>
-            <HoverPreview imgs={card.imgs}>
-            <img draggable
-                src={card.imgs.front} alt={card.name} style={style}
-                onClick={(e) => {
-                    dispatch(removeCardFromSideboard(card));
-                }}
-                onDragStart={() => {
-                    dispatch(setDragCard(card, 'sideboard', i))
-                }}
-                onDragEnd={() => dispatch(setDragCard(null))}
-                onDrop={() => {
-                    dispatch(dropCard('sideboard', i))
-                }}
-            />
-            </HoverPreview>
-        </div>
-    });
+            // Don't mark unowned cards if inventory isn't initialized
+            if (cardCollection) {
+
+                // Don't color if single copy of basic land owned
+                if (card.type_line.toLowerCase().includes("basic") && card.type_line.toLowerCase().includes("land") 
+                    && cardCollection[card.arenaId]
+                ) {}
+
+                // Special case cards
+                else if (cardCollection[card.arenaId] && cardCollection[card.arenaId] >= 4 &&
+                        [70288, 69172, 67306, 76490].includes(card.arenaId)
+                ) {}
+
+                // Color unowned copies of this card
+                else if ( !cardCollection[card.arenaId] || (addedToDeck[card.arenaId] > cardCollection[card.arenaId]) ) {
+
+                    // Darken unowned cards
+                    style.filter = "brightness(50%)";
+                }
+            }
+
+            // Add cards to render array
+            renderSBCards.push(<div className="DBDeckCard" key={card + sbCounter} style={{ zIndex: sbCounter }}>
+                <HoverPreview imgs={card.imgs}>
+                <img draggable
+                    src={card.imgs.front} alt={card.name} style={style}
+                    onClick={(e) => {
+                        dispatch(removeCardFromSideboard(card, i, j));
+                    }}
+                    onDragStart={() => {
+                        dispatch(setDragCard(card, 'sideboard', j))
+                    }}
+                    onDragEnd={() => dispatch(setDragCard(null))}
+                    onDrop={() => {
+                        dispatch(dropCard('sideboard', j))
+                    }}
+                />
+                </HoverPreview>
+            </div>);
+
+            // Increment counter (for setting z-index)
+            sbCounter++;
+
+        } // End column loop (j)
+    } // End row loop (i)
     
     // Flip triangle button direction when opening or closing the sideboard
     let iconClass = 'SBshowButton icon caret right';

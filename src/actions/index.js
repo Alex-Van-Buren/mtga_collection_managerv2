@@ -150,10 +150,10 @@ export function addCardToDeck(card) {
     };
 }
 
-export function removeCardFromDeck(card, loc) {
+export function removeCardFromDeck(card, col, row) {
     return {
         type: REMOVE_CARD_FROM_DECK,
-        payload: {card , loc}
+        payload: { card, col, row }
     };
 }
 
@@ -186,10 +186,10 @@ export function addCardToSideboard(card) {
  * @param {object} card 
  * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
  */
-export function removeCardFromSideboard(card) {
+export function removeCardFromSideboard(card, col, row) {
     return {
         type: REMOVE_CARD_FROM_SIDEBOARD,
-        payload: card
+        payload: { card, col, row }
     };
 }
 

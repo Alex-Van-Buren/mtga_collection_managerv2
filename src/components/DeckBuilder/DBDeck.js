@@ -22,8 +22,8 @@ function DBDeck() {
 
         return deck.map((column, i) => {
             return <div className="DBDeckColumn" key={'column'+i}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => {e.stopPropagation(); dispatch(dropCard( 'deck', {col:i, row: 0}))}}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {e.stopPropagation(); dispatch(dropCard( 'deck', {col:i, row: 0}))}}
             >
 
                 {/* Create JSX for each individual card */}
@@ -76,7 +76,7 @@ function DBDeck() {
                             onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
                             src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
-                                dispatch(removeCardFromDeck(card, {col: i, row: j}));
+                                dispatch(removeCardFromDeck(card, i, j));
 
                                 // If the deckType is limited, move the card to the sideboard
                                 if ( deckType === 'limited' ) {

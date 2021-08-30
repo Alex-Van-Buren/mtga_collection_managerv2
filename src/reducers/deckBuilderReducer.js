@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     deck: [ [], [], [], [], [], [], [], [] ],
     // Contains card names, ids, and number of copies
     deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
-    sideboard: [],
+    sideboard: [ [], [], [], [], [], [], [], [] ],
     sideboardMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
     commander: null,
     companion: null,
@@ -48,8 +48,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             const card = action.payload.card;
 
             // Find which column/row to remove card from
-            const col = action.payload.loc.col;
-            const row = action.payload.loc.row
+            const col = action.payload.col;
+            const row = action.payload.row
 
             // Copy current state
             const newDeck = [ ...state.deck ];
@@ -93,14 +93,17 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Alias the card to an easier name
             const card = action.payload;
 
+            // Find which column to add card to
+            const i = colNumber(card.cmc);
+
             // Copy current state
             const newSideboard = [ ...state.sideboard ];
             const newSideboardMap = { ...state.sideboardMap };
 
             // Add card to sideboard
-            newSideboard.push(card);
+            newSideboard[i].push(card);
 
-            // Add card to sideboardMap 
+            // Add card to sideboard map
             addCardToCardMap(newSideboardMap, card);
 
             // Update state
@@ -108,16 +111,18 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         }
 
         case REMOVE_CARD_FROM_SIDEBOARD: {
-            const card = action.payload;
+            
+            const { card, col, row } = action.payload;
+            console.log(card, col, row)
 
             // Copy sideboard
             let newSideboard = [ ...state.sideboard ];
             let newSideboardMap = { ...state.sideboardMap };
             
             // Remove card
-            newSideboard.splice(newSideboard.indexOf(card), 1);
+            newSideboard[col].splice(row, 1);
 
-            // Remove card from sideboardMap 
+            // Remove card from sideboard map
             removeCardFromCardMap(newSideboardMap, card);
 
             // Update state
@@ -126,10 +131,17 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
         case SET_SIDEBOARD: {
 
-            const newSideboard = action.payload;
+            const newSideboard = [ [], [], [], [], [], [], [], [] ];
             const newSideboardMap = {};
 
-            for (const card of newSideboard) {            
+            for (const card of action.payload) {      
+                
+                // Find which column to add card to
+                const i = colNumber(card.cmc);
+    
+                // Place card in specific sideboard column
+                newSideboard[i].push(card);
+
                 addCardToCardMap(newSideboardMap, card);
             }
 

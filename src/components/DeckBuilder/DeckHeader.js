@@ -29,7 +29,7 @@ function DeckHeader() {
     deck = deck.flat();
 
     // Initialize deck counts
-    const sideboardCount = companion ? sideboard.length + 1 : sideboard.length;
+    const sideboardCount = companion ? sideboard.flat().length + 1 : sideboard.flat().length;
     let deckCount        = commander ? 1 : 0;
     let landCount        = 0;
     let partialLandCount = 0;
