@@ -75,11 +75,11 @@ function DBSideboard() {
                         dispatch(removeCardFromSideboard(card, i, j));
                     }}
                     onDragStart={() => {
-                        dispatch(setDragCard(card, 'sideboard', j))
+                        dispatch(setDragCard(card, 'sideboard', {col: i, row: j} ))
                     }}
                     onDragEnd={() => dispatch(setDragCard(null))}
                     onDrop={() => {
-                        dispatch(dropCard('sideboard', j))
+                        dispatch(dropCard('sideboard', {col: i, row: j}))
                     }}
                 />
                 </HoverPreview>
@@ -109,7 +109,7 @@ function DBSideboard() {
             <div className="DBDeckColumn"
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => {
-                    dispatch(dropCard('sideboard', sideboard.length))
+                    dispatch(dropCard('sideboard', {col: 7, row: sideboard[7].length}))
                 }}
             >
                 {renderSBCards}
