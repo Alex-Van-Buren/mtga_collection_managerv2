@@ -219,18 +219,18 @@ function CardModal() {
     const keyEvents = [
 
         // Left Arrow pressed --> go left (-1 to index unless at start)
-        { key: 37, keyFunction: goLeft },
+        { keys: [37], keyFunction: goLeft },
 
         // Right Arrow pressed --> go right (+1 to index unless at end)
-        { key: 39, keyFunction: goRight },
+        { keys: [39], keyFunction: goRight },
 
         // Space bar pressed --> Flip card if possible
-        { key: 32, keyFunction: flipCard }
+        { keys: [32], keyFunction: flipCard }
     ];
 
     // Render Modal
     return (
-        <Modal content={renderedContent} keyEvents={keyEvents} show={show} showModal={(val) => dispatch(showCardModal(val))}/>
+        <Modal content={renderedContent} keyEvents={keyEvents} show={show} setShow={(val) => dispatch(showCardModal(val))}/>
     );
 }
 

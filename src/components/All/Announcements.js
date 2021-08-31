@@ -68,7 +68,7 @@ function Announcements() {
         <br /><br />
     </div>;
 
-    const renderedModal = modalOpen ? <Modal content={announceList} show={modalOpen} showModal={setModalOpen} /> : null;
+    const renderedModal = modalOpen ? <Modal content={announceList} show={modalOpen} setShow={setModalOpen} /> : null;
 
     return renderedModal;
 }

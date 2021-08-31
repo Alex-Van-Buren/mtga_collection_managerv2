@@ -28,7 +28,7 @@ function ImportExportModal() {
     );
 
     // If moddalOpen is true --> render the modal, false --> null
-    const renderedModal = modalOpen ? <Modal content={modalContent} show={modalOpen} showModal={setModalOpen} /> : null;
+    const renderedModal = modalOpen ? <Modal content={modalContent} show={modalOpen} setShow={setModalOpen} /> : null;
 
     return (
         <div id='importExportButtons'>
