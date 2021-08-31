@@ -253,7 +253,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             if( state.dragCard.section === 'collection' && action.payload.section ==='sideboard' ) {
 
                 // Add card to the sideboard in desired location
-                newSideboard.splice(action.payload.endloc, 0, card);
+                newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row, 0, card);
 
                 // Add card to the sideboard Map
                 addCardToCardMap(newSideboardMap, card);
@@ -262,7 +262,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Case Sideboard --> Collection
             if (state.dragCard.section === 'sideboard' && action.payload.section === 'collection' ) {
                 // Remove the card from newSideboard and newSideboardMap
-                newSideboard.splice(state.dragCard.loc, 1);
+                newSideboard[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
                 removeCardFromCardMap(newSideboardMap, card);
             }
 
@@ -274,7 +274,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                 removeCardFromCardMap(newDeckMap, card);
 
                 // Add card to newSideboard at desired location and add to newSideboardMap
-                newSideboard.splice(action.payload.endloc, 0, card);
+                newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row, 0, card);
                 addCardToCardMap(newSideboardMap, card);
             }
 
@@ -282,21 +282,21 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             if (state.dragCard.section === 'sideboard' && action.payload.section === 'deck' ) {
                 
                 // Remove card from newSideboard array and newSideboardMap
-                newSideboard.splice(state.dragCard.loc, 1);
+                newSideboard[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
                 removeCardFromCardMap(newSideboardMap, card);
 
                 // Add card to newDeck at desired location and add to newDeckMap
                 newDeck[action.payload.endloc.col].splice(action.payload.endloc.row, 0, card);
                 addCardToCardMap(newDeckMap, card);
             }
-            // Case Sideboard --> Sideboard (Moving within column)
+            // Case Sideboard --> Sideboard (Moving within sideBoard)
             if (state.dragCard.section === 'sideboard' && action.payload.section === 'sideboard') {
 
                 // Remove card from sideboard array
-                newSideboard.splice(state.dragCard.loc, 1);
+                newSideboard[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
                 
                 // Add card to desired location
-                newSideboard.splice(action.payload.endloc, 0 , card);
+                newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row, 0 , card);
             }
             return {...state, deck: newDeck, deckMap: newDeckMap, sideboard: newSideboard, sideboardMap: newSideboardMap, dragCard: null};
         }

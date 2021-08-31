@@ -1,29 +1,21 @@
-# Collection Manager
-## Use your browser to instantly analyze your MTG Arena collection. No downloads. No loading.
+<h1 align="center">Collection Manager</h1>
+<h2>Use your browser to instantly analyze your MTG Arena collection and decks. No sign-up. No login. No downloads.</h2>
 
 ### How to use the Collection Manager:
-1. Upload your Player Log file (see the help page for help finding it!)
+1. Upload your Player Log file (see the help page for help finding you logs).
 2. See your collection progress for every set.
+3. View, modify, and build decks using the deck builder.
 
 ### Features:
-* It's like, *really, really* fast. Analyze every single MTG Arena card as fast as you can click upload.
-* No downloads necessary.
-* Native dark mode, or optionally blind yourself with light mode.
-* View every card that you own, see which ones you're missing, or check out whole sets at a time.
-* Conveniently view your gold, gems, wildcards, and vault progress while the game's not open.
-* Breakdown your progress for every rarity in every set set.
-* Toggle between the current standard sets and all historic sets with one click.
-* Customize your search -- try looking only for rare, white Angels, that don't come in a booster pack, only from the Kaldheim set. Be as specific as you want!
-* See how many drafts it'll take to earn every rare or mythic, just enter your match win rate. **No** fumbling with "the average number of wins before you get three losses."
-    * Compare different draft formats, see which one will get you ever card with the least gold or gems spent.
-    * View your draft rewards. What win rate do you need to hit to go infinite? (Hint: It's about 68% if you're playing Premier. **And** you get 346 free packs to boot!)
-* See how many boosters you need to complete each set.
-* Try out keyboard shortcuts! The site is fully keyboard accessible.
-    * In the large card view - Use the arrow keys to quickly navigate between cards, hit escape to exit the large view, and flip double-sided cards with the space bar!
-
-### Coming Soon:
-* Deck Builder
+* See what cards you own and which ones you're missing for every set in MTG Arena.
+   * Look up cards by name, rarity, color, mana cost, set, how many you own, card type (e.g. creatures), and whether they're available from booster packs.
+* Use the booster and draft calculators to see how many more booster packs or drafts you need to complete your collection.
+* View your vault progress, number of wildcards, gold, and gems.
+* Use the deck builder to build new decks or modify existing ones.
+   * Supports specific card versions (e.g. specify the STA version of Shock instead of whatever Shock is arbitrarily chosen by MTG Arena)
+   * Save your decks to file to use later or copy them to your clipboard to immediately use them in game
+   * Import decks from file or paste them in from your clipboard
+   * Try out the "Limited" mode to edit your draft decks
 
 ## Stay tuned for the full release coming soon!
-
 © 2021 Nate Sackett and Alex Van Buren. All rights reserved.
