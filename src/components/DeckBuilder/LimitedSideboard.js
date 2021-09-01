@@ -100,39 +100,39 @@ function SideboardColumn({cardArray, col}) {
     }
 
     let renderColumn;
-    if (cardList.length >= 1) {
-        renderColumn = cardList.map( (card, i )=> {
-            return (
-                // Using DBDeckCard class from dbdeck
-                <div className="DBDeckCard" key={card.name + i} 
-                    onClick={(e) => moveToDeck(e, card)}
-                >
-                    <HoverPreview imgs={card.imgs}>
-                        <img src={card.imgs.front} alt={card.name}
-                        onDragStart={() => {
-                            // Cannot use i as row index because if cards are filtered out the index may be incorrect
-                            dispatch(setDragCard(card, 'sideboard', {col: col, row: cardArray.indexOf(card)}));
-                        }}
-                        onDragEnd={() => {
-                            dispatch(setDragCard(null));
-                        }}
-                        onDrop={() => {
-                            dispatch(dropCard('sideboard', {col: col, row: cardArray.indexOf(card)}));
-                        }}
-                        />
-                    </HoverPreview>
-                </div>
-            )
-        });
-
-    }
-    // Return nothing if there are no cards
-    else {
-        return null;
-    }
+    renderColumn = cardList.map( (card, i )=> {
+        return (
+            // Using DBDeckCard class from dbdeck
+            <div className="DBDeckCard" key={card.name + i} 
+                onClick={(e) => moveToDeck(e, card)}
+            >
+                <HoverPreview imgs={card.imgs}>
+                    <img src={card.imgs.front} alt={card.name}
+                    onDragStart={() => {
+                        // Cannot use i as row index because if cards are filtered out the index may be incorrect
+                        dispatch(setDragCard(card, 'sideboard', {col: col, row: cardArray.indexOf(card)}));
+                    }}
+                    onDragEnd={() => {
+                        dispatch(setDragCard(null));
+                    }}
+                    onDrop={(e) => {
+                        e.stopPropagation();
+                        dispatch(dropCard('sideboard', {col: col, row: cardArray.indexOf(card)}));
+                    }}
+                    />
+                </HoverPreview>
+            </div>
+        )
+    });    
 
     return (
-        <div className="limitedSideboard-column">
+        // Using same styles as dbdeck
+        <div className="DBDeckColumn"
+            onDrop={(e) => {
+                e.stopPropagation();
+                dispatch(dropCard('sideboard', {col: col, row: cardArray.length}))
+            }}
+        >
             {renderColumn}
         </div>
     )

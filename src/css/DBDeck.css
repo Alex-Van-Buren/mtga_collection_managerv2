@@ -36,6 +36,9 @@
     height: 25px;
     width: 159px;
 }
+.DBDeckCard:hover{
+    cursor: pointer;
+}
 
 .DBDeckCard img {
     /* Only top card will be this height */
