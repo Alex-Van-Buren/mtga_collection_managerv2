@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import HoverPreview from '../Templates/HoverPreview';
-import { removeCardFromSideboard, addCardToDeck, limitedSort } from '../../actions';
+import { removeCardFromSideboard, addCardToDeck, limitedSort, setDragCard, dropCard } from '../../actions';
 import findCards from '../../data/findCards';
 import '../../css/LimitedSideboard.css';
 
@@ -91,7 +91,7 @@ function SideboardColumn({cardArray, col}) {
     // Make searchOptions object
     const searchOptions = {color: colors, rarity: rarityOptions, cardTypes: searchCardTypes, term: searchTerm, advancedSearchType: searchType, cmc: searchcmc};
     // Use findCards to filter the sideboard cards
-    const cardList = findCards(searchOptions, 'all', cardArray);
+    const cardList = findCards(searchOptions, 'all', cardArray, false);
 
     function moveToDeck(event, card) {
         event.stopPropagation();
@@ -108,7 +108,18 @@ function SideboardColumn({cardArray, col}) {
                     onClick={(e) => moveToDeck(e, card)}
                 >
                     <HoverPreview imgs={card.imgs}>
-                        <img src={card.imgs.front} alt={card.name}/>
+                        <img src={card.imgs.front} alt={card.name}
+                        onDragStart={() => {
+                            // Cannot use i as row index because if cards are filtered out the index may be incorrect
+                            dispatch(setDragCard(card, 'sideboard', {col: col, row: cardArray.indexOf(card)}));
+                        }}
+                        onDragEnd={() => {
+                            dispatch(setDragCard(null));
+                        }}
+                        onDrop={() => {
+                            dispatch(dropCard('sideboard', {col: col, row: cardArray.indexOf(card)}));
+                        }}
+                        />
                     </HoverPreview>
                 </div>
             )

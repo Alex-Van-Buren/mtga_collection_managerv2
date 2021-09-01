@@ -6,10 +6,11 @@ import arenaCards from "./arenaCards";
  * @param {*} searchOptions Object of options to filter the cards on Arena. Define as an object eg{set:'setId', name:'cardName', color: ['W', 'G'] 
  * (color also accepts 'colorless' or 'multi'), rarity: ['rarity1','rarity2'], booster: boolean}
  * @param {*} returnOptions An Array of addtional properties to retrieve eg ['image_uris', 'set', 'cmc', etc]
- * @param {} searchCards Optional. A List of card objects to search. Defaults to all cards on arena. 
+ * @param {} searchCards Optional. A List of card objects to search. Defaults to all cards on arena.
+ * @param {boolean} sort Optional. Boolean to sort the found cards. Defaults to true.
  * @returns An array of the cards founds with each card as an object with properties: name, arenaId, and the additional properties defined (if found)
  */
-function findCards(searchOptions, returnOptions, searchCards = arenaCards) {
+function findCards(searchOptions, returnOptions, searchCards = arenaCards, sort = true) {
 
     // Destructure search options
     const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes, addType } = searchOptions;
@@ -118,7 +119,9 @@ function findCards(searchOptions, returnOptions, searchCards = arenaCards) {
     }
 
     // Sort the cards 
-    cardList = sortCards(cardList);  
+    if (sort) {
+        cardList = sortCards(cardList);  
+    }
 
     return cardList;
 }
