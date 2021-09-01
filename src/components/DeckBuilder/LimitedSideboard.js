@@ -48,6 +48,7 @@ function LimitedSideboard() {
 function SideboardColumn({cardArray, col}) {
     const dispatch = useDispatch();
     const { colors, rarity, cardTypes, searchTerm, searchType, cmc } = useSelector(state => state.displayOptions);
+    const { addType } = useSelector(state => state.deckBuilder);
    
     // Create rarity search option from rarity object
     let rarityOptions = [];
@@ -89,7 +90,7 @@ function SideboardColumn({cardArray, col}) {
     }
 
     // Make searchOptions object
-    const searchOptions = {color: colors, rarity: rarityOptions, cardTypes: searchCardTypes, term: searchTerm, advancedSearchType: searchType, cmc: searchcmc};
+    const searchOptions = {color: colors, rarity: rarityOptions, cardTypes: searchCardTypes, term: searchTerm, advancedSearchType: searchType, cmc: searchcmc, addType};
     // Use findCards to filter the sideboard cards
     const cardList = findCards(searchOptions, 'all', cardArray, false);
 

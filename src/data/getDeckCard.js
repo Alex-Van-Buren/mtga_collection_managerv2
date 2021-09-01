@@ -79,7 +79,7 @@ function getDeckCard(name, set=null, collector_number=null) {
     return matches;
 }
 
-function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_number, type_line, legalities, color_identity, rarity, oracle_text }, matches) {
+function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_number, type_line, legalities, color_identity, rarity, oracle_text, keywords }, matches) {
 
     // Images can be deeply nested, so extract ahead of time
     let imgs = { front: null };
@@ -95,7 +95,7 @@ function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_n
     }
 
     // Add card to matches
-    matches.push({ name, cmc, arenaId: arena_id, set, imgs, collector_number, type_line, legalities, color_identity, rarity, oracle_text });
+    matches.push({ name, cmc, arenaId: arena_id, set, imgs, collector_number, type_line, legalities, color_identity, rarity, oracle_text, keywords });
 
     return matches;
 }

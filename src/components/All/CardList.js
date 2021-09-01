@@ -138,7 +138,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             }
         }
         
-        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set', 'legalities', 'color_identity'];
+        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set', 'legalities', 'color_identity', 'keywords'];
 
         return findCards(searchOptions, returnOptions);
         
