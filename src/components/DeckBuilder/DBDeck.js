@@ -92,11 +92,11 @@ function DBDeck() {
     }, [deck, deckType, cardCollection, dispatch]);
 
     // Show commander and companion only when they exist
-    const commander_companion = (commander && ["brawl", "custom"].includes(deckType)) || companion ? (
+    const commander_companion = (commander  || companion ) ? (
         <div id="commander_companion">
 
             {/* Show commander if it exists */}
-            {commander && ["brawl", "custom"].includes(deckType) ? (<>
+            {commander ? (<>
                 <label htmlFor="commanderCard">Commander</label>
                 <HoverPreview imgs={commander.imgs}>
                 <img
