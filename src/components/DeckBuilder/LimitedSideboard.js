@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import HoverPreview from '../Templates/HoverPreview';
-import { removeCardFromSideboard, addCardToDeck, limitedSort, setDragCard, dropCard } from '../../actions';
+import { removeCardFromSideboard, addCardToDeck, limitedSort, setDragCard, dropCard, changeCompanion } from '../../actions';
 import findCards from '../../data/findCards';
 import '../../css/LimitedSideboard.css';
 
@@ -97,7 +97,12 @@ function SideboardColumn({cardArray, col}) {
     function moveToDeck(event, card) {
         event.stopPropagation();
         dispatch(removeCardFromSideboard(card, col, cardArray.indexOf(card)));
-        dispatch(addCardToDeck(card));
+        if (addType === 'deck'){
+            dispatch(addCardToDeck(card));
+        }
+        if (addType === 'companion'){
+            dispatch(changeCompanion(card));
+        }
     }
 
     let renderColumn;

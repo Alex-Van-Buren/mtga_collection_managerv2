@@ -112,7 +112,12 @@ function DBDeck() {
                 <HoverPreview imgs={companion.imgs}>
                 <img
                     src={companion.imgs.front} alt={companion.name} id="companionCard"
-                    onClick={() => dispatch(changeCompanion())}
+                    onClick={() =>{
+                        dispatch(changeCompanion())
+                        if (deckType === 'limited'){
+                            dispatch(addCardToSideboard(companion))
+                        }
+                    } }
                 />
                 </HoverPreview>
             </>) : null}
