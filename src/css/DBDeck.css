@@ -56,3 +56,17 @@
     height: 225px;
     width: 159px;
 }
+
+.darkMode .draggingOver {
+    background-color: rgba(255,255,255,0.15);
+}
+
+.draggingOver {
+    background-color: rgba(0,0,0, 0.15);
+}
+
+.specialCard {
+    min-width: 159px;
+    min-height: 229px;
+    flex-shrink: 0;
+}
