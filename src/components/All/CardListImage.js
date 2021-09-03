@@ -12,36 +12,24 @@ import '../../css/CardListImage.css';
 /**
  * Describes a single image from the CardList, including its backside if applicable.
  */
-function CardListImage({
-    card, index, cardHeader, cardClass="bouncy column", additionalFlipClass="", deckBuilder=false
-}) {
-
-    // Destructure the card properties needed for 
-    const { name, backside, type_line, oracle_text, imgs } = card;
-
-    // Get redux dispatcher
-    const dispatch = useDispatch();
-
-    // Get deckList and deckType for use in deckbuilder
-    const deckObj = useSelector((state) => state.deckBuilder.deckMap);
-    const deckType = useSelector((state) => state.deckBuilder.deckType);
-    const sideObj = useSelector((state) => state.deckBuilder.sideboardMap);
-    const commander = useSelector((state) => state.deckBuilder.commander);
-    const { addType } = useSelector(state => state.deckBuilder);
-
-    // Track image side to be shown (front=true)
-    const [imgSide, setImgSide] = useState(true);
-
-    // Hover text to display when card is in the set view
-    let fullText = !deckBuilder ? `${name}\n${type_line}\n${oracle_text}` : null;
-
-    // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    let cardImages = imgs ? <CardSide src={imgs.front} name={name} title={fullText} /> : null;
-    let flipButton = null; // Regular cards don't have a flip button
-
-    // Refs
+function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
+    
     const flipRef = useRef();
     const cardRef = useRef();
+    const dispatch = useDispatch();
+    
+    // Get redux for use in deckbuilder
+    const { deckMap, deckType, sideboardMap, commander, addType } = useSelector(state => state.deckBuilder);
+    
+    // Destructure the card properties needed for 
+    const { name, card_faces, type_line, imgs } = card;
+    
+    // Track image side to be shown (front=true)
+    const [imgSide, setImgSide] = useState(true);
+    
+    // Only double-sided cards will have two images, otherwise create one if the image is initialized
+    let cardImages = imgs ? <CardSide src={imgs.front} name={name} title={name} /> : null;
+    let flipButton = null; // Regular cards don't have a flip button
 
     // CardInfo for dispatching to deck/sideboard/commander/companion
     const cardInfo = { 
@@ -63,19 +51,17 @@ function CardListImage({
 
         // Animate flip button
         if (imgSide)
-            flipRef.current.style.animation = "turned .6s linear";
+            flipRef.current.style.animation = "rotate1 .6s linear";
         else
-            flipRef.current.style.animation = "turning .6s linear";
+            flipRef.current.style.animation = "rotate2 .6s linear";
     }
 
     // Decide whether to show the flip button
     if (imgs && imgs.back && !deckBuilder) {
 
-        const backsideText = `${name}\n${type_line}\n${backside.oracle_text}`;
-
         flipButton = (
             <button
-                className={`circular ui icon button flipButton ${additionalFlipClass}`}
+                className={'circular ui icon button flipButton'}
                 onClick={e => flip(e)}
                 onKeyDown={e => {
                     // If they hit enter
@@ -96,71 +82,65 @@ function CardListImage({
 
         // Creating a front and backside
         cardImages = <>
-            <CardSide src={imgs.front} name={name} title={fullText}     className="cardImg"/>
-            <CardSide src={imgs.back}  name={name} title={backsideText} className="backside"/>
+            <CardSide src={imgs.front} name={name} title={card_faces[0].name} className="cardImg"/>
+            <CardSide src={imgs.back}  name={name} title={card_faces[1].name} className="backside"/>
         </>;
     } 
     // Otherwise check if there is a "backside", but not flipable (Adventure cards fall in this category)
-    else if (backside && imgs && !deckBuilder) {
-
-        // Add backside text
-        fullText = `${fullText} // ${backside.oracle_text}`;
+    else if (imgs && imgs.back && !deckBuilder) {
 
         // Redeclare cardImages because fullText has changed
-        cardImages = <CardSide src={imgs.front} name={name} title={fullText} />;
+        cardImages = <CardSide src={imgs.front} name={name} title={name} />;
     }
 
     const onClick = (e) => {
         if (!deckBuilder) {
-            return (() => {
-                // Get the index of the image on click
-                dispatch( setCardModalContent({ index, imgSide }) );
 
-                // Then show the modal
-                dispatch( showCardModal(true) );
-            })();
+            // Get the index of the image on click
+            dispatch( setCardModalContent({ index, imgSide }) );
+
+            // Then show the modal
+            dispatch( showCardModal(true) );
         }
         else { // deckBuilder === true
-            return (() => {
 
-                if (isCardAddible(card, deckObj, sideObj, commander, deckType)) {
+            // Choose action to dispatch to if there's enough room for the card
+            if (isCardAddible(card, deckMap, sideboardMap, commander, deckType)) {
 
-                    // Choose action to dispatch to
-                    switch (addType) {
-                        case "deck":
-                            dispatch(addCardToDeck(cardInfo));
-                            break;
-                        case "sideboard":
-                            dispatch(addCardToSideboard(cardInfo));
-                            break;
-                        case "commander":
-                            dispatch(changeCommander(cardInfo));
-                            dispatch(setAddType("deck"));
-                            break;
-                        case "companion":
-                            dispatch(changeCompanion(cardInfo));
-                            dispatch(setAddType("deck"));
-                            break;
-                        default: break;
-                    }
+                switch (addType) {
+                    case "deck":
+                        dispatch(addCardToDeck(cardInfo));
+                        break;
+                    case "sideboard":
+                        dispatch(addCardToSideboard(cardInfo));
+                        break;
+                    case "commander":
+                        dispatch(changeCommander(cardInfo));
+                        dispatch(setAddType("deck"));
+                        break;
+                    case "companion":
+                        dispatch(changeCompanion(cardInfo));
+                        dispatch(setAddType("deck"));
+                        break;
+                    default: break;
                 }
-            })();
+            }
         }
     }
-    
 
     const compose = (
 
-        <div className={cardClass} tabIndex="-1" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
+        <div className={"bouncy column"} tabIndex="-1" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
 
             <div className="ui fluid card removeBoxShadow">
                 <div className="content">
                     {/* Header differs between set and deck builder implementations */}
                     {cardHeader}
                 </div>
-                <div ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0"
-                    onDragStart={() =>{
-                        if (deckBuilder && isCardAddible(card, deckObj, sideObj, commander, deckType)) {
+                <div 
+                    ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0"
+                    onDragStart={() => {
+                        if (deckBuilder && isCardAddible(card, deckMap, sideboardMap, commander, deckType)) {
                             dispatch(setDragCard(cardInfo, 'collection', null))
                         }
                     }}
@@ -170,7 +150,6 @@ function CardListImage({
                         }
                     }}
                 >
-
                     {/* Display one image for regular cards, and two for double-faced cards */}
                     {cardImages}
 
@@ -178,11 +157,10 @@ function CardListImage({
             </div>
             {/* Flip button is null when not a double-sided card */}
             {flipButton}
-
         </div>
     );
 
-    // Return the composed card wrapped in the hover preview if in deckbuilder
+    // Return the card images wrapped in the hover preview if in deckbuilder
     if (deckBuilder) {
         return (
             // Show preview when hovering
@@ -191,15 +169,13 @@ function CardListImage({
             </HoverPreview>
         );
     }
-    // Other wise just return composed card
+    // Other wise just return card images
     return compose;
 }
 
 export default CardListImage;
 
-// Helper Component - single spot to make changes cascade to all card images
+/** Helper Component - makes defining card images simpler */
 function CardSide({ src, name, title=null, className=null }) {
-    return (
-        <img src={src} alt={name} aria-label={name} title={title} className={className} draggable='true' />
-    );
+    return <img src={src} alt={name} aria-label={name} title={title} className={className} draggable='true' />;
 }
