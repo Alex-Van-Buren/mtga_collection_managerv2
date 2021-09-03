@@ -199,7 +199,7 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             let newSideboardMap = {...state.sideboardMap};
 
             // Destructure the card info from state.dragCard
-            const {card} = state.dragCard;
+            const { card } = state.dragCard;
 
             // Case Deck --> Deck (ie Moving a card around in deck)
             if ( state.dragCard.section === 'deck' && action.payload.section === 'deck') {

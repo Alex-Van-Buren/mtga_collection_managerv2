@@ -267,7 +267,7 @@ export function setDragCard(card, section, loc) {
     }
     return {
         type: SET_DRAG_CARD,
-        payload:{card: card, section, loc}
+        payload: { card: card, section, loc }
     };
 }
 
@@ -280,7 +280,7 @@ export function setDragCard(card, section, loc) {
 export function dropCard(section, endloc) {
     return {
         type: DROP_CARD, 
-        payload: {section, endloc}
+        payload: { section, endloc }
     }
 }
 

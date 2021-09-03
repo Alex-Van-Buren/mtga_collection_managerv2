@@ -18,7 +18,7 @@ function ExportDeck() {
     const toString = useMemo(() => {
         let deckOutput = '';
         
-        // Add deck\
+        // Add deck
         if (Object.keys(deckMap).length) {
             deckOutput += 'Deck\n';
 

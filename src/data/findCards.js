@@ -10,7 +10,7 @@ import arenaCards from "./arenaCards";
  * @param {boolean} sort Optional. Boolean to sort the found cards. Defaults to true.
  * @returns An array of the cards found
  */
-function findCards(searchOptions, searchCards = arenaCards, sort = true) {
+function findCards(searchOptions, searchCards=arenaCards, sort=true) {
 
     // Destructure search options
     const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes, addType } = searchOptions;
@@ -120,7 +120,7 @@ function findCards(searchOptions, searchCards = arenaCards, sort = true) {
 
     // Sort the cards 
     if (sort) {
-        cardList = sortCards(cardList);  
+        sortCards(cardList);
     }
 
     return cardList;
@@ -295,8 +295,6 @@ function sortCards(cardList) {
     cardList.sort( (card1, card2) => {
         return card1.cmc - card2.cmc
     })
-
-    return cardList;
 }
 
 /**
