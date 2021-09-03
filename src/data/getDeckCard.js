@@ -8,7 +8,7 @@ import arenaCards from "./arenaCards";
  * @param {string} name The card name (not case sensitive). Fallback for no match from set and collector_number.
  * @param {string} set (Optional) The three-letter set code for the card (not case sensitive).
  * @param {number} collector_number (Optional) The collector number for the specific card set.
- * @returns {array} cards: [{ name, cmc, arenaId, set, imgs, collector_number, type_line }, ...]
+ * @returns {array} An array of matching cards.
  */
 function getDeckCard(name, set=null, collector_number=null) {
 
@@ -33,7 +33,7 @@ function getDeckCard(name, set=null, collector_number=null) {
             if (card.set === set && card.collector_number === collector_number) {
                 
                 // Add card to matches
-                matches = addCard(card, matches);
+                matches.push(card);
 
                 // Don't look for additional matches
                 break;
@@ -52,7 +52,7 @@ function getDeckCard(name, set=null, collector_number=null) {
                 && (card.set === set) )
             {
                 // Add card to matches
-                matches = addCard(card, matches);
+                matches.push(card);
 
                 // Don't look for additional matches
                 break;
@@ -70,33 +70,12 @@ function getDeckCard(name, set=null, collector_number=null) {
             if ( card.name.toLowerCase() === name || (card.card_faces && card.card_faces[0].name.toLowerCase() === name) ) {
                 
                 // Add card to matches
-                matches = addCard(card, matches);
+                matches.push(card);
             }
         }
     }
 
     // Return array of matching cards
-    return matches;
-}
-
-function addCard({ name, cmc, arena_id, card_faces, image_uris, set, collector_number, type_line, legalities, color_identity, rarity, oracle_text, keywords }, matches) {
-
-    // Images can be deeply nested, so extract ahead of time
-    let imgs = { front: null };
-
-    // Double-faced cards
-    if (card_faces && card_faces[1] && card_faces[1].image_uris) {
-        imgs.front = card_faces[0].image_uris.border_crop;
-        imgs.back  = card_faces[1].image_uris.border_crop;
-    }
-    // Single-faced cards
-    else {
-        imgs.front = image_uris.border_crop;
-    }
-
-    // Add card to matches
-    matches.push({ name, cmc, arenaId: arena_id, set, imgs, collector_number, type_line, legalities, color_identity, rarity, oracle_text, keywords });
-
     return matches;
 }
 

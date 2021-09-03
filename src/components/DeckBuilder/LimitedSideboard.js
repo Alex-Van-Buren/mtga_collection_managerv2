@@ -92,7 +92,7 @@ function SideboardColumn({cardArray, col}) {
     // Make searchOptions object
     const searchOptions = {color: colors, rarity: rarityOptions, cardTypes: searchCardTypes, term: searchTerm, advancedSearchType: searchType, cmc: searchcmc, addType};
     // Use findCards to filter the sideboard cards
-    const cardList = findCards(searchOptions, 'all', cardArray, false);
+    const cardList = findCards(searchOptions, cardArray, false);
 
     function moveToDeck(event, card) {
         event.stopPropagation();

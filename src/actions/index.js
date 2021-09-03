@@ -161,7 +161,6 @@ export function removeCardFromDeck(card, col, row) {
 /**
  * Replace current deck with this array of cards
  * @param {array} cards Array of cards to make into new deck
- * @typedef cards: [{ name, cmc, arenaId, set, imgs, collector_number, type_line }, ...]
  */
 export function setDeck(cards) {
     return {
@@ -173,7 +172,6 @@ export function setDeck(cards) {
 /**
  * Add this card to the sideboard.
  * @param {object} card 
- * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
  */
 export function addCardToSideboard(card) {
     return {
@@ -185,7 +183,6 @@ export function addCardToSideboard(card) {
 /**
  * Remove this card from the sideboard
  * @param {object} card 
- * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
  */
 export function removeCardFromSideboard(card, col, row) {
     return {
@@ -196,7 +193,7 @@ export function removeCardFromSideboard(card, col, row) {
 
 /**
  * Set sideboard to an array of cards
- * @param {Array} cards Array of card objects. Each card is {name, cmc, arenaId, set, imgs, collector_number, type_line} 
+ * @param {Array} cards Array of card objects.
  */
 export function setSideboard(cards) {
     return {
@@ -208,7 +205,6 @@ export function setSideboard(cards) {
 /**
  * Make this card (or null) your commander. Default value is null (removes commander).
  * @param {object} [card=null]
- * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
  */
 export function changeCommander(card=null) {
     return {
@@ -220,7 +216,6 @@ export function changeCommander(card=null) {
 /**
  * Make this card (or null) your companion. Default value is null (removes companion).
  * @param {object} [card=null]
- * @typedef card: { name, cmc, arenaId, set, imgs, collector_number, type_line }
  */
 export function changeCompanion(card=null) {
     return {

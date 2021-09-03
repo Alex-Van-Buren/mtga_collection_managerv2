@@ -8,9 +8,9 @@ import arenaCards from "./arenaCards";
  * @param {*} returnOptions An Array of addtional properties to retrieve eg ['image_uris', 'set', 'cmc', etc]
  * @param {} searchCards Optional. A List of card objects to search. Defaults to all cards on arena.
  * @param {boolean} sort Optional. Boolean to sort the found cards. Defaults to true.
- * @returns An array of the cards founds with each card as an object with properties: name, arenaId, and the additional properties defined (if found)
+ * @returns An array of the cards found
  */
-function findCards(searchOptions, returnOptions, searchCards = arenaCards, sort = true) {
+function findCards(searchOptions, searchCards = arenaCards, sort = true) {
 
     // Destructure search options
     const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes, addType } = searchOptions;
@@ -114,7 +114,7 @@ function findCards(searchOptions, returnOptions, searchCards = arenaCards, sort 
         if (addCard) {
 
             // Push card with desired properties to card list
-            cardList.push(getCardProperties(card, returnOptions));
+            cardList.push(card);
         }
     }
 
@@ -309,30 +309,31 @@ function sortCards(cardList) {
  * "name", "type_line", and "oracle_text" are the allowed advanced search types, indicating the specific card section to search.
  * @returns True if the card contains the search term, false otherwise. (Or matches advanced search options if specified)
  */
-function filterByTerm(card, term, advancedSearchType=null) {
+ function filterByTerm(card, term, advancedSearchType=null) {
 
     // Normal search
     if (!advancedSearchType) {
 
-        // Check name
-        if ( match(card.name) ) {
-            return true;
-        }
+        if (
+            // Check name
+            match(card.name) ||
     
-        // Check type line
-        if ( match(card.type_line) ) {
-            return true;
-        }
-    
-        // Check oracle text
-        if (card.oracle_text && match(card.oracle_text)) {
+            // Check type line
+            match(card.type_line) ||
+        
+            // Check oracle text if it exists
+            ( card.oracle_text && match(card.oracle_text) ) ||
+
+            // Check printed_name if it exists
+            ( card.printed_name && match(card.printed_name) )
+        ) {
             return true;
         }
     
         // Need to check card faces in order to find some cards
         if (card.card_faces) {
     
-            // Check oracle_text for each face
+            // Check for oracle_text match on either face
             for (const face of card.card_faces) {
     
                 if ( face.oracle_text && match(face.oracle_text) ) {
@@ -348,7 +349,7 @@ function filterByTerm(card, term, advancedSearchType=null) {
 
             case "name":
                 // Check name only
-                if ( match(card.name) ) {
+                if ( match(card.name) || (card.printed_name && match(card.printed_name))) {
                     return true;
                 }
                 return false;
@@ -369,11 +370,12 @@ function filterByTerm(card, term, advancedSearchType=null) {
                 // Need to check card faces in order to find some cards
                 if (card.card_faces) {
             
-                    // Check oracle_text for each face
+                    // Check for oracle_text match on either face
                     for (const face of card.card_faces) {
             
-                        if ( face.oracle_text && match(face.oracle_text) )
+                        if ( face.oracle_text && match(face.oracle_text) ) {
                             return true;
+                        }
                     }
                 }
                 return false;
@@ -463,61 +465,6 @@ function filterCommanders(typeline) {
         return true;
     }
     return false;
-}
-
-/**
- * Helper function that takes the input card and returns the desired properties of that card to make it easier to use
- * @param {Array} card The card to remove properties from.
- * @param {Array} returnOptions Properties to keep from the card list. If returnOptions is set to 'all', will return entire card object.
- * @returns New card list with only the properties specified in returnOptions
- */
-function getCardProperties(card, returnOptions) {
-    // Check if returnOptions is set to 'all' --> just return the entire card objectf
-    if ( returnOptions === 'all' ) {
-        return card;
-    }
-    
-    // Otherwise
-    // Initialize card object to add
-    let newCard = {};
-    newCard.name = card.name;    
-
-    // Add the arena id to newCard
-    newCard.arenaId = card.arena_id;
-
-    // Add cmc to newCard
-    newCard.cmc = card.cmc;
-
-    // Check for other optional card Properties
-    if (returnOptions) {
-
-        returnOptions.forEach((option) => {
-
-            // Check if the option is directly defined
-            if( card[option]) {
-
-                // Then just put the option in the newCard
-                newCard[option] = card[option];
-            } 
-
-            // Check if the option is defined under card_faces (using front face)
-            else if ( card.card_faces && card.card_faces[0][option]) {
-
-                // Put option in the newCard
-                newCard[option] = card.card_faces[0][option];
-
-                // Put the backside option onto key property backside
-                if (!newCard.backside) {
-                    newCard.backside = {};
-                }
-
-                newCard.backside[option] = card.card_faces[1][option];
-            }
-
-            // Else the option is not found so do nothing                
-        });
-    }
-    return newCard;
 }
 
 export default findCards;

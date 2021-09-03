@@ -5,6 +5,9 @@ import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboar
 import HoverPreview from '../Templates/HoverPreview';
 import '../../css/DBDeck.css';
 
+/**
+ * The cards that are actively in the user's deck.
+ */
 function DBDeck() {
 
     // Access redux dispatcher
@@ -61,72 +64,65 @@ function DBDeck() {
                         }
                     }
 
-                    return <div className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}
-                    onDragOver={(e) => e.preventDefault()}
+                    return <div 
+                        className="DBDeckCard" key={'card'+i+j} style={{ zIndex: j }}
+                        onDragOver={(e) => e.preventDefault()}
                     >
-                        <HoverPreview imgs={card.imgs}>
-                        <img draggable
+                    <HoverPreview imgs={card.imgs}>
+                        <img
+                            src={card.imgs.front} alt={card.name} style={style} draggable
                             onDragStart={(e) => {
                                 e.dataTransfer.effectAllowed = 'move';
                                 dispatch(setDragCard(card, 'deck', {col: i, row: j}));
                             }}
-                            onDragEnd={() => {
-                                dispatch(setDragCard(null));
-                            }}
+                            onDragEnd={() => { dispatch(setDragCard(null)) }}
                             onDrop={(e) =>{ e.stopPropagation(); dispatch(dropCard('deck', {col: i, row: j}))}}
-                            src={card.imgs.front} alt={card.name} style={style}
                             onClick={(e) => {
                                 dispatch(removeCardFromDeck(card, i, j));
 
                                 // If the deckType is limited, move the card to the sideboard
-                                if ( deckType === 'limited' ) {
-                                    dispatch(addCardToSideboard(card));
-                                }
+                                if ( deckType === 'limited' ) { dispatch(addCardToSideboard(card)) }
                             }}
                         />
-                        </HoverPreview>
+                    </HoverPreview>
                     </div>;
                 } ) }
             </div>;
         });
     }, [deck, deckType, cardCollection, dispatch]);
 
-    // Show commander and companion only when they exist
-    const commander_companion = (commander  || companion ) ? (
-        <div id="commander_companion">
+    // Show commander if it exists
+    const commanderJSX = commander ? (<>
 
-            {/* Show commander if it exists */}
-            {commander ? (<>
-                <label htmlFor="commanderCard">Commander</label>
-                <HoverPreview imgs={commander.imgs}>
-                <img
-                    src={commander.imgs.front} alt={commander.name} id="commanderCard"
-                    onClick={() => dispatch(changeCommander())}
-                />
-                </HoverPreview>
-            </>) : null}
+        <label htmlFor="commanderCard">Commander</label>
+        <HoverPreview imgs={commander.imgs}>
+            <img
+                src={commander.imgs.front} alt={commander.name} id="commanderCard"
+                onClick={() => dispatch(changeCommander())}
+            />
+        </HoverPreview>
+    </>): null;
 
-            {/* Show companion if it exists */}
-            {companion ? (<>
-                <label htmlFor="companionCard">Companion</label>
-                <HoverPreview imgs={companion.imgs}>
-                <img
-                    src={companion.imgs.front} alt={companion.name} id="companionCard"
-                    onClick={() =>{
-                        dispatch(changeCompanion())
-                        if (deckType === 'limited'){
-                            dispatch(addCardToSideboard(companion))
-                        }
-                    } }
-                />
-                </HoverPreview>
-            </>) : null}
-        </div>
-    ) : null;
+    // Show companion if it exists
+    const companionJSX = companion ? (<>
+
+        <label htmlFor="companionCard">Companion</label>
+        <HoverPreview imgs={companion.imgs}>
+            <img
+                src={companion.imgs.front} alt={companion.name} id="companionCard"
+                onClick={() => {
+                    dispatch(changeCompanion());
+                    if (deckType === 'limited') {
+                        dispatch(addCardToSideboard(companion));
+                    }
+                }}
+            />
+        </HoverPreview>
+    </>): null;
 
     return (
         <div id="DBDeck">
-            {commander_companion}
+            {commander || companion ? <div id="commander_companion">{commanderJSX}{companionJSX}</div> : null}
             {renderCards}
         </div>
     );

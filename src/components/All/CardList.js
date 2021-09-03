@@ -77,7 +77,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         } else {
 
             // If the redux value is empty, set = undefined so that findcards will disregard filtering by set
-            if (reduxSets.length === 0 ){
+            if (reduxSets.length === 0 ) {
                 set = undefined;
 
             // If reduxSets has info, they need be altered so that set is an array of 3 letter set codes
@@ -138,9 +138,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             }
         }
         
-        const returnOptions = ['image_uris', 'type_line', 'oracle_text', 'cmc', 'collector_number', 'set', 'legalities', 'color_identity', 'keywords'];
-
-        return findCards(searchOptions, returnOptions);
+        return findCards(searchOptions);
         
     }, [boosterVal, setId, reduxCardTypes, cmc, reduxDeckType, deckBuilder, colors, searchTerm, searchType, rarities, reduxSets, addBasics, addType]);
 
@@ -151,14 +149,6 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const renderCards = useMemo(() => {
         let returnCards = [];
         for (const card of cards) {
-
-            // Get image from card
-            const imgs = { front: card.image_uris.border_crop };
-
-            // Check if backside exists
-            if (card.backside && card.backside.image_uris) {
-                imgs.back = card.backside.image_uris.border_crop;
-            }
 
             // Get number of card owned, if any
             const numOwned = cardCollection && cardCollection[card.arenaId] ? 
@@ -183,7 +173,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             }
 
             // Track images to be displayed
-            currentPictures.push(imgs);
+            currentPictures.push(card.imgs);
 
             // Build card header
             let cardHeader;
@@ -250,7 +240,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             // Build card JSX
             returnCards.push(
                 <CardListImage
-                    card={card} index={currentPictures.indexOf(imgs)} key={card.arenaId}
+                    card={card} index={currentPictures.indexOf(card.imgs)} key={card.arenaId}
                     cardHeader={cardHeader} deckBuilder={deckBuilder}
                 />
             );

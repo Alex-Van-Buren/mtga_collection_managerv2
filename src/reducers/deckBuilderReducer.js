@@ -179,15 +179,6 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
         }
 
         case SET_ADD_TYPE: {
-
-            // Input validation
-            if (
-                !["deck", "sideboard", "commander", "companion"].includes(action.payload) || // Check if invalid
-                action.payload === state.addType // Check if current value
-            ) {
-                return state;
-            }
-
             return { ...state, addType: action.payload };
         }
 

@@ -41,7 +41,7 @@
 }
 
 /* Front side flip button animation */
-@keyframes turned {
+@keyframes rotate1 {
     from {
         transform: rotate(0deg);
     }
@@ -51,7 +51,7 @@
 }
 
 /* Back side flip button animation */
-@keyframes turning {
+@keyframes rotate2 {
     from {
         transform: rotate(0deg);
     }

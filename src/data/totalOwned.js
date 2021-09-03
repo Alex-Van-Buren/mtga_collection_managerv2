@@ -8,6 +8,7 @@ import { historicSets as sets } from '../data/setInfo';
  * each rarity in that set
  */
 function totalOwned(cardCollection) {
+
     // Historic Anthologies
     const anthologies = ['ha1', 'ha2', 'ha3', 'ha4', 'ha5'];
 
@@ -21,7 +22,7 @@ function totalOwned(cardCollection) {
             rare:     { ownedTotal: 0, setTotal: 0 },
             uncommon: { ownedTotal: 0, setTotal: 0 },
             common:   { ownedTotal: 0, setTotal: 0 }
-        }
+        };
     }
 
     // Helper function that updates the inventory ownedTotal and setTotal given a card
@@ -30,9 +31,8 @@ function totalOwned(cardCollection) {
         inventory[card.set][card.rarity].setTotal += 4;
     
         // Find number owned by user
-        const id = card.arena_id;
-        if (cardCollection && cardCollection[id]) {
-            inventory[card.set][card.rarity].ownedTotal += cardCollection[id];
+        if (cardCollection && cardCollection[card.arenaId]) {
+            inventory[card.set][card.rarity].ownedTotal += cardCollection[card.arenaId];
         }
     }
 
@@ -55,6 +55,7 @@ function totalOwned(cardCollection) {
             updateInventory(card);
             continue; // Card has been added so go to next card
         }
+        
         // --------------------- Normal Sets---------------------------------------
         // Filter out non-booster cards
         if (!card.booster) {
