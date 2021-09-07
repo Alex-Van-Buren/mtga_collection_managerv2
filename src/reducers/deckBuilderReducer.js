@@ -201,100 +201,67 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             // Destructure the card info from state.dragCard
             const { card } = state.dragCard;
 
-            // Case Deck --> Deck (ie Moving a card around in deck)
-            if ( state.dragCard.section === 'deck' && action.payload.section === 'deck') {
+            // Get old section and location data from state.dragCard
+            const oldSection = state.dragCard.section;
+            const oldLoc = state.dragCard.loc
 
-                // Get index to Remove from dragCard location
-                const indexToRemove = state.dragCard.loc;
+            // Remove card from old Section
+            switch (oldSection) {
+                case 'deck':
+                    newDeck[oldLoc.col].splice(oldLoc.row, 1);
+                    removeCardFromCardMap(newDeckMap, card);
+                    break;
+
+                case 'sideboard':
+                    newSideboard[oldLoc.col].splice(oldLoc.row, 1);
+                    removeCardFromCardMap(newSideboardMap, card);
+                    break;
                 
-                // Remove the card from the newDeck array (Since the card is not being removed from the deck no need to change newDeckMap)
-                newDeck[indexToRemove.col].splice(indexToRemove.row,1);
-    
-                // Get index to Add from payload endlocation
-                const indexToAdd = action.payload.endloc;
-
-                // If the card is being moved around in the same column, just put the card at the index to add
-                if (indexToAdd.col === indexToRemove.col) {
-                    newDeck[indexToAdd.col].splice(indexToAdd.row, 0, state.dragCard.card);
-                } else {
-                    // If it is changing columns then the index to Add needs +1
-                    newDeck[indexToAdd.col].splice(indexToAdd.row + 1 , 0, state.dragCard.card);
-                }
-            }
-
-            // Case for Deck --> Collection
-            if ( state.dragCard.section === 'deck' && action.payload.section === 'collection' ){
-                // Remove the card from deck array
-                newDeck[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
-
-                // Remove the card from the deckMap
-                removeCardFromCardMap(newDeckMap, card);
-            } 
-
-            // Case for Collection --> Deck
-            if ( state.dragCard.section ==='collection' && action.payload.section === 'deck' ) {
-
-                // Add the card to the deck in desired location and add to newDeckMap
-                newDeck[action.payload.endloc.col].splice(action.payload.endloc.row + 1, 0, card);
-                addCardToCardMap(newDeckMap, card);
-            }
+                case 'collection': 
+                    break;
             
-            // Case Collection --> Sideboard
-            if( state.dragCard.section === 'collection' && action.payload.section ==='sideboard' ) {
-
-                // Add card to the sideboard in desired location
-                newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row + 1, 0, card);
-
-                // Add card to the sideboard Map
-                addCardToCardMap(newSideboardMap, card);
+                default:
+                    break;
             }
 
-            // Case Sideboard --> Collection
-            if (state.dragCard.section === 'sideboard' && action.payload.section === 'collection' ) {
-                // Remove the card from newSideboard and newSideboardMap
-                newSideboard[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
-                removeCardFromCardMap(newSideboardMap, card);
-            }
+            // Get new section and location data from action.payload
+            const newSection = action.payload.section;
+            const newLoc = action.payload.loc;
 
-            // Case Deck --> Sideboard
-            if (state.dragCard.section === 'deck'  && action.payload.section === 'sideboard' ) {
+            // Add Card to new Section and location
+            switch (newSection) {
+                case 'deck':
+                    // Check if card is either changing sections or columns
+                    if ( oldSection !== 'deck' || newLoc.col !== oldLoc.col ){
+                        newDeck[newLoc.col].splice(newLoc.row + 1, 0, card);
+                    } else {
 
-                // Remove card from newdeck array and newDeckMap
-                newDeck[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1); 
-                removeCardFromCardMap(newDeckMap, card);
-
-                // Add card to newSideboard at desired location and add to newSideboardMap
-                newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row + 1, 0, card);
-                addCardToCardMap(newSideboardMap, card);
-            }
-
-            // Case Sideboard --> Deck
-            if (state.dragCard.section === 'sideboard' && action.payload.section === 'deck' ) {
+                        // TODO: figure out weirdness when moving within column
+                        newDeck[newLoc.col].splice(newLoc.row , 0, card);
+                    }
+                    addCardToCardMap(newDeckMap, card);
+                    break;
                 
-                // Remove card from newSideboard array and newSideboardMap
-                newSideboard[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
-                removeCardFromCardMap(newSideboardMap, card);
+                case 'sideboard':
+                    // Check if card is either changing sections or columns
+                    if ( oldSection !== 'sideboard' || newLoc.col !== oldLoc.col ) {
+                        newSideboard[newLoc.col].splice(newLoc.row + 1, 0, card);
+                    } else {
 
-                // Add card to newDeck at desired location and add to newDeckMap
-                newDeck[action.payload.endloc.col].splice(action.payload.endloc.row + 1, 0, card);
-                addCardToCardMap(newDeckMap, card);
-            }
-            // Case Sideboard --> Sideboard (Moving within sideBoard)
-            if (state.dragCard.section === 'sideboard' && action.payload.section === 'sideboard') {
+                        // TODO: figure out weirdness when moving within column
+                        newSideboard[newLoc.col].splice(newLoc.row, 0, card);
+                    }
 
-                // Remove card from sideboard array
-                newSideboard[state.dragCard.loc.col].splice(state.dragCard.loc.row, 1);
-                
-                // Add card to desired location
-                // check if the card is changing columns
-                if (state.dragCard.loc.col === action.payload.endloc.col) {
-                    newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row, 0 , card);
-                }
-                else {
-                    // Add 1 to row index if it changing columns
-                    newSideboard[action.payload.endloc.col].splice(action.payload.endloc.row + 1, 0 , card);
-                }
+                    addCardToCardMap(newSideboardMap, card);
+                    break;
+
+                case 'collection':
+                    break;
+
+                default : 
+                    break;
             }
+
             return {...state, deck: newDeck, deckMap: newDeckMap, sideboard: newSideboard, sideboardMap: newSideboardMap, dragCard: null};
         }
 
