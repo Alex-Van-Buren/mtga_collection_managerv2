@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -15,6 +15,12 @@ import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/SetDetails.css';
 
 function SetDetails() {
+
+// Always start from the top of a set
+useEffect(() => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+}, []);
 
     // Get set Id from url
     const { setId } = useParams();
