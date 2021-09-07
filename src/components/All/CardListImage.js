@@ -6,7 +6,7 @@ import {
     setCardModalContent, showCardModal, addCardToDeck, addCardToSideboard, changeCommander, changeCompanion, setAddType, setDragCard
 } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
-import isCardAddible from '../../hooks/isCardAddible';
+import useIsCardAddible from '../../hooks/useIsCardAddible';
 import '../../css/CardListImage.css';
 
 /**
@@ -18,8 +18,9 @@ function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
     const cardRef = useRef();
     const dispatch = useDispatch();
     
-    // Get redux for use in deckbuilder
-    const { deckMap, deckType, sideboardMap, commander, addType } = useSelector(state => state.deckBuilder);
+    const { addType } = useSelector(state => state.deckBuilder);
+
+    const isCardAddible = useIsCardAddible(card);
     
     // Destructure the card properties needed for 
     const { name, card_faces, type_line, imgs } = card;
@@ -105,7 +106,7 @@ function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
         else { // deckBuilder === true
 
             // Choose action to dispatch to if there's enough room for the card
-            if (isCardAddible(card, deckMap, sideboardMap, commander, deckType)) {
+            if (isCardAddible) {
 
                 switch (addType) {
                     case "deck":
@@ -140,7 +141,7 @@ function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
                 <div 
                     ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0"
                     onDragStart={() => {
-                        if (deckBuilder && isCardAddible(card, deckMap, sideboardMap, commander, deckType)) {
+                        if (deckBuilder && isCardAddible) {
                             dispatch(setDragCard(cardInfo, 'collection', null))
                         }
                     }}

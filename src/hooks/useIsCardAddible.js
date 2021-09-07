@@ -1,14 +1,15 @@
+import { useSelector } from "react-redux";
+
 /**
  * A function that checks if a card is able to be added to a deck.
  * Checks if there are max copies of a card already in the decklist as well as if the card is legal in the desired deckType.
  * @param {object} card The card Object attempting to be added. Should contain at least name, type_line, and  legalities.
- * @param {Object} deckObj The decklist object of cards currently in the deck.
- * @param {Object} sideObj The sideboard object of cards currently in the deck.
- * @param {Object} commander The currently selected commander.
- * @param {string} deckType String of deck type being created. e.g. "standard", "historic"
  * @returns {boolean} True if card can be added. False if it cannot be added
  */
-export default function isCardAddible(card, deckObj, sideObj, commander, deckType) {
+export default function useIsCardAddible(card) {
+
+    const { deckMap, deckType, sideboardMap, commander } = useSelector(state => state.deckBuilder);
+
     // First check if the card is legal in the desired deckType
     // For Custom and Limited, all cards are legal so skip this step
     if (!(deckType === 'custom' || deckType === 'limited')) {
@@ -28,18 +29,18 @@ export default function isCardAddible(card, deckObj, sideObj, commander, deckTyp
     }
 
     // Check if the deck has any copies of the card
-    if ( deckObj[card.name] ) {
+    if ( deckMap[card.name] ) {
 
         // Add up all versions of the card with the same name 
-        for (const arenaId in deckObj[card.name]) {
-            copiesInDeck += deckObj[card.name][arenaId].copies;
+        for (const arenaId in deckMap[card.name]) {
+            copiesInDeck += deckMap[card.name][arenaId].copies;
         }
     }
 
     // Check the sideboard
-    if ( sideObj[card.name] ) {
-        for (const arenaId in sideObj[card.name]) {
-            copiesInDeck += sideObj[card.name][arenaId].copies;
+    if ( sideboardMap[card.name] ) {
+        for (const arenaId in sideboardMap[card.name]) {
+            copiesInDeck += sideboardMap[card.name][arenaId].copies;
         }
     }
     // Get the max number of copies allowed in a deck for this decktype
