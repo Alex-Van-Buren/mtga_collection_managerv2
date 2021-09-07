@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import '../../css/HoverPreview.css'
@@ -15,11 +15,18 @@ import '../../css/HoverPreview.css'
  */
 export default function HoverPreview({ children, imgs, height=350, width=247.07, delay=500 }) {
 
-    // Location of div wrapped around the children, used to determine hover preview location
-    const locationRef = useRef();
-
     // Stores current timer when it exists
     const timerID = useRef(null);
+    
+    // Cancel timers on unmount
+    useEffect(() => () => {
+        if (timerID.current) {
+            clearTimeout(timerID.current);
+        }
+    }, []);
+    
+    // Location of div wrapped around the children, used to determine hover preview location
+    const locationRef = useRef();
 
     // Track whether to show this hover preview
     const [show, setShow] = useState(false);
@@ -60,7 +67,7 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
     function onMouseOut() {
 
         // Clear the timer when the mouse leaves the target
-        clearTimeout(timerID);
+        clearTimeout(timerID.current);
         timerID.current = null;
 
         // Forcefully stop the hover preview on mouse leave
