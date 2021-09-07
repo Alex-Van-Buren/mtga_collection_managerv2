@@ -240,8 +240,9 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             // Build card JSX
             returnCards.push(
                 <CardListImage
-                    card={card} index={currentPictures.indexOf(card.imgs)} key={card.arenaId}
-                    cardHeader={cardHeader} deckBuilder={deckBuilder}
+                    card={card} index={currentPictures.indexOf(card.imgs)} cardHeader={cardHeader} deckBuilder={deckBuilder}
+                    // Unique key for cards with undefined arenaIds
+                    key={card.arenaId ? card.arenaId : `${card.set}${card.collector_number}`}
                 />
             );
             
