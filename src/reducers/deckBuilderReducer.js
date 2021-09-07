@@ -197,6 +197,8 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
             let newDeckMap = { ...state.deckMap };
             let newSideboard = [...state.sideboard];
             let newSideboardMap = {...state.sideboardMap};
+            let newCompanion = {...state.companion};
+            let newCommander = {...state.commander};
 
             // Destructure the card info from state.dragCard
             const { card } = state.dragCard;
@@ -216,10 +218,15 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                     newSideboard[oldLoc.col].splice(oldLoc.row, 1);
                     removeCardFromCardMap(newSideboardMap, card);
                     break;
-                
-                case 'collection': 
-                    break;
             
+                case 'companion':
+                    newCompanion = null;
+                    break;
+
+                case 'commander':
+                    newCommander = null;
+                    break;
+
                 default:
                     break;
             }
@@ -255,14 +262,25 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                     addCardToCardMap(newSideboardMap, card);
                     break;
 
-                case 'collection':
+                case 'companion':
+                    newCompanion = card;
+                    break;
+
+                case 'commander':
+                    newCommander = card;
                     break;
 
                 default : 
                     break;
             }
-
-            return {...state, deck: newDeck, deckMap: newDeckMap, sideboard: newSideboard, sideboardMap: newSideboardMap, dragCard: null};
+            // Check if the newCompanion and newCommander Objects are empty and set to Null if they are
+            if ( newCommander !== null && Object.keys(newCommander).length === 0){
+                newCommander = null;
+            }
+            if ( newCompanion !==null  && Object.keys(newCompanion).length === 0){
+                newCompanion = null;
+            }
+            return {...state, deck: newDeck, deckMap: newDeckMap, sideboard: newSideboard, sideboardMap: newSideboardMap, companion: newCompanion, commander: newCommander, dragCard: null};
         }
 
         case LIMITED_SORT: {

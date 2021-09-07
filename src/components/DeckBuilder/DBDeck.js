@@ -112,7 +112,12 @@ function DBDeck() {
             {/* Show commander if it exists */}
             {commander || addType === 'commander' ? (<>
                 <label htmlFor="commanderCard">Commander</label>
-                <div className="specialCard">
+                <div className="specialCard"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDragStart={() => dispatch(setDragCard(commander, 'commander', {col: null, row: null}))}
+                    onDragEnd={() => dispatch(setDragCard(null))}
+                    onDrop={() => dispatch(dropCard('commander', {col: null, row: null}))}
+                >
                     {commander ? 
                     <HoverPreview imgs={commander.imgs}>
                     <img
@@ -126,7 +131,12 @@ function DBDeck() {
             {/* Show companion if it exists */}
             {companion || addType === 'companion' ? (<>
                 <label htmlFor="companionCard">Companion</label>
-                <div className="specialCard">
+                <div className="specialCard"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDragStart={() => dispatch(setDragCard(companion, 'companion', {col: null, row: null}))}
+                    onDragEnd={() => dispatch(setDragCard(null))}
+                    onDrop={() => dispatch(dropCard('companion', {col: null, row: null}))}
+                >
                     {companion ?
                     <HoverPreview imgs={companion.imgs}>
                     <img
