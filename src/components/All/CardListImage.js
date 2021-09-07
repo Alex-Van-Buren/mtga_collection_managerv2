@@ -22,141 +22,140 @@ function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
 
     const isCardAddible = useIsCardAddible(card);
     
-    // Destructure the card properties needed for 
-    const { name, card_faces, type_line, imgs } = card;
+    // Destructure card properties for ease of access
+    const { name, card_faces, imgs } = card;
     
     // Track image side to be shown (front=true)
-    const [imgSide, setImgSide] = useState(true);
+    const [ imgSide, setImgSide ] = useState(true);
     
-    // Only double-sided cards will have two images, otherwise create one if the image is initialized
-    let cardImages = imgs ? <CardSide src={imgs.front} name={name} title={name} /> : null;
+    // Variables that differ between the set view and the deck builder
+    let cardImages;
     let flipButton = null; // Regular cards don't have a flip button
+    let onClick, onDragStart=null, onDragEnd=null;
 
-    // CardInfo for dispatching to deck/sideboard/commander/companion
-    const cardInfo = { 
-        name: card.name, cmc: card.cmc, arenaId: card.arenaId, set: card.set, imgs: imgs, color_identity: card.color_identity,
-        collector_number: card.collector_number, type_line: type_line, legalities: card.legalities, keywords: card.keywords
-    };
+    /* Deck Builder */
+    if (deckBuilder) {
+        cardImages = <CardSide src={imgs.front} name={name} />; // No title because of hover preview
 
-    /**
-     * Flips card and turns flip button
-     * @param {Event} event 
-     */
-    function flip(event) {
+        // Clicking will move the card from the card list to the desired portion of the deck
+        onClick = (e) => {
 
-        // Don't allow flip button click to propagate onto card
-        event.stopPropagation();
-        
-        // Set state for card side displayed
-        setImgSide(!imgSide);
-
-        // Animate flip button
-        if (imgSide)
-            flipRef.current.style.animation = "rotate1 .6s linear";
-        else
-            flipRef.current.style.animation = "rotate2 .6s linear";
-    }
-
-    // Decide whether to show the flip button
-    if (imgs && imgs.back && !deckBuilder) {
-
-        flipButton = (
-            <button
-                className={'circular ui icon button flipButton'}
-                onClick={e => flip(e)}
-                onKeyDown={e => {
-                    // If they hit enter
-                    if (e.key === "Enter" || e.key === "Space") {
-
-                        // Prevent the default action
-                        e.preventDefault(); 
-
-                        // And flip card
-                        flip(e);
-                    }
-                }}
-                aria-label="Flip Card" title="Flip Card"
-            >
-                <i className="undo icon" ref={flipRef}/>
-            </button>
-        );
-
-        // Creating a front and backside
-        cardImages = <>
-            <CardSide src={imgs.front} name={name} title={card_faces[0].name} className="cardImg"/>
-            <CardSide src={imgs.back}  name={name} title={card_faces[1].name} className="backside"/>
-        </>;
-    } 
-    // Otherwise check if there is a "backside", but not flipable (Adventure cards fall in this category)
-    else if (imgs && imgs.back && !deckBuilder) {
-
-        // Redeclare cardImages because fullText has changed
-        cardImages = <CardSide src={imgs.front} name={name} title={name} />;
-    }
-
-    const onClick = (e) => {
-        if (!deckBuilder) {
-
-            // Get the index of the image on click
-            dispatch( setCardModalContent({ index, imgSide }) );
-
-            // Then show the modal
-            dispatch( showCardModal(true) );
-        }
-        else { // deckBuilder === true
-
-            // Choose action to dispatch to if there's enough room for the card
             if (isCardAddible) {
-
                 switch (addType) {
                     case "deck":
-                        dispatch(addCardToDeck(cardInfo));
+                        dispatch(addCardToDeck(card));
                         break;
                     case "sideboard":
-                        dispatch(addCardToSideboard(cardInfo));
+                        dispatch(addCardToSideboard(card));
                         break;
                     case "commander":
-                        dispatch(changeCommander(cardInfo));
+                        dispatch(changeCommander(card));
                         dispatch(setAddType("deck"));
                         break;
                     case "companion":
-                        dispatch(changeCompanion(cardInfo));
+                        dispatch(changeCompanion(card));
                         dispatch(setAddType("deck"));
                         break;
                     default: break;
                 }
             }
         }
-    }
 
+        onDragStart=() => {
+            if (isCardAddible) {
+                dispatch(setDragCard(card, 'collection', null));
+            }
+        }
+        onDragEnd=() => {
+            dispatch(setDragCard(null));
+        }
+    }
+    
+    /* Set View */
+    else {
+
+        // Clicking opens a modal to a larger view of the card
+        onClick = () => {
+            
+            // Get the index of the image on click
+            dispatch( setCardModalContent({ index, imgSide }) );
+            
+            // Then show the modal
+            dispatch( showCardModal(true) );
+        }
+
+        // Show flip button for 2-sided cards
+        if (imgs.back) {
+
+            flipButton = (
+                <button
+                    className={'circular ui icon button flipButton'}
+                    onClick={e => flip(e)}
+                    onKeyDown={e => {
+                        // If they hit enter
+                        if (e.key === "Enter" || e.key === "Space") {
+
+                            // Enter and space shouldn't do their default actions, just flip the card
+                            e.preventDefault();
+                            flip(e);
+                        }
+                    }}
+                    aria-label="Flip Card" title="Flip Card"
+                >
+                    <i className="undo icon" ref={flipRef}/>
+                </button>
+            );
+
+            // Separate/create front and back cards
+            cardImages = <>
+                <CardSide src={imgs.front} name={name} title={card_faces[0].name} className="cardImg"/>
+                <CardSide src={imgs.back}  name={name} title={card_faces[1].name} className="backside"/>
+            </>;
+        }
+        // No back, so only make one img tag
+        else {
+            cardImages = <CardSide src={imgs.front} name={name} title={name}/>; // Includes title
+        }
+
+        /**
+         * Flips card and turns flip button
+         * @param {Event} event 
+         */
+         function flip(event) {
+    
+            // Don't allow flip button click to propagate onto card
+            event.stopPropagation();
+            
+            // Set state for card side displayed
+            setImgSide(!imgSide);
+    
+            // Animate flip button
+            if (imgSide) {
+                flipRef.current.style.animation = "rotate1 .6s linear";
+            } else {
+                flipRef.current.style.animation = "rotate2 .6s linear";
+            }
+        }
+    }
+    
+    // Putting all the pieces together except the hover preview for the deck builder
     const compose = (
 
         <div className={"bouncy column"} tabIndex="-1" onKeyDown={e => makeKeyboardClickable(e, cardRef)}>
 
             <div className="ui fluid card removeBoxShadow">
+
                 <div className="content">
-                    {/* Header differs between set and deck builder implementations */}
                     {cardHeader}
                 </div>
-                <div 
-                    ref={cardRef} onClick={onClick} className={imgSide ? "image" : "flipped image"} tabIndex="0"
-                    onDragStart={() => {
-                        if (deckBuilder && isCardAddible) {
-                            dispatch(setDragCard(cardInfo, 'collection', null))
-                        }
-                    }}
-                    onDragEnd={() => {
-                        if (deckBuilder) {
-                            dispatch(setDragCard(null))
-                        }
-                    }}
-                >
-                    {/* Display one image for regular cards, and two for double-faced cards */}
-                    {cardImages}
 
+                <div 
+                    className={imgSide ? "image" : "flipped image"} ref={cardRef} tabIndex="0"
+                    onClick={onClick} onDragStart={onDragStart} onDragEnd={onDragEnd}
+                >
+                    {cardImages}
                 </div>
             </div>
-            {/* Flip button is null when not a double-sided card */}
             {flipButton}
         </div>
     );
