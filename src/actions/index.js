@@ -277,10 +277,10 @@ export function setDragCard(card, section, loc) {
  * @param {*} endloc the index/indecies that describe the location within the section where the card is being dragged from.
  * @returns 
  */
-export function dropCard(section, endloc) {
+export function dropCard(section, loc) {
     return {
         type: DROP_CARD, 
-        payload: { section, endloc }
+        payload: { section, loc }
     }
 }
 
