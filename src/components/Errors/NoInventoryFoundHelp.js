@@ -12,7 +12,9 @@ import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 function renderPathButton(text, setText, ref, path) {
     return (
         <button className="errorButton" tabIndex="0" ref={ref} onKeyDown={e => makeKeyboardClickable(e, ref)}
-            onClick={() => {
+            onClick={(e) => {
+                e.stopPropagation();
+
                 // Write path to clipboard
                 navigator.clipboard.writeText(path).then(() => {
 

@@ -39,7 +39,6 @@ function Accordion(props) {
 
     const expandButton = ( 
         <button className="expandButton" key="expandButton" 
-        onClick={()=> setOpen(!open)}
         aria-expanded={open} aria-label="Expand/Collapse Section">
             <i className={iconClass}></i>
         </button>
@@ -57,10 +56,10 @@ function Accordion(props) {
     )
 
     return(
-        <>
+        <span onClick={()=> setOpen(!open)}>
             {firstElement}
             {collapsableStuff} 
-        </>
+        </span>
     )
 }
 
