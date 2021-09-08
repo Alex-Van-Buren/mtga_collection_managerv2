@@ -2,8 +2,9 @@
     background-color: rgb(70, 70, 70);
     border-radius: 10px;
     color: white;
+    min-width: 600px;
     padding: 2rem;
-    width: 80vw;
+    width: 60vw;
 }
 
 #announceList::-webkit-scrollbar {
@@ -16,7 +17,7 @@
 
 #announceList {
     border-top: 1px solid white;
-    height: 70vh;
+    height: 50vh;
     overflow-y: scroll;
 }
 
@@ -47,4 +48,28 @@
 
 #announceList {
     overflow-y: auto;
+}
+
+@media (hover: none), (pointer: coarse) {
+    #announceList {
+        min-height: 90%;
+    }
+    #announce {
+        min-width: 90vw;
+    }
+    #announce h1 {
+        font-size: 2rem;
+    }
+    #announce li {
+        font-size: 1.25rem;
+    }
+    #announce li > strong {
+        font-size: 1.5rem;
+    }
+    .announceHeader {
+        flex-direction: column-reverse;
+    }
+    .invisible {
+        display: none;
+    }
 }
