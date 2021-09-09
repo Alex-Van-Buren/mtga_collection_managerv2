@@ -66,6 +66,16 @@ function DBSideboard() {
                 }
             }
 
+            // Make style for dragging cards
+            if (currentDragOver.section === 'sideboard') {
+
+                // If the current column is less  --> translate down
+                // OR if the current column is the same and the row is bigger that currently being dragged over
+                if( currentDragOver.col < i || (currentDragOver.col === i && j > currentDragOver.row )) {
+                    style.transform = 'translateY(10px)';
+                }
+            }
+
             // Add cards to render array
             renderSBCards.push(<div className="DBDeckCard" key={card + sbCounter} style={{ zIndex: sbCounter }}>
                 <HoverPreview imgs={card.imgs}>
@@ -122,6 +132,18 @@ function DBSideboard() {
                     dispatch(setCurrentDragOver('sideboard', 7, sideboard[7].length))
                 }}
             >
+                <div className="firstElement"
+                    onDrop={(e) =>{
+                        e.stopPropagation(); 
+                        dispatch(dropCard('sideboard', {col: 0, row: -1}))
+                        dispatch(setCurrentDragOver());
+                    }}
+                    onDragEnter={(e) => {
+                        e.stopPropagation();
+                        dispatch(setCurrentDragOver('sideboard', 0, -1));
+                    }}
+                >
+                </div>
                 {renderSBCards}
             </div>
         </div>
