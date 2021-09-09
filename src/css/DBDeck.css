@@ -43,6 +43,7 @@
 .DBDeckCard img {
     /* Only top card will be this height */
     height: 225px;
+    transition: transform 0.1s;
 }
 
 #commander_companion {
@@ -69,4 +70,11 @@
     min-width: 159px;
     min-height: 229px;
     flex-shrink: 0;
+}
+
+.DBDeckColumn .firstElement {
+    color: var(--clr-txt);
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 16px;
 }

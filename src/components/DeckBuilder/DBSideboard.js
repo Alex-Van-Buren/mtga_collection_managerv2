@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeCardFromSideboard, setDragCard, dropCard } from './../../actions';
+import { removeCardFromSideboard, setDragCard, dropCard, setCurrentDragOver } from './../../actions';
 import HoverPreview from '../Templates/HoverPreview';
 import '../../css/DBSideboard.css';
 
@@ -81,6 +81,9 @@ function DBSideboard() {
                     onDrop={() => {
                         dispatch(dropCard('sideboard', {col: i, row: j}))
                     }}
+                    onDragEnter={() =>{
+                        dispatch(setCurrentDragOver('sideboard', i, j));
+                    }}
                 />
                 </HoverPreview>
             </div>);
@@ -104,12 +107,15 @@ function DBSideboard() {
     </div>
 
     return (
-        <div className={sideboardClass}>
+        <div className={sideboardClass} onDragEnter={() => dispatch(setCurrentDragOver())}>
             {showButton}
             <div className="DBDeckColumn"
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => {
                     dispatch(dropCard('sideboard', {col: 7, row: sideboard[7].length}))
+                }}
+                onDragEnter={() => {
+                    dispatch(setCurrentDragOver('sideboard', 7, sideboard[7].length))
                 }}
             >
                 {renderSBCards}

@@ -1,6 +1,6 @@
 import {
     ADD_CARD_TO_DECK, REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS, SET_ADD_TYPE, ADD_CARD_TO_SIDEBOARD, 
-    REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, DROP_CARD, LIMITED_SORT
+    REMOVE_CARD_FROM_SIDEBOARD, CHANGE_COMMANDER, CHANGE_COMPANION, SET_SIDEBOARD, SET_DRAG_CARD, DROP_CARD, LIMITED_SORT, SET_CURRENT_DRAG_OVER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,7 +16,8 @@ const INITIAL_STATE = {
     addBasics: false,
     addType: "deck", // Valid types: "deck", "sideboard", "commander", "companion"
     dragCard: null,
-    limitedSort: 'cmc'
+    limitedSort: 'cmc',
+    currentDragOver: {section: 'collection', col: null, row: null}
 };
 
 export default function deckbuilderReducer(state = INITIAL_STATE, action) {
@@ -243,8 +244,13 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                         newDeck[newLoc.col].splice(newLoc.row + 1, 0, card);
                     } else {
 
-                        // TODO: figure out weirdness when moving within column
-                        newDeck[newLoc.col].splice(newLoc.row , 0, card);
+                        // When moving a card within its column check whether its index is increasing/decreasing.
+                        // Since a card was removed, all of the indecies succeeding it decrease by 1, so no need to add 1.
+                        if(newLoc.row < oldLoc.row) { 
+                        newDeck[newLoc.col].splice(newLoc.row + 1, 0, card);
+                        } else{
+                            newDeck[newLoc.col].splice(newLoc.row , 0, card);
+                        }
                     }
                     addCardToCardMap(newDeckMap, card);
                     break;
@@ -255,8 +261,11 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
                         newSideboard[newLoc.col].splice(newLoc.row + 1, 0, card);
                     } else {
 
-                        // TODO: figure out weirdness when moving within column
-                        newSideboard[newLoc.col].splice(newLoc.row, 0, card);
+                        if (newLoc.row < oldLoc.row) {
+                        newSideboard[newLoc.col].splice(newLoc.row +1 , 0, card);
+                        } else {
+                            newSideboard[newLoc.col].splice(newLoc.row, 0, card);
+                        }
                     }
 
                     addCardToCardMap(newSideboardMap, card);
@@ -303,6 +312,10 @@ export default function deckbuilderReducer(state = INITIAL_STATE, action) {
 
             }
             return {...state, limitedSort: action.payload, sideboard: newSideboard };
+        }
+
+        case SET_CURRENT_DRAG_OVER: {
+            return {...state, currentDragOver: action.payload } ;
         }
 
         default:

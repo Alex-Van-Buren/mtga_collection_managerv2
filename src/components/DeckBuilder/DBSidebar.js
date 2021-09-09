@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import DBCardFilters from './DBCardFilters';
 import DBDeckOptions from './DBDeckOptions';
+import { setCurrentDragOver } from '../../actions';
 import '../../css/DBSidebar.css';
 
 /**
@@ -9,8 +11,11 @@ import '../../css/DBSidebar.css';
  * @returns JSX for sidebar
  */
 function DBSidebar() {
+    const dispatch = useDispatch();
     return (
-        <div id="DBSidebar">
+        <div id="DBSidebar" 
+            onDragEnter={() => dispatch(setCurrentDragOver())}
+        >
             <DBCardFilters />
             <DBDeckOptions />
         </div>

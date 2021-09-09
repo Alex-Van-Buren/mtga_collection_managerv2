@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAddType } from '../../actions';
+import { setAddType, setCurrentDragOver } from '../../actions';
 import '../../css/DeckHeader.css';
 
 /**
@@ -184,7 +184,7 @@ function DeckHeader() {
     }
 
     return (
-        <div className="deckHeader">
+        <div className="deckHeader" onDragEnter={() => dispatch(setCurrentDragOver())}>
 
             <div className="left">
                 <div className="deck">Deck: {deckCount}</div>

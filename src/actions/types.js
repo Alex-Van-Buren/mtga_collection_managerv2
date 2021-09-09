@@ -35,3 +35,4 @@ export const SET_ADD_TYPE = "SET_ADD_TYPE";
 export const SET_DRAG_CARD = 'SET_DRAG_CARD';
 export const DROP_CARD = 'DROP_CARD';
 export const LIMITED_SORT = 'LIMITED_SORT';
+export const SET_CURRENT_DRAG_OVER = 'SET_CURRENT_DRAG_OVER';

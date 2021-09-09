@@ -1,7 +1,7 @@
-import React, { useMemo, useRef, createRef } from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard, setDragCard, dropCard } from '../../actions';
+import { changeCommander, changeCompanion, removeCardFromDeck, addCardToSideboard, setDragCard, dropCard, setCurrentDragOver } from '../../actions';
 import HoverPreview from '../Templates/HoverPreview';
 import '../../css/DBDeck.css';
 
@@ -9,17 +9,12 @@ import '../../css/DBDeck.css';
  * The cards that are actively in the user's deck.
  */
 function DBDeck() {
-
     // Access redux dispatcher
     const dispatch = useDispatch();
 
     // Get Redux
     const { cardCollection } = useSelector(state => state.inventory);
-    const { deck, commander, companion, deckType, addType } = useSelector(state => state.deckBuilder);
-
-    // Create Ref array for columns
-    const colRefs = useRef([]);
-    colRefs.current = deck.map((_, i) => colRefs.current[i] ?? createRef());
+    const { deck, commander, companion, deckType, addType, currentDragOver } = useSelector(state => state.deckBuilder);
     
     // Make an array of JSX for each of the 8 deck columns
     const renderCards = useMemo(() => {
@@ -28,16 +23,36 @@ function DBDeck() {
         const addedToDeck = {};
 
         return deck.map((column, i) => {
-            return <div className="DBDeckColumn" key={'column'+i} ref={colRefs.current[i]}
+            let colClass = '';
+
+            if (currentDragOver.section === 'deck' && currentDragOver.col === i){
+                colClass = ' draggingOver';
+            }
+            return <div className={`DBDeckColumn${colClass}`} key={'column'+i} 
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
                     e.stopPropagation(); 
                     dispatch(dropCard( 'deck', {col:i, row: 0}));
-                    colRefs.current[i].current.classList.remove('draggingOver');
+                    dispatch(setCurrentDragOver());
                 }}
-                onDragEnter={() => colRefs.current[i].current.classList.add('draggingOver')}
-                onDragLeave={() => colRefs.current[i].current.classList.remove('draggingOver')}
+                onDragEnter={() => {
+                    dispatch(setCurrentDragOver('deck', i, deck[i].length));
+                }}
             >
+                {/* Create a top element above the cards in each column */}
+                <div className="firstElement"
+                    onDrop={(e) =>{
+                        e.stopPropagation(); 
+                        dispatch(dropCard('deck', {col: i, row: -1}))
+                        dispatch(setCurrentDragOver());
+                    }}
+                    onDragEnter={(e) => {
+                        e.stopPropagation();
+                        dispatch(setCurrentDragOver('deck', i, -1));
+                    }}
+                >
+                    {deck[i].length} 
+                </div>
 
                 {/* Create JSX for each individual card */}
                 { column.map( (card, j) => {
@@ -45,12 +60,12 @@ function DBDeck() {
                     // Track that a copy of this card was added to the deck
                     addedToDeck[card.arenaId] = addedToDeck[card.arenaId] ? addedToDeck[card.arenaId]+1 : 1;
 
-                    let style = {};
+                    let cardStyle = {};
 
                     // Add red boarder around cards not legal in current format
                     if (card.legalities && card.legalities[deckType] && card.legalities[deckType] !== "legal" ) {
-                        style.boxShadow = '0 0 0 3px red';
-                        style.borderRadius = '5px';
+                        cardStyle.boxShadow = '0 0 0 3px red';
+                        cardStyle.borderRadius = '5px';
                     }
 
                     // Don't mark unowned cards if inventory isn't initialized
@@ -70,7 +85,15 @@ function DBDeck() {
                         else if ( !cardCollection[card.arenaId] || (addedToDeck[card.arenaId] > cardCollection[card.arenaId]) ) {
 
                             // Darken unowned cards
-                            style.filter = "brightness(50%)";
+                            cardStyle.filter = "brightness(50%)";
+                        }
+                    }
+                    // Make style for dragging cards
+                    // Check if column is the same
+                    if (currentDragOver.section === 'deck' && currentDragOver.col === i){
+                        // Check if row is greater than current dragOver
+                        if (j > currentDragOver.row){
+                            cardStyle.transform = 'translateY(10px)';
                         }
                     }
 
@@ -80,7 +103,7 @@ function DBDeck() {
                     >
                     <HoverPreview imgs={card.imgs}>
                         <img
-                            src={card.imgs.front} alt={card.name} style={style} draggable
+                            src={card.imgs.front} alt={card.name} style={cardStyle} draggable
                             onDragStart={(e) => {
                                 e.dataTransfer.effectAllowed = 'move';
                                 dispatch(setDragCard(card, 'deck', {col: i, row: j}));
@@ -89,7 +112,11 @@ function DBDeck() {
                             onDrop={(e) =>{
                                 e.stopPropagation(); 
                                 dispatch(dropCard('deck', {col: i, row: j}))
-                                colRefs.current[i].current.classList.remove('draggingOver')
+                                dispatch(setCurrentDragOver());
+                            }}
+                            onDragEnter={(e) => {
+                                e.stopPropagation();
+                                dispatch(setCurrentDragOver('deck',i, j));
                             }}
                             onClick={(e) => {
                                 dispatch(removeCardFromDeck(card, i, j));
@@ -103,7 +130,7 @@ function DBDeck() {
                 } ) }
             </div>;
         });
-    }, [deck, deckType, cardCollection, dispatch]);
+    }, [deck, deckType, cardCollection, dispatch, currentDragOver]);
 
     // Show commander and companion only when they exist
     const commander_companion = (commander  || companion || addType ==='commander' || addType === 'companion') ? (

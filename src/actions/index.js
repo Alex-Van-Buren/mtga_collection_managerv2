@@ -4,7 +4,7 @@ import {
     SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
     REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS,ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD,
     CHANGE_COMMANDER, CHANGE_COMPANION, SELECT_CARD_TYPES, SET_SIDEBOARD, SET_ADD_TYPE, SET_DRAG_CARD, DROP_CARD, 
-    LIMITED_SORT
+    LIMITED_SORT, SET_CURRENT_DRAG_OVER
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -288,5 +288,19 @@ export function limitedSort(sortType) {
     return {
         type: LIMITED_SORT,
         payload: sortType
+    }
+}
+
+/**
+ * 
+ * @param {string} section 'deck', 'invalid', 'sideboard'. Defaults to 'invalid'
+ * @param {*} col column index. Defaults to null.
+ * @param {*} row row index. Defaults to null.
+ * @returns 
+ */
+export function setCurrentDragOver(section='invalid', col=null, row=null) {
+    return {
+        type: SET_CURRENT_DRAG_OVER, 
+        payload: {section, col, row}
     }
 }
