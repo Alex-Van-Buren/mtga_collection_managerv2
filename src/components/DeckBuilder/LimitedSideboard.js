@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import HoverPreview from '../Templates/HoverPreview';
-import { removeCardFromSideboard, addCardToDeck, limitedSort, setDragCard, dropCard, changeCompanion } from '../../actions';
+import { removeCardFromSideboard, addCardToDeck, limitedSort, setDragCard, dropCard, changeCompanion, setCurrentDragOver } from '../../actions';
 import findCards from '../../data/findCards';
 import '../../css/LimitedSideboard.css';
 
@@ -48,7 +48,7 @@ function LimitedSideboard() {
 function SideboardColumn({cardArray, col}) {
     const dispatch = useDispatch();
     const { colors, rarity, cardTypes, searchTerm, searchType, cmc } = useSelector(state => state.displayOptions);
-    const { addType } = useSelector(state => state.deckBuilder);
+    const { addType, currentDragOver } = useSelector(state => state.deckBuilder);
    
     // Create rarity search option from rarity object
     let rarityOptions = [];
@@ -124,6 +124,10 @@ function SideboardColumn({cardArray, col}) {
                     onDrop={(e) => {
                         e.stopPropagation();
                         dispatch(dropCard('sideboard', {col: col, row: cardArray.indexOf(card)}));
+                        dispatch(setCurrentDragOver());
+                    }}
+                    onDragEnter={() => {
+                        dispatch(setCurrentDragOver('sideboard', col, cardArray.indexOf(card)));
                     }}
                     />
                 </HoverPreview>
@@ -133,10 +137,15 @@ function SideboardColumn({cardArray, col}) {
 
     return (
         // Using same styles as dbdeck
-        <div className="DBDeckColumn"
+        <div className={currentDragOver.section === 'sideboard' && currentDragOver.col === col ? 
+        'DBDeckColumn draggingOver' : 'DBDeckColumn'}
             onDrop={(e) => {
                 e.stopPropagation();
-                dispatch(dropCard('sideboard', {col: col, row: cardArray.length}))
+                dispatch(dropCard('sideboard', {col: col, row: cardArray.length}));
+                dispatch(setCurrentDragOver());
+            }}
+            onDragEnter={() => {
+                dispatch(setCurrentDragOver('sideboard', col, cardArray.length));
             }}
         >
             {renderColumn}

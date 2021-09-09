@@ -32,7 +32,7 @@ function DBDeck() {
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
                     e.stopPropagation(); 
-                    dispatch(dropCard( 'deck', {col:i, row: 0}));
+                    dispatch(dropCard( 'deck', {col:i, row: deck[i].length}));
                     dispatch(setCurrentDragOver());
                 }}
                 onDragEnter={() => {
@@ -105,7 +105,6 @@ function DBDeck() {
                         <img
                             src={card.imgs.front} alt={card.name} style={cardStyle} draggable
                             onDragStart={(e) => {
-                                e.dataTransfer.effectAllowed = 'move';
                                 dispatch(setDragCard(card, 'deck', {col: i, row: j}));
                             }}
                             onDragEnd={() => dispatch(setDragCard(null))}
@@ -134,16 +133,23 @@ function DBDeck() {
 
     // Show commander and companion only when they exist
     const commander_companion = (commander  || companion || addType ==='commander' || addType === 'companion') ? (
-        <div id="commander_companion">
+        <div id="commander_companion" onDragEnter={() => dispatch(setCurrentDragOver())}>
 
             {/* Show commander if it exists */}
             {commander || addType === 'commander' ? (<>
                 <label htmlFor="commanderCard">Commander</label>
-                <div className="specialCard"
+                <div className={currentDragOver.section === 'commander'? 'specialCard draggingOver' : "specialCard"}
                     onDragOver={(e) => e.preventDefault()}
                     onDragStart={() => dispatch(setDragCard(commander, 'commander', {col: null, row: null}))}
                     onDragEnd={() => dispatch(setDragCard(null))}
-                    onDrop={() => dispatch(dropCard('commander', {col: null, row: null}))}
+                    onDrop={() => {
+                        dispatch(dropCard('commander', {col: null, row: null}));
+                        dispatch(setCurrentDragOver())
+                    }}
+                    onDragEnter={(e) => {
+                        e.stopPropagation();
+                        dispatch(setCurrentDragOver('commander'));
+                    }}
                 >
                     {commander ? 
                     <HoverPreview imgs={commander.imgs}>
@@ -158,11 +164,18 @@ function DBDeck() {
             {/* Show companion if it exists */}
             {companion || addType === 'companion' ? (<>
                 <label htmlFor="companionCard">Companion</label>
-                <div className="specialCard"
+                <div className={currentDragOver.section === 'companion' ? 'specialCard draggingOver' : "specialCard"}
                     onDragOver={(e) => e.preventDefault()}
                     onDragStart={() => dispatch(setDragCard(companion, 'companion', {col: null, row: null}))}
                     onDragEnd={() => dispatch(setDragCard(null))}
-                    onDrop={() => dispatch(dropCard('companion', {col: null, row: null}))}
+                    onDrop={() => {
+                        dispatch(dropCard('companion', {col: null, row: null}));
+                        dispatch(setCurrentDragOver());
+                    }}
+                    onDragEnter={(e) => {
+                        e.stopPropagation();
+                        dispatch(setCurrentDragOver('companion'));
+                    }}
                 >
                     {companion ?
                     <HoverPreview imgs={companion.imgs}>

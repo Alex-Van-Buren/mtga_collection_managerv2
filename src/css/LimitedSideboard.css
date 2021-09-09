@@ -1,6 +1,7 @@
 .limitedSideboard {
     display: flex;
     flex-direction: column;
+    height: 100%
 }
 
 .limitedSideboard-header{
@@ -19,6 +20,7 @@
     display: flex;
     gap: 8px;
     padding: 5px;
+    height: 100%;
 }
 
 .sortButtons {

@@ -13,7 +13,7 @@ function DBSideboard() {
     
     // Redux
     const { cardCollection } = useSelector(state => state.inventory);
-    const { deckType, sideboard } = useSelector(state => state.deckBuilder);
+    const { deckType, sideboard, currentDragOver } = useSelector(state => state.deckBuilder);
     const dispatch = useDispatch();
 
     // Track cards added
@@ -79,9 +79,11 @@ function DBSideboard() {
                     }}
                     onDragEnd={() => dispatch(setDragCard(null))}
                     onDrop={() => {
-                        dispatch(dropCard('sideboard', {col: i, row: j}))
+                        dispatch(dropCard('sideboard', {col: i, row: j}));
+                        dispatch(setCurrentDragOver());
                     }}
-                    onDragEnter={() =>{
+                    onDragEnter={(e) =>{
+                        e.stopPropagation();
                         dispatch(setCurrentDragOver('sideboard', i, j));
                     }}
                 />
@@ -109,12 +111,14 @@ function DBSideboard() {
     return (
         <div className={sideboardClass} onDragEnter={() => dispatch(setCurrentDragOver())}>
             {showButton}
-            <div className="DBDeckColumn"
+            <div className={currentDragOver.section === 'sideboard' ? "DBDeckColumn draggingOver" : 'DBDeckColumn'}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => {
                     dispatch(dropCard('sideboard', {col: 7, row: sideboard[7].length}))
+                    dispatch(setCurrentDragOver());
                 }}
-                onDragEnter={() => {
+                onDragEnter={(e) => {
+                    e.stopPropagation();
                     dispatch(setCurrentDragOver('sideboard', 7, sideboard[7].length))
                 }}
             >

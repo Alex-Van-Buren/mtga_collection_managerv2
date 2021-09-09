@@ -293,9 +293,9 @@ export function limitedSort(sortType) {
 
 /**
  * 
- * @param {string} section 'deck', 'invalid', 'sideboard'. Defaults to 'invalid'
- * @param {*} col column index. Defaults to null.
- * @param {*} row row index. Defaults to null.
+ * @param {string} section 'deck', 'invalid', 'sideboard', 'commander', 'companion'. Defaults to 'invalid'
+ * @param {number} col column index. Defaults to null.
+ * @param {number} row row index. Defaults to null.
  * @returns 
  */
 export function setCurrentDragOver(section='invalid', col=null, row=null) {
