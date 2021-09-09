@@ -107,13 +107,25 @@ function SideboardColumn({cardArray, col}) {
 
     let renderColumn;
     renderColumn = cardList.map( (card, i )=> {
+        let cardStyle = {};
+
+        // Make style for dragging cards
+        // Check if column is the same
+        if (currentDragOver.section === 'sideboard' && currentDragOver.col === col){
+
+            // Check if row is greater than current dragOver
+            if (i > currentDragOver.row){
+                cardStyle.transform = 'translateY(10px)';
+            }
+        }
+
         return (
             // Using DBDeckCard class from dbdeck
             <div className="DBDeckCard" key={card.name + i} 
                 onClick={(e) => moveToDeck(e, card)}
             >
                 <HoverPreview imgs={card.imgs}>
-                    <img src={card.imgs.front} alt={card.name}
+                    <img src={card.imgs.front} alt={card.name} style={cardStyle}
                     onDragStart={() => {
                         // Cannot use i as row index because if cards are filtered out the index may be incorrect
                         dispatch(setDragCard(card, 'sideboard', {col: col, row: cardArray.indexOf(card)}));
@@ -126,7 +138,8 @@ function SideboardColumn({cardArray, col}) {
                         dispatch(dropCard('sideboard', {col: col, row: cardArray.indexOf(card)}));
                         dispatch(setCurrentDragOver());
                     }}
-                    onDragEnter={() => {
+                    onDragEnter={(e) => {
+                        e.stopPropagation();
                         dispatch(setCurrentDragOver('sideboard', col, cardArray.indexOf(card)));
                     }}
                     />
@@ -144,10 +157,25 @@ function SideboardColumn({cardArray, col}) {
                 dispatch(dropCard('sideboard', {col: col, row: cardArray.length}));
                 dispatch(setCurrentDragOver());
             }}
-            onDragEnter={() => {
+            onDragEnter={(e) => {
+                e.stopPropagation();
                 dispatch(setCurrentDragOver('sideboard', col, cardArray.length));
             }}
         >
+            {/* Create a top element above the cards in each column */}
+            <div className="firstElement"
+                onDrop={(e) =>{
+                    e.stopPropagation(); 
+                    dispatch(dropCard('sideboard', {col: col, row: -1}))
+                    dispatch(setCurrentDragOver());
+                }}
+                onDragEnter={(e) => {
+                    e.stopPropagation();
+                    dispatch(setCurrentDragOver('sideboard', col, -1));
+                }}
+                >
+                    {cardList.length} 
+                </div>
             {renderColumn}
         </div>
     )
