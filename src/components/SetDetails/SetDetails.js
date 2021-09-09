@@ -16,11 +16,11 @@ import '../../css/SetDetails.css';
 
 function SetDetails() {
 
-// Always start from the top of a set
-useEffect(() => {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-}, []);
+    // Always start from the top of a set
+    useEffect(() => {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+    }, []);
 
     // Get set Id from url
     const { setId } = useParams();

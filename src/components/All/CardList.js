@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import findCards from '../../data/findCards';
 import CardListImage from './CardListImage';
 import LazyLoad from '../Templates/LazyLoad';
+import findCards from '../../data/findCards';
 import { updateImageList } from '../../actions';
 import '../../css/CardList.css';
 
@@ -19,7 +19,7 @@ import '../../css/CardList.css';
 function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     
     // Get values from redux state
-    const cardCollection = useSelector(state => state.inventory.cardCollection);
+    const { cardCollection } = useSelector(state => state.inventory);
 
     const {
         colors, searchTerm, searchType, showCards, cardCount, cmc,
