@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectRarity } from '../../actions';
 import CustomButton from '../Templates/CustomButton';
+import '../../css/RarityButtons.css';
 
 /**
  * The rarity buttons selecter for card filtering. 

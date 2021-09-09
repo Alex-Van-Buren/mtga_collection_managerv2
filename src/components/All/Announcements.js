@@ -26,7 +26,7 @@ function Announcements() {
 
         <div className="announceHeader">
 
-            <div className="invisible closeModalButton"><i className="close icon"/></div>
+            <div id="announcementSpacer" className="invisible"></div>
 
             <h1>Announcements:</h1>
 

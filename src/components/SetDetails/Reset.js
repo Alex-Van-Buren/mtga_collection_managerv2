@@ -2,6 +2,7 @@ import React from 'react';
 
 import Custombutton from '../Templates/CustomButton';
 import { resetDisplayOptions } from '../../actions';
+import '../../css/Reset.css';
 
 function Reset() {
     const resetBtnClass = 'ui button positive reset-button';

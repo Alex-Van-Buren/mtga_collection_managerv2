@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CustomDropdown from '../Templates/CustomDropdown';
 import { setShowCards } from '../../actions';
+import '../../css/NumberOwnedDropdown.css';
 
 function NumberOwnedDropdown({ header }) {
     const dispatch = useDispatch();

@@ -1,7 +1,3 @@
-.ui.center.aligned.header {
-    color: var(--clr-txt);
-    margin-bottom: 0;
-}
 .ui.center.aligned.sub.header {
     margin: 8px 0;
 }

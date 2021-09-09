@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CustomDropdown from '../Templates/CustomDropdown';
 import { selectBooster }  from '../../actions/index';
+import '../../css/BoosterDropdown.css';
 
 function BoosterDropdown({ header }) {
 

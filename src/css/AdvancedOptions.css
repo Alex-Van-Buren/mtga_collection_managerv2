@@ -25,29 +25,9 @@
     padding: 20px;
 }
 
-.closeModalButton {
+.advancedOptionsModal .closeModalButton {
     width: 100%;
     height: 2.5em;
-}
-
-.closeModalButton button {
-    float: right;
-    border-radius: 3px;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 2em;
-    border: 1px solid var(--clr-txt);
-}
-
-.closeModalButton button:hover {
-    cursor: pointer;
-    filter: brightness(0.8);
-}
-
-.closeModalButton i {
-    margin: 0;
-    width: auto;
-    height: auto;
 }
 
 .advancedOptionsSection {

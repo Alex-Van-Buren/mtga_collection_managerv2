@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from '../Header/Header';
-import Footer from './Footer';
-import Home from './Home';
-import SetDetails from '../SetDetails/SetDetails';
-import Help from './Help';
-import DeckBuilder from '../DeckBuilder/DeckBuilder';
-import PageNotFound from './PageNotFound';
-import ScrollTop from './ScrollTop';
 import Announcements from './Announcements';
+import ScrollTop from './ScrollTop';
+import Footer from './Footer';
 import '../../css/App.css';
+
+const Home = lazy(() => import('./Home'));
+const Help = lazy(() => import('./Help'));
+const SetDetails = lazy(() => import('../SetDetails/SetDetails'));
+const DeckBuilder = lazy(() => import('../DeckBuilder/DeckBuilder'));
+const PageNotFound = lazy(() => import('./PageNotFound'));
 
 /**
  * Main Component - displays header and routes
@@ -23,13 +24,15 @@ function App() {
                     <Header />
                     <Announcements/>
 
-                    <Switch>
-                        <Route exact component={Home}   path='/' />
-                        <Route component={Help}         path='/help' />
-                        <Route component={SetDetails}   path='/set/:setId' />
-                        <Route component={DeckBuilder}  path='/deckbuilder' />
-                        <Route component={PageNotFound} />
-                    </Switch>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Switch>
+                            <Route exact component={Home}   path='/' />
+                            <Route component={Help}         path='/help' />
+                            <Route component={SetDetails}   path='/set/:setId' />
+                            <Route component={DeckBuilder}  path='/deckbuilder' />
+                            <Route component={PageNotFound} />
+                        </Switch>
+                    </Suspense>
 
                     <ScrollTop />
                 </div>

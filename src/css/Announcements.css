@@ -26,6 +26,7 @@
 }
 
 #announce li {
+    margin-top: 30px;
     font-size: 1.5rem;
     text-align: left;
 }
@@ -40,6 +41,7 @@
 
 .announceHeader {
     display: flex;
+    justify-content: space-between;
 }
 
 .invisible {
@@ -48,6 +50,10 @@
 
 #announceList {
     overflow-y: auto;
+}
+
+#announcementSpacer {
+    width: 35px;
 }
 
 @media (hover: none), (pointer: coarse) {

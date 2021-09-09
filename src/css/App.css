@@ -21,6 +21,9 @@
   --uncommon-o: rgba(159, 165, 175, 0.8);
   --common-o:   rgba(26, 23, 24, 0.9);
 
+  --primary:  rgb(33, 133, 208);
+  --primary-o:  rgba(33, 133, 208, 0.8);
+
   --tab-gradient: linear-gradient(rgb(200, 200, 200), rgba(210, 210, 210, 0.9), rgba(210, 210, 210, 0.1));
   
   scroll-behavior: smooth;
@@ -65,6 +68,10 @@ body.darkMode {
   background-image: url(../images/watermark_dark.svg);
 }
 
+label {
+  color: var(--clr-txt);
+}
+
 #contentContainer {
   position: relative;
   min-height: 100vh;
@@ -107,4 +114,29 @@ body::-webkit-scrollbar-thumb {
 
 .ui.card, .ui.cards>.card {
   box-shadow: 0 1px 3px 0 var(--border-clr), 0 0 0 2px var(--border-clr);
+}
+
+.ui.center.aligned.header {
+  color: var(--clr-txt);
+  margin-bottom: 0;
+}
+
+.closeModalButton button {
+  float: right;
+  border-radius: 3px;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 2em;
+  border: 1px solid var(--clr-txt);
+}
+
+.closeModalButton button:hover {
+  cursor: pointer;
+  filter: brightness(0.8);
+}
+
+.closeModalButton i {
+  margin: 0;
+  width: auto;
+  height: auto;
 }

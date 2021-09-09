@@ -7,7 +7,7 @@
     font-size: 1.15rem ;
 }
 
-.helpPage>div {
+.helpPage > div {
     margin-top: 30px;
     border-bottom: solid 1px var(--clr-txt);
     padding-bottom: 8px
@@ -24,7 +24,7 @@
     width: 280px;
 }
 
-li {
+.helpPage li {
     margin: 30px auto;
 }
 
@@ -43,7 +43,7 @@ li {
     color: yellow;
 }
 
-li>ul>li {
+.helpPage li>ul>li {
     margin: 12px auto;
     font-size: 95%;
 }
