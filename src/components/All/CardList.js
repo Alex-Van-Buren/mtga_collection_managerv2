@@ -22,7 +22,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     const { cardCollection } = useSelector(state => state.inventory);
 
     const {
-        colors, searchTerm, searchType, showCards, cardCount, cmc,
+        colors, searchTerm, searchType, showCards, cardCount, cmcs,
         booster: boosterVal, set: reduxSets, cardTypes: reduxCardTypes, rarity: rarities,
     } = useSelector(state => state.displayOptions);
 
@@ -102,14 +102,16 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
                 cardTypes.push(cardType.val);
             }
         }
-        // Check the cmc values for "Any" string and change them to undefined
-        let searchcmc = {...cmc};
 
-        if (searchcmc.min === 'Any') {
-            searchcmc.min = undefined;
-        }
-        if (searchcmc.max === 'Any') {
-            searchcmc.max = undefined;
+        // Make cmcs usuable for findCards
+        let selectedCMCs = undefined;
+        
+        if ( cmcs.length >= 1 ) {
+            selectedCMCs = [];
+            
+            for ( const cmc of cmcs) {
+                selectedCMCs.push(cmc.val);
+            }
         }
 
         // Set the decktype for searchOptions
@@ -123,14 +125,14 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         // Put all search options into a single object for findCards function
         let searchOptions = {
             set: set, color: colors, booster: booster, rarity: rarityOption, term: searchTerm,
-            advancedSearchType: searchType, cmc: searchcmc, deckType: deckType, cardTypes: cardTypes
+            advancedSearchType: searchType, cmcs: selectedCMCs, deckType: deckType, cardTypes: cardTypes
         };
 
         if (deckBuilder) {
             
             // If we are in the deckbuilder and are adding basic lands, we need different searchOptions
             if (addBasics) {
-                searchOptions = { ...searchOptions, excludeBasicLands: false, cmc: undefined, rarity: undefined, cardTypes: undefined}
+                searchOptions = { ...searchOptions, excludeBasicLands: false, cmcs: undefined, rarity: undefined, cardTypes: undefined}
             }
             // addType is used to show only commanders or companions. Not used when searching basic lands
             else {
@@ -140,7 +142,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         
         return findCards(searchOptions);
         
-    }, [boosterVal, setId, reduxCardTypes, cmc, reduxDeckType, deckBuilder, colors, searchTerm, searchType, rarities, reduxSets, addBasics, addType]);
+    }, [boosterVal, setId, reduxCardTypes, cmcs, reduxDeckType, deckBuilder, colors, searchTerm, searchType, rarities, reduxSets, addBasics, addType]);
 
     // Track currently shown pictures
     let currentPictures = [];

@@ -1,6 +1,6 @@
 import { 
     SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS, SELECT_BOOSTER, SET_SEARCH_TERM, RESET, UPDATE_IMAGE_LIST, 
-    SELECT_DETAILS_MENU, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, SELECT_CARD_TYPES
+    SELECT_DETAILS_MENU, SELECT_SET, SET_SEARCH_TYPE, SELECT_CARD_TYPES, SELECT_CMCS
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -22,7 +22,7 @@ const INITIAL_STATE = {
 
     set: [],
 
-    cmc: {min: "Any", max: "Any"},
+    cmcs: [],
 
     searchTerm: "",
 
@@ -126,7 +126,7 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
                 rarity: { mythic: false, rare: false, uncommon: false, common: false },
                 showCards: "Show All Cards",
                 booster: "Show All Cards",
-                cmc: {min: "Any", max: "Any"},
+                cmcs: [],
                 searchTerm: "",
                 searchType: null,
                 set: [],
@@ -135,18 +135,8 @@ export default function displayOptionsReducer(state = INITIAL_STATE, action) {
             });
         }
 
-        case SET_CMC_MIN: {
-            let cmc = {...state.cmc};
-            cmc.min = action.payload;
-
-            return {...state, cmc}
-        }
-
-        case SET_CMC_MAX: {
-            let cmc = {...state.cmc};
-            cmc.max = action.payload;
-
-            return {...state, cmc}
+        case SELECT_CMCS: {
+            return { ...state, cmcs: action.payload }
         }
 
         case SELECT_CARD_TYPES: {

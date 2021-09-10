@@ -13,7 +13,7 @@ import arenaCards from "./arenaCards";
 function findCards(searchOptions, searchCards=arenaCards, sort=true) {
 
     // Destructure search options
-    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmc, deckType, cardTypes, addType } = searchOptions;
+    const { set, color, rarity, booster, term, advancedSearchType=null, excludeBasicLands=true, cmcs, deckType, cardTypes, addType } = searchOptions;
 
     /**
      * An array of ananymous functions to be called on each card
@@ -77,10 +77,8 @@ function findCards(searchOptions, searchCards=arenaCards, sort=true) {
     }
 
     // Filter cmc if needed
-    if (cmc) {
-        if ( cmc.min !== undefined || cmc.max !== undefined) {
-            filterFunctions.push( (card) => filterCMC(card.cmc, cmc.min, cmc.max) );
-        }
+    if (cmcs) {      
+        filterFunctions.push( (card) => filterCMC(card.cmc, cmcs) );
     }
 
     // Filter Card legality if needed
@@ -393,18 +391,27 @@ function sortCards(cardList) {
 }
 
 /**
- * Checks if a card should be kept in the finalCards array based on the cmc of the card and min/max values
+ * Checks if a card should be kept in the finalCards array based on the cmc of the card and selected CMCs
  * @param {Number} cardCMC The converted mana cost of card
- * @param {*} min The minimum value to be accepted. Inclusive. If undefined will be 0
- * @param {*} max The maximum value to be accepted. Inclusive. If undefined will be set to absurdly high number
+ * @param {*} selectedCMCs Array of values of cmcs to be accepted. 
  * @returns Returns true if the card should be kept. False if not
  */
-function filterCMC(cardCMC, min = 0, max = Number.MAX_SAFE_INTEGER) {
+function filterCMC(cardCMC, selectedCMCs) {
 
-    // Check if the card's cmc is between the min and max
-    if (cardCMC >= min && cardCMC <= max) {
-        return true;
+    for (const selectedCMC of selectedCMCs) {
+        // Check if the value is '8+'
+        if ( selectedCMC === '8+' ) {
+            if ( cardCMC >= 8 ) {
+                return true;
+            }
+
+        } else {
+            if (selectedCMC === cardCMC){
+                return true;
+            }
+        }
     }
+    
     return false;
 }
 
