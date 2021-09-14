@@ -1,10 +1,10 @@
 import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, SELECT_COLOR, SELECT_RARITY, SET_SHOWCARDS,
     SET_SEARCH_TERM, SHOW_CARD_MODAL, SET_CARD_MODAL_CONTENT, SHOW_HEADER_MODAL, SET_HEADER_MODAL_CONTENT, UPDATE_IMAGE_LIST,
-    SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SET_CMC_MIN, SET_CMC_MAX, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
+    SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
     REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS,ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD,
     CHANGE_COMMANDER, CHANGE_COMPANION, SELECT_CARD_TYPES, SET_SIDEBOARD, SET_ADD_TYPE, SET_DRAG_CARD, DROP_CARD, 
-    LIMITED_SORT, SET_CURRENT_DRAG_OVER
+    LIMITED_SORT, SET_CURRENT_DRAG_OVER, SELECT_CMCS
 } from './types';
 import totalOwned from '../data/totalOwned';
 
@@ -130,18 +130,11 @@ export function getPlayerInventory(inventory) {
     };
 }
 
-export function setCMCMin(cmc) {
+export function selectCMCS(cmcs) {
     return {
-        type: SET_CMC_MIN,
-        payload: cmc
-    };
-}
-
-export function setCMCMax(cmc) {
-    return {
-        type: SET_CMC_MAX,
-        payload: cmc
-    };
+        type: SELECT_CMCS,
+        payload: cmcs
+    }
 }
 
 export function addCardToDeck(card) {

@@ -1,28 +1,12 @@
 .CMCDropdowns-container{
-    display: flex;
     margin-left: 18px;
     margin-top: 7px;
-    gap: 5px;
 }
 
-.CMCDropdowns-container .dropdown-item {
+.pickCMC {
+    width: 10em;
+}
+
+.pickCMC .multi-option {
     text-align: center;
-}
-
-.minCMC, .maxCMC {
-    display: flex;
-    align-items: center;
-}
-
-.minCMC {
-    margin-right: 1rem;
-}
-
-.minCMC>.dropdown, .maxCMC>.dropdown {
-    width: 4rem;
-    margin-left: 3px;
-}
-
-.minCMC > label, .maxCMC > label {
-    margin-right: 0.5rem;
 }

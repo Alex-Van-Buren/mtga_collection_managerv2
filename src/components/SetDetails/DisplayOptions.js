@@ -23,7 +23,7 @@ function DisplayOptions() {
         <div className="display-options-dropdowns">
             <NumberOwnedDropdown header="Number You Own:" />
             <BoosterDropdown header="In Booster Packs?" />
-            <CMCDropdowns header="Select Mana Cost:"/>
+            <CMCDropdowns header="Select Mana Costs:"/>
             <CardTypeDropdown />
             <Reset />
         </div>

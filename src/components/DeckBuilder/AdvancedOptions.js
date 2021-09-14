@@ -21,13 +21,13 @@ function AdvancedOptions() {
 
     // Advanced options modal is open/closed
     const [modalOpen, setModalOpen] = useState(false);
-    const { rarity, showCards, booster, set, cmc, searchType, cardTypes} = useSelector(state => state.displayOptions);
+    const { rarity, showCards, booster, set, cmcs, searchType, cardTypes} = useSelector(state => state.displayOptions);
 
     // Boolean for if advanced Options are being used
     let inUse = false;
     // Check if any of the advanced Options are not their defaults
     if (showCards !== 'Show All Cards' || booster !=='Show All Cards' || set.length > 0 || cardTypes.length > 0 || searchType !== null ||
-        Object.values(rarity).includes(true) || cmc.min !== 'Any' || cmc.max !== 'Any'
+        Object.values(rarity).includes(true) || cmcs.length > 0
     ) {
         inUse = true;
     }
@@ -48,7 +48,7 @@ function AdvancedOptions() {
                 <div className="advancedOptionsSection">
                     <NumberOwnedDropdown header="Number You Own:"/>
                     <BoosterDropdown header="In Booster Packs?"  />
-                    <CMCDropdowns header="Select Mana Cost:"/>
+                    <CMCDropdowns header="Select Mana Costs:"/>
                 </div>
                 <div className="advancedOptionsSection">
                     <SelectSet />
