@@ -187,7 +187,7 @@ function DeckHeader() {
         <div className="deckHeader" onDragEnter={() => dispatch(setCurrentDragOver())}>
 
             <div className="left">
-                <div className="deck">Deck: {deckCount}</div>
+                <div className="deckCount">Deck: {deckCount}</div>
                 <div className="landCount">Land: {landCount}{partialLandSpan}</div>
                 <div className="creatureCount">Creatures: {creatureCount}</div>
                 <div className="nonCreatureCount">Noncreatures: {nonCreatureCount}</div>
@@ -195,7 +195,7 @@ function DeckHeader() {
 
             <div className="right">
                 {comButtons}
-                <div className="sideboard">Sideboard: {sideboardCount}</div>
+                <div className="sideboardCount">Sideboard: {sideboardCount}</div>
                 {addToggle}
             </div>
         </div>

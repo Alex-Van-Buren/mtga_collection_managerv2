@@ -18,6 +18,10 @@
     scrollbar-color: var(--scroll-bar) var(--scroll-area);
 }
 
+.sideboard .DBDeckColumn .firstElement {
+    background-color: transparent;
+}
+
 .sideboard .DBDeckColumn::-webkit-scrollbar-track{
     background: var(--scroll-area);
 }

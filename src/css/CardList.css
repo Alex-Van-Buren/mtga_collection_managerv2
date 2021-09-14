@@ -6,6 +6,14 @@
     padding: 0.5em 1em;
 }
 
+.ui.card>.image>img {
+    border-radius: 10px;
+}
+
+#DeckBuilder .ui.card>.image>img {
+    border-radius: 7px;
+}
+
 .ui.fluid.card {
     background-color: transparent;
     color: var(--clr-txt);

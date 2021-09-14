@@ -31,6 +31,10 @@
     min-width: 159px;
 }
 
+.DBDeckColumn img:first-of-type {
+    margin-top: 2px;
+}
+
 .DBDeckCard {
     /* Stacked cards will be this height */
     height: 25px;
@@ -42,6 +46,7 @@
 }
 
 .DBDeckCard img {
+    border-radius: 7px;
     /* Only top card will be this height */
     height: 225px;
     transition: transform 0.1s;
@@ -54,7 +59,15 @@
     width: 159px;
 }
 
+#commander_companion .DBDeckColumn .firstElement {
+    border-radius: 10px;
+    font-size: 1em;
+    line-height: 20px;
+    margin-bottom: 2px;
+}
+
 #commander_companion img {
+    border-radius: 7px;
     height: 225px;
     width: 159px;
 }
@@ -75,11 +88,13 @@
 
 .DBDeckColumn .firstElement {
     background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
     color: var(--clr-txt);
-    text-align: center;
+    flex-shrink: 0;
     font-size: 0.8em;
     line-height: 16px;
     min-height: 8px;
+    text-align: center;
 }
 
 .darkMode .DBDeckColumn .firstElement {

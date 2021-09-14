@@ -12,11 +12,11 @@
     display: flex;
 }
 
-.deckHeader .deck {
+.deckHeader .deckCount {
     width: 68px;
 }
 
-.deckHeader .sideboard {
+.deckHeader .sideboardCount {
     width: 96px;
 }
 

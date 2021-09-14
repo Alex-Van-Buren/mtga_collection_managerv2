@@ -28,7 +28,8 @@ function DBDeck() {
             if (currentDragOver.section === 'deck' && currentDragOver.col === i){
                 colClass = ' draggingOver';
             }
-            return <div className={`DBDeckColumn${colClass}`} key={'column'+i} 
+            return <div 
+                className={`DBDeckColumn${colClass}`} key={'column'+i} draggable='true'
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
                     e.stopPropagation(); 
@@ -41,7 +42,7 @@ function DBDeck() {
             >
                 {/* Create a top element above the cards in each column */}
                 <div className="firstElement"
-                    onDrop={(e) =>{
+                    onDrop={(e) => {
                         e.stopPropagation(); 
                         dispatch(dropCard('deck', {col: i, row: -1}))
                         dispatch(setCurrentDragOver());
@@ -103,7 +104,7 @@ function DBDeck() {
                     >
                     <HoverPreview imgs={card.imgs}>
                         <img
-                            src={card.imgs.front} alt={card.name} style={cardStyle} draggable
+                            src={card.imgs.front} alt={card.name} style={cardStyle} draggable='true' tabIndex={0}
                             onDragStart={(e) => {
                                 dispatch(setDragCard(card, 'deck', {col: i, row: j}));
                             }}
@@ -121,7 +122,18 @@ function DBDeck() {
                                 dispatch(removeCardFromDeck(card, i, j));
 
                                 // If the deckType is limited, move the card to the sideboard
-                                if ( deckType === 'limited' ) { dispatch(addCardToSideboard(card)) }
+                                if ( deckType === 'limited' ) {
+                                    dispatch(addCardToSideboard(card));
+                                }
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    dispatch(removeCardFromDeck(card, i, j));
+
+                                    if ( deckType === 'limited' ) {
+                                        dispatch(addCardToSideboard(card));
+                                    }
+                                }
                             }}
                         />
                     </HoverPreview>
@@ -137,34 +149,41 @@ function DBDeck() {
 
             {/* Show commander if it exists */}
             {commander || addType === 'commander' ? (<>
-                <label htmlFor="commanderCard">Commander</label>
-                <div className={currentDragOver.section === 'commander'? 'specialCard draggingOver' : "specialCard"}
+                <div
+                    className="DBDeckColumn" draggable='true'
                     onDragOver={(e) => e.preventDefault()}
                     onDragStart={() => dispatch(setDragCard(commander, 'commander', {col: null, row: null}))}
                     onDragEnd={() => dispatch(setDragCard(null))}
                     onDrop={() => {
                         dispatch(dropCard('commander', {col: null, row: null}));
-                        dispatch(setCurrentDragOver())
+                        dispatch(setCurrentDragOver());
                     }}
                     onDragEnter={(e) => {
                         e.stopPropagation();
                         dispatch(setCurrentDragOver('commander'));
                     }}
                 >
-                    {commander ? 
-                    <HoverPreview imgs={commander.imgs}>
-                    <img
-                        src={commander.imgs.front} alt={commander.name} id="commanderCard"
-                        onClick={() => dispatch(changeCommander())}
-                    />
-                    </HoverPreview> : null}
+                    <div className="firstElement">Commander</div>
+                    <div className={currentDragOver.section === 'commander'? 'specialCard draggingOver' : "specialCard"}>
+                        {commander ? <HoverPreview imgs={commander.imgs}>
+                            <img
+                                src={commander.imgs.front} alt={commander.name} id="commanderCard" tabIndex={0}
+                                onClick={() => dispatch(changeCommander())}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        dispatch(changeCommander());
+                                    }
+                                }}
+                            />
+                        </HoverPreview> : null}
+                    </div>
                 </div>
             </>) : null}
 
             {/* Show companion if it exists */}
             {companion || addType === 'companion' ? (<>
-                <label htmlFor="companionCard">Companion</label>
-                <div className={currentDragOver.section === 'companion' ? 'specialCard draggingOver' : "specialCard"}
+                <div
+                    className="DBDeckColumn" draggable='true'
                     onDragOver={(e) => e.preventDefault()}
                     onDragStart={() => dispatch(setDragCard(companion, 'companion', {col: null, row: null}))}
                     onDragEnd={() => dispatch(setDragCard(null))}
@@ -177,18 +196,28 @@ function DBDeck() {
                         dispatch(setCurrentDragOver('companion'));
                     }}
                 >
-                    {companion ?
-                    <HoverPreview imgs={companion.imgs}>
-                    <img
-                        src={companion.imgs.front} alt={companion.name} id="companionCard"
-                        onClick={() =>{
-                            dispatch(changeCompanion())
-                            if (deckType === 'limited') {
-                                dispatch(addCardToSideboard(companion))
-                            }
-                        } }
-                    />
-                    </HoverPreview> : null}
+                    <div className="firstElement">Companion</div>
+                    <div className={currentDragOver.section === 'companion' ? 'specialCard draggingOver' : "specialCard"}>
+                        {companion ? <HoverPreview imgs={companion.imgs}>
+                            <img
+                                src={companion.imgs.front} alt={companion.name} id="companionCard" tabIndex={0}
+                                onClick={() =>{
+                                    dispatch(changeCompanion());
+                                    if (deckType === 'limited') {
+                                        dispatch(addCardToSideboard(companion));
+                                    }
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        dispatch(changeCompanion());
+                                        if (deckType === 'limited') {
+                                            dispatch(addCardToSideboard(companion));
+                                        }
+                                    }
+                                }}
+                            />
+                        </HoverPreview> : null}
+                    </div>
                 </div>
             </>) : null}
         </div>

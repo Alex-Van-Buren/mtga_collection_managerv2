@@ -164,7 +164,7 @@ function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
     if (deckBuilder) {
         return (
             // Show preview when hovering
-            <HoverPreview imgs={imgs}>
+            <HoverPreview imgs={imgs} >
                 {compose}
             </HoverPreview>
         );

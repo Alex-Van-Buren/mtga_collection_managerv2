@@ -62,7 +62,7 @@ function ExportDeck() {
 
                 // Only list number and name for "pana" and other 4+ letter set codes, or collector numbers
                 // with letters, because the game doesn't import them correctly
-                if (card.set.length > 3 || /.*[A-Za-z].*/.test(card.col_num)) {
+                if (card.set.length > 3 || /.*[A-Za-z].*/.test(card.collector_number)) {
 
                     // Ex output: 4 Llanowar Elves
                     deckOutput += `${card.copies} ${name}\n`;
@@ -71,7 +71,7 @@ function ExportDeck() {
                 else {
                     
                     // Ex output: 4 Clearwater Pathway (ZNR) 260
-                    deckOutput += `${card.copies} ${name} (${card.set.toUpperCase()}) ${card.col_num}\n`;
+                    deckOutput += `${card.copies} ${name} (${card.set.toUpperCase()}) ${card.collector_number}\n`;
                 }
             }
         }

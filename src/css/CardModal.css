@@ -59,6 +59,7 @@
 }
 
 .cardImage img {
+    border-radius: 17px;
     max-width: 100%;
     max-height: 90vh;
 }

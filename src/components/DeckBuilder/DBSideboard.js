@@ -79,7 +79,7 @@ function DBSideboard() {
             // Add cards to render array
             renderSBCards.push(<div className="DBDeckCard" key={card + sbCounter} style={{ zIndex: sbCounter }}>
                 <HoverPreview imgs={card.imgs}>
-                <img draggable
+                <img draggable='true'
                     src={card.imgs.front} alt={card.name} style={style}
                     onClick={(e) => {
                         dispatch(removeCardFromSideboard(card, i, j));

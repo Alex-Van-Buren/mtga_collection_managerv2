@@ -44,8 +44,8 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
         
         images = (
             <div className="hoverPreviewDiv" style={{ left: x, top: y }}>
-                <img src={imgs.front} alt="hoverPreviewFrontImg" className="hoverPreviewImg"/>
-                {imgs.back ? <img src={imgs.back}  alt="hoverPreviewBackImg" className="hoverPreviewImg"/> : null}
+                <img src={imgs.front} alt="hoverPreviewFrontImg" className="hoverPreviewImg" />
+                {imgs.back ? <img src={imgs.back}  alt="hoverPreviewBackImg" className="hoverPreviewImg" /> : null}
             </div>
         );
     }
@@ -54,7 +54,12 @@ export default function HoverPreview({ children, imgs, height=350, width=247.07,
     return (<>
         <div
             onMouseOver={setTimer} onMouseOut={onMouseOut} onClick={setTimer} ref={locationRef}
-            onFocus={setTimer} onBlur={onMouseOut} onDragStart={onMouseOut}
+            onFocus={setTimer} onBlur={onMouseOut} onDragStart={onMouseOut} 
+            onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    setTimer();
+                }
+            }}
         >
             {children}
         </div>
