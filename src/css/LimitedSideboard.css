@@ -4,7 +4,7 @@
     height: 100%
 }
 
-.limitedSideboard-header{
+.limitedSideboard-header {
     display: flex;
     align-items: center;
     width: 100%;
@@ -18,7 +18,7 @@
 
 .limitedSideboard-cards {
     display: flex;
-    gap: 8px;
+    gap: 2px;
     padding: 5px;
     height: 100%;
 }
