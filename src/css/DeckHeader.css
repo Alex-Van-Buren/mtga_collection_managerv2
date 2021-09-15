@@ -1,9 +1,10 @@
 .deckHeader {
     align-items: center;
     background-color: lightgray;
-    color: rgba(0,0,0,0.87);
+    color: rgba(0, 0, 0, 0.87);
     display: flex;
     justify-content: space-between;
+    overflow-y: auto;
     padding-left: 1rem;
 }
 
