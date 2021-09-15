@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Modal from '../Templates/Modal';
+import { setCookie, getCookies } from '../../hooks/cookies';
+import getTime from '../../hooks/getTime';
 import '../../css/Announcements.css';
+
+// Specify date of newest announcement. Announcements hidden after this date won't be shown.
+const newestAnnouncement = 20210915000000; // YYYY + MM + DD + 000000
 
 /**
  * Creates a Modal pop-up using session storage to relay announcements to users. Will display on each new session.
@@ -10,17 +15,14 @@ function Announcements() {
 
     const [modalOpen, setModalOpen] = useState(true);
 
-    // Check if announcement has been made this session
-    if (window.sessionStorage.getItem("seenAnnouncements") === "true") {
+    // Check if these announcements have been hidden
+    useEffect(() => {
 
-        // Don't show this modal when announcements have been seen this session
-        return null;
-    } 
-    // Update that the user has seen current announcements this session
-    if (!modalOpen) {
-
-        window.sessionStorage.setItem("seenAnnouncements", "true");
-    }
+        const { hide } = getCookies();
+        if (parseInt(hide) > newestAnnouncement) {
+            setModalOpen(false);
+        }
+    }, []);
 
     const announceList = <div id="announce">
 
@@ -36,7 +38,10 @@ function Announcements() {
             </div>
         </div>
 
-        {/* Current announcements that show up when loading the home page */}
+        {/* 
+            Current announcements that show up when loading the home page
+            - structured as an li containing a strong tag as the title and optional p tags with additional info
+        */}
         <div id="announceList">
             <ol>
                 <li>
@@ -44,19 +49,30 @@ function Announcements() {
                 </li>
                 <li>
                     <strong>Log Files are still broken</strong>
-                    <p>We will update Collection Manager as soon as MTG Arena updates their log files!</p>
+                    <p>We will update Collection Manager as soon as MTG Arena updates their log files.</p>
                 </li>
                 <li>
-                    <strong>Check out the deck builder</strong>
+                    <strong>The deck builder is here!</strong>
+                    <p>...and frankly, it's lookin' pretty good.</p>
                 </li>
             </ol>
         </div>
-        <br /><br />
+
+        <div className="announcementButtons">
+            <button 
+                onClick={() => {
+                    // Hide current announcements for 2 weeks (will show any new announcements)
+                    setCookie('hide', getTime(), 14);
+                    setModalOpen(false);
+                }} className="ui green button"
+            >
+                Dismiss
+            </button>
+        </div>
+
     </div>;
 
-    const renderedModal = modalOpen ? <Modal content={announceList} show={modalOpen} setShow={setModalOpen} /> : null;
-
-    return renderedModal;
+    return modalOpen ? <Modal content={announceList} show={modalOpen} setShow={setModalOpen} /> : null;
 }
 
 export default Announcements;

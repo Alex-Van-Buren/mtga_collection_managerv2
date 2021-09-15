@@ -33,6 +33,7 @@
 
 #announce li > p {
     font-weight: normal;
+    margin-top: 0.5em;
 }
 
 #announce li > strong {
