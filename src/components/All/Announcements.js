@@ -6,7 +6,7 @@ import getTime from '../../hooks/getTime';
 import '../../css/Announcements.css';
 
 // Specify date of newest announcement. Announcements hidden after this date won't be shown.
-const newestAnnouncement = 20210915000000; // YYYY + MM + DD + 000000
+const newestAnnouncement = 20210916900000; // YYYY + MM + DD + 000000
 
 /**
  * Creates a Modal pop-up using session storage to relay announcements to users. Will display on each new session.
@@ -44,15 +44,21 @@ function Announcements() {
         <div id="announceList">
             <ol>
                 <li>
+                    <strong>Innistrad: Midnight Hunt is now available!</strong>
+                    <p>The game mode legalities for the MID set has not been fully updated.</p>
+                    <p>Set the game mode to "future" if you wish to use the deck builder with the MID set.</p>
+                </li>
+                <li>
+                    <strong>MTG Arena still has broken Log files, but...</strong>
+                    <p>We can count the cards that are currently in your decks, but If it's not in a deck, we can't count it!</p>
+                    <p>Hopefully, this "solution" doesn't need to last for long.</p>
+                </li>
+                <li>
+                    <strong>New card legalities available</strong>
+                    <p>Historic Brawl and Future legalities are now available as Game Modes in the Deck Builder!</p>
+                </li>
+                <li>
                     <strong>This site is in pre-release!</strong>
-                </li>
-                <li>
-                    <strong>Log Files are still broken</strong>
-                    <p>We will update Collection Manager as soon as MTG Arena updates their log files.</p>
-                </li>
-                <li>
-                    <strong>The deck builder is here!</strong>
-                    <p>...and frankly, it's lookin' pretty good.</p>
                 </li>
             </ol>
         </div>

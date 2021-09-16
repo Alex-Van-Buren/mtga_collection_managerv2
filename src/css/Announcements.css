@@ -21,6 +21,10 @@
     overflow-y: scroll;
 }
 
+.announcementButtons {
+    margin-top: 10px;
+}
+
 #announce h1 {
     font-size: 2.5rem;
 }
