@@ -109,10 +109,10 @@ function Home() {
         <>
             {renderToggle}
 
-            <div className="ui container home">
-                <div className="ui huge center aligned header">{collectionTitle}</div>
+            <div className="homePage">
+                <h1 className="homeTitle">{collectionTitle}</h1>
 
-                <div className={`ui ${numCards} cards`}>
+                <div className='cardSetList'>
                     {renderSets()}
                 </div>
             </div>

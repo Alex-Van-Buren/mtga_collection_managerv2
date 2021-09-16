@@ -29,7 +29,7 @@ function DBDeck() {
                 colClass = ' draggingOver';
             }
             return <div 
-                className={`DBDeckColumn${colClass}`} key={'column'+i} draggable='true'
+                className={`DBDeckColumn${colClass}`} key={'column'+i} draggable='false'
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
                     e.stopPropagation(); 

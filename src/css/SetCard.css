@@ -1,6 +1,7 @@
 .ui.link.card {
     justify-content: center;
 }
+
 #setCardHeader {
     color: var(--clr-txt);
     font-family: 'Kadwa', serif;
@@ -8,7 +9,8 @@
     font-weight: 400;
     margin: 3% 0;
 }
-#setCardHeader>img {
+
+#setCardHeader > img {
     width: 80%;
 }
 
@@ -27,6 +29,6 @@
     color: var(--clr-txt);
 }
 
-.ui.header>img:only-child {
+.ui.header > img:only-child {
     margin: 0;
 }
