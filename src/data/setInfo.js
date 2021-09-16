@@ -1,3 +1,6 @@
+import mid_logo from '../images/setLogos/mid_logo.png';
+import j21_logo from '../images/setLogos/j21_logo.png';
+import afr_logo from '../images/setLogos/afr_logo.png';
 import stx_logo from '../images/setLogos/stx_logo.png';
 import khm_logo from '../images/setLogos/khm_logo.png';
 import klr_logo from '../images/setLogos/klr_logo.png';
@@ -16,13 +19,11 @@ import dom_logo from '../images/setLogos/dom_logo.png';
 import rix_logo from '../images/setLogos/rix_logo.png';
 import xln_logo from '../images/setLogos/xln_logo.png';
 import jmp_logo from '../images/setLogos/jmp_logo.png';
-import afr_logo from '../images/setLogos/afr_logo.png';
-import j21_logo from '../images/setLogos/j21_logo.png';
 
 /**
  * The set codes of the current standard sets
  */
-export const standardSets = ["afr", "stx", "khm", "znr", "m21", "iko", "thb", "eld"];
+export const standardSets = [ "mid", "afr", "stx", "khm", "znr" ];
 
 /**
  * setInfo contains keys of the set ids which contain objects with:
@@ -32,6 +33,12 @@ export const standardSets = ["afr", "stx", "khm", "znr", "m21", "iko", "thb", "e
  * Most recent sets at the top
  */
 export const setInfo = {
+    mid: {
+        name: "Innistard: Midnight Hunt",
+        mythic_upgrade: (1/8),
+        collationId: 100025,
+        logo: mid_logo
+    },
     afr: {
         name: "Adventures in the Forgotton Realms",
         mythic_upgrade: (1/7),
