@@ -14,7 +14,7 @@
 
 .ui.center.aligned.sub.header {
     color: var(--clr-txt);
-    margin: 0;
+    margin: 0 auto;
 }
 
 .ui.link.card {
@@ -25,4 +25,8 @@
 .ui.link.card:hover {
     background-color: var(--clr-sec);
     color: var(--clr-txt);
+}
+
+.ui.header>img:only-child {
+    margin: 0;
 }
