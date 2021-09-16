@@ -7,9 +7,9 @@ const INITIAL_STATE = {
     // Array of card columns, each corresponds to cmc value 0-7, >7 mapped to 7
     deck: [ [], [], [], [], [], [], [], [] ],
     // Contains card names, ids, and number of copies
-    deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
+    deckMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: collector_number } }
     sideboard: [ [], [], [], [], [], [], [], [] ],
-    sideboardMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: col_num } }
+    sideboardMap: {}, // key: card.name, value: { key: card.arendId, value: { key: copies, key: set, key: collector_number } }
     commander: null,
     companion: null,
     deckType: "standard", 
@@ -374,7 +374,7 @@ function addCardToCardMap(cardMap, card) {
     }
     // Else initialize arenaId for card name
     else {
-        cardMap[card.name][card.arenaId] = {copies: 1, set: card.set, col_num: card.collector_number };
+        cardMap[card.name][card.arenaId] = {copies: 1, set: card.set, collector_number: card.collector_number };
     }
 }
 

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
  * The content in the export modal. Contains a preview of the exported deck, save to file button,
  * and copy to clipboard button.
  */
-function ExportDeck() {
+function ExportDeck({ setModalOpen }) {
 
     const { deckMap, sideboardMap, commander, companion } = useSelector(state => state.deckBuilder);
 
@@ -51,16 +51,22 @@ function ExportDeck() {
      * Gets string for deckMap and sideboardMap
      */
     function deck_sideboardOutput(inputMap) {
+        const faceSeparator = " // ";
 
         let deckOutput = '';
 
         // Iterate through each card name in imputMap
         for (let [name, ids] of Object.entries(inputMap)) {
+
+            // Only use front face if double-sided
+            if (name.includes(faceSeparator)) {
+                name = name.substring(0, name.indexOf(faceSeparator));
+            }
             
             // Iterate through each arenaId of that card name and add it to deckOutput string
             for (const card of Object.values(ids)) {
 
-                // Only list number and name for "pana" and other 4+ letter set codes, or collector numbers
+                // Only list number and name for sets with 4+ letter set codes, or collector numbers
                 // with letters, because the game doesn't import them correctly
                 if (card.set.length > 3 || /.*[A-Za-z].*/.test(card.collector_number)) {
 
@@ -148,7 +154,16 @@ function ExportDeck() {
     
     return (
         <div id="importExportContent">
-            <h1>Export Deck</h1>
+            <div className="spacedModalHeader">
+
+                <div className="invisible closeButtonSpacer"/>
+
+                <h1>Import Deck</h1>
+
+                <div className="closeModalButton">
+                    <button onClick={() => setModalOpen(false)}><i className="close icon"/></button>
+                </div>
+            </div>
 
             <h3>Preview:</h3>
             <p id="deckPreview">{toString}</p>

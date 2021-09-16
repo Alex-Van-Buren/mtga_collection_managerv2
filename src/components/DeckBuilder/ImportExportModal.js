@@ -20,10 +20,7 @@ function ImportExportModal() {
     // JSX in the modal --> only viewable if modalOpen is true
     const modalContent = (
         <div className="importExportModal darkMode">
-            <div className="closeModalButton">
-                <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"></i></button>
-            </div>
-            {isImport ? <ImportDeck setModalOpen={setModalOpen}/> : <ExportDeck />}
+            {isImport ? <ImportDeck setModalOpen={setModalOpen} /> : <ExportDeck setModalOpen={setModalOpen} />}
         </div>
     );
 

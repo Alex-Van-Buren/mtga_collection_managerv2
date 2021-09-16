@@ -3,26 +3,12 @@ import { Link } from 'react-router-dom';
 
 import SetCard from './SetCard';
 import { standardSets, historicSets } from '../../data/setInfo';
-import useResizeWidth from '../../hooks/useResizeWidth';
 import '../../css/Home.css';
 
 /**
  * Home Page Component - Displays current card sets and other general info/options
  */
 function Home() {
-
-    // Use custom hook to get current window width. Updates whenever window width changes
-    const width = useResizeWidth();
-
-    // Choose how many cards to show based on window size
-    let numCards = "four"; // Default to full width
-    if (width < 580)
-        numCards = "one"
-    else if (width < 992)
-        numCards = "two";
-    else if (width < 1200)
-        numCards = "three";
-
 
     // State determines whether to show standard or historic sets
     const [showStandard, setShowStandard] = useState(true);

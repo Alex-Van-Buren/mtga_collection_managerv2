@@ -40,21 +40,8 @@
     font-size: 2rem;
 }
 
-.announceHeader {
-    display: flex;
-    justify-content: space-between;
-}
-
-.invisible {
-    visibility: hidden;
-}
-
 #announceList {
     overflow-y: auto;
-}
-
-#announcementSpacer {
-    width: 35px;
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -73,10 +60,10 @@
     #announce li > strong {
         font-size: 1.5rem;
     }
-    .announceHeader {
+    #announce .spacedModalHeader {
         flex-direction: column-reverse;
     }
-    .invisible {
+    #announce .invisible {
         display: none;
     }
 }

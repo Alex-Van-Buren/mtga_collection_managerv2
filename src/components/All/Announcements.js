@@ -26,13 +26,12 @@ function Announcements() {
 
     const announceList = <div id="announce">
 
-        <div className="announceHeader">
+        <div className="spacedModalHeader">
 
-            <div id="announcementSpacer" className="invisible"></div>
+            <div className="invisible closeButtonSpacer"/>
 
             <h1>Announcements:</h1>
 
-            {/* Modal Close */}
             <div className="closeModalButton">
                 <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"/></button>
             </div>

@@ -384,7 +384,17 @@ function ImportDeck({ setModalOpen }) {
 
     return (
         <div id="importExportContent">
-            <h1>Import Deck</h1>
+
+            <div className="spacedModalHeader">
+
+                <div className="invisible closeButtonSpacer"/>
+
+                <h1>Import Deck</h1>
+
+                <div className="closeModalButton">
+                    <button onClick={() => setModalOpen(false)}><i className="close icon"/></button>
+                </div>
+            </div>
 
             <h3>Preview/Copy & Paste:</h3>
             <textarea 

@@ -26,8 +26,10 @@
     border-radius: 10px;
     color: var(--clr-txt);
     padding: 2rem;
-    height: 80vh;
-    width: 60vw;
+    height: fit-content;
+    text-align: center;
+    width: 800px;
+    max-width: 90vw;
 }
 
 #importExportContent {
@@ -40,9 +42,11 @@
 }
 
 #fileOrClipboardButtons {
+    align-self: center;
     display: flex;
     flex-direction: row;
-    align-self: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #fileOrClipboardButtons button {

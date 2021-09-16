@@ -7,3 +7,16 @@
     -webkit-user-select: auto !important;
     -moz-user-select: auto !important;
 }
+
+.spacedModalHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.closeButtonSpacer {
+    width: 35px;
+}
