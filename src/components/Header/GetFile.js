@@ -26,10 +26,10 @@ function GetFile() {
     function extractCardInventory(file) {
 
         // Define the Regex to get all owned arena cards
-        const cardRegex = /GetPlayerCards.+payload.+({[\d":,]+})/g;
+        let cardRegex = /GetPlayerCards.+payload.+({[\d":,]+})/g;
                 
         // Use regex to extract the inventory data from the log
-        const matches = [...file.matchAll(cardRegex)];
+        let matches = [...file.matchAll(cardRegex)];
 
         // Check if regex returned valid data
         if (matches.length > 0) {
@@ -50,12 +50,32 @@ function GetFile() {
             return true;
         }
 
-        // Alert user of invalid Player Log
-        else {
+        /* TODO: Temporary "solution" for broken log files */
+        cardRegex = /{"cardId":\d+,"quantity":\d+}/g;
 
-            // Unsuccessful
-            return false;
+        // Get every card that's currently in one of the player's decks
+        matches = file.match(cardRegex);
+
+        if (matches.length > 0) {
+            
+            // Construct the inventory from cards in decks
+            const inventory = {};
+            for (const match of matches) {
+
+                const { cardId, quantity } = JSON.parse(match);
+
+                // Initialize arenaId in inventory OR use the larger quantity if arenaId already in inventory
+                if ( (inventory[cardId] === undefined) || (quantity > inventory[cardId]) ) {
+                    inventory[cardId] = quantity;
+                }
+            }
+            dispatch( getCollection(inventory) );
+            dispatch( processSetCollection(inventory) );
+            return true;
         }
+
+        // Else unsuccessful
+        return false;
     }
 
     /**
