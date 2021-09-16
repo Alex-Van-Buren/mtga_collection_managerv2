@@ -156,9 +156,15 @@ function DeckHeader() {
         }
 
         switch (type) {
-            case "commander": buttonText = "Set Commander"; break;
-            case "companion": buttonText = "Set Companion"; break;
-            default: buttonText = ""; break;
+            case "commander":
+                buttonText = "Set Commander";
+                break;
+            case "companion":
+                buttonText = "Set Companion";
+                break;
+            default:
+                buttonText = "";
+                break;
         }
 
         return <button
@@ -177,7 +183,7 @@ function DeckHeader() {
     // Don't show add Commander/Companion buttons when adding basic lands. Don't show Commander button unless needed.
     if (addBasics) {}
     else {
-        if (deckType === "brawl" || deckType === "custom") {
+        if ( ["brawl", "historicbrawl", "custom"].includes(deckType) ) {
             comButtons.push(setComButton("commander"));
         }
         comButtons.push(setComButton("companion"));

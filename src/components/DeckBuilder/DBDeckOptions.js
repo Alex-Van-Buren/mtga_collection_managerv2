@@ -16,9 +16,10 @@ function DBDeckOptions() {
     const { deckType, deck, sideboard } = useSelector(state => state.deckBuilder);
     
     // Deck/game type
-    const items = [ "standard", "historic", "limited", "brawl", "custom" ];
+    const items = [ "standard", "historic", "limited", "brawl", "historicbrawl", "future", "custom" ];
+    const labels = []; labels[4] = "historic brawl";
     const renderGameType = <CustomDropdown
-        items={items} firstSelection={deckType}
+        items={items} labels={labels} firstSelection={deckType}
         selectfn={(item) => dispatch(selectDeckType(item))}
         ariaLabel="Select deck type"
     />
@@ -56,7 +57,7 @@ function DBDeckOptions() {
     return (
         <div id="DBDeckOptions">
 
-            <label htmlFor="gameTypeDropDown">Deck Type:</label>
+            <label htmlFor="gameTypeDropDown">Game Mode:</label>
             <div id="gameTypeDropDown">
                 {renderGameType}
             </div>
