@@ -30,7 +30,7 @@ function Announcements() {
 
             <div className="invisible closeButtonSpacer"/>
 
-            <h1>Announcements:</h1>
+            <h1>v0.6.1 Announcements:</h1>
 
             <div className="closeModalButton">
                 <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"/></button>
