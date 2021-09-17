@@ -11,7 +11,7 @@ import '../../css/Announcements.css';
 function Announcements() {
 
     // Specify date of newest announcement. Announcements hidden after this date won't be shown.
-    const newestAnnouncement = 20210918000000; // YYYY + MM + DD + 000000
+    const newestAnnouncement = 20210917000000; // YYYY + MM + DD + 000000
 
     const [modalOpen, setModalOpen] = useState(true);
 
