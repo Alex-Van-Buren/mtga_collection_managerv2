@@ -6,7 +6,7 @@ import getTime from '../../hooks/getTime';
 import '../../css/Announcements.css';
 
 // Specify date of newest announcement. Announcements hidden after this date won't be shown.
-const newestAnnouncement = 20210916900000; // YYYY + MM + DD + 000000
+const newestAnnouncement = 20210917999999; // YYYY + MM + DD + 999999
 
 /**
  * Creates a Modal pop-up using session storage to relay announcements to users. Will display on each new session.
