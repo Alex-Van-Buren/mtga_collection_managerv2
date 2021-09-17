@@ -30,7 +30,7 @@ function Announcements() {
 
             <div className="invisible closeButtonSpacer"/>
 
-            <h1>v0.6.1 Announcements:</h1>
+            <h1>v0.6.2 Announcements:</h1>
 
             <div className="closeModalButton">
                 <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"/></button>
@@ -49,9 +49,8 @@ function Announcements() {
                     <p>Set the game mode to "future" if you wish to use the deck builder with the MID set.</p>
                 </li>
                 <li>
-                    <strong>MTG Arena still has broken Log files, but...</strong>
-                    <p>We can count the cards that are currently in your decks, but If it's not in a deck, we can't count it!</p>
-                    <p>Hopefully, this "solution" doesn't need to last for long.</p>
+                    <strong>MTG Arena's log file are still completely broken.</strong>
+                    <p>We thought there might've been a somewhat workable solution, but it turns out that the log files are just really poorly constructed!</p>
                 </li>
                 <li>
                     <strong>New card legalities available</strong>

@@ -43,34 +43,10 @@ function GetFile() {
             // Use getCollection action creator to put the basic inventory into Redux
             dispatch( getCollection(inventory) );
             
-            // Put processed set information into Redux                
+            // Put processed set information into Redux
             dispatch( processSetCollection(inventory) );
 
             // Successful
-            return true;
-        }
-
-        /* TODO: Temporary "solution" for broken log files */
-        cardRegex = /{"cardId":\d+,"quantity":\d+}/g;
-
-        // Get every card that's currently in one of the player's decks
-        matches = file.match(cardRegex);
-
-        if (matches.length > 0) {
-            
-            // Construct the inventory from cards in decks
-            const inventory = {};
-            for (const match of matches) {
-
-                const { cardId, quantity } = JSON.parse(match);
-
-                // Initialize arenaId in inventory OR use the larger quantity if arenaId already in inventory
-                if ( (inventory[cardId] === undefined) || (quantity > inventory[cardId]) ) {
-                    inventory[cardId] = quantity;
-                }
-            }
-            dispatch( getCollection(inventory) );
-            dispatch( processSetCollection(inventory) );
             return true;
         }
 
