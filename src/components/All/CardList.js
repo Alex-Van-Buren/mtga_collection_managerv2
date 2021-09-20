@@ -27,7 +27,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
     } = useSelector(state => state.displayOptions);
 
     const {
-        deckMap, sideboardMap, commander, addBasics, deckType: reduxDeckType, addType,
+        deckMap, sideboardMap, commander, companion, addBasics, deckType: reduxDeckType, addType,
     } = useSelector(state => state.deckBuilder);
 
     // Access redux dispatch
@@ -210,7 +210,11 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
 
                         // Count the commander
                         if (commander && commander.arenaId === card.arenaId) {
-                            copiesInDeck = 1;
+                            copiesInDeck++;
+                        }
+
+                        if (companion && companion.arenaId === card.arenaId) {
+                            copiesInDeck++;
                         }
 
                         // Count the copies in the main deck
