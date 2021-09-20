@@ -35,7 +35,7 @@ export const standardSets = [ "mid", "afr", "stx", "khm", "znr" ];
 export const setInfo = {
     mid: {
         name: "Innistard: Midnight Hunt",
-        mythic_upgrade: (1/8),
+        mythic_upgrade: (1/7.4),
         collationId: 100025,
         logo: mid_logo
     },
