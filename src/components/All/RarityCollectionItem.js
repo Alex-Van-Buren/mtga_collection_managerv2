@@ -45,6 +45,7 @@ function RarityCollectionItem({ setId, rarity }) {
         "ha3": "ha1",
         "ha4": "ha1",
         "ha5": "ha1",
+        "mid": "xin4",
     }
 
     const symbol = symbolTransforms[setId] ? symbolTransforms[setId] : setId;
