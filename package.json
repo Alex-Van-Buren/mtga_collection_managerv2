@@ -1,6 +1,6 @@
 {
   "name": "collection_manager",
-  "homepage": "https://www.collectionmanager.net",
+  "homepage": "http://www.collectionmanager.net",
   "version": "0.6.2",
   "private": true,
   "dependencies": {
