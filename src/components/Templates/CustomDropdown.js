@@ -6,8 +6,9 @@ import '../../css/CustomDropdown.css';
  * Creates a dropdown menu where the selected item is displayed
  * @prop {Array} items An array of strings that are the different options that can be selected
  * @prop {Array} labels An array corresponding with items. items determines the value passed to the selectfn, while
- * labels determines what text is shown in the dropdown if that label is defined. Only the specific labels that should
- * be overwritten need to be defined. @example (with only one overwritten label): const labels = []; labels[4] = "historic brawl";
+ * labels determines what text is shown in the dropdown, if that label is defined. Only the specific labels that should
+ * be overwritten need to be defined.
+ * @example (with only one overwritten label): const labels = []; labels[4] = "historic brawl";
  * @prop {String} firstSelection The string of the default selection. Should be one of the strings in the items array.
  * @prop {Function} [selectfn=undefined] An additional callback function that uses the item selected as an argument.
  * @prop {String} [ariaLabel=undefined] An aria-label.
