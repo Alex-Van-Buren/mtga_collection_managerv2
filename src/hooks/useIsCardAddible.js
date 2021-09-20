@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
  */
 export default function useIsCardAddible(card) {
 
-    const { deckMap, deckType, sideboardMap, commander } = useSelector(state => state.deckBuilder);
+    const { deckMap, deckType, sideboardMap, commander, companion } = useSelector(state => state.deckBuilder);
 
     // First check if the card is legal in the desired deckType
     // For Custom and Limited, all cards are legal so skip this step
@@ -28,6 +28,11 @@ export default function useIsCardAddible(card) {
         copiesInDeck++;
     }
 
+    // Check the companion slot
+    if (companion && companion.name === card.name) {
+        copiesInDeck++;
+    }
+    
     // Check if the deck has any copies of the card
     if ( deckMap[card.name] ) {
 
