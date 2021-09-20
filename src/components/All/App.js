@@ -18,7 +18,7 @@ const PageNotFound = lazy(() => import('./PageNotFound'));
  */
 function App() {
     return (
-        <Router basename="/mtga_collection_managerv2">
+        <Router>
             <div id="contentContainer">
                 <div id="keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage">
                     <Header />
