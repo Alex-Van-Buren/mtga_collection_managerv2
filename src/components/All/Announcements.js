@@ -10,8 +10,10 @@ import '../../css/Announcements.css';
  */
 function Announcements() {
 
+    const version = 'v0.6.2';
+    
     // Specify date of newest announcement. Announcements hidden after this date won't be shown.
-    const newestAnnouncement = 20210917000000; // YYYY + MM + DD + 000000
+    const newestAnnouncement = 20210921000000; // YYYY + MM + DD + 000000
 
     const [modalOpen, setModalOpen] = useState(true);
 
@@ -30,7 +32,7 @@ function Announcements() {
 
             <div className="invisible closeButtonSpacer"/>
 
-            <h1>v0.6.2 Announcements:</h1>
+            <h1>{version} Announcements:</h1>
 
             <div className="closeModalButton">
                 <button onClick={() => setModalOpen(!modalOpen)}><i className="close icon"/></button>
@@ -45,12 +47,10 @@ function Announcements() {
             <ol>
                 <li>
                     <strong>Innistrad: Midnight Hunt is now available!</strong>
-                    <p>The game mode legalities for the MID set has not been fully updated.</p>
-                    <p>Set the game mode to "future" if you wish to use the deck builder with the MID set.</p>
                 </li>
                 <li>
                     <strong>MTG Arena's log file are still completely broken.</strong>
-                    <p>We thought there might've been a somewhat workable solution, but it turns out that the log files are just really poorly constructed!</p>
+                    <p>We are working on a manual mode for collection tracking. </p>
                 </li>
                 <li>
                     <strong>New card legalities available</strong>
