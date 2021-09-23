@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent } from '../../actions';
+import { getCardCollection, getPlayerInventory, processSetCollection, showHeaderModal, setHeaderModalContent } from '../../actions';
 import makeKeyboardClickable from '../../hooks/makeKeyboardClickable';
 import '../../css/GetFile.css'
 
@@ -10,14 +10,25 @@ function GetFile() {
     // Get access to Redux dispatch function
     const dispatch = useDispatch();
 
-    // Initial card set processing. Loads null values into Redux state
+    // Populate inventory with card data from local storage if it exists
     useEffect( () => {
 
-        // Get and process initially empty card set
-        dispatch( getCollection(null) );
-        dispatch( processSetCollection(null) );
+        // Get card collection from local storage or set it to be empty if not in local storage
+        let collectionString = window.localStorage.getItem("cardCollection");
+        let cardCollection = {}; // Default value
+        if (collectionString) {
+            // Sanitize input from localStorage
+            collectionString = collectionString.replace(/[^\d"':,{}]/g, '');
+            try {
+                cardCollection = JSON.parse(collectionString);
+            } catch (error) {}
+        }
+
+        dispatch( getCardCollection(cardCollection) );
+        dispatch( processSetCollection(cardCollection) );
     },
-    [dispatch]); // Only updates if dispatch changes value. Just here to make ESLint happy
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []);
 
     /**
      * Uses regular expression to extract card inventory from player log
@@ -40,8 +51,8 @@ function GetFile() {
             // Parse the data into a JSON that can be more easily manipulated
             const inventory = JSON.parse(match[1]);
 
-            // Use getCollection action creator to put the basic inventory into Redux
-            dispatch( getCollection(inventory) );
+            // Use getCardCollection action creator to put the basic inventory into Redux
+            dispatch( getCardCollection(inventory) );
             
             // Put processed set information into Redux
             dispatch( processSetCollection(inventory) );

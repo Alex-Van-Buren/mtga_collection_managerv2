@@ -70,7 +70,7 @@ function DBDeck() {
                     }
 
                     // Don't mark unowned cards if inventory isn't initialized
-                    if (cardCollection) {
+                    if (cardCollection && Object.keys(cardCollection).length > 0) {
 
                         // Don't color if single copy of basic land owned
                         if (card.type_line.toLowerCase().includes("basic") && card.type_line.toLowerCase().includes("land") 
@@ -83,7 +83,7 @@ function DBDeck() {
                         ) {}
 
                         // Color unowned copies of this card
-                        else if ( !cardCollection[card.arenaId] || (addedToDeck[card.arenaId] > cardCollection[card.arenaId]) ) {
+                        else if ( (cardCollection[card.arenaId] === undefined) || (addedToDeck[card.arenaId] > cardCollection[card.arenaId]) ) {
 
                             // Darken unowned cards
                             cardStyle.filter = "brightness(50%)";
