@@ -243,9 +243,13 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
                 })();
 
 
-                cardHeader = <div className="deckBuilder_circles">
-                    {circles}
-                </div>;
+                cardHeader = (
+                    <div className="content">
+                        <div className="deckBuilder_circles">
+                            {circles}
+                        </div>
+                    </div>
+                );
             }
 
             // Build card JSX
