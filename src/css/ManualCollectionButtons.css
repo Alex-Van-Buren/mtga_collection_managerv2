@@ -1,0 +1,21 @@
+#ManualCollectionButtons > button > i.minus.icon {
+    padding: 1px 0 0 4px;
+}
+
+#ManualCollectionButtons > button > i.plus.icon {
+    padding: 1px 0 0 3px;
+}
+
+#ManualCollectionButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 1px;
+    width: 100%;
+}
+
+@media (hover: none), (pointer: coarse) {
+    #ManualCollectionButtons .invisible {
+        visibility: visible;
+    }
+}

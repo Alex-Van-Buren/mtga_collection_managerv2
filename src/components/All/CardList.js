@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CardListImage from './CardListImage';
+import ManualCollectionButtons from '../SetDetails/ManualCollectionButtons';
 import LazyLoad from '../Templates/LazyLoad';
 import findCards from '../../data/findCards';
 import { updateImageList } from '../../actions';
@@ -183,7 +184,11 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             // Normally cardHeader is just the number of cards owned out of a max of 4
             if (!deckBuilder) {
                 
-                cardHeader = <div className="right floated content" > {numOwned} / 4 </div>;
+                cardHeader = (
+                    <ManualCollectionButtons card={card}>
+                        <div className="numOwned" > {numOwned} / 4 </div>
+                    </ManualCollectionButtons>
+                );
             }
             
             // In the deck builder, the card header indicates how many are owned as well as how many copies are in the deck
@@ -254,9 +259,8 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             
         }
         return returnCards;
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardCollection, cards, showCards, deckBuilder, deckMap, sideboardMap, commander]);
+    }, [cardCollection, cards, showCards, deckBuilder, deckMap, sideboardMap, commander, companion]);
 
     // Track card images displayed, but only update redux state after JSX done rendering
     useEffect( () => {

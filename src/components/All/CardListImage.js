@@ -145,9 +145,7 @@ function CardListImage({ card, index, cardHeader, deckBuilder=false }) {
 
             <div className="ui fluid card removeBoxShadow">
 
-                <div className="content">
-                    {cardHeader}
-                </div>
+                {cardHeader}
 
                 <div 
                     className={imgSide ? "image" : "flipped image"} ref={cardRef} tabIndex="0"
