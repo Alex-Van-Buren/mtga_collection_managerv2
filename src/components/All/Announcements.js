@@ -10,10 +10,10 @@ import '../../css/Announcements.css';
  */
 function Announcements() {
 
-    const version = 'v0.6.3';
+    const version = 'v1.0.0';
 
     // Specify date of newest announcement. Announcements hidden after this date won't be shown.
-    const newestAnnouncement = 20210922000000; // YYYY + MM + DD + 000000
+    const newestAnnouncement = 20211028000000; // YYYY + MM + DD + 000000
 
     const [modalOpen, setModalOpen] = useState(true);
 
@@ -46,22 +46,16 @@ function Announcements() {
         <div id="announceList">
             <ol>
                 <li>
-                    <strong>Your card collection is now stored in your browser!</strong>
-                    <p>Clearing your cookies + site data for "all time" will also clear your collection! (Clearing less than "all time" is safe though)</p>
-                </li>
-                <li>
-                    <strong>Manual Collection Tracking is now available!</strong>
-                    <p>Log files are still broken, so automatic tracking via uploading a log file is still unavailable.</p>
-                    <p>Directions:</p>
-                    <ul>
-                        <li>Click on the set you want to track</li>
-                        <li>Find the card that you want to update by either scrolling to it or using card filters</li>
-                        <li>Hover over the number owned (X/4)</li>
-                        <li>The buttons to change how many you own will appear!</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>This site is in pre-release!</strong>
+                    <strong>Full version of Collection Manager released</strong>
+                    <p>We will continue to add new sets as they are released, but have no plans to work on new features.</p>
+                    <p>
+                        Until WotC adds your owned cards back to log files, the original point of this website, being an 
+                        outside-of-game auto-tracker, doesn't work.
+                    </p>
+                    <p>
+                        Viewing sets, manual tracking, deck building, and the draft calculator all still work, but
+                        are less useful without automatic tracking.
+                    </p>
                 </li>
             </ol>
         </div>
@@ -70,7 +64,7 @@ function Announcements() {
             <button 
                 onClick={() => {
                     // Hide current announcements for 2 weeks (will show any new announcements)
-                    setCookie('hide', getTime(), 14);
+                    setCookie('hide', getTime(), 366);
                     setModalOpen(false);
                 }} className="ui green button"
             >
