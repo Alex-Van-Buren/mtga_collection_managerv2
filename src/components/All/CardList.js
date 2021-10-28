@@ -154,8 +154,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
         for (const card of cards) {
 
             // Get number of card owned, if any
-            const numOwned = cardCollection && cardCollection[card.arenaId] ? 
-                cardCollection[card.arenaId] : 0;
+            const numOwned = cardCollection[card.arenaId] ? cardCollection[card.arenaId] : 0;
 
             // Initialize makeCard Boolean to false
             let makeCard = false;
@@ -181,7 +180,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             // Build card header
             let cardHeader;
 
-            // Normally cardHeader is just the number of cards owned out of a max of 4
+            // Card Header for set view; number owned and buttons to change number owned
             if (!deckBuilder) {
                 
                 cardHeader = (
@@ -193,7 +192,6 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             
             // In the deck builder, the card header indicates how many are owned as well as how many copies are in the deck
             else {
-                // <i className="circle icon"/>
 
                 // Circles are filled if owned and colored if added to deck
                 const circles = (() => {
