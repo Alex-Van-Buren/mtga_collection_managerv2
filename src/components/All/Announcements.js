@@ -10,7 +10,7 @@ import '../../css/Announcements.css';
  */
 function Announcements() {
 
-    const version = 'v1.0.0';
+    const version = 'v1.0.1';
 
     // Specify date of newest announcement. Announcements hidden after this date won't be shown.
     const newestAnnouncement = 20211028000000; // YYYY + MM + DD + 000000
