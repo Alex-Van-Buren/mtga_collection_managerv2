@@ -10,7 +10,6 @@ import '../../css/Help.css';
 
 /**
  * The help page.
- * @returns 
  */
 function Help() {
     // Gets the query string from the URL
@@ -20,7 +19,7 @@ function Help() {
     // Object that has the open props for all of the Accordions
     let openAccordion = {
         findLogfile: false, detailedLogs: false, usingDraftCalculator: false, FAQ: false, bugs: false
-    }
+    };
 
     // Set openSection of openAccordion to true
     if (openAccordion.hasOwnProperty(openSection)){
@@ -29,6 +28,11 @@ function Help() {
 
     // Frequently asked questions array of {question: "", answer: ""}
     const FAQs = [
+        {
+            question: "Uploading my log file doesn't do anything, why?",
+            answer: "The developers removed the info from log files that we used to extract which cards you own. We don't " +
+            "know if or when they'll put it back."
+        },
         {
             question: 'What does uploading my "log file" do?',
             answer: "Your log file contains the IDs of all the cards you own, as well as your vault progress, gold, gems, " +
@@ -57,8 +61,12 @@ function Help() {
     // Known Bugs
     const bugs = [
         {
-            text: 'Resizing the window can prevent lists of images from loading. Scrolling through the list of images '+
-            'may fix the problem. If this doesn\'t work, reloading will fix the issue.'
+            text: "Resizing the window can prevent lists of images from loading. Scrolling through the list of images " +
+            "may fix the problem. If this doesn't work, reloading will fix the issue."
+        },
+        {
+            text: "Log files update gold/gems/wildcards, but nothing else since Wizards of the Coast removed inventory " + 
+            "info from log files."
         }
     ];
 
@@ -174,8 +182,7 @@ function Help() {
                 </div>
             </div>
         </div>
-
-    </ div>
+    </div>
     </>
     );
 }
