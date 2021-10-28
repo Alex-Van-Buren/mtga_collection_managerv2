@@ -1,6 +1,6 @@
 {
   "name": "collection_manager",
-  "homepage": "http://www.collectionmanager.net",
+  "homepage": "https://mtga-collection-manager.herokuapp.com/",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
