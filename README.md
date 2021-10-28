@@ -1,6 +1,9 @@
 <h1 align="center">Collection Manager</h1>
 <h2>Use your browser to instantly analyze your MTG Arena collection and decks. No sign-up. No login. No downloads.</h2>
 
+### Automatic collection tracking not currently available
+* If/when WotC adds collection data back into Arena's log files, automatic tracking will be added again.
+
 ### How to use the Collection Manager:
 1. Upload your Player Log file (see the help page for help finding you logs).
 2. See your collection progress for every set.
@@ -17,5 +20,4 @@
    * Import decks from file or paste them in from your clipboard
    * Try out the "Limited" mode to edit your draft decks
 
-## Stay tuned for the full release coming soon!
 © 2021 Nate Sackett and Alex Van Buren. All rights reserved.
