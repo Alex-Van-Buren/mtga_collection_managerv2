@@ -45,7 +45,8 @@ function RarityCollectionItem({ setId, rarity }) {
         "ha3": "ha1",
         "ha4": "ha1",
         "ha5": "ha1",
-        "mid": "xin4",
+        "mid": "xin4",  // MID and VOW are currently listed under these in KeyRune. This may be corrected in future versions of Keyrune cdn
+        "vow": "xin3",
     }
 
     const symbol = symbolTransforms[setId] ? symbolTransforms[setId] : setId;

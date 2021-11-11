@@ -1,3 +1,4 @@
+import vow_logo from '../images/setLogos/vow_logo.png';
 import mid_logo from '../images/setLogos/mid_logo.png';
 import j21_logo from '../images/setLogos/j21_logo.png';
 import afr_logo from '../images/setLogos/afr_logo.png';
@@ -23,7 +24,7 @@ import jmp_logo from '../images/setLogos/jmp_logo.png';
 /**
  * The set codes of the current standard sets
  */
-export const standardSets = [ "mid", "afr", "stx", "khm", "znr" ];
+export const standardSets = [ "vow", "mid", "afr", "stx", "khm", "znr" ];
 
 /**
  * setInfo contains keys of the set ids which contain objects with:
@@ -33,8 +34,14 @@ export const standardSets = [ "mid", "afr", "stx", "khm", "znr" ];
  * Most recent sets at the top
  */
 export const setInfo = {
+    vow: {
+        name: "Innistrad: Crimson Vow",
+        mythic_upgrade: (1/7.4),
+        collationId: 100026,
+        logo: vow_logo
+    },
     mid: {
-        name: "Innistard: Midnight Hunt",
+        name: "Innistrad: Midnight Hunt",
         mythic_upgrade: (1/7.4),
         collationId: 100025,
         logo: mid_logo
