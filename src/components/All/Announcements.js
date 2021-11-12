@@ -10,10 +10,10 @@ import '../../css/Announcements.css';
  */
 function Announcements() {
 
-    const version = 'v1.0.1';
+    const version = 'v1.0.2';
 
     // Specify date of newest announcement. Announcements hidden after this date won't be shown.
-    const newestAnnouncement = 20211028000000; // YYYY + MM + DD + 000000
+    const newestAnnouncement = 20211111000000; // YYYY + MM + DD + 000000
 
     const [modalOpen, setModalOpen] = useState(true);
 
@@ -46,6 +46,7 @@ function Announcements() {
         <div id="announceList">
             <ol>
                 <li>
+                    <strong>Crimson Vow now on Collection Manager</strong>
                     <strong>Full version of Collection Manager released</strong>
                     <p>We will continue to add new sets as they are released, but have no plans to work on new features.</p>
                     <p>
