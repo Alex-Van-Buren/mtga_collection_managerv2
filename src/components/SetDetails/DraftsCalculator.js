@@ -229,7 +229,7 @@ function DraftsCalculator() {
         <div id="draftsCalculator">
             <h3>Calculator Options 
                 <a 
-                href="/mtga_collection_managerv2/help?openSection=usingDraftCalculator#usingDraftCalculator" 
+                href="/help?openSection=usingDraftCalculator#usingDraftCalculator"
                 target="_blank">
                     <i className="info circle icon"></i>
                 </a>
