@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from '../Header/Header';
-import Announcements from './Announcements';
+// import Announcements from './Announcements';
 import ScrollTop from './ScrollTop';
 import Footer from './Footer';
 import '../../css/App.css';
