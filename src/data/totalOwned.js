@@ -60,9 +60,16 @@ function totalOwned(cardCollection) {
         // Filter out non-booster cards
         if (!card.booster) {
 
-            // Don't include non-booster cards
-            continue;
+            //  Don't skip alchemy cards
+            if (card.set[0] === "y" && card.set.length === 4) {
+
+            } else {
+
+                // Don't include non-booster cards
+                continue;
+            }
         }
+
 
         // If card is in a tracked set, add that card to inventory 
         if (inventory[card.set]) {
