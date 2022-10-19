@@ -31,23 +31,19 @@ function RarityCollectionItem({ setId, rarity }) {
     // Calculate percent of cards owned (to one decimal) from specified set of specified rarity
     const percentOwned = ((ownedTotal / setTotal) * 100).toFixed(1);
 
-    let rarityNumber;
-    // Check if percentOwned is a number and don't show the percentage to user if NaN
-    if (percentOwned >= 0 ) {
-        rarityNumber = `${ownedTotal} / ${setTotal} (${percentOwned}%)`;
-    } else {
-        rarityNumber = `${ownedTotal} / ${setTotal}`;
-    }
-
+    let symbol = setId;
     // Replace some set symbols with another (e.g. give all Historic Anthologies the HA1 symbol)
-    const symbolTransforms = {
-        "ha2": "ha1",
-        "ha3": "ha1",
-        "ha4": "ha1",
-        "ha5": "ha1",
+    if (setId.slice(0, 2) === 'ha') {
+        symbol = 'ha1'
+    }
+    if (setId.length === 4 && setId[0] === 'y') {
+        symbol = 'y22'
     }
 
-    const symbol = symbolTransforms[setId] ? symbolTransforms[setId] : setId;
+    // If there are no cards of this rarity, don't show a progress bar for this rarity
+    if (setTotal === 0) {
+        return <></>
+    }
 
     return (
         <div className="item " id="collectionItem" >
@@ -60,7 +56,7 @@ function RarityCollectionItem({ setId, rarity }) {
                 </div>
 
                 <div className="rarityNumber">
-                    <span>{rarityNumber}</span>
+                    <span>{`${ownedTotal} / ${setTotal} (${percentOwned}%)`}</span>
                 </div>
             </div>
             <ProgressBar percent={percentOwned} innerClass={rarity}/>
