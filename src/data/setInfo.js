@@ -43,12 +43,12 @@ export const standardSets = [ "dmu", "snc", "neo", "vow", "mid" ];
  * Most recent sets at the top
  */
 export const setInfo = {
-    ydmu: {
-        name: "Alchemy: Dominaria",
-        mythic_upgrade: (1/7),
-        collationId: 400030,
-        logo: null
-    },
+    // ydmu: {
+    //     name: "Alchemy: Dominaria",
+    //     mythic_upgrade: (1/7),
+    //     collationId: 400030,
+    //     logo: null
+    // },
     dmu: {
         name: "Dominaria United",
         mythic_upgrade: (1/7),
