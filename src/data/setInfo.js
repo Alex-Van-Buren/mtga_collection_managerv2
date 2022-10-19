@@ -1,3 +1,6 @@
+import dmu_logo from '../images/setLogos/dmu_logo.png';
+import snc_logo from '../images/setLogos/snc_logo.png';
+import neo_logo from '../images/setLogos/neo_logo.png';
 import vow_logo from '../images/setLogos/vow_logo.png';
 import mid_logo from '../images/setLogos/mid_logo.png';
 import j21_logo from '../images/setLogos/j21_logo.png';
@@ -24,16 +27,70 @@ import jmp_logo from '../images/setLogos/jmp_logo.png';
 /**
  * The set codes of the current standard sets
  */
-export const standardSets = [ "vow", "mid", "afr", "stx", "khm", "znr" ];
+export const standardSets = [ "dmu", "snc", "neo", "vow", "mid" ];
 
 /**
  * setInfo contains keys of the set ids which contain objects with:
  *    [setId].name - full set name
  *    [setId].mythic_upgrade - mythic upgrade rate
  *    [setId].collationId - booster "collationId"
+    set: {
+        name: "",
+        mythic_upgrade: (1/7),
+        collationId: X000XX,
+        logo: null
+    },
  * Most recent sets at the top
  */
 export const setInfo = {
+    ydmu: {
+        name: "Alchemy: Dominaria",
+        mythic_upgrade: (1/7),
+        collationId: 400030,
+        logo: null
+    },
+    dmu: {
+        name: "Dominaria United",
+        mythic_upgrade: (1/7),
+        collationId: 100030,
+        logo: dmu_logo
+    },
+    hbg: {
+        name: "Alchemy Horizons: Baldur's Gate",
+        mythic_upgrade: (1/7),
+        collationId: 100029,
+        logo: null
+    },
+    ysnc: {
+        name: "Alchemy: New Capenna",
+        mythic_upgrade: (1/7),
+        collationId: 400028,
+        logo: null
+    },
+    snc: {
+        name: "Streets of New Capenna",
+        mythic_upgrade: (1/7),
+        collationId: 100028,
+        logo: snc_logo
+    },
+    yneo: {
+        name: "Alchemy: Kamigawa",
+        mythic_upgrade: (1/9),
+        collationId: 400027,
+        logo: null
+    },
+    neo: {
+        name: "Kamigawa: Neon Dynasty",
+        mythic_upgrade: (1/8),
+        collationId: 100027,
+        logo: neo_logo
+    },
+    ymid: {
+        name: "Alchemy: Innistrad",
+        mythic_upgrade: (1/9.4),
+        collationId: 400026,
+        logo: null
+    },
     vow: {
         name: "Innistrad: Crimson Vow",
         mythic_upgrade: (1/7.4),

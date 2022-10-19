@@ -133,7 +133,7 @@ function findCards(searchOptions, searchCards=arenaCards, sort=true) {
  function filterSet(cardSet, set) {
 
     // Filter cards not in the set
-    if (set === cardSet || set.includes(cardSet)) {
+    if (set === cardSet || ( Array.isArray(set) && set.includes(cardSet) )) {
         return true;
     }
 
