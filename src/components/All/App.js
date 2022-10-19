@@ -22,7 +22,7 @@ function App() {
             <div id="contentContainer">
                 <div id="keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage">
                     <Header />
-                    <Announcements/>
+                    {/* <Announcements/> */}
 
                     <Suspense fallback={<div>Loading...</div>}>
                         <Switch>
