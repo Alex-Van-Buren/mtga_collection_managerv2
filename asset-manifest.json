@@ -4,8 +4,8 @@
     "static/js/0.578e251a.chunk.js": "/mtga_collection_managerv2/static/js/0.578e251a.chunk.js",
     "static/js/0.578e251a.chunk.js.map": "/mtga_collection_managerv2/static/js/0.578e251a.chunk.js.map",
     "main.css": "/mtga_collection_managerv2/static/css/main.eff07122.chunk.css",
-    "main.js": "/mtga_collection_managerv2/static/js/main.22283939.chunk.js",
-    "main.js.map": "/mtga_collection_managerv2/static/js/main.22283939.chunk.js.map",
+    "main.js": "/mtga_collection_managerv2/static/js/main.4cf19112.chunk.js",
+    "main.js.map": "/mtga_collection_managerv2/static/js/main.4cf19112.chunk.js.map",
     "runtime-main.js": "/mtga_collection_managerv2/static/js/runtime-main.af845e3f.js",
     "runtime-main.js.map": "/mtga_collection_managerv2/static/js/runtime-main.af845e3f.js.map",
     "static/js/3.04b75643.chunk.js": "/mtga_collection_managerv2/static/js/3.04b75643.chunk.js",
@@ -81,6 +81,6 @@
     "static/js/runtime-main.af845e3f.js",
     "static/js/3.04b75643.chunk.js",
     "static/css/main.eff07122.chunk.css",
-    "static/js/main.22283939.chunk.js"
+    "static/js/main.4cf19112.chunk.js"
   ]
 }
