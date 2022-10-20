@@ -18,7 +18,7 @@ const PageNotFound = lazy(() => import('./PageNotFound'));
  */
 function App() {
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <div id="contentContainer">
                 <div id="keepSomeSpaceBetweenTheContentAndTheFooterAtTheBottomOfThePage">
                     <Header />
