@@ -1,6 +1,6 @@
 {
   "name": "collection_manager",
-  "homepage": "https://mtga-collection-manager.herokuapp.com/",
+  "homepage": "https://alex-van-buren.github.io/mtga_collection_managerv2/",
   "version": "1.0.2",
   "private": true,
   "dependencies": {
@@ -22,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +43,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
 }
