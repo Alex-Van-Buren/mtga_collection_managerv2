@@ -254,8 +254,7 @@ function CardList({ setId=null, scrollingParent=null, deckBuilder }) {
             returnCards.push(
                 <CardListImage
                     card={card} index={currentPictures.indexOf(card.imgs)} cardHeader={cardHeader} deckBuilder={deckBuilder}
-                    // Unique key for cards with undefined arenaIds
-                    key={card.arenaId ? card.arenaId : `${card.set}${card.collector_number}`}
+                    key= {`${card.set}${card.collector_number}`}
                 />
             );
             
