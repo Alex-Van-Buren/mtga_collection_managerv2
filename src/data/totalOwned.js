@@ -1,5 +1,5 @@
 import arenaCards from './arenaCards';
-import { historicSets as sets } from '../data/setInfo';
+import { historicSets as sets, setInfo } from '../data/setInfo';
 
 /**
  * Counts the number of cards in each set and the number the user owns from that set.
@@ -8,9 +8,6 @@ import { historicSets as sets } from '../data/setInfo';
  * each rarity in that set
  */
 function totalOwned(cardCollection) {
-
-    // Historic Anthologies
-    const anthologies = ['ha1', 'ha2', 'ha3', 'ha4', 'ha5'];
 
     // Create inventory for each set
     const inventory = {};
@@ -45,37 +42,16 @@ function totalOwned(cardCollection) {
             // Don't include basic lands (skip other checks and don't add this card)
             continue;
         }
-
-        // -----------------------Weird sets logic----------------------------------
-        // Check if the card is in one the strange sets
         
-        if (anthologies.includes(card.set) || card.set === 'sta') {
-            // For anthologies and strixhaven mystical archives, include all the cards don't check if booster
-            // Update the inventory
-            updateInventory(card);
-            continue; // Card has been added so go to next card
-        }
-        
-        // --------------------- Normal Sets---------------------------------------
-        // Filter out non-booster cards
-        if (!card.booster) {
+        // Check if we track the amount of this card (booster values match)
+        if (setInfo[card.set] && setInfo[card.set].booster === card.booster) {
 
-            //  Don't skip alchemy cards
-            if (card.set[0] === "y" && card.set.length === 4) {
-
-            } else {
-
-                // Don't include non-booster cards
-                continue;
-            }
-        }
-
-
-        // If card is in a tracked set, add that card to inventory 
-        if (inventory[card.set]) {
             // Update the inventory 
             updateInventory(card);
         }
+        
+        // Don't include non-booster cards
+        continue;
     }
 
     return inventory;

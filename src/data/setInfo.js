@@ -63,7 +63,7 @@ export const setInfo = {
         mythic_upgrade: (1/7),
         collationId: 100029,
         logo: null,
-        booster: false
+        booster: true
     },
     ysnc: {
         name: "Alchemy: New Capenna",
