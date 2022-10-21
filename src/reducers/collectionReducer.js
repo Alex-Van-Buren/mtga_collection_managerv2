@@ -2,6 +2,7 @@ import {
     GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, ADD_CARD_TO_COLLECTION, REMOVE_CARD_FROM_COLLECTION
 } from '../actions/types';
 import totalOwned from '../data/totalOwned';
+import { setInfo } from '../data/setInfo';
 
 const INITIAL_STATE = {
     cardCollection: {},
@@ -29,7 +30,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             return {...state, player: action.payload};
 
         case ADD_CARD_TO_COLLECTION: {
-            const { arenaId, set, rarity } = action.payload; // action.payload is a card
+            const { arenaId, set, rarity, booster } = action.payload; // action.payload is a card
             const newCollection = { ...state.cardCollection };
             const newSet = { ...state.set };
             const cardCount = newCollection[arenaId];
@@ -50,7 +51,10 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             }
 
             // Update set
-            newSet[set][rarity].ownedTotal++;
+            if (booster == setInfo[set].booster) {
+
+                newSet[set][rarity].ownedTotal++;
+            }
 
             // Update cardCollection in local storage
             window.localStorage.setItem("cardCollection", JSON.stringify(newCollection));
@@ -59,7 +63,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
         }
 
         case REMOVE_CARD_FROM_COLLECTION: {
-            const { arenaId, set, rarity } = action.payload;
+            const { arenaId, set, rarity, booster } = action.payload;
             const newCollection = { ...state.cardCollection };
             const newSet = { ...state.set };
             const cardCount = newCollection[arenaId];
@@ -80,7 +84,10 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             }
 
             // Update set
-            newSet[set][rarity].ownedTotal--;
+            if (booster == setInfo[set].booster) {
+
+                newSet[set][rarity].ownedTotal--;
+            }
 
             // Update cardCollection in local storage
             window.localStorage.setItem("cardCollection", JSON.stringify(newCollection));
