@@ -38,7 +38,8 @@ export const standardSets = [ "dmu", "snc", "neo", "vow", "mid" ];
         name: "",
         mythic_upgrade: (1/7),
         collationId: X000XX,
-        logo: null
+        logo: null,
+        booster: true
     },
  * Most recent sets at the top
  */
@@ -47,219 +48,255 @@ export const setInfo = {
     //     name: "Alchemy: Dominaria",
     //     mythic_upgrade: (1/7),
     //     collationId: 400030,
-    //     logo: null
+    //     logo: null,
+    //     booster: false
     // },
     dmu: {
         name: "Dominaria United",
         mythic_upgrade: (1/7),
         collationId: 100030,
-        logo: dmu_logo
+        logo: dmu_logo,
+        booster: true
     },
     hbg: {
         name: "Alchemy Horizons: Baldur's Gate",
         mythic_upgrade: (1/7),
         collationId: 100029,
-        logo: null
+        logo: null,
+        booster: false
     },
     ysnc: {
         name: "Alchemy: New Capenna",
         mythic_upgrade: (1/7),
         collationId: 400028,
-        logo: null
+        logo: null,
+        booster: false
     },
     snc: {
         name: "Streets of New Capenna",
         mythic_upgrade: (1/7),
         collationId: 100028,
-        logo: snc_logo
+        logo: snc_logo,
+        booster: true
     },
     yneo: {
         name: "Alchemy: Kamigawa",
         mythic_upgrade: (1/9),
         collationId: 400027,
-        logo: null
+        logo: null,
+        booster: false
     },
     neo: {
         name: "Kamigawa: Neon Dynasty",
         mythic_upgrade: (1/8),
         collationId: 100027,
-        logo: neo_logo
+        logo: neo_logo,
+        booster: true
     },
     ymid: {
         name: "Alchemy: Innistrad",
         mythic_upgrade: (1/9.4),
         collationId: 400026,
-        logo: null
+        logo: null,
+        booster: false
     },
     vow: {
         name: "Innistrad: Crimson Vow",
         mythic_upgrade: (1/7.4),
         collationId: 100026,
-        logo: vow_logo
+        logo: vow_logo,
+        booster: true
     },
     mid: {
         name: "Innistrad: Midnight Hunt",
         mythic_upgrade: (1/7.4),
         collationId: 100025,
-        logo: mid_logo
+        logo: mid_logo,
+        booster: true
     },
     afr: {
         name: "Adventures in the Forgotton Realms",
         mythic_upgrade: (1/7),
         collationId: 100024,
-        logo: afr_logo
+        logo: afr_logo,
+        booster: true
     },
     stx: {
         name: "Strixhaven: School of Mages",
         mythic_upgrade: (1/8),
         collationId: 100023,
-        logo: stx_logo
+        logo: stx_logo,
+        booster: true
     },
     sta: {
         name: "Strixhaven Mystical Archives",
         mythic_upgrade: 0.066,
         rare_rate: 0.264,
         collationId: 100023,
-        logo: null
+        logo: null,
+        booster: false
     },
     khm: {
         name: "Kaldheim",
         mythic_upgrade: (1/7.4),
         collationId: 100022,
-        logo: khm_logo
+        logo: khm_logo,
+        booster: true
     },
     klr: {
         name: "Kaladesh Remastered",
         mythic_upgrade: (1/7),
         collationId: 100021,
-        logo: klr_logo
+        logo: klr_logo,
+        booster: true
     },
     znr: {
         name: "Zendikar Rising",
         mythic_upgrade: (1/7.4),
         collationId: 100020,
-        logo: znr_logo
+        logo: znr_logo,
+        booster: true
     },
     akr: {
         name: "Amonkhet Remastered",
         mythic_upgrade: (1/6),
         collationId: 100019,
-        logo: akr_logo
+        logo: akr_logo,
+        booster: true
     },
     m21: {
         name: "Core Set 2021",
         mythic_upgrade: (1/8),
         collationId: 100018,
-        logo: m21_logo
+        logo: m21_logo,
+        booster: true
     },
     iko: {
         name: "Ikoria: Lair of Behemoths",
         mythic_upgrade: (1/8),
         collationId: 100017,
-        logo: iko_logo
+        logo: iko_logo,
+        booster: true
     },
     thb: {
         name: "Theros Beyond Death",
         mythic_upgrade: (1/8),
         collationId: 100016,
-        logo: thb_logo
+        logo: thb_logo,
+        booster: true
     },
     eld: {
         name:"Throne of Eldraine",
         mythic_upgrade: (1/8),
         collationId: 100015,
-        logo: eld_logo
+        logo: eld_logo,
+        booster: true
     },
     m20: {
         name: "Core Set 2020",
         mythic_upgrade: (1/8),
         collationId: 100014,
-        logo: m20_logo
+        logo: m20_logo,
+        booster: true
     },
     war: {
         name: "War of the Spark",
         mythic_upgrade: (1/8),
         collationId: 100013,
-        logo: war_logo
+        logo: war_logo,
+        booster: true
     },
     rna: {
         name: "Ravnica Allegiance",
         mythic_upgrade: (1/8),
         collationId: 100010,
-        logo: rna_logo
+        logo: rna_logo,
+        booster: true
     },
     grn: {
         name: "Guilds of Ravnica",
         mythic_upgrade: (1/8),
         collationId: 100009,
-        logo: grn_logo
+        logo: grn_logo,
+        booster: true
     },
     m19: {
         name: "Core Set 2019",
         mythic_upgrade: (1/8),
         collationId: 100008,
-        logo: m19_logo
+        logo: m19_logo,
+        booster: true
     },
     // "dom" also uses set code "dar"
     dom: {
         name: "Dominaria",
         mythic_upgrade: (1/8),
         collationId: 100007,
-        logo: dom_logo
+        logo: dom_logo,
+        booster: true
     },
     rix: {
         name: "Rivals of Ixalan",
         mythic_upgrade: (1/8),
         collationId: 100006,
-        logo: rix_logo
+        logo: rix_logo,
+        booster: true
     },
     xln: {
         name: "Ixalan",
         mythic_upgrade: (1/8),
         collationId: 100005,
-        logo: xln_logo
+        logo: xln_logo,
+        booster: true
     },
     ha1: {
         name: "Historic Anthology",
         mythic_upgrade: null,
         collationId: null,
-        logo: null
+        logo: null,
+        booster: false
     },
     ha2: {
         name: "Historic Anthology 2",
         mythic_upgrade: null,
         collationId: null,
-        logo: null
+        logo: null,
+        booster: false
     },
     ha3: {
         name: "Historic Anthology 3",
         mythic_upgrade: null,
         collationId: null,
-        logo: null
+        logo: null,
+        booster: false
     },
     ha4: {
         name: "Historic Anthology 4",
         mythic_upgrade: null,
         collationId: null,
-        logo: null
+        logo: null,
+        booster: false
     },
     ha5: {
         name: "Historic Anthology 5",
         mythic_upgrade: null,
         collationId: null,
-        logo: null
+        logo: null,
+        booster: false
     },
     jmp: {
         name: "Jumpstart",
         mythic_upgrade: null,
         collationId: null,
-        logo: jmp_logo
+        logo: jmp_logo,
+        booster: true
     },
     j21: {
         name: "Jumpstart: Historic Horizons",
         mythic_upgrade: null,
         collationId: null,
-        logo: j21_logo
+        logo: j21_logo,
+        booster: true
     },
 }
 
