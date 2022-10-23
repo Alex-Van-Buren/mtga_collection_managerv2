@@ -51,7 +51,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             }
 
             // Update set
-            if (booster == setInfo[set].booster) {
+            if (booster === setInfo[set].booster) {
 
                 newSet[set][rarity].ownedTotal++;
             }
@@ -84,7 +84,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             }
 
             // Update set
-            if (booster == setInfo[set].booster) {
+            if (booster === setInfo[set].booster) {
 
                 newSet[set][rarity].ownedTotal--;
             }
