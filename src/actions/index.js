@@ -4,7 +4,8 @@ import {
     SELECT_DETAILS_MENU, SELECT_BOOSTER, RESET, SELECT_SET, SET_SEARCH_TYPE, ADD_CARD_TO_DECK,
     REMOVE_CARD_FROM_DECK, SET_DECK, SELECT_DECK_TYPE, TOGGLE_ADD_BASICS,ADD_CARD_TO_SIDEBOARD, REMOVE_CARD_FROM_SIDEBOARD,
     CHANGE_COMMANDER, CHANGE_COMPANION, SELECT_CARD_TYPES, SET_SIDEBOARD, SET_ADD_TYPE, SET_DRAG_CARD, DROP_CARD, 
-    LIMITED_SORT, SET_CURRENT_DRAG_OVER, SELECT_CMCS, ADD_CARD_TO_COLLECTION, REMOVE_CARD_FROM_COLLECTION
+    LIMITED_SORT, SET_CURRENT_DRAG_OVER, SELECT_CMCS, ADD_CARD_TO_COLLECTION, REMOVE_CARD_FROM_COLLECTION,
+    SET_PACK_NUMBER
 } from './types';
 
 export function getCardCollection(collection) {
@@ -316,5 +317,17 @@ export function removeCardFromCollection(card) {
     return {
         type: REMOVE_CARD_FROM_COLLECTION,
         payload: card
+    };
+}
+
+/**
+ * Set number of booster packs owned
+ * @param {Number} number
+ * @param {string} set
+ */
+export function setPackNumber(number, set) {
+    return {
+        type: SET_PACK_NUMBER,
+        payload: {number, set}
     };
 }
