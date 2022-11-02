@@ -101,11 +101,14 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             // Get number and set of booster packs to change
             let { number, set } = action.payload;
             number = parseInt(number);
+            number = !number ? 0 : number;
             set = set.toUpperCase();
 
             // Get existing booster packs owned
-            let newPlayer = { ...state.player };
-            let newBoosters = newPlayer.Boosters;
+            let newState = { ...state, player: {...state.player} };
+            let newPlayer = { ...newState.player, Boosters: [...newState.player.Boosters] };
+
+            // Example of object in Boosters array
             // const example = {
                 // CollationId: 1000000,
                 // SetCode: "ccc",
@@ -113,7 +116,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             // }
 
             // Check if set already exists in booster list
-            let boosterObj = newBoosters.find( obj => obj.SetCode === set );
+            let boosterObj = newPlayer.Boosters.find( obj => obj.SetCode === set );
 
             // Set doesn't exist in Booster list
             if (boosterObj === undefined) {
@@ -124,7 +127,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
                 }
 
                 // Get CollationId from setInfo and create new booster object
-                newBoosters.push({
+                newPlayer.Boosters.push({
                     CollationId: setInfo[set.toLowerCase()].collationId,
                     SetCode: set,
                     Count: number
@@ -136,7 +139,7 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
 
                 // If number is 0, delete this booster object from the Booster array
                 if (number === 0) {
-                    newBoosters = newBoosters.filter( obj => obj.SetCode !== set );
+                    newPlayer.Boosters = newPlayer.Boosters.filter( obj => obj.SetCode !== set );
                 }
     
                 // Alter booster count
@@ -146,7 +149,8 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             }
             
             // Return new state with state.player.Boosters updated
-            return { ...state, player: newPlayer };
+            newState.player = newPlayer;
+            return newState;
         }
 
         default:
