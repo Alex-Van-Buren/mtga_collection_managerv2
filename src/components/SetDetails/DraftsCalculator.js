@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import CustomDropdown from '../Templates/CustomDropdown';
+import ManualPacks from './ManualPacks';
 import useBooster from '../../hooks/useBooster';
 import useDraft from '../../hooks/useDraft';
 import draftsNeeded from '../../data/draftsNeeded';
@@ -245,7 +246,9 @@ function DraftsCalculator() {
                     {renderMythicsPickedInput}
 
                 </div>
-                <p>Packs Owned: {ownedBoosters}</p>
+                <p>
+                    <ManualPacks set={setId} />
+                </p>
             </div>
             {renderOutput}
         </div>

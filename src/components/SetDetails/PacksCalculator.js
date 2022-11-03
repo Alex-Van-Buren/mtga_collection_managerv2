@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useBooster from '../../hooks/useBooster';
 
 import packsNeeded from '../../data/packsNeeded';
+import ManualPacks from './ManualPacks';
 import { setInfo } from '../../data/setInfo';
 import '../../css/PacksCalculator.css';
 
@@ -32,7 +33,7 @@ function PacksCalculator() {
     }
     return (
         <div className="calculator"> 
-            <h2>Packs Owned: {ownedBoosters}</h2>
+            <h2>< ManualPacks set={setId} /></h2>
             <h2>Additional Packs Needed to Complete:</h2>       
             <h3>Rares: <span className="packNumber">{packsToCompleteRares - ownedBoosters}</span> </h3>                        
             <h3>Mythics: <span className="packNumber">{packsToCompleteMythics - ownedBoosters}</span> </h3>            

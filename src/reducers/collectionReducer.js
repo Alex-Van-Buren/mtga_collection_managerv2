@@ -1,5 +1,6 @@
 import { 
-    GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, ADD_CARD_TO_COLLECTION, REMOVE_CARD_FROM_COLLECTION
+    GET_CARD_COLLECTION, GET_PLAYER_INVENTORY, PROCESS_SET_COLLECTION, 
+    ADD_CARD_TO_COLLECTION, REMOVE_CARD_FROM_COLLECTION, SET_PACK_NUMBER
 } from '../actions/types';
 import totalOwned from '../data/totalOwned';
 import { setInfo } from '../data/setInfo';
@@ -93,6 +94,63 @@ export default function collectionReducer(state = INITIAL_STATE, action) {
             window.localStorage.setItem("cardCollection", JSON.stringify(newCollection));
 
             return { ...state, cardCollection: newCollection, set: newSet };
+        }
+
+        case SET_PACK_NUMBER: {
+
+            // Get number and set of booster packs to change
+            let { number, set } = action.payload;
+            number = parseInt(number);
+            number = !number ? 0 : number;
+            set = set.toUpperCase();
+
+            // Get existing booster packs owned
+            let newState = { ...state, player: {...state.player} };
+            let newPlayer = { ...newState.player, Boosters: [...newState.player.Boosters] };
+
+            // Example of object in Boosters array
+            // const example = {
+                // CollationId: 1000000,
+                // SetCode: "ccc",
+                // Count: 5 
+            // }
+
+            // Check if set already exists in booster list
+            let boosterObj = newPlayer.Boosters.find( obj => obj.SetCode === set );
+
+            // Set doesn't exist in Booster list
+            if (boosterObj === undefined) {
+
+                // If number is 0, do nothing, return original state
+                if (number === 0) {
+                    return state;
+                }
+
+                // Get CollationId from setInfo and create new booster object
+                newPlayer.Boosters.push({
+                    CollationId: setInfo[set.toLowerCase()].collationId,
+                    SetCode: set,
+                    Count: number
+                });
+            }
+
+            // Set does exist
+            else {
+
+                // If number is 0, delete this booster object from the Booster array
+                if (number === 0) {
+                    newPlayer.Boosters = newPlayer.Boosters.filter( obj => obj.SetCode !== set );
+                }
+    
+                // Alter booster count
+                else {
+                    boosterObj.Count = number;
+                }
+            }
+            
+            // Return new state with state.player.Boosters updated
+            newState.player = newPlayer;
+            return newState;
         }
 
         default:
