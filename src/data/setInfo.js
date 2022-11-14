@@ -134,7 +134,7 @@ export const setInfo = {
         rare_rate: 0.264,
         collationId: 100023,
         logo: null,
-        booster: false
+        booster: true
     },
     khm: {
         name: "Kaldheim",
