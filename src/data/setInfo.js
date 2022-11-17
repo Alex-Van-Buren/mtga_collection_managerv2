@@ -1,3 +1,4 @@
+import bro_logo from '../images/setLogos/bro_logo.png';
 import dmu_logo from '../images/setLogos/dmu_logo.png';
 import snc_logo from '../images/setLogos/snc_logo.png';
 import neo_logo from '../images/setLogos/neo_logo.png';
@@ -27,7 +28,7 @@ import jmp_logo from '../images/setLogos/jmp_logo.png';
 /**
  * The set codes of the current standard sets
  */
-export const standardSets = [ "dmu", "snc", "neo", "vow", "mid" ];
+export const standardSets = ["bro", "dmu", "snc", "neo", "vow", "mid" ];
 
 /**
  * setInfo contains keys of the set ids which contain objects with:
@@ -51,6 +52,20 @@ export const setInfo = {
     //     logo: null,
     //     booster: false
     // },
+    bro: {
+        name: "The Brothers' War",
+        mythic_upgrade: (1/7),
+        collationId: 100031,
+        logo: bro_logo,
+        booster: true
+    },
+    brr: {
+        name: "The Brothers' War Retro Artifacts",
+        mythic_upgrade: (1/7),
+        collationId: 100031,
+        logo: null,
+        booster: true
+    },
     dmu: {
         name: "Dominaria United",
         mythic_upgrade: (1/7),
